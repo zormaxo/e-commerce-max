@@ -1,22 +1,20 @@
-using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Service;
+using Service.Base;
 
-namespace Service.BaseService.Controllers
+namespace API.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
   public class ProductsController : ControllerBase
   {
-    private readonly IMapper _mapper;
     private ProductService _productSrv;
 
-
-    public ProductsController(IMapper mapper, ProductService productSrv)
+    public ProductsController(FwServiceCollection srvCollection)
     {
-      _productSrv = productSrv;
-      _mapper = mapper;
+      _productSrv = srvCollection.ProductSrv;
     }
 
     [HttpGet]

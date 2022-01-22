@@ -1,17 +1,18 @@
 using AutoMapper;
+using Core.Interfaces;
 using Infrastructure.Data;
 
 namespace Service.Base
 {
   public class BaseService : IBaseService
-  {
-    protected readonly StoreContext _context;
-    protected readonly IMapper _mapper;
+  { 
+    protected  IMapper Mapper{ get; set; }
+    protected  IUnitOfWork Uow{ get; set; }
 
-    public BaseService(StoreContext context, IMapper mapper)
+    public BaseService(IMapper mapper, IUnitOfWork uow)
     {
-      _mapper = mapper;
-      _context = context;
-    }
+      Mapper = mapper;
+      Uow = uow;
+    }    
   }
 }

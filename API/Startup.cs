@@ -1,9 +1,11 @@
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Service.Base;
 using Service.Helpers;
 
-namespace Service.BaseService
+namespace API
 {
   public class Startup
   {
@@ -16,7 +18,8 @@ namespace Service.BaseService
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddScoped<ProductService>();
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
+      services.AddScoped<FwServiceCollection>();
       services.AddAutoMapper(typeof(MappingProfiles));
       services.AddControllers();
       services.AddDbContext<StoreContext>(x =>
