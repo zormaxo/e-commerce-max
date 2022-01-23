@@ -1,5 +1,7 @@
 using Core.Entities;
 using Core.Interfaces;
+using Core.Repositories;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.Data
 {
@@ -20,9 +22,9 @@ namespace Infrastructure.Data
       return new GenericRepository<T>(_context);
     }
 
-    public Task<int> Complete()
+    public async Task<int> CompleteAsync()
     {
-      return _context.SaveChangesAsync();
+      return await _context.SaveChangesAsync();
     }
 
     public void Dispose()

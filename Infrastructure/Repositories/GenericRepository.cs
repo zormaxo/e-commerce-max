@@ -1,19 +1,21 @@
 using Core.Entities;
-using Core.Interfaces;
+using Core.Repositories;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Repositories
 {
   public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
   {
-    protected readonly StoreContext _context;
     private DbSet<TEntity> _dbSet;
-    
+
     public GenericRepository(StoreContext context)
     {
-      _context = context;
+      Context = context;
       _dbSet = context.Set<TEntity>();
     }
+
+    protected StoreContext Context { get; private set; }
 
     public async Task<TEntity> GetByIdAsync(int id)
     {
@@ -25,20 +27,14 @@ namespace Infrastructure.Data
       return await _dbSet.ToListAsync();
     }
 
-
-    public virtual void Insert(TEntity entity)
+    public async Task AddAsync(TEntity entity)
     {
-      _dbSet.Add(entity);
+      await _dbSet.AddAsync(entity);
     }
 
-    public void Add(TEntity entity)
+    public async Task AddRangeAsync(IEnumerable<TEntity> entities)
     {
-      _dbSet.Add(entity);
-    }
-
-    public void AddRange(IEnumerable<TEntity> entities)
-    {
-      _dbSet.AddRange(entities);
+      await _dbSet.AddRangeAsync(entities);
     }
 
     public void Remove(TEntity entity)

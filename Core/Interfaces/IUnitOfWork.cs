@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Repositories;
 
 namespace Core.Interfaces
 {
@@ -6,6 +7,6 @@ namespace Core.Interfaces
   {
     IProductRepository Products { get; }
     IGenericRepository<T> GenRepo<T>() where T : BaseEntity;
-    Task<int> Complete();
+    Task<int> CompleteAsync();
   }
 }
