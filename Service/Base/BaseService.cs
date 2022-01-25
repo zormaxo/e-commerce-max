@@ -3,7 +3,7 @@ using Infrastructure.Data;
 
 namespace Service.Base
 {
-  public class BaseService : IBaseService
+  public class BaseService
   {
     protected readonly StoreContext _context;
     protected readonly IMapper _mapper;
@@ -12,6 +12,11 @@ namespace Service.Base
     {
       _mapper = mapper;
       _context = context;
+    }
+
+    public BaseService(IMapper mapper)
+    {
+      _mapper = mapper;
     }
   }
 }
