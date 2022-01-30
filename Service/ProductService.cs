@@ -27,14 +27,15 @@ namespace Service
     {
       var spec = new ProductsWithTypesAndBrandsSpecification();
       var products = await _productsRepo.ListAsync(spec);
-      return _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
+      return _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
     }
 
     public async Task<ProductToReturnDto> GetProduct(int id)
     {
       var spec = new ProductsWithTypesAndBrandsSpecification(id);
       var product = await _productsRepo.GetEntityWithSpec(spec);
+
       return _mapper.Map<ProductToReturnDto>(product);
     }
 

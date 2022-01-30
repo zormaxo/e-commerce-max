@@ -1,3 +1,4 @@
+using API.Errors;
 using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
@@ -26,8 +27,14 @@ namespace Service.BaseService.Controllers
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]   //swagger documentation hints
     public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
     {
+      var productToReturnDto = await _productSrv.GetProduct(id);
+
+      if (productToReturnDto == null) return NotFound(new ApiResponse(404));
+
       return await _productSrv.GetProduct(id);
     }
 

@@ -21,7 +21,6 @@ namespace Infrastructure.Data
       return await _dbSet.FindAsync(id);
     }
 
-
     public async Task<IReadOnlyList<T>> ListAllAsync()
     {
       return await _dbSet.ToListAsync();
