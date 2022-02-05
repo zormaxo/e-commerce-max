@@ -4,6 +4,7 @@ using Core.Entities;
 using Core.Repositories;
 using Core.Specifications;
 using Service.Base;
+using Service.Helpers;
 
 namespace Service
 {
@@ -23,12 +24,18 @@ namespace Service
       _productBrandRepo = productBrandRepo;
     }
 
-    public async Task<IReadOnlyList<ProductToReturnDto>> GetProducts()
+    public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
     {
-      var spec = new ProductsWithTypesAndBrandsSpecification();
+      var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+      var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
+
+      var totalItems = await _productsRepo.CountAsync(countSpec);
+
       var products = await _productsRepo.ListAsync(spec);
 
-      return _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
+      var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
+
+      return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data);
     }
 
     public async Task<ProductToReturnDto> GetProduct(int id)

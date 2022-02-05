@@ -2,7 +2,9 @@ using API.Errors;
 using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
+using Service.Helpers;
 
 namespace Service.BaseService.Controllers
 {
@@ -21,9 +23,9 @@ namespace Service.BaseService.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+    public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     {
-      return Ok(await _productSrv.GetProducts());
+      return Ok(await _productSrv.GetProducts(productParams));
     }
 
     [HttpGet("{id}")]
