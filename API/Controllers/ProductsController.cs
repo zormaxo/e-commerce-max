@@ -1,3 +1,4 @@
+using API.Controllers;
 using API.Errors;
 using AutoMapper;
 using Core.Dtos;
@@ -8,9 +9,7 @@ using Service.Helpers;
 
 namespace Service.BaseService.Controllers
 {
-  [ApiController]
-  [Route("api/[controller]")]
-  public class ProductsController : ControllerBase
+  public class ProductsController : BaseApiController
   {
     private readonly IMapper _mapper;
     private ProductService _productSrv;
@@ -37,7 +36,7 @@ namespace Service.BaseService.Controllers
 
       if (productToReturnDto == null) return NotFound(new ApiResponse(404));
 
-      return await _productSrv.GetProduct(id);
+      return productToReturnDto;
     }
 
     [HttpGet("brands")]
