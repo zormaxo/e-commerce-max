@@ -23,14 +23,18 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
+            "assets": [              
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.css", 
+              "node_modules/@fortawesome/fontawesome-free/css/solid.css", 
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            
+            ]
           },
           "configurations": {
             "production": {
