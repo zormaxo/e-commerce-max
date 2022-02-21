@@ -1,6 +1,8 @@
+using System.Linq.Expressions;
 using System.Reflection;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Infrastructure.Data
 {
@@ -17,8 +19,23 @@ namespace Infrastructure.Data
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
-      modelBuilder.Entity<BaseAuditableEntity>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
       modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+      Expression<Func<BaseAuditableEntity, bool>> filterExpr = bm => !bm.IsDeleted;
+      foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes())
+      {
+        // check if current entity type is child of BaseModel
+        if (mutableEntityType.ClrType.IsAssignableTo(typeof(BaseAuditableEntity)))
+        {
+          // modify expression to handle correct child type
+          var parameter = Expression.Parameter(mutableEntityType.ClrType);
+          var body = ReplacingExpressionVisitor.Replace(filterExpr.Parameters.First(), parameter, filterExpr.Body);
+          var lambdaExpression = Expression.Lambda(body, parameter);
+
+          // set filter
+          mutableEntityType.SetQueryFilter(lambdaExpression);
+        }
+      }
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
