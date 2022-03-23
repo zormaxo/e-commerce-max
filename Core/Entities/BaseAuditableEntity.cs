@@ -1,3 +1,4 @@
+
 using Core.Entities;
 
 public class BaseAuditableEntity : BaseEntity

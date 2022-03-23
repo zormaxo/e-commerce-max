@@ -1,3 +1,4 @@
+using System.Net;
 using API.Controllers;
 using API.Errors;
 using AutoMapper;
@@ -34,7 +35,7 @@ namespace Service.BaseService.Controllers
     {
       var productToReturnDto = await _productSrv.GetProduct(id);
 
-      if (productToReturnDto == null) return NotFound(new ApiResponse(404));
+      if (productToReturnDto == null) return NotFound(new ApiResponse((int)HttpStatusCode.NotFound));
 
       return productToReturnDto;
     }

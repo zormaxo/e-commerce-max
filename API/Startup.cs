@@ -1,35 +1,27 @@
 using API.Extensions;
 using API.Middleware;
-using Core.Repositories;
-using Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Service.Helpers;
 
 namespace Service.BaseService
 {
   public class Startup
   {
     private readonly IConfiguration _config;
-    public Startup(IConfiguration config)
+    private readonly IWebHostEnvironment _env;
+    public Startup(IConfiguration config, IWebHostEnvironment env)
     {
       _config = config;
+      _env = env;
     }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddAutoMapper(typeof(MappingProfiles));
+      services.AddApplicationServices(_env, _config);
       services.AddControllers();
-      services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-      services.AddApplicationServices();
       services.AddSwaggerDocumentation();
       services.AddCors(opt =>
       {
-        opt.AddPolicy("CorsPolicy", policy =>
-            {
-              policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
-            });
+        opt.AddPolicy("CorsPolicy", policy => { policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"); });
       });
     }
 
