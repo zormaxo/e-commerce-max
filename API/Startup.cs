@@ -17,6 +17,7 @@ namespace Service.BaseService
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddApplicationServices(_env, _config);
+      services.AddControllerServices();
       services.AddControllers();
       services.AddSwaggerDocumentation();
       services.AddCors(opt =>

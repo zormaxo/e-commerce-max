@@ -1,25 +1,22 @@
 using System.Net;
-using API.Controllers;
 using API.Errors;
 using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
+using Service;
 using Service.Helpers;
 
-namespace Service.BaseService.Controllers
+namespace API.Controllers
 {
   public class ProductsController : BaseApiController
   {
-    private readonly IMapper _mapper;
     private ProductService _productSrv;
 
-
-    public ProductsController(IMapper mapper, ProductService productSrv)
+    public ProductsController(ProductService productSrv)
     {
       _productSrv = productSrv;
-      _mapper = mapper;
     }
 
     [HttpGet]
