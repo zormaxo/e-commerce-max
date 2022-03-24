@@ -27,6 +27,11 @@ namespace Infrastructure.Data
       return await _dbSet.ToListAsync();
     }
 
+    public async Task AddAsync(T entity)
+    {
+      await _dbSet.AddAsync(entity);
+    }
+
     public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
     {
       return await _dbSet.AnyAsync(predicate);
@@ -50,6 +55,11 @@ namespace Infrastructure.Data
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
       return SpecificationEvaluator<T>.GetQuery(_dbSet.AsQueryable(), spec);
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+      return await _context.SaveChangesAsync();
     }
   }
 }

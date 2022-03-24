@@ -1,55 +1,74 @@
+using System.Security.Cryptography;
+using System.Text;
 using API.DTOs;
 using AutoMapper;
 using Core.Entities;
+using Core.Interfaces;
 using Core.Repositories;
+using Core.Specifications;
 
 namespace Service
 {
   public class AccountService : BaseService
   {
     private readonly IGenericRepository<AppUser> _appUsersRepo;
+    private readonly ITokenService _tokenService;
 
-    public AccountService(IGenericRepository<AppUser> appUsersRepo, IMapper mapper) : base(mapper)
+    public AccountService(IGenericRepository<AppUser> appUsersRepo, IMapper mapper, ITokenService tokenService) : base(mapper)
     {
       _appUsersRepo = appUsersRepo;
+      _tokenService = tokenService;
     }
 
-    // public async Task<UserDto> Register(RegisterDto registerDto)
-    // {
-    //   if (await UserExists(registerDto.Username)) return ObjectResult("Username is taken");
+    public async Task<UserDto> Register(RegisterDto registerDto)
+    {
+      if (await UserExists(registerDto.Username)) return null;
 
-    //   using var hmac = new HMACSHA512();
+      using var hmac = new HMACSHA512();
 
-    //   var user = new AppUser
-    //   {
-    //     UserName = registerDto.Username.ToLower(),
-    //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-    //     PasswordSalt = hmac.Key
-    //   };
+      var user = new AppUser
+      {
+        UserName = registerDto.Username.ToLower(),
+        PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+        PasswordSalt = hmac.Key
+      };
 
-    //   _context.Users.Add(user);
-    //   await _context.SaveChangesAsync();
+      await _appUsersRepo.AddAsync(user);
+      await _appUsersRepo.SaveChangesAsync();
 
-    //   return new UserDto
-    //   {
-    //     Username = user.UserName,
-    //     Token = _tokenService.CreateToken(user)
-    //   };
-    // }
+      return new UserDto
+      {
+        Username = user.UserName,
+        Token = _tokenService.CreateToken(user)
+      };
+    }
+
+    public async Task<UserDto> Login(LoginDto loginDto)
+    {
+      var spec = new UsersSpecification(loginDto.Username);
+      var user = await _appUsersRepo.GetEntityWithSpec(spec);
+
+      if (user == null) return null;
+
+      using var hmac = new HMACSHA512(user.PasswordSalt);
+
+      var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+      for (int i = 0; i < computedHash.Length; i++)
+      {
+        if (computedHash[i] != user.PasswordHash[i]) return null;
+      }
+
+      return new UserDto
+      {
+        Username = user.UserName,
+        Token = _tokenService.CreateToken(user)
+      };
+    }
 
     private async Task<bool> UserExists(string username)
     {
       return await _appUsersRepo.AnyAsync(x => x.UserName == username.ToLower());
-    }
-
-    public async Task<IEnumerable<AppUser>> GetUsers()
-    {
-      return await _appUsersRepo.ListAllAsync();
-    }
-
-    public async Task<AppUser> GetUser(int id)
-    {
-      return await _appUsersRepo.GetByIdAsync(id);
     }
   }
 }
