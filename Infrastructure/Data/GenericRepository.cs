@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Core.Entities;
 using Core.Repositories;
 using Core.Specifications;
@@ -24,6 +25,11 @@ namespace Infrastructure.Data
     public async Task<IReadOnlyList<T>> ListAllAsync()
     {
       return await _dbSet.ToListAsync();
+    }
+
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+    {
+      return await _dbSet.AnyAsync(predicate);
     }
 
     public async Task<T> GetEntityWithSpec(ISpecification<T> spec)

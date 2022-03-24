@@ -1,7 +1,7 @@
 using AutoMapper;
 using Infrastructure.Data;
 
-namespace Service.Base
+namespace Service
 {
   public class BaseService
   {
