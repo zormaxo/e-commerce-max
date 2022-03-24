@@ -1,9 +1,6 @@
-using System.Security.Cryptography;
-using System.Text;
 using API.DTOs;
-using Core.Entities;
+using API.Errors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Service;
 
 namespace API.Controllers
@@ -19,16 +16,18 @@ namespace API.Controllers
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-      UserDto user = await _accountSrv.Register(registerDto);
-
-      return user ?? new ActionResult<UserDto>(BadRequest("Username is taken"));
+      var response = await _accountSrv.Register(registerDto);
+      if (response.StatusCode != 200) return BadRequest(response);
+      return response.Data;
     }
 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-      UserDto user = await _accountSrv.Login(loginDto);
-      return user ?? new ActionResult<UserDto>(BadRequest("Invalid"));
+      // UserDto user = await _accountSrv.Login(loginDto);
+      var response = await _accountSrv.Login(loginDto);
+      if (response.StatusCode != 200) return Unauthorized(response);
+      return response.Data;
     }
   }
 }
