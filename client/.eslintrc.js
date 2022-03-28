@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "ignorePatterns": [
     "projects/**/*"
@@ -9,7 +9,7 @@
         "*.ts"
       ],
       "parserOptions": {
-        "tsconfigRootDir": "client",
+        "tsconfigRootDir": __dirname,
         "project": [
           "tsconfig.json"
         ],
