@@ -3,7 +3,6 @@ using Core.Dtos;
 using Core.Entities;
 using Core.Repositories;
 using Core.Specifications;
-using Service.Base;
 using Service.Helpers;
 
 namespace Service

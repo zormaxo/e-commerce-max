@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Core.Entities;
 using Core.Repositories;
 using Core.Specifications;
@@ -26,6 +27,16 @@ namespace Infrastructure.Data
       return await _dbSet.ToListAsync();
     }
 
+    public async Task AddAsync(T entity)
+    {
+      await _dbSet.AddAsync(entity);
+    }
+
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+    {
+      return await _dbSet.AnyAsync(predicate);
+    }
+
     public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
     {
       return await ApplySpecification(spec).FirstOrDefaultAsync();
@@ -44,6 +55,11 @@ namespace Infrastructure.Data
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
       return SpecificationEvaluator<T>.GetQuery(_dbSet.AsQueryable(), spec);
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+      return await _context.SaveChangesAsync();
     }
   }
 }

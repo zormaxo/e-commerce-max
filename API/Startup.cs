@@ -17,12 +17,14 @@ namespace Service.BaseService
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddApplicationServices(_env, _config);
+      services.AddControllerServices();
       services.AddControllers();
       services.AddSwaggerDocumentation();
       services.AddCors(opt =>
       {
         opt.AddPolicy("CorsPolicy", policy => { policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"); });
       });
+      services.AddIdentityServices(_config);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +37,7 @@ namespace Service.BaseService
       app.UseStaticFiles();
       app.UseRouting();
       app.UseCors("CorsPolicy");
+      app.UseAuthentication();
       app.UseAuthorization();
       app.UseEndpoints(endpoints =>
       {
