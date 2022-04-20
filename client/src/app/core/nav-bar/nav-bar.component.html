@@ -1,112 +1,51 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-light bg-warning bg-gradient py-2" aria-labelledby="navbar">
+  <nav class="navbar navbar-expand navbar-light bg-warning bg-gradient py-2" aria-labelledby="navbar">
     <div class="container-xl">
-      <div style="width: 210px">
-        <a href="#" class="navbar-brand fw-bold text-dark py-0"><span class="small">Kuyumdan.com</span></a>
+      <div style="min-width: 180px">
+        <a href="#" class="navbar-brand fw-bold text-dark"><span class="small">Kuyumdan.com</span></a>
       </div>
-      <div class="d-flex align-items-center">
-        <a class="btn btn-outline-dark me-2 border-0 d-md-none" type="button" id="button-addon1">
-          <em class="fa-solid fa-user fa-lsm"></em>
-        </a>
-        <button class="navbar-toggler text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-          <em class="fa-solid fa-bars fa-sm"></em>
-        </button>
-      </div>
-      <div class="col-12 col-md-3 col-lg-4 mt-1 mt-md-0">
-        <div class="input-group input-group-sm">
-          <input type="text" class="form-control" placeholder="Ürün veya marka ara" />
-          <button class="btn btn-outline-dark" type="button" id="button-addon1">
-            <em class="fa-solid fa-magnifying-glass"></em>
-          </button>
+      <div class="row flex-grow-1 justify-content-between">
+        <div class="col-10 col-sm-5 col-md-7">
+          <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Ürün veya marka ara" />
+            <button class="btn btn-outline-dark" type="button" id="button-addon1">
+              <em class="fa-solid fa-magnifying-glass"></em>
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="d-flex flex-grow-1 justify-content-end d-none d-md-flex" id="navbarCollapse">
-        <form>
-          <a href="#" class="btn btn-outline-dark me-2 btn-sm">Giriş Yap</a>
-          <a href="#" class="btn btn-outline-dark me-2 btn-sm">Hesap Aç</a>
-          <a href="#" class="btn btn-dark btn-sm">Ücretsiz İlan Ver</a>
-        </form>
-      </div>
-    </div>
-  </nav>
-  <nav class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvas">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvas">Offcanvas</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="flex-shrink-0 p-3 bg-white" style="width: 280px">
-        <ul class="list-unstyled ps-0">
-          <li class="mb-1">
-            <button
-              class="btn btn-toggle align-items-center rounded collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#home-collapse"
-              aria-expanded="true">
-              Home
-            </button>
-            <div class="collapse show" id="home-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Overview</a></li>
-                <li><a href="#" class="link-dark rounded">Updates</a></li>
-                <li><a href="#" class="link-dark rounded">Reports</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button
-              class="btn btn-toggle align-items-center rounded collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#dashboard-collapse"
-              aria-expanded="false">
-              Dashboard
-            </button>
-            <div class="collapse" id="dashboard-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Overview</a></li>
-                <li><a href="#" class="link-dark rounded">Weekly</a></li>
-                <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                <li><a href="#" class="link-dark rounded">Annually</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button
-              class="btn btn-toggle align-items-center rounded collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#orders-collapse"
-              aria-expanded="false">
-              Orders
-            </button>
-            <div class="collapse" id="orders-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">New</a></li>
-                <li><a href="#" class="link-dark rounded">Processed</a></li>
-                <li><a href="#" class="link-dark rounded">Shipped</a></li>
-                <li><a href="#" class="link-dark rounded">Returned</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-top my-3"></li>
-          <li class="mb-1">
-            <button
-              class="btn btn-toggle align-items-center rounded collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#account-collapse"
-              aria-expanded="false">
-              Account
-            </button>
-            <div class="collapse" id="account-collapse" style="">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">New...</a></li>
-                <li><a href="#" class="link-dark rounded">Profile</a></li>
-                <li><a href="#" class="link-dark rounded">Settings</a></li>
-                <li><a href="#" class="link-dark rounded">Sign out</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+        <div class="d-flex justify-content-end d-none d-sm-flex col-auto" id="navbarCollapse">
+          <form>
+            <a href="#" class="btn btn-outline-dark me-2 btn-sm">Giriş Yap</a>
+            <a href="#" class="btn btn-dark btn-sm">Ücretsiz İlan Ver</a>
+          </form>
+        </div>
       </div>
     </div>
   </nav>
 </header>
+<nav class="navbar navbar-expand navbar-light bg-light fixed-bottom d-sm-none" aria-label="footer nav">
+  <div class="container-fluid">
+    <ul class="navbar-nav d-flex flex-grow-1 justify-content-around">
+      <li class="nav-item">
+        <a class="btn btn-outline-dark me-2 py-0 border-0" type="button" id="button-addon1">
+          <em class="fa-solid fa-house fa-lsm"></em>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-dark me-2 py-0 border-0" type="button" id="button-addon1">
+          <em class="fa-solid fa-border-all fa-lsm"></em>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-dark me-2 py-0 border-0" type="button" id="button-addon1">
+          <em class="fa-solid fa-heart fa-lsm"></em>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="btn btn-outline-dark me-2 py-0 border-0" type="button" id="button-addon1">
+          <em class="fa-solid fa-user fa-lsm"></em>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
