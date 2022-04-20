@@ -5,27 +5,27 @@ using Service;
 
 namespace API.Controllers
 {
-  public class UsersController : BaseApiController
-  {
-    private UserService _userSrv;
-
-    public UsersController(UserService userSrv)
+    public class UsersController : BaseApiController
     {
-      _userSrv = userSrv;
-    }
+        private UserService _userSrv;
 
-    [AllowAnonymous]
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
-    {
-      return Ok(await _userSrv.GetUsers());
-    }
+        public UsersController(UserService userSrv)
+        {
+            _userSrv = userSrv;
+        }
 
-    [Authorize]
-    [HttpGet("{id}")]
-    public async Task<ActionResult<AppUser>> GetUser(int id)
-    {
-      return await _userSrv.GetUser(id);
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        {
+            return Ok(await _userSrv.GetUsers());
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AppUser>> GetUser(int id)
+        {
+            return await _userSrv.GetUser(id);
+        }
     }
-  }
 }
