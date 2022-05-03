@@ -13,8 +13,7 @@ module.exports = {
       extends: [
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
-        'plugin:@typescript-eslint/recommended',
-        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended'
       ],
       rules: {
         '@angular-eslint/directive-selector': [

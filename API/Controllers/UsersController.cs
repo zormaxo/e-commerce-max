@@ -7,7 +7,7 @@ namespace API.Controllers
 {
     public class UsersController : BaseApiController
     {
-        private UserService _userSrv;
+        private readonly UserService _userSrv;
 
         public UsersController(UserService userSrv)
         {
