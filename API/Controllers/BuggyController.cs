@@ -30,7 +30,7 @@ namespace API.Controllers
 
       var thingToReturn = thing.ToString();
 
-      return Ok();
+      return Ok(thingToReturn);
     }
 
     [HttpGet("badrequest")]
@@ -42,7 +42,7 @@ namespace API.Controllers
     [HttpGet("badrequest/{id}")]
     public ActionResult GetBadRequest(int id)
     {
-      return Ok("sdf");
+      return Ok(id);
     }
   }
 }
