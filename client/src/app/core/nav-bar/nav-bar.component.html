@@ -15,12 +15,25 @@
             </div>
           </div>
           <div class="col-sm-8 d-none d-sm-flex justify-content-end">
-            <a *ngIf="!isLoggedIn" href="#" class="btn btn-outline-dark me-1 btn-sm">Giriş Yap</a>
-            <ul *ngIf="isLoggedIn" class="navbar-nav justify-content-around">
-              <li class="nav-item dropdown">
-                <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" id="button-addon1">
-                  <em class="fa-solid fa-user fa-lg"></em>
+            <a *ngIf="(accountService.currentUser$ | async) === null" href="#" class="btn btn-outline-dark me-1 btn-sm"
+              >Giriş Yap</a
+            >
+            <ul
+              *ngIf="accountService.currentUser$ | async"
+              class="navbar-nav justify-content-around align-items-center">
+              <li class="btn-group" style="align-self: flex-center" dropdown>
+                <a
+                  dropdownToggle
+                  type="button"
+                  class="nav-link dropdown-toggle small py-0"
+                  aria-controls="dropdown-basic">
+                  {{ (accountService.currentUser$ | async).username }} <span class="caret"></span>
                 </a>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                  <li role="menuitem"><a class="dropdown-item small" href="#">Edit Profile</a></li>
+                  <li class="divider dropdown-divider"></li>
+                  <li role="menuitem"><a class="dropdown-item small" href="#" (click)="logout()">Logout</a></li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" id="button-addon1">
@@ -43,7 +56,9 @@
                 </a>
               </li>
             </ul>
-            <a href="#" class="btn btn-secondary btn-sm d-none d-md-block">Ücretsiz İlan Ver</a>
+            <a href="#" class="btn btn-dark btn-sm d-none d-md-block" style="align-self: flex-start"
+              >Ücretsiz İlan Ver</a
+            >
           </div>
         </div>
       </div>

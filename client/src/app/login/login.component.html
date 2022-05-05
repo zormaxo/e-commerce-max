@@ -1,4 +1,4 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+<form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
   <div class="my-3 mx-0">
     <input type="text" class="form-control" name="username" [(ngModel)]="model.username" placeholder="Username" />
   </div>
@@ -7,7 +7,7 @@
     <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password" />
   </div>
   <div class="form-group text-center">
-    <button class="btn btn-success me-2" type="submit">Üye Ol</button>
+    <button class="btn btn-success me-2" type="submit">Giriş Yap</button>
     <button class="btn btn-light" (click)="cancel()" type="button">İptal</button>
   </div>
 </form>

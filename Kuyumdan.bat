@@ -1,6 +1,6 @@
 d:
-cd D:\Codes\Kuyumdan.com\API
+cd D:\Codes\Kuyumdan\API
 start dotnet watch run
-cd D:\Codes\Kuyumdan.com\client
+cd D:\Codes\Kuyumdan\client
 start ng s
-cd D:\Codes\Kuyumdan.com
+cd D:\Codes\Kuyumdan
