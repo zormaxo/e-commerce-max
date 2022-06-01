@@ -1,5 +1,4 @@
 using API.DTOs;
-using API.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -8,6 +7,7 @@ namespace API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly AccountService _accountSrv;
+
         public AccountController(AccountService accountSrv)
         {
             _accountSrv = accountSrv;
