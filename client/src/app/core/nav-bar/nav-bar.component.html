@@ -1,67 +1,58 @@
 <header>
   <nav class="navbar navbar-expand navbar-light bg-warning bg-gradient py-1" aria-labelledby="navbar">
     <div class="container-xl">
-      <div class="col-4 col-md-3">
-        <a href="#" class="navbar-brand fw-bold text-dark py-0"><span class="small">kuyumdan.com</span></a>
-      </div>
-      <div class="col-8 col-md-9">
-        <div class="row">
-          <div class="col-10 col-sm-4 ms-auto">
-            <div class="input-group input-group-sm border border-secondary rounded">
-              <input type="search" class="form-control border-0" placeholder="Ürün veya marka ara" />
-              <button class="btn btn-outline-dark border-0" type="button" id="button-addon1">
-                <em class="fa-solid fa-magnifying-glass"></em>
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-8 d-none d-sm-flex justify-content-end">
-            <a *ngIf="(accountService.currentUser$ | async) === null" href="#" class="btn btn-outline-dark me-1 btn-sm"
-              >Giriş Yap</a
-            >
-            <ul
-              *ngIf="accountService.currentUser$ | async"
-              class="navbar-nav justify-content-around align-items-center">
-              <li class="btn-group" style="align-self: flex-center" dropdown>
-                <a
-                  dropdownToggle
-                  type="button"
-                  class="nav-link dropdown-toggle small py-0"
-                  aria-controls="dropdown-basic">
-                  {{ (accountService.currentUser$ | async).username }} <span class="caret"></span>
-                </a>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                  <li role="menuitem"><a class="dropdown-item small" href="#">Edit Profile</a></li>
-                  <li class="divider dropdown-divider"></li>
-                  <li role="menuitem"><a class="dropdown-item small" href="#" (click)="logout()">Logout</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" id="button-addon1">
-                  <em class="fa-solid fa-envelope fa-lg"></em>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" id="button-addon1">
-                  <em class="fa-solid fa-bell fa-lg"></em>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" id="button-addon1">
-                  <em class="fa-solid fa-heart fa-lg"></em>
-                </a>
-              </li>
-              <li class="nav-item d-block d-md-none">
-                <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" id="button-addon1">
-                  <em class="fa-solid fa-circle-plus fa-lg"></em>
-                </a>
-              </li>
-            </ul>
-            <a href="#" class="btn btn-dark btn-sm d-none d-md-block" style="align-self: flex-start"
-              >Ücretsiz İlan Ver</a
-            >
-          </div>
+      <a href="#" class="navbar-brand col-5 col-sm-4 col-md-3 fw-bold text-dark p-0 m-0"
+        ><span class="small">kuyumdan.com</span></a
+      >
+      <div class="col-5 col-sm me-sm-2 me-md-5">
+        <div class="input-group input-group-sm border border-secondary rounded me-5">
+          <input type="search" class="form-control border-0" placeholder="Ürün veya marka ara" />
+          <button class="btn btn-outline-dark border-0" type="button">
+            <em class="fa-solid fa-magnifying-glass"></em>
+          </button>
         </div>
       </div>
+      <a
+        *ngIf="(accountService.currentUser$ | async) === null"
+        href="#"
+        class="btn btn-outline-dark me-1 btn-sm text-nowrap d-none d-sm-flex"
+        >Giriş Yap</a
+      >
+      <div
+        *ngIf="accountService.currentUser$ | async"
+        class="navbar-nav justify-content-around align-items-center d-none d-sm-flex">
+        <div class="btn-group" dropdown>
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle small py-0" aria-controls="dropdown-basic">
+            {{ (accountService.currentUser$ | async).username }} <span class="caret"></span>
+          </a>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item small" href="#">Edit Profile</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item small" href="#" (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+        <a class="btn btn-outline-dark p-1 me-1 border-0" type="button">
+          <em class="fa-solid fa-envelope fa-lg"></em>
+        </a>
+        <a class="btn btn-outline-dark p-1 me-1 border-0" type="button">
+          <em class="fa-solid fa-bell fa-lg"></em>
+        </a>
+        <a class="btn btn-outline-dark p-1 me-1 border-0" type="button">
+          <em class="fa-solid fa-heart fa-lg"></em>
+        </a>
+        <a class="btn btn-outline-dark p-1 me-1 border-0 d-none d-sm-block d-md-none" type="button">
+          <em class="fa-solid fa-circle-plus fa-lg"></em>
+        </a>
+      </div>
+      <a *ngIf="accountService.currentUser$ | async" href="#" class="btn btn-dark btn-sm d-none d-md-block text-nowrap"
+        >İlan Ver</a
+      >
+      <a
+        *ngIf="(accountService.currentUser$ | async) === null"
+        href="#"
+        class="btn btn-dark btn-sm d-none d-sm-block text-nowrap"
+        >İlan Ver</a
+      >
     </div>
   </nav>
 </header>
@@ -70,27 +61,27 @@
   <div class="container-fluid">
     <ul class="navbar-nav flex-grow-1 justify-content-around">
       <li class="nav-item">
-        <a class="btn btn-outline-dark py-0 border-0" type="button" id="button-addon1">
+        <a class="btn btn-outline-dark py-0 border-0" type="button">
           <em class="fa-solid fa-house"></em>
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-dark py-0 border-0" type="button" id="button-addon1">
+        <a class="btn btn-outline-dark py-0 border-0" type="button">
           <em class="fa-solid fa-border-all"></em>
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-dark py-0 border-0" type="button" id="button-addon1">
+        <a class="btn btn-outline-dark py-0 border-0" type="button">
           <em class="fa-solid fa-heart"></em>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="btn btn-outline-dark py-0 border-0" type="button" id="button-addon1">
+        <a class="btn btn-outline-dark py-0 border-0" type="button">
           <em class="fa-solid fa-user"></em>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="btn btn-outline-dark py-0 border-0" type="button" id="button-addon1">
+        <a class="btn btn-outline-dark py-0 border-0" type="button">
           <em class="fa-solid fa-circle-plus"></em>
         </a>
       </li>
