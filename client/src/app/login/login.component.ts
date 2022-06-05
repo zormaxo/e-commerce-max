@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginComponent {
   @Output() cancelRegister = new EventEmitter<boolean>();
   model: { username?: string; password?: string } = {};
 
-  constructor(public accountService: AccountService) {}
+  constructor(public accountService: AccountService, private toastr: ToastrService) {}
 
   login() {
     this.accountService.login(this.model).subscribe({
@@ -20,6 +21,7 @@ export class LoginComponent {
       },
       error: (error) => {
         console.log(error);
+        this.toastr.error(error.error.message);
       },
     });
   }

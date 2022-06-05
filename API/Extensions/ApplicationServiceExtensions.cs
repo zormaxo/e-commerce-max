@@ -16,17 +16,6 @@ namespace API.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(MappingProfiles));
 
-            void optionsAction(DbContextOptionsBuilder x)
-            {
-                x.UseSqlite(config.GetConnectionString("DefaultConnection"));
-                if (env.IsDevelopment())
-                {
-                    x.EnableSensitiveDataLogging();
-                    //// x.LogTo(Console.WriteLine, LogLevel.Information);
-                }
-            }
-            services.AddDbContext<StoreContext>(optionsAction);
-
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = actionContext =>
@@ -44,6 +33,17 @@ namespace API.Extensions
                     return new BadRequestObjectResult(errorResponse);
                 };
             });
+
+            void optionsAction(DbContextOptionsBuilder x)
+            {
+                x.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                if (env.IsDevelopment())
+                {
+                    x.EnableSensitiveDataLogging();
+                    //// x.LogTo(Console.WriteLine, LogLevel.Information);
+                }
+            }
+            services.AddDbContext<StoreContext>(optionsAction);
 
             return services;
         }
