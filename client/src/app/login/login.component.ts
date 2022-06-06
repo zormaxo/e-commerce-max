@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
@@ -11,13 +12,12 @@ export class LoginComponent {
   @Output() cancelRegister = new EventEmitter<boolean>();
   model: { username?: string; password?: string } = {};
 
-  constructor(public accountService: AccountService, private toastr: ToastrService) {}
+  constructor(public accountService: AccountService, private toastr: ToastrService, private router: Router) {}
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.cancel();
+      next: () => {
+        this.router.navigateByUrl('members');
       },
       error: (error) => {
         console.log(error);

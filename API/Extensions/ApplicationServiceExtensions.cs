@@ -11,8 +11,6 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
         {
-            //// services.AddScoped<IProductRepository, ProductRepository>();
-            //// services.AddScoped<ProductService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(typeof(MappingProfiles));
 
