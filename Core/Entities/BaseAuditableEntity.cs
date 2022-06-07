@@ -1,8 +1,8 @@
-
-using Core.Entities;
-
-public class BaseAuditableEntity : BaseEntity
+namespace Core.Entities
 {
-  public bool IsDeleted { get; set; }
-  public DateTime UpdateDate { get; set; }
+    public class BaseAuditableEntity : BaseEntity
+    {
+        public bool IsDeleted { get; set; }
+        public DateTime UpdateDate { get; set; }
+    }
 }

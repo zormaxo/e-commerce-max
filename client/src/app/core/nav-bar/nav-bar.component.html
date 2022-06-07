@@ -12,6 +12,13 @@
           </button>
         </div>
       </div>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
+        </li>
+      </ul>
+
       <a
         *ngIf="(accountService.currentUser$ | async) === null"
         href="#"
