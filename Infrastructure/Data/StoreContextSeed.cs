@@ -1,6 +1,9 @@
-using Core.Entities;
-using Microsoft.Extensions.Logging;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data
 {
@@ -12,9 +15,30 @@ namespace Infrastructure.Data
         {
             try
             {
-                if (!context.ProductBrands.Any())
+                if (!await context.Users.AnyAsync())
                 {
-                    var brandsData = File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
+                    var userData =await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/users.json");
+                    var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+
+                    context.Users.AddRange(users);
+
+                    foreach (var user in users)
+                    {
+                        using var hmac = new HMACSHA512();
+
+                        user.UserName = user.UserName.ToLower();
+                        user.PasswordSalt = hmac.Key;
+                        user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("123"));
+
+                        context.Users.Add(user);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!await context.ProductBrands.AnyAsync())
+                {
+                    var brandsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/brands.json");
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
                     context.ProductBrands.AddRange(brands);
@@ -22,9 +46,9 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.ProductTypes.Any())
+                if (!await context.ProductTypes.AnyAsync())
                 {
-                    var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
+                    var typesData =await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/types.json");
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
                     context.ProductTypes.AddRange(types);
@@ -32,9 +56,9 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.Products.Any())
+                if (!await context.Products.AnyAsync())
                 {
-                    var productsData = File.ReadAllText("../Infrastructure/Data/SeedData/products.json");
+                    var productsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/products.json");
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
                     context.Products.AddRange(products);

@@ -5,6 +5,7 @@ using Service;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly UserService _userSrv;
@@ -14,14 +15,13 @@ namespace API.Controllers
             _userSrv = userSrv;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             return Ok(await _userSrv.GetUsers());
         }
 
-        [Authorize]
+
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
