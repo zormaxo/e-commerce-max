@@ -1,15 +1,14 @@
 using AutoMapper;
-using Infrastructure.Data;
 
 namespace Service
 {
-  public class BaseService
-  {
-    protected readonly IMapper _mapper;
-
-    public BaseService(IMapper mapper)
+    public class BaseService
     {
-      _mapper = mapper;
+        protected readonly IMapper _mapper;
+
+        public BaseService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
     }
-  }
 }

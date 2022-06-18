@@ -1,15 +1,16 @@
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 
 namespace Infrastructure.Data
 {
     public class StoreContextSeed
     {
-        protected StoreContextSeed() { }
+        protected StoreContextSeed()
+        { }
 
         public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
         {
@@ -17,7 +18,7 @@ namespace Infrastructure.Data
             {
                 if (!await context.Users.AnyAsync())
                 {
-                    var userData =await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/users.json");
+                    var userData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/users.json");
                     var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
                     context.Users.AddRange(users);
@@ -48,7 +49,7 @@ namespace Infrastructure.Data
 
                 if (!await context.ProductTypes.AnyAsync())
                 {
-                    var typesData =await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/types.json");
+                    var typesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/types.json");
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
                     context.ProductTypes.AddRange(types);
