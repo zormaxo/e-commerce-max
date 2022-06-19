@@ -8,15 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : GenericRepository<AppUser>, IUserRepository
     {
-        private readonly StoreContext _context;
         private readonly IMapper _mapper;
 
-        public UserRepository(StoreContext context, IMapper mapper)
+        public UserRepository(StoreContext context, IMapper mapper) : base(context)
         {
             _mapper = mapper;
-            _context = context;
         }
 
         public async Task<MemberDto> GetMemberAsync(string username)

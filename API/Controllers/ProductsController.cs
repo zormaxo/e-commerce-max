@@ -1,5 +1,5 @@
 using API.Errors;
-using Core.Dtos;
+using Core.DTOs;
 using Core.Entities;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;

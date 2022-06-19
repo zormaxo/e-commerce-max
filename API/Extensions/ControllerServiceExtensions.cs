@@ -11,7 +11,6 @@ namespace API.Extensions
             services.AddScoped<ProductService>();
             services.AddScoped<AccountService>();
             services.AddScoped<UserService>();
-            services.AddScoped<ITokenService, TokenService>();
             return services;
         }
     }

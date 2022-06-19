@@ -1,4 +1,4 @@
-namespace Core.Dtos
+namespace Core.DTOs
 {
     public class ProductToReturnDto
     {

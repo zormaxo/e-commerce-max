@@ -1,3 +1,4 @@
+using Core.DTOs;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,16 +17,20 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            return Ok(await _userSrv.GetUsers());
+            var response = await _userSrv.GetUsers();
+            if (response.StatusCode != 200) return BadRequest(response);
+            return Ok(response.Data);
         }
 
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _userSrv.GetUser(id);
+            var response = await _userSrv.GetUser(username);
+            if (response.StatusCode != 200) return BadRequest(response);
+            return Ok(response.Data);
         }
     }
 }

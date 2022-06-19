@@ -1,5 +1,8 @@
+using API.Data;
 using API.Errors;
+using Core.Interfaces;
 using Core.Repositories;
+using Core.Service.Helpers;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +14,9 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.Configure<ApiBehaviorOptions>(options =>

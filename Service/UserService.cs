@@ -1,26 +1,29 @@
+using API.Errors;
 using AutoMapper;
-using Core.Entities;
-using Core.Repositories;
+using Core.DTOs;
+using Core.Interfaces;
 
 namespace Service
 {
-  public class UserService : BaseService
-  {
-    private readonly IGenericRepository<AppUser> _appUsersRepo;
-
-    public UserService(IGenericRepository<AppUser> appUsersRepo, IMapper mapper) : base(mapper)
+    public class UserService : BaseService
     {
-      _appUsersRepo = appUsersRepo;
-    }
+        private readonly IUserRepository _userRepository;
 
-    public async Task<IEnumerable<AppUser>> GetUsers()
-    {
-      return await _appUsersRepo.ListAllAsync();
-    }
+        public UserService(IUserRepository userRepository, IMapper mapper) : base(mapper)
+        {
+            _userRepository = userRepository;
+        }
 
-    public async Task<AppUser> GetUser(int id)
-    {
-      return await _appUsersRepo.GetByIdAsync(id);
+        public async Task<ApiResponse<IEnumerable<MemberDto>>> GetUsers()
+        {
+            var users = await _userRepository.GetMembersAsync();
+            return new ApiResponse<IEnumerable<MemberDto>>(users);
+        }
+
+        public async Task<ApiResponse<MemberDto>> GetUser(string username)
+        {
+            var user = await _userRepository.GetMemberAsync(username);
+            return new ApiResponse<MemberDto>(user);
+        }
     }
-  }
 }

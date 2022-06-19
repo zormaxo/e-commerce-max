@@ -1,5 +1,5 @@
 using AutoMapper;
-using Core.Dtos;
+using Core.DTOs;
 using Core.Entities;
 using Core.Repositories;
 using Core.Specifications;

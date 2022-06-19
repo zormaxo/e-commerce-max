@@ -1,7 +1,6 @@
 using AutoMapper;
-using Core.Dtos;
+using Core.DTOs;
 using Core.Entities;
-using System.Linq.Expressions;
 
 namespace Service.Helpers
 {
@@ -16,6 +15,11 @@ namespace Service.Helpers
                 .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
                 .ForMember(d => d.ProductType, ProductTypeName)
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+
+            CreateMap<AppUser, MemberDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
+                    src.Products.FirstOrDefault(x => x.IsMain).PictureUrl));
+            CreateMap<Photo, PhotoDto>();
         }
 
         public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)
