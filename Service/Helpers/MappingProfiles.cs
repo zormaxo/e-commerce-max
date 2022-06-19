@@ -14,10 +14,14 @@ namespace Service.Helpers
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
                 .ForMember(d => d.ProductType, ProductTypeName)
-                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>())
+                .ForMember(dest => dest.PictureUrl, opt => opt.MapFrom(src =>
+                    src.Photos.FirstOrDefault(x => x.IsMain).Url));
 
             CreateMap<AppUser, MemberDto>();
-            CreateMap<Photo, PhotoDto>();
+            CreateMap<Photo, PhotoDto>()
+                .ForMember(d => d.Url, o => o.MapFrom<PhotoUrlResolver>());
+
         }
 
         public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

@@ -13,7 +13,5 @@ namespace Core.Entities
         public AppUser User { get; set; }
         public int UserId { get; set; }
         public ICollection<Photo> Photos { get; set; }
-
-
     }
 }

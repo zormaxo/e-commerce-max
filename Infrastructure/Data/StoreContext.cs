@@ -45,7 +45,7 @@ namespace Infrastructure.Data
 
             foreach (var entityEntry in entries)
             {
-                ((BaseAuditableEntity)entityEntry.Entity).UpdateDate = DateTime.Now;
+                ((BaseAuditableEntity)entityEntry.Entity).LastUpdated = DateTime.Now;
 
                 // if (entityEntry.State == EntityState.Added)
                 // {
