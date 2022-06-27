@@ -44,7 +44,7 @@ export class ShopComponent implements OnInit {
 
   getBrands() {
     this.shopService.getBrands().subscribe(response => {
-      this.brands = [{ id: 0, name: 'All' }, ...response];
+      this.brands = response;
     }, error => {
       console.log(error);
     })

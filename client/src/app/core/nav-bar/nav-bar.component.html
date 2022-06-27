@@ -1,15 +1,20 @@
 <header>
   <nav class="navbar navbar-expand navbar-light bg-warning bg-gradient py-1" aria-labelledby="navbar">
-    <div class="container-xl">
-      <a href="#" class="navbar-brand col-5 col-sm-4 col-md-3 fw-bold text-dark p-0 m-0" routerLink=""
+    <div class="container-xxl">
+      <a href="#" class="navbar-brand col-5 col-sm-4 col-md-3 fw-bold text-dark p-0 m-0 bg-warning" routerLink=""
         ><span class="small">kuyumdan.com</span></a
       >
       <div class="col-5 col-sm me-sm-2 me-md-5">
         <div class="input-group input-group-sm border border-secondary rounded me-5">
           <input type="search" class="form-control border-0" placeholder="Ürün veya marka ara" />
-          <button class="btn btn-outline-dark border-0" type="button">
-            <em class="fa-solid fa-magnifying-glass"></em>
-          </button>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-outline-dark border-0" type="button">
+              <em class="fa-solid fa-magnifying-glass"></em>
+            </button>
+            <button class="btn btn-outline-dark border-0" type="button">
+              <em class="fa-solid fa-xmark"></em>
+            </button>
+          </div>
         </div>
       </div>
 
