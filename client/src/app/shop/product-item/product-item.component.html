@@ -1,14 +1,8 @@
 <div class="card h-100 shadow-sm">
   <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" class="card-img-top bg-info" />
-  <div class="card-body d-flex flex-column">
-    <a href="#">
-      <h6 class="text-uppercase">{{ product.name }}</h6>
+  <div class="card-body d-flex flex-column p-1 text-decoration-none">
+    <a href="#" class="text-decoration-none">
+      <div style="font-size: 0.75rem;" class="text-truncate text-dark">{{ product.name }}</div>
     </a>
-    <span class="mb-2">{{ product.price | currency }}</span>
-
-    <div class="btn-group mt-auto">
-      <button type="button" class="btn btn-outline-secondary mr-2"><i class="fa fa-shopping-cart"></i></button>
-      <button type="button" class="btn btn-outline-secondary">View</button>
-    </div>
   </div>
 </div>
