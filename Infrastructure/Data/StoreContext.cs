@@ -1,8 +1,8 @@
+using System.Linq.Expressions;
+using System.Reflection;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Infrastructure.Data
 {
@@ -19,6 +19,7 @@ namespace Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //e-commerce 27
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
@@ -29,10 +30,22 @@ namespace Infrastructure.Data
             {
                 // modify expression to handle correct child type
                 var parameter = Expression.Parameter(mutableEntityType.ClrType);
-                var body = ReplacingExpressionVisitor.Replace(filterExpr.Parameters.First(), parameter, filterExpr.Body);
+                var body = ReplacingExpressionVisitor.Replace(filterExpr.Parameters[0], parameter, filterExpr.Body);
                 var lambdaExpression = Expression.Lambda(body, parameter);
                 // set filter
                 mutableEntityType.SetQueryFilter(lambdaExpression);
+            }
+
+            //e-commerce 62
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            {
+                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+                {
+                    foreach (var property in entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal)))
+                    {
+                        modelBuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
+                    }
+                }
             }
         }
 
@@ -52,7 +65,7 @@ namespace Infrastructure.Data
                 //   ((BaseAuditableEntity)entityEntry.Entity).CreationDate = DateTime.Now;
                 // }
             }
-            return base.SaveChangesAsync();
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

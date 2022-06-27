@@ -21,7 +21,6 @@ namespace Service.Helpers
             CreateMap<AppUser, MemberDto>();
             CreateMap<Photo, PhotoDto>()
                 .ForMember(d => d.Url, o => o.MapFrom<PhotoUrlResolver>());
-
         }
 
         public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

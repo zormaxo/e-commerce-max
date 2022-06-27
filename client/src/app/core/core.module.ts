@@ -10,4 +10,4 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, BrowserAnimationsModule, BsDropdownModule.forRoot(), RouterModule],
   exports: [NavBarComponent],
 })
-export class CoreModule {}
+export class CoreModule { }
