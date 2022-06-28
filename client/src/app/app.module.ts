@@ -19,7 +19,8 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
-import { ShopModule } from './shop/shop.module';
+import { ShopModule } from './shop/showcase/shop.module';
+import { MachineModule } from './shop/machine/machine.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ShopModule } from './shop/shop.module';
     CoreModule,
     FormsModule,
     SharedModule,
-    ShopModule
+    ShopModule,
+    MachineModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],
