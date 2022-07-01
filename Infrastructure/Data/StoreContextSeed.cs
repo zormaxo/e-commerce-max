@@ -1,9 +1,9 @@
-using Core.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data
 {
@@ -16,6 +16,26 @@ namespace Infrastructure.Data
         {
             try
             {
+                if (!await context.Cities.AnyAsync())
+                {
+                    var cityData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/cities.json");
+                    var cities = JsonSerializer.Deserialize<List<City>>(cityData);
+
+                    context.Cities.AddRange(cities);
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!await context.Counties.AnyAsync())
+                {
+                    var countyData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/counties.json");
+                    var counties = JsonSerializer.Deserialize<List<County>>(countyData);
+
+                    context.Counties.AddRange(counties);
+
+                    await context.SaveChangesAsync();
+                }
+
                 if (!await context.Users.AnyAsync())
                 {
                     var userData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/users.json");
