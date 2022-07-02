@@ -6,7 +6,7 @@ namespace Core.Entities
     {
         [Required]
         public string UserName { get; set; }
-        public string Logo { get; set; }
+        public string LogoUrl { get; set; }
         public string PhotoUrl { get; set; }
 
         [Required]
