@@ -5,7 +5,13 @@ namespace Core.Entities
     public class AppUser : BaseAuditableEntity
     {
         [Required]
-        public string UserName { get; set; }
+        public string Username { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string Surname { get; set; }
         public string LogoUrl { get; set; }
         public string PhotoUrl { get; set; }
 

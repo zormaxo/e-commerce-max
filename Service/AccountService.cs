@@ -31,7 +31,7 @@ namespace Service
 
             var user = new AppUser
             {
-                UserName = registerDto.Username.ToLower(),
+                Username = registerDto.Username.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
                 PasswordSalt = hmac.Key
             };
@@ -41,7 +41,7 @@ namespace Service
 
             var userDto = new UserDto
             {
-                Username = user.UserName,
+                Username = user.Username,
                 Token = _tokenService.CreateToken(user)
             };
 
@@ -68,7 +68,7 @@ namespace Service
 
             var userDto = new UserDto
             {
-                Username = user.UserName,
+                Username = user.Username,
                 Token = _tokenService.CreateToken(user)
             };
 
@@ -77,7 +77,7 @@ namespace Service
 
         private async Task<bool> UserExists(string username)
         {
-            return await _appUsersRepo.AnyAsync(x => x.UserName == username.ToLower());
+            return await _appUsersRepo.AnyAsync(x => x.Username == username.ToLower());
         }
     }
 }

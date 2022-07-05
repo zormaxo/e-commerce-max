@@ -21,7 +21,7 @@ export class RegisterComponent {
       },
       error: (error) => {
         console.log(error);
-        this.toastr.error(error.error.message);
+        this.toastr.error(error.message);
       },
     });
   }

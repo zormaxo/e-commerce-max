@@ -1,23 +1,23 @@
 [{
-    "UserName": "Omer",
+    "Username": "Omer",
 	"PhotoUrl": "https://randomuser.me/api/portraits/men/87.jpg"
   }, {
-    "UserName": "Ekrem",
+    "Username": "Ekrem",
 	"PhotoUrl": "https://randomuser.me/api/portraits/men/57.jpg"
   }, {
-    "UserName": "Emre",
+    "Username": "Emre",
 	"PhotoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
   }, {
-    "UserName": "Şükrü Ahmet",
+    "Username": "Şükrü Ahmet",
 	"PhotoUrl": "https://randomuser.me/api/portraits/men/93.jpg"
   }, {
-    "UserName": "Müberra",
+    "Username": "Müberra",
 	"PhotoUrl": "https://randomuser.me/api/portraits/women/54.jpg"
   }, {
-    "UserName": "Aslı",
+    "Username": "Aslı",
 	"PhotoUrl": "https://randomuser.me/api/portraits/women/50.jpg"
   }, {
-    "UserName": "Salih",
+    "Username": "Salih",
 	"PhotoUrl": "https://randomuser.me/api/portraits/men/90.jpg"
   }
 ]
