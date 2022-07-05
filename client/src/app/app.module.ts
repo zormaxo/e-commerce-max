@@ -22,6 +22,7 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { ShopModule } from './shop/showcase/shop.module';
 import { MachineModule } from './shop/machine/machine.module';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,9 +48,12 @@ import { MemberCardComponent } from './members/member-card/member-card.component
     FormsModule,
     SharedModule,
     ShopModule,
-    MachineModule
+    MachineModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

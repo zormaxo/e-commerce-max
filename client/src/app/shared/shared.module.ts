@@ -6,6 +6,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PagerComponent } from './pager/pager.component';
 import { PagingHeaderComponent } from './paging-header/paging-header.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [PagerComponent, PagingHeaderComponent],
@@ -17,7 +18,16 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
       positionClass: 'toast-bottom-right',
     }),
     PaginationModule.forRoot(),
+    NgxGalleryModule,
   ],
-  exports: [BsDropdownModule, ToastrModule, TabsModule, PaginationModule, PagingHeaderComponent, PagerComponent],
+  exports: [
+    BsDropdownModule,
+    ToastrModule,
+    TabsModule,
+    PaginationModule,
+    PagingHeaderComponent,
+    PagerComponent,
+    NgxGalleryModule,
+  ],
 })
 export class SharedModule {}
