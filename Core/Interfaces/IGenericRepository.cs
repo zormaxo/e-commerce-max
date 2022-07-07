@@ -2,10 +2,12 @@ using Core.Entities;
 using Core.Specifications;
 using System.Linq.Expressions;
 
-namespace Core.Repositories
+namespace Core.Interfaces
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
+        IQueryable<T> GetAll();
+
         Task<T> GetByIdAsync(int id);
 
         Task<IReadOnlyList<T>> ListAllAsync();

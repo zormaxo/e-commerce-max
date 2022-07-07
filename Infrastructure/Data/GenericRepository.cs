@@ -1,5 +1,5 @@
 using Core.Entities;
-using Core.Repositories;
+using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -15,6 +15,11 @@ namespace Infrastructure.Data
         {
             _context = context;
             _dbSet = context.Set<T>();
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return _dbSet;
         }
 
         public async Task<T> GetByIdAsync(int id)
