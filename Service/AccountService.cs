@@ -3,7 +3,6 @@ using AutoMapper;
 using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
-using Core.Repositories;
 using Core.Specifications;
 using System.Net;
 using System.Security.Cryptography;

@@ -1,7 +1,7 @@
 using AutoMapper;
 using Core.DTOs;
 using Core.Entities;
-using Core.Repositories;
+using Core.Interfaces;
 using Core.Specifications;
 using Service.Helpers;
 
