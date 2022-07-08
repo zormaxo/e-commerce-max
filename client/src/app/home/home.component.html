@@ -1,26 +1,5 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="container">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <h1>kuyumdan.com</h1>
-    <p class="lead">Kuyumcu makine ve malzemeleri Kuyumdan.com!</p>
-    <div class="text-center">
-      <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Giriş Yap</button>
-      <button class="btn btn-info btn-lg">Learn more</button>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="registerMode" class="container">
-  <div class="row justify-content-center">
-    <div class="col-auto">
-      <h1 class="bg-warning px-2">kuyumdan.com</h1>
-      <div>
-        <tabset [justified]="true">
-          <tab heading="Giriş Yap"><app-login (cancelRegister)="cancelRegisterMode($event)"></app-login></tab>
-          <tab heading="Üye Ol"><app-register (cancelRegister)="cancelRegisterMode($event)"></app-register></tab>
-        </tabset>
-      </div>
-    </div>
-  </div>
+<div class="container-xxl mt-3">
+  <app-shop></app-shop>
 </div>
