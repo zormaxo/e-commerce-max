@@ -8,7 +8,7 @@
     </select> -->
 
     <!-- <h5 class="text-warning ms-3">Brands</h5> -->
-    <ul class="list-group mt-5">
+    <!-- <ul class="list-group mt-5">
       <li
         class="list-group-item list-group-item-action d-flex justify-content-between align-items-start p-2"
         *ngFor="let brand of brands"
@@ -18,18 +18,19 @@
         <small class="me-auto"> {{ brand.name }}</small>
         <small class="badge bg-secondary rounded-pill">12</small>
       </li>
-    </ul>
-    <!-- <h5 class="text-warning ms-3">Types</h5>
+    </ul> -->
+    <h5 class="text-warning ms-3">Types</h5>
     <ul class="list-group my-3">
       <li
-        class="list-group-item"
+        class="list-group-item list-group-item-action d-flex align-items-center p-2"
         *ngFor="let type of types"
         [class.active]="type.id === shopParams.typeId"
         [value]="type.id"
         (click)="onTypeSelected(type.id)">
-        {{ type.name }}
+        <small> {{ type.name }}&nbsp;</small>
+        <small style="font-size: 12px"> ({{ type.count }})</small>
       </li>
-    </ul> -->
+    </ul>
   </section>
   <section class="col-sm-8 col-md-9">
     <div>Vitrin</div>

@@ -17,7 +17,7 @@ export class RegisterComponent {
   register() {
     this.accountService.register(this.model).subscribe({
       next: () => {
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('');
       },
       error: (error) => {
         console.log(error);

@@ -59,7 +59,7 @@ export class MachineComponent implements OnInit {
   getTypes() {
     this.machineService.getTypes().subscribe(
       (response) => {
-        this.types = [{ id: 0, name: 'All' }, ...response];
+        this.types = response;
       },
       (error) => {
         console.log(error);

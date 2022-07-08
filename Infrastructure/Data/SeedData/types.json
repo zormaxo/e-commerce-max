@@ -1,18 +1,18 @@
-[
-  {
+[{
     "Id": 1,
-    "Name": "Boards"
-  },
-  {
+    "Name": "Boards",
+    "Count": 6
+  }, {
     "Id": 2,
-    "Name": "Hats"
-  },
-  {
+    "Name": "Hats",
+    "Count": 3
+  }, {
     "Id": 3,
-    "Name": "Boots"
-  },
-  {
+    "Name": "Boots",
+    "Count": 3
+  }, {
     "Id": 4,
-    "Name": "Gloves"
+    "Name": "Gloves",
+    "Count": 4
   }
 ]

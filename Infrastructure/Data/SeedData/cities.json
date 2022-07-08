@@ -1,6 +1,6 @@
 [{
     "Id": 1,
-    "CityCityName": "Adana"
+    "CityName": "Adana"
   }, {
     "Id": 2,
     "CityName": "Adıyaman"
