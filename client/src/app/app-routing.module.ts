@@ -11,6 +11,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
+import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,11 +20,16 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {
+        path: 'members/a/:username',
+        component: MemberProfileStartComponent,
+      },
+      {
         path: 'members',
         component: MemberProfileComponent,
         canActivate: [AuthGuard],
-        children: [{ path: 'a/:username', component: MembershipInfoComponent }],
+        children: [{ path: 'a/:username/info', component: MembershipInfoComponent }],
       },
+      { path: 'members/a', component: MemberProfileStartComponent },
       { path: 'members/:username', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },

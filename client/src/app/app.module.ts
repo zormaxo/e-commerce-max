@@ -25,6 +25,7 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
+import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MembershipInfoComponent } from './members/member-profile/membership-inf
     MemberCardComponent,
     MemberProfileComponent,
     MembershipInfoComponent,
+    MemberProfileStartComponent,
   ],
   imports: [
     BrowserModule,
