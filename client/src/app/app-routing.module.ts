@@ -12,9 +12,11 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
 import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
+import { EntryComponent } from './entry/entry.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'entry', component: EntryComponent },
   {
     path: '',
     canActivateChild: [AuthGuard],

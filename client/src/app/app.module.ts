@@ -7,9 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './entry/register/register.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './entry/login/login.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -26,6 +26,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
 import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
+import { EntryComponent } from './entry/entry.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MemberProfileStartComponent } from './members/member-profile-start/memb
     MemberProfileComponent,
     MembershipInfoComponent,
     MemberProfileStartComponent,
+    EntryComponent,
   ],
   imports: [
     BrowserModule,

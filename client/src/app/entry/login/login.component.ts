@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +17,12 @@ export class LoginComponent {
   login() {
     this.accountService.login(this.model).subscribe({
       next: () => {
-        this.router.navigateByUrl('members');
+        this.router.navigateByUrl('home');
       },
       error: (error) => {
         console.log(error);
         this.toastr.error(error.error.message);
       },
     });
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
   }
 }

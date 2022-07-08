@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <a routerLink="" class="link-dark text-decoration-none"><h1 class="bg-warning p-2">kuyumdan.com</h1></a>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-5">
+    <div class="col-4">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <tabset [justified]="true">
+            <tab heading="Giriş Yap"><app-login></app-login></tab>
+            <tab heading="Üye Ol"><app-register></app-register></tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
