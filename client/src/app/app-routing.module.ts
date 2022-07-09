@@ -13,6 +13,7 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
 import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 import { EntryComponent } from './entry/entry.component';
+import { MachineComponent } from './shop/machine/machine.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,9 +35,11 @@ const routes: Routes = [
       { path: 'members/a', component: MemberProfileStartComponent },
       { path: 'members/:username', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
+
       { path: 'messages', component: MessagesComponent },
     ],
   },
+  { path: 'makine', component: MachineComponent },
   { path: 'errors', component: TestErrorsComponent },
   { path: 'notfound', component: NotFoundComponent },
   { path: 'servererror', component: ServerErrorComponent },

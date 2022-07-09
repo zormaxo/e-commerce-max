@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
 import { IType } from '../../shared/models/productType';
@@ -23,7 +24,7 @@ export class ShopComponent implements OnInit {
     { name: 'Price: High to low', value: 'priceDesc' },
   ];
 
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService, private router: Router) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -73,10 +74,8 @@ export class ShopComponent implements OnInit {
     this.getProducts();
   }
 
-  onTypeSelected(typeId: number) {
-    this.shopParams.typeId = typeId;
-    this.shopParams.pageNumber = 1;
-    this.getProducts();
+  onTypeSelected(typeName: string) {
+    this.router.navigateByUrl(typeName.toLowerCase());
   }
 
   onSortSelected(sort: string) {
