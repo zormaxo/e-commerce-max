@@ -17,30 +17,21 @@
           </div>
         </div>
       </div>
-      <a
-        *ngIf="(accountService.currentUser$ | async) === null"
-        href="#"
-        class="btn btn-outline-dark me-1 btn-sm text-nowrap d-none d-sm-flex"
-        routerLink="entry"
-        >Giriş Yap</a
-      >
-      <div
-        *ngIf="accountService.currentUser$ | async as user"
+      <a *ngIf="(accountService.currentUser$ | async) === null" href="#"
+        class="btn btn-outline-dark me-1 btn-sm text-nowrap d-none d-sm-flex" routerLink="entry">Giriş Yap</a>
+      <div *ngIf="accountService.currentUser$ | async as user"
         class="navbar-nav justify-content-around align-items-center d-none d-sm-flex">
         <div class="btn-group" dropdown>
           <a dropdownToggle type="button" class="nav-link dropdown-toggle small py-0" aria-controls="dropdown-basic">
             {{ user.username | titlecase }} <span class="caret"></span>
           </a>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item small" href="#">Edit Profile</a></li>
+            <li role="menuitem"><a class="dropdown-item small">Edit Profile</a></li>
             <li class="divider dropdown-divider"></li>
-            <li role="menuitem"><a class="dropdown-item small" href="#" (click)="logout()">Logout</a></li>
+            <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Logout</a></li>
           </ul>
         </div>
-        <a
-          class="btn btn-outline-dark p-1 me-1 border-0"
-          type="button"
-          routerLink="/messages"
+        <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" routerLink="/messages"
           routerLinkActive="active">
           <em class="fa-solid fa-envelope fa-lg"></em>
         </a>
@@ -54,15 +45,10 @@
           <em class="fa-solid fa-circle-plus fa-lg"></em>
         </a>
       </div>
-      <a *ngIf="accountService.currentUser$ | async" href="#" class="btn btn-dark btn-sm d-none d-md-block text-nowrap"
-        >İlan Ver</a
-      >
-      <a
-        *ngIf="(accountService.currentUser$ | async) === null"
-        href="#"
-        class="btn btn-dark btn-sm d-none d-sm-block text-nowrap"
-        >İlan Ver</a
-      >
+      <a *ngIf="accountService.currentUser$ | async" href="#"
+        class="btn btn-dark btn-sm d-none d-md-block text-nowrap">İlan Ver</a>
+      <a *ngIf="(accountService.currentUser$ | async) === null" href="#"
+        class="btn btn-dark btn-sm d-none d-sm-block text-nowrap">İlan Ver</a>
     </div>
   </nav>
 </header>

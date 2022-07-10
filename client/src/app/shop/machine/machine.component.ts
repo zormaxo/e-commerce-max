@@ -15,7 +15,7 @@ export class MachineComponent implements OnInit {
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
-  shopParams = new ShopParams();
+  shopParams = new ShopParams(10);
   totalCount: number;
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },

@@ -5,4 +5,8 @@ export class ShopParams {
   pageNumber = 1;
   pageSize = 50;
   search: string;
+
+  constructor(pageSize = 50) {
+    this.pageSize = pageSize;
+  }
 }

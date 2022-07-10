@@ -20,7 +20,7 @@
       </li>
     </ul> -->
     <!-- <h5 class="text-warning ms-3">Types</h5> -->
-    <ul class="list-group my-3">
+    <ul class="list-group">
       <li
         class="list-group-item list-group-item-action d-flex align-items-center p-2"
         *ngFor="let type of types"
@@ -39,7 +39,7 @@
         <app-product-item [product]="product"></app-product-item>
       </div>
     </div>
-    <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
+    <div class="d-flex justify-content-center mt-3" *ngIf="totalCount > 0">
       <app-pager
         [pageSize]="shopParams.pageSize"
         [totalCount]="totalCount"
