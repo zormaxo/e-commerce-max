@@ -45,7 +45,7 @@ import { EntryComponent } from './entry/entry.component';
     MemberProfileComponent,
     MembershipInfoComponent,
     MemberProfileStartComponent,
-    EntryComponent,
+    EntryComponent
   ],
   imports: [
     BrowserModule,
