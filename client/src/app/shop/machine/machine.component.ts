@@ -102,4 +102,8 @@ export class MachineComponent implements OnInit {
     this.shopParams = new ShopParams();
     this.getProducts();
   }
+
+  naber(params) {
+    console.log(params);
+  }
 }

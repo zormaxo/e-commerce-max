@@ -21,8 +21,8 @@
         <thead>
           <tr>
             <th scope="col" style="width: 100px"></th>
-            <th scope="col" style="text-align: start" appSort><small>İlan Başlığı</small></th>
-            <th scope="col" style="width: 50px" appSort><small>Fiyat</small></th>
+            <th scope="col" style="text-align: start"><small>İlan Başlığı</small></th>
+            <th scope="col" style="width: 50px" appSort (someEvent)="naber($event)"><small>Fiyat</small></th>
             <th scope="col" style="width: 100px" appSort><small>İlan Tarihi</small></th>
             <th scope="col" style="width: 100px" appSort><small>İl / İlçe</small></th>
           </tr>
