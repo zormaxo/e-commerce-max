@@ -24,6 +24,10 @@ export class OnlyNumberDirective {
     const next: string = current.concat(event.key);
     if (next && !String(next).match(this.regex)) {
       event.preventDefault();
+    } else {
+      let omer = parseInt(next).toLocaleString();
+      this.el.nativeElement.value = omer;
+      event.preventDefault();
     }
   }
 }
