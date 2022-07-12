@@ -5,7 +5,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 })
 export class SortDirective implements OnInit {
   @Input('appSort') sortTextInput: string;
-  @Output() someEvent: EventEmitter<string> = new EventEmitter();
+  @Output() headerClicked: EventEmitter<string> = new EventEmitter();
 
   arrow: Direction = Direction.None;
   down: unknown;
@@ -53,8 +53,7 @@ export class SortDirective implements OnInit {
       this.arrow = Direction.Asc;
       sortText = this.sortTextInput + Direction.Asc;
     }
-    console.log(sortText);
-    // this.someEvent.emit('omer');
+    this.headerClicked.emit(sortText);
   }
 
   @HostListener('mouseenter') mouseenter() {}

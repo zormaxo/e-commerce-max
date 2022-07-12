@@ -22,8 +22,12 @@
           <tr>
             <th scope="col" style="width: 100px"></th>
             <th scope="col" style="text-align: start"><small>İlan Başlığı</small></th>
-            <th scope="col" style="width: 50px" appSort="Price" (someEvent)="naber($event)"><small>Fiyat</small></th>
-            <th scope="col" style="width: 100px" appSort="Date"><small>İlan Tarihi</small></th>
+            <th scope="col" style="width: 80px" appSort="price" (headerClicked)="onHeaderClicked($event)">
+              <small>Fiyat</small>
+            </th>
+            <th scope="col" style="width: 100px" appSort="date" (headerClicked)="onHeaderClicked($event)">
+              <small>İlan Tarihi</small>
+            </th>
             <th scope="col" style="width: 100px"><small>İl / İlçe</small></th>
           </tr>
         </thead>
@@ -39,7 +43,7 @@
               <small>{{ product.price }} TL</small>
             </td>
             <td>
-              <small>22 Haziran 2022</small>
+              <small>{{ product.created }}</small>
             </td>
             <td>
               <small>İstanbul Bahçelievler</small>

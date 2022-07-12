@@ -103,7 +103,8 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  naber(params) {
-    console.log(params);
+  onHeaderClicked(sortText) {
+    this.shopParams.sort = sortText;
+    this.getProducts();
   }
 }

@@ -9,6 +9,8 @@ namespace Core.DTOs
         public string PictureUrl { get; set; }
         public string ProductType { get; set; }
         public string ProductBrand { get; set; }
+        public string City { get; set; }
+        public string County { get; set; }
         public DateTime Created { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }
