@@ -12,6 +12,7 @@ namespace Core.Specifications
             AddInclude(x => x.ProductBrand);
             AddInclude(x => x.Photos);
             AddInclude(x => x.County);
+            AddInclude("County.City");
             AddOrderBy(x => x.Name);
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 

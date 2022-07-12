@@ -27,6 +27,13 @@ namespace Core.Specifications
 
         public bool IsPagingEnabled { get; private set; }
 
+        public List<string> IncludeStrings { get; } = new List<string>();
+
+        protected void AddInclude(string includeString)
+        {
+            IncludeStrings.Add(includeString);
+        }
+
         protected void AddInclude(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);
