@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace Core.Specifications
@@ -16,6 +17,8 @@ namespace Core.Specifications
         public Expression<Func<T, bool>> Criteria { get; }
 
         public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
+
+        public List<Func<IQueryable<T>, IIncludableQueryable<T, object>>> IncludesWithThen { get; } = new List<Func<IQueryable<T>, IIncludableQueryable<T, object>>>();
 
         public Expression<Func<T, object>> OrderBy { get; private set; }
 
@@ -37,6 +40,11 @@ namespace Core.Specifications
         protected void AddInclude(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);
+        }
+
+        protected void AddInclude(Func<IQueryable<T>, IIncludableQueryable<T, object>> includeExpression)
+        {
+            IncludesWithThen.Add(includeExpression);
         }
 
         protected void AddOrderBy(Expression<Func<T, object>> orderByExpression)

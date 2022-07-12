@@ -1,5 +1,6 @@
 using Core.Entities;
 using Core.Specification;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Specifications
 {
@@ -11,8 +12,8 @@ namespace Core.Specifications
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
             AddInclude(x => x.Photos);
-            AddInclude(x => x.County);
-            AddInclude("County.City");
+            AddInclude(x => x.Include(x => x.County).ThenInclude(x => x.City));
+            //AddInclude("County.City");
             AddOrderBy(x => x.Name);
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 
@@ -45,9 +46,9 @@ namespace Core.Specifications
 
         public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
         {
-            AddInclude(x => x.ProductType);
-            AddInclude(x => x.ProductBrand);
-            AddInclude(x => x.Photos);
+            AddInclude(x => x.Include(y => y.ProductType));
+            AddInclude(x => x.Include(x => x.ProductBrand));
+            AddInclude(x => x.Include(x => x.Photos));
         }
     }
 }

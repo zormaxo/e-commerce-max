@@ -32,7 +32,9 @@ namespace Infrastructure.Data
 
             query = spec.IncludeStrings.Aggregate(query, (current, include) => current.Include(include));
 
-            return spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+
+            return spec.IncludesWithThen.Aggregate(query, (current, include) => include(current));
         }
     }
 }

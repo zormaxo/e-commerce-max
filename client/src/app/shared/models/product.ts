@@ -7,4 +7,6 @@ export interface IProduct {
   productType: string;
   productBrand: string;
   created: Date;
+  city: string;
+  county: string;
 }
