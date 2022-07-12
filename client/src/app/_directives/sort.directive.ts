@@ -56,10 +56,6 @@ export class SortDirective implements OnInit {
     this.headerClicked.emit(sortText);
   }
 
-  @HostListener('mouseenter') mouseenter() {}
-
-  @HostListener('mouseleave') mouseleave() {}
-
   private CreateElements() {
     this.space = this.renderer.createElement('span');
     this.space.innerText = ' ';

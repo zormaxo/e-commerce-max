@@ -22,7 +22,7 @@ export class MachineComponent implements OnInit {
     { name: 'Price: Low to high', value: 'priceAsc' },
     { name: 'Price: High to low', value: 'priceDesc' },
   ];
-  minVal: string;
+  minVal: number = 10151.6;
 
   constructor(private machineService: MachineService) {}
 
@@ -30,11 +30,6 @@ export class MachineComponent implements OnInit {
     this.getProducts();
     this.getBrands();
     this.getTypes();
-  }
-
-  processMyValue(): void {
-    let numberVal = parseInt(this.minVal).toLocaleString();
-    this.minVal = numberVal;
   }
 
   getProducts() {

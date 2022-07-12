@@ -27,7 +27,7 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
 import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 import { EntryComponent } from './entry/entry.component';
-import { OnlyNumberDirective } from './_directives/only-number.directive';
+import OnlyNumberDirective from './_directives/only-number.directive';
 
 @NgModule({
   declarations: [
