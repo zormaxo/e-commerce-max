@@ -26,6 +26,14 @@ namespace Core.Specifications
                         AddOrderByDescending(p => p.Price);
                         break;
 
+                    case "dateAsc":
+                        AddOrderBy(p => p.Created);
+                        break;
+
+                    case "dateDesc":
+                        AddOrderByDescending(p => p.Created);
+                        break;
+
                     default:
                         AddOrderBy(n => n.Name);
                         break;

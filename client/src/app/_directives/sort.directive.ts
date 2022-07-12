@@ -1,10 +1,12 @@
-import { Directive, ElementRef, EventEmitter, HostListener, OnInit, Output, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appSort]',
 })
 export class SortDirective implements OnInit {
+  @Input('appSort') sortTextInput: string;
   @Output() someEvent: EventEmitter<string> = new EventEmitter();
+
   arrow: Direction = Direction.None;
   down: unknown;
   up: unknown;
@@ -17,6 +19,16 @@ export class SortDirective implements OnInit {
   ngOnInit(): void {
     this.thText = (<HTMLElement>this.elRef.nativeElement).firstChild;
     this.renderer.addClass(this.thText, 'text-primary');
+
+    this.renderer.listen(this.thText, 'mouseenter', (event) => {
+      this.renderer.addClass(this.thText, 'text-decoration-underline');
+    });
+
+    this.renderer.listen(this.thText, 'mouseleave', (event) => {
+      this.renderer.removeClass(this.thText, 'text-decoration-underline');
+    });
+
+    this.renderer.setStyle(this.thText, 'cursor', 'pointer');
   }
 
   @HostListener('click') click() {
@@ -26,29 +38,28 @@ export class SortDirective implements OnInit {
       this.renderer.removeChild(el.parentNode, el);
     });
 
+    let sortText: string;
     if (this.arrow == Direction.None) {
       this.renderer.appendChild(this.elRef.nativeElement, this.space);
-      this.renderer.appendChild(this.elRef.nativeElement, this.down);
-      this.arrow = Direction.Down;
-    } else if (this.arrow == Direction.Down) {
       this.renderer.appendChild(this.elRef.nativeElement, this.up);
-      this.arrow = Direction.Up;
-    } else if (this.arrow == Direction.Up) {
+      this.arrow = Direction.Asc;
+      sortText = this.sortTextInput + Direction.Asc;
+    } else if (this.arrow == Direction.Asc) {
       this.renderer.appendChild(this.elRef.nativeElement, this.down);
-      this.arrow = Direction.Down;
+      this.arrow = Direction.Desc;
+      sortText = this.sortTextInput + Direction.Desc;
+    } else if (this.arrow == Direction.Desc) {
+      this.renderer.appendChild(this.elRef.nativeElement, this.up);
+      this.arrow = Direction.Asc;
+      sortText = this.sortTextInput + Direction.Asc;
     }
-
-    this.someEvent.emit('omer');
+    console.log(sortText);
+    // this.someEvent.emit('omer');
   }
 
-  @HostListener('mouseenter') mouseenter() {
-    this.renderer.addClass(this.thText, 'text-decoration-underline');
-    this.renderer.setStyle(this.thText, 'cursor', 'pointer');
-  }
+  @HostListener('mouseenter') mouseenter() {}
 
-  @HostListener('mouseleave') mouseleave() {
-    this.renderer.removeClass(this.thText, 'text-decoration-underline');
-  }
+  @HostListener('mouseleave') mouseleave() {}
 
   private CreateElements() {
     this.space = this.renderer.createElement('span');
@@ -67,7 +78,7 @@ export class SortDirective implements OnInit {
 }
 
 enum Direction {
-  Up = 1,
-  Down,
-  None,
+  Asc = 'Asc',
+  Desc = 'Desc',
+  None = '',
 }
