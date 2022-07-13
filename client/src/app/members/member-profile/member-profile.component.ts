@@ -17,7 +17,7 @@ export class MemberProfileComponent implements OnInit {
   constructor(private memberService: MembersService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.loadMember();
+    // this.loadMember();
 
     this.galleryOptions = [
       {

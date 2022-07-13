@@ -9,6 +9,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { RouterModule } from '@angular/router';
     MemberDetailComponent,
     MemberListComponent,
   ],
-  imports: [CommonModule, SharedModule, CoreModule],
+  imports: [CommonModule, SharedModule, CoreModule, FormsModule],
   exports: [
     MemberCardComponent,
     MemberProfileComponent,

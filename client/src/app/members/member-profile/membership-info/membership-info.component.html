@@ -1,15 +1,17 @@
-<form>
-  <div class="form-floating mb-3">
-    <input type="email" class="form-control"  />
-    <label>E-Mail adresi</label>
-  </div>
+<ng-container *ngIf="member">
+  <form>
     <div class="form-floating mb-3">
-    <input type="text" class="form-control"  />
-    <label>İsim</label>
-  </div>
-  <div class="form-floating mb-3">
-    <input type="text" class="form-control"  />
-    <label>Soyisim</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Kaydet</button>
-</form>
+      <input type="email" class="form-control" name="email" [(ngModel)]="member.username" />
+      <label>E-Mail adresi</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" name="username" [(ngModel)]="member.username" />
+      <label>İsim</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" />
+      <label>Soyisim</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+  </form>
+</ng-container>
