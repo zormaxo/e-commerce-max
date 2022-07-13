@@ -17,12 +17,9 @@ export class MachineComponent implements OnInit {
   types: IType[];
   shopParams = new ShopParams(10);
   totalCount: number;
-  sortOptions = [
-    { name: 'Alphabetical', value: 'name' },
-    { name: 'Price: Low to high', value: 'priceAsc' },
-    { name: 'Price: High to low', value: 'priceDesc' },
-  ];
-  minVal: number = 10151.6;
+
+  minValue =123;
+  maxValue: number;
 
   constructor(private machineService: MachineService) {}
 
@@ -30,6 +27,10 @@ export class MachineComponent implements OnInit {
     this.getProducts();
     this.getBrands();
     this.getTypes();
+  }
+
+  omer() {
+    console.log(this.minValue);
   }
 
   getProducts() {
@@ -107,5 +108,21 @@ export class MachineComponent implements OnInit {
   onHeaderClicked(sortText) {
     this.shopParams.sort = sortText;
     this.getProducts();
+  }
+
+  onRdNewClicked(params) {
+    var target = params.target;
+    if (target.checked) {
+      this.shopParams.isNew = true;
+      this.getProducts();
+    }
+  }
+
+  onRdSecondClicked(params) {
+    var target = params.target;
+    if (target.checked) {
+      this.shopParams.isNew = false;
+      this.getProducts();
+    }
   }
 }

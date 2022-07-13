@@ -22,6 +22,10 @@ namespace Core.Specifications
         {
             get => _search;
             set => _search = value.ToLower();
-        }   
+        }
+
+        public bool? IsNew { get; set; }
+        public int? MinValue { get; set; }
+        public int? MaxValue { get; set; }
     }
 }

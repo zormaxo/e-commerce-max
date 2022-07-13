@@ -5,6 +5,9 @@ export class ShopParams {
   pageNumber = 1;
   pageSize = 50;
   search: string;
+  isNew: boolean;
+  minValue = 0;
+  maxValue = 0;
 
   constructor(pageSize = 50) {
     this.pageSize = pageSize;

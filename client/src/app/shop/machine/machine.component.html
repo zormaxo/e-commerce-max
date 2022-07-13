@@ -5,11 +5,16 @@
       <div class="card-body">
         <div class="card-text">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" />
+            <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" (change)="onRdNewClicked($event)" />
             <label class="form-check-label" for="rdNew"> Sıfır </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" />
+            <input
+              class="form-check-input"
+              type="radio"
+              name="rdStatus"
+              id="rdSecond"
+              (change)="onRdSecondClicked($event)" />
             <label class="form-check-label" for="rdSecond"> İkinci El </label>
           </div>
         </div>
@@ -21,16 +26,17 @@
         <div class="card-text">
           <div class="row align-items-center">
             <div class="col">
-              <input type="text" class="form-control" appOnlyNumber />
+              <input type="text" class="form-control" [(ngModel)]="minValue" appOnlyNumber/>
             </div>
             <div class="col-auto p-0">-</div>
             <div class="col">
-              <input type="text" class="form-control" appOnlyNumber />
+              <input type="text" class="form-control" [(ngModel)]="maxValue" appOnlyNumber />
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="text-end"><button class="btn btn-primary btn-sm mt-3 me-auto" (click)="omer()">Ara</button></div>
   </section>
   <section class="col-sm-8 col-md-9">
     <div class="d-none d-md-block">

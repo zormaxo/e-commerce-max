@@ -29,6 +29,18 @@ export class MachineService {
       params = params.append('search', shopParams.search);
     }
 
+    if (shopParams.isNew != undefined) {
+      params = params.append('isNew', shopParams.isNew);
+    }
+
+    if (shopParams.maxValue !== 0) {
+      params = params.append('maxValue', shopParams.maxValue);
+    }
+
+    if (shopParams.minValue !== 0) {
+      params = params.append('minValue', shopParams.minValue);
+    }
+
     params = params.append('sort', shopParams.sort);
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString());
