@@ -21,6 +21,8 @@ namespace Core.Entities
         public County County { get; set; }
         public int CountyId { get; set; }
         public bool Showcase { get; set; }
+        public bool IsNew { get; set; }
+        public bool IsActive { get; set; }
         public ICollection<Photo> Photos { get; set; }
     }
 }

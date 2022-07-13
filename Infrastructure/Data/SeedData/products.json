@@ -11,7 +11,9 @@
     "ProductBrandId": 1,
     "UserId": 1,
     "Showcase": true,
-    "CountyId": 34
+    "CountyId": 34,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Green Angular Board 3000",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -25,7 +27,9 @@
     "ProductBrandId": 1,
     "UserId": 1,
     "Showcase": true,
-    "CountyId": 123
+    "CountyId": 123,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Core Board Speed Rush 3",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -39,7 +43,9 @@
     "ProductBrandId": 2,
     "UserId": 2,
     "Showcase": true,
-    "CountyId": 565
+    "CountyId": 565,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Net Core Super Board",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -53,7 +59,9 @@
     "ProductBrandId": 2,
     "UserId": 6,
     "Showcase": true,
-    "CountyId": 23
+    "CountyId": 23,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "React Board Super Whizzy Fast",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -67,7 +75,9 @@
     "ProductBrandId": 4,
     "UserId": 4,
     "Showcase": true,
-    "CountyId": 87
+    "CountyId": 87,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Typescript Entry Board",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -81,7 +91,9 @@
     "ProductBrandId": 5,
     "UserId": 1,
     "Showcase": true,
-    "CountyId": 645
+    "CountyId": 645,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Core Blue Hat",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -95,7 +107,9 @@
     "ProductBrandId": 2,
     "UserId": 2,
     "Showcase": true,
-    "CountyId": 555
+    "CountyId": 555,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Green React Woolen Hat",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -109,7 +123,9 @@
     "ProductBrandId": 4,
     "UserId": 3,
     "Showcase": true,
-    "CountyId": 487
+    "CountyId": 487,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Purple React Woolen Hat",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -123,7 +139,9 @@
     "ProductBrandId": 4,
     "UserId": 4,
     "Showcase": true,
-    "CountyId": 654
+    "CountyId": 654,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Blue Code Gloves",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -137,7 +155,9 @@
     "ProductBrandId": 3,
     "UserId": 5,
     "Showcase": true,
-    "CountyId": 866
+    "CountyId": 866,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Green Code Gloves",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -151,7 +171,9 @@
     "ProductBrandId": 3,
     "UserId": 5,
     "Showcase": true,
-    "CountyId": 911
+    "CountyId": 911,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Purple React Gloves",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
@@ -165,7 +187,9 @@
     "ProductBrandId": 4,
     "UserId": 6,
     "Showcase": true,
-    "CountyId": 188
+    "CountyId": 188,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Green React Gloves",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -179,7 +203,9 @@
     "ProductBrandId": 4,
     "UserId": 1,
     "Showcase": true,
-    "CountyId": 777
+    "CountyId": 777,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Redis Red Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -193,7 +219,9 @@
     "ProductBrandId": 6,
     "UserId": 2,
     "Showcase": true,
-    "CountyId": 459
+    "CountyId": 459,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Core Red Boots",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -207,7 +235,9 @@
     "ProductBrandId": 2,
     "UserId": 3,
     "Showcase": true,
-    "CountyId": 345
+    "CountyId": 345,
+    "IsActive": 1,
+    "IsNew": 0
   }, {
     "Name": "Core Purple Boots",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -222,7 +252,9 @@
     "ProductBrandId": 2,
     "UserId": 1,
     "Showcase": true,
-    "CountyId": 612
+    "CountyId": 612,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Angular Purple Boots",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -236,7 +268,9 @@
     "ProductBrandId": 1,
     "UserId": 5,
     "Showcase": true,
-    "CountyId": 784
+    "CountyId": 784,
+    "IsActive": 1,
+    "IsNew": 1
   }, {
     "Name": "Angular Blue Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -250,6 +284,8 @@
     "ProductBrandId": 1,
     "UserId": 4,
     "Showcase": true,
-    "CountyId": 803
+    "CountyId": 803,
+    "IsActive": 1,
+    "IsNew": 1
   }
 ]

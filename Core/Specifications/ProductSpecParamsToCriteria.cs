@@ -16,6 +16,8 @@ namespace Core.Specification
         public Expression<Func<Product, bool>> GetCriteria() =>
             p => (string.IsNullOrEmpty(_specParam.Search) || p.Name.ToLower().Contains(_specParam.Search)) &&
                  (!_specParam.BrandId.HasValue || p.ProductBrandId == _specParam.BrandId) &&
-                 (!_specParam.TypeId.HasValue || p.ProductTypeId == _specParam.TypeId);
+                 (!_specParam.TypeId.HasValue || p.ProductTypeId == _specParam.TypeId) &&
+                 (!_specParam.TypeId.HasValue || p.ProductTypeId == _specParam.TypeId) &&
+                 (p.IsActive);
     }
 }
