@@ -26,9 +26,7 @@ export class MachineComponent implements OnInit {
     this.getTypes();
   }
 
-  omer() {
-    console.log(this.shopParams.minValue);
-    console.log(this.shopParams.maxValue);
+  onSearchProduct() {
     this.getProducts();
   }
 
@@ -109,19 +107,4 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  onRdNewClicked(params) {
-    var target = params.target;
-    if (target.checked) {
-      this.shopParams.isNew = true;
-      this.getProducts();
-    }
-  }
-
-  onRdSecondClicked(params) {
-    var target = params.target;
-    if (target.checked) {
-      this.shopParams.isNew = false;
-      this.getProducts();
-    }
-  }
 }

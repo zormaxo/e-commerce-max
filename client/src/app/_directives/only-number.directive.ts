@@ -4,7 +4,7 @@ import { NgControl } from '@angular/forms';
 @Directive({
   selector: '[appOnlyNumber]',
 })
-export default class OnlyNumberDirective implements OnInit {
+export class OnlyNumberDirective implements OnInit {
   private regex = new RegExp(/^\d*$/);
 
   // Allow key codes for special events
