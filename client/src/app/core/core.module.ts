@@ -8,6 +8,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [NavBarComponent],
   imports: [CommonModule, BrowserAnimationsModule, BsDropdownModule.forRoot(), RouterModule],
-  exports: [NavBarComponent],
+  exports: [NavBarComponent, RouterModule],
 })
-export class CoreModule { }
+export class CoreModule {}
