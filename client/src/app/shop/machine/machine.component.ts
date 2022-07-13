@@ -18,9 +18,6 @@ export class MachineComponent implements OnInit {
   shopParams = new ShopParams(10);
   totalCount: number;
 
-  minValue =123;
-  maxValue: number;
-
   constructor(private machineService: MachineService) {}
 
   ngOnInit(): void {
@@ -30,7 +27,9 @@ export class MachineComponent implements OnInit {
   }
 
   omer() {
-    console.log(this.minValue);
+    console.log(this.shopParams.minValue);
+    console.log(this.shopParams.maxValue);
+    this.getProducts();
   }
 
   getProducts() {

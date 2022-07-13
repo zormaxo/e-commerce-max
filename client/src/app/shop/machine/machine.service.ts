@@ -29,15 +29,15 @@ export class MachineService {
       params = params.append('search', shopParams.search);
     }
 
-    if (shopParams.isNew != undefined) {
+    if (shopParams.isNew !== undefined) {
       params = params.append('isNew', shopParams.isNew);
     }
 
-    if (shopParams.maxValue !== 0) {
+    if (shopParams.maxValue !== undefined && shopParams.maxValue !== 0) {
       params = params.append('maxValue', shopParams.maxValue);
     }
 
-    if (shopParams.minValue !== 0) {
+    if (shopParams.minValue !== undefined &&  shopParams.maxValue !== 0) {
       params = params.append('minValue', shopParams.minValue);
     }
 
