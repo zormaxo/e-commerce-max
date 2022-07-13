@@ -16,11 +16,10 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
-import { ShopModule } from './shop/showcase/shop.module';
-import { MachineModule } from './shop/machine/machine.module';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EntryComponent } from './entry/entry.component';
 import { MemberModule } from './members/member.module';
+import { ShopModule } from './shop/shop.module';
 
 @NgModule({
   declarations: [
@@ -44,8 +43,7 @@ import { MemberModule } from './members/member.module';
     FormsModule,
     SharedModule,
     ShopModule,
-    MachineModule,
-    MemberModule
+    MemberModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

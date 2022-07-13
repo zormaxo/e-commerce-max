@@ -3,7 +3,7 @@ import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
 import { IType } from '../../shared/models/productType';
 import { ShopParams } from '../../shared/models/shopParams';
-import { MachineService } from './machine.service';
+import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-machine',
@@ -18,7 +18,7 @@ export class MachineComponent implements OnInit {
   shopParams = new ShopParams(10);
   totalCount: number;
 
-  constructor(private machineService: MachineService) {}
+  constructor(private machineService: ShopService) {}
 
   ngOnInit(): void {
     this.getProducts();

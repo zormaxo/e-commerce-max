@@ -14,7 +14,7 @@ import { MembershipInfoComponent } from './members/member-profile/membership-inf
 import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 import { EntryComponent } from './entry/entry.component';
 import { MachineComponent } from './shop/machine/machine.component';
-import { ShopComponent } from './shop/showcase/shop.component';
+import { ShowcaseComponent } from './shop/showcase/showcase.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'showcase', pathMatch: 'full' },
@@ -22,7 +22,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'showcase', component: ShopComponent },
+      { path: 'showcase', component: ShowcaseComponent },
       { path: 'makine', component: MachineComponent },
       {
         path: 'members',

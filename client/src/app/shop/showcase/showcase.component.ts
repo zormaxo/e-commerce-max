@@ -4,14 +4,14 @@ import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
 import { IType } from '../../shared/models/productType';
 import { ShopParams } from '../../shared/models/shopParams';
-import { ShopService } from './shop.service';
+import { ShopService } from '../shop.service';
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss'],
+  selector: 'app-showcase',
+  templateUrl: './showcase.component.html',
+  styleUrls: ['./showcase.component.scss'],
 })
-export class ShopComponent implements OnInit {
+export class ShowcaseComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
