@@ -1,37 +1,37 @@
 [{
     "FirstName": "Omer",
     "Surname": "Kocadere",
-    "Username": "Omer",
+    "Username": "okocadere@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/men/87.jpg"
   }, {
     "FirstName": "Ekrem",
     "Surname": "Kocadere",
-    "Username": "Ekrem",
+    "Username": "ekrem@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/men/57.jpg"
   }, {
     "FirstName": "Emre",
     "Surname": "Kocadere",
-    "Username": "Emre",
+    "Username": "emre@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
   }, {
     "FirstName": "Şükrü Ahmet",
     "Surname": "Kocadere",
-    "Username": "Şükrü Ahmet",
+    "Username": "akocadere@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/men/93.jpg"
   }, {
     "FirstName": "Müberra",
     "Surname": "Kocadere",
-    "Username": "Müberra",
+    "Username": "muberra@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/women/54.jpg"
   }, {
     "FirstName": "Aslı",
     "Surname": "Kocadere",
-    "Username": "Aslı",
+    "Username": "asli@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/women/50.jpg"
   }, {
     "FirstName": "Salih",
     "Surname": "Kocadere",
-    "Username": "Salih",
+    "Username": "salih@gmail.com",
     "PhotoUrl": "https://randomuser.me/api/portraits/men/90.jpg"
   }
 ]

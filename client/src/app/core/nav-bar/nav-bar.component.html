@@ -29,11 +29,11 @@
         class="navbar-nav justify-content-around align-items-center d-none d-sm-flex">
         <div class="btn-group" dropdown>
           <a dropdownToggle type="button" class="nav-link dropdown-toggle small py-0" aria-controls="dropdown-basic">
-            {{ user.username | titlecase }} <span class="caret"></span>
+            {{ user.firstName | titlecase }} <span class="caret"></span>
           </a>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
-              <a class="dropdown-item small" [routerLink]="['/members', user.username, 'membership']">Edit Profile</a>
+              <a class="dropdown-item small" [routerLink]="['/members', user.id, 'membership']">Edit Profile</a>
             </li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Logout</a></li>

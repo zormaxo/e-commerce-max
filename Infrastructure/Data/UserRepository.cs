@@ -17,10 +17,10 @@ namespace API.Data
             _mapper = mapper;
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(int id)
         {
             return await _context.Users
-                .Where(x => x.Username == username)
+                .Where(x => x.Id == id)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }

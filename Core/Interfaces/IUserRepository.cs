@@ -17,6 +17,6 @@ namespace Core.Interfaces
 
         Task<IEnumerable<MemberDto>> GetMembersAsync();
 
-        Task<MemberDto> GetMemberAsync(string username);
+        Task<MemberDto> GetMemberAsync(int id);
     }
 }
