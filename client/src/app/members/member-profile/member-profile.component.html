@@ -1,15 +1,19 @@
 <div class="row">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-action p-2 fw-bold disabled text-dark">Kullanıcı Bilgilerim</li>
-      <li class="list-group-item list-group-item-action"><small>Üyelik Bilgilerim</small></li>
-      <li class="list-group-item list-group-item-action"><small>İletişim Bilgilerim</small></li>
-      <li class="list-group-item list-group-item-action"><small>Şifre Değişikliği</small></li>
-      <li class="list-group-item list-group-item-action p-2 fw-bold disabled text-dark">İlanlarım</li>
-      <li class="list-group-item list-group-item-action"><small>Özet</small></li>
-      <li class="list-group-item list-group-item-action"><small>Yayında Olanlar</small></li>
-      <li class="list-group-item list-group-item-action"><small>Yayında Olmayanlar</small></li>
-    </ul>
+    <div class="card">
+      <div class="card-header h6">Kullanıcı Bilgilerim</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item list-group-item-action"><small>Üyelik Bilgilerim</small></li>
+        <li class="list-group-item list-group-item-action"><small>İletişim Bilgilerim</small></li>
+        <li class="list-group-item list-group-item-action"><small>Şifre Değişikliği</small></li>
+      </ul>
+      <div class="card-header h6">İlanlarım</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item list-group-item-action"><small>Özet</small></li>
+        <li class="list-group-item list-group-item-action"><small>Yayında Olanlar</small></li>
+        <li class="list-group-item list-group-item-action"><small>Yayında Olmayanlar</small></li>
+      </ul>
+    </div>
   </section>
   <section class="col-sm-8 col-md-9">
     <router-outlet></router-outlet>

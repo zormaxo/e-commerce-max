@@ -40,9 +40,12 @@ export class OnlyNumberDirective implements OnInit {
     }
   }
 
-  @HostListener('keyup', ['$event']) onInput(event: KeyboardEvent) {
-    const number = new Intl.NumberFormat('tr-TR').format(parseInt(this.el.nativeElement.value.replaceAll('.', '')));
-    this.control.control.setValue(number);
+  @HostListener('keyup', ['$event']) onInput() {
+    const value = parseInt(this.el.nativeElement.value.replaceAll('.', ''));
+    if (!isNaN(value)) {
+      const number = new Intl.NumberFormat('tr-TR').format(value);
+      this.control.control.setValue(number);
+    }
   }
 
   // @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {

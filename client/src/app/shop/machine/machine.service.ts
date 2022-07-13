@@ -33,12 +33,14 @@ export class MachineService {
       params = params.append('isNew', shopParams.isNew);
     }
 
-    if (shopParams.maxValue !== undefined && shopParams.maxValue !== 0) {
-      params = params.append('maxValue', shopParams.maxValue);
+    if (shopParams.maxValue !== undefined) {
+      const maxValue = shopParams.maxValue.replaceAll('.', '');
+      params = params.append('maxValue', maxValue);
     }
 
-    if (shopParams.minValue !== undefined &&  shopParams.maxValue !== 0) {
-      params = params.append('minValue', shopParams.minValue);
+    if (shopParams.minValue !== undefined && shopParams.maxValue !== '0') {
+      const minValue = shopParams.minValue.replaceAll('.', '');
+      params = params.append('minValue', minValue);
     }
 
     params = params.append('sort', shopParams.sort);

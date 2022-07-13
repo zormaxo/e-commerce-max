@@ -24,6 +24,12 @@ const routes: Routes = [
     children: [
       { path: 'showcase', component: ShopComponent },
       { path: 'makine', component: MachineComponent },
+      {
+        path: 'members',
+        component: MemberProfileComponent,
+        canActivate: [AuthGuard],
+        children: [{ path: ':username/membership', component: MembershipInfoComponent }],
+      },
     ],
   },
   { path: 'entry', component: EntryComponent },
@@ -35,12 +41,7 @@ const routes: Routes = [
         path: 'members/a/:username',
         component: MemberProfileStartComponent,
       },
-      {
-        path: 'members',
-        component: MemberProfileComponent,
-        canActivate: [AuthGuard],
-        children: [{ path: 'a/:username/info', component: MembershipInfoComponent }],
-      },
+
       { path: 'members/a', component: MemberProfileStartComponent },
       { path: 'members/:username', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
