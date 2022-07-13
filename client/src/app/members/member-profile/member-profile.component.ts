@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,14 +10,18 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov
   styleUrls: ['./member-profile.component.scss'],
 })
 export class MemberProfileComponent implements OnInit {
-  member: Member;
+  @Input() member: Member;
   galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
+  @Input() galleryImages: NgxGalleryImage[];
 
   constructor(private memberService: MembersService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // this.loadMember();
+
+    if (this.member) {
+      this.galleryImages = this.getImages();
+    }
 
     this.galleryOptions = [
       {
@@ -41,12 +45,5 @@ export class MemberProfileComponent implements OnInit {
     });
 
     return imageUrls;
-  }
-
-  loadMember() {
-    this.memberService.getMember(this.route.snapshot.paramMap.get('username')).subscribe((member) => {
-      this.member = member;
-      this.galleryImages = this.getImages();
-    });
   }
 }

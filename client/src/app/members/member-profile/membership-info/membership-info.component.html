@@ -1,17 +1,29 @@
 <ng-container *ngIf="member">
-  <form>
-    <div class="form-floating mb-3">
-      <input type="email" class="form-control" placeholder="E-Mail adresi" name="email" [(ngModel)]="member.username" />
-      <label>E-Mail adresi</label>
+  <div class="row">
+    <div class="col-10">
+      <form>
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="E-Mail adresi"
+            name="email"
+            [(ngModel)]="member.username" />
+          <label>E-Mail adresi</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" placeholder="İsim" name="username" [(ngModel)]="member.firstName" />
+          <label>İsim</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" placeholder="Soyisim" name="surname" [(ngModel)]="member.surname" />
+          <label>Soyisim</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+      </form>
     </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" placeholder="İsim" name="username" [(ngModel)]="member.firstName" />
-      <label>İsim</label>
+    <div class="col-2">
+      <app-member-detail [member]="member" [galleryImages]="imageUrls"></app-member-detail>
     </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" placeholder="Soyisim" name="surname" [(ngModel)]="member.surname" />
-      <label>Soyisim</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Kaydet</button>
-  </form>
+  </div>
 </ng-container>

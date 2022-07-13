@@ -1,54 +1,7 @@
-<div class="row" *ngIf="member">
-    <div class="col-2">
-        <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}" 
-                class="card-img-top img-thumbnail">
-            <div class="card-body">
-                <div>
-                    <strong>Location:</strong>
-                    <p>İst, Bah</p>
-                </div>
-                <div>
-                    <strong>Age:</strong>
-                    <p>15</p>
-                </div>
-                <div>
-                    <strong>Last Active:</strong>
-                    <p>{{member.created}}</p>
-                </div>
-                <div>
-                    <strong>Member since:</strong>
-                    <p>{{member.created}}</p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group d-flex">
-                    <button class="btn btn-primary">Like</button>
-                    <button class="btn btn-success">Message</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-10">
-        <tabset class="member-tabset">
-            <tab heading='About {{member.username}}'>
-                <h4>Description</h4>
-                <p>{{member.introduction}}</p>
-                <h4>Looking for</h4>
-                <p>{{member.lookingFor}}</p>
-            </tab>
-            <tab heading='Interests'>
-                <h4>Interests</h4>
-                <p>{{member.interests}}</p>
-            </tab>
-            <tab heading='Photos'>
-                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" 
-                    style="display: inline-block; margin-bottom: 20px;"></ngx-gallery>
-            </tab>
-            <tab heading='Messages'>
-                <p>Messages will go here</p>
-            </tab>
-        </tabset>
-    </div>
+<div class="card">
+  <img
+    src="{{ member.photoUrl || './assets/user.png' }}"
+    alt="{{ member.username }}"
+    class="card-img-top img-thumbnail" />
+  <div class="card-body">Fotoğraf Yükle</div>
 </div>
