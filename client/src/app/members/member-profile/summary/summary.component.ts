@@ -14,8 +14,7 @@ export class SummaryComponent implements OnInit {
   products: IProduct[];
   shopParams = new ShopParams(10);
   totalCount: number;
-  activeCount: number;
-  inactiveCount: number;
+  counts: Counts;
 
   constructor(private shopService: ShopService, private accountService: AccountService) {}
 
@@ -25,18 +24,14 @@ export class SummaryComponent implements OnInit {
 
   getProducts() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.getProductsWithUserId(user.id);
+      this.shopService.getProductCounts(user.id).subscribe((counts: Counts) => {
+        this.counts = counts;
+      });
     });
   }
+}
 
-  getProductsWithUserId(userId: number) {
-    this.shopParams.userId = userId;
-    this.shopParams.getAllStatus = true;
-    this.shopService.getProducts(this.shopParams).subscribe((response) => {
-      this.products = response.data;
-      this.totalCount = response.count;
-      this.activeCount = this.products.filter((x) => x.isActive).length;
-      this.inactiveCount = this.totalCount - this.activeCount;
-    });
-  }
+interface Counts {
+  activeProducts: number;
+  inactiveProducts: number;
 }

@@ -23,6 +23,12 @@ namespace API.Controllers
         {
             return Ok(await _productSrv.GetProducts(productParams));
         }
+        
+        [HttpGet("product-counts")]
+        public async Task<ActionResult<object>> GetProductCounts([FromQuery] ProductSpecParams productParams)
+        {
+            return Ok(await _productSrv.GetProductsCounts(productParams));
+        }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

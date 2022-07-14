@@ -3,6 +3,8 @@ using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
 
 namespace Service
@@ -34,6 +36,19 @@ namespace Service
             var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
             return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data);
+        }
+
+        public async Task<object> GetProductsCounts(ProductSpecParams productParams)
+        {
+            var activeProducts = await _productsRepo.GetAll()
+                .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
+                .Where(x => x.IsActive).CountAsync();
+
+            var inactiveProducts =  await _productsRepo.GetAll()
+                .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
+                .Where(x => !x.IsActive).CountAsync();
+
+            return new { activeProducts, inactiveProducts };
         }
 
         public async Task<ProductToReturnDto> GetProduct(int id)

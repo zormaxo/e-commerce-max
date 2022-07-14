@@ -62,6 +62,13 @@ export class ShopService {
     );
   }
 
+  getProductCounts(userId: number) {
+    let params = new HttpParams();
+    params = params.append('userId', userId);
+
+    return this.http.get<unknown>(this.baseUrl + 'products/product-counts', { params: params });
+  }
+
   getBrands() {
     return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
   }
