@@ -10,7 +10,6 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class MembershipInfoComponent implements OnInit {
   member: Member;
-  imageUrls = [];
 
   constructor(private memberService: MembersService, private route: ActivatedRoute) {}
 
@@ -19,19 +18,6 @@ export class MembershipInfoComponent implements OnInit {
   }
 
   loadMember() {
-    this.memberService.getMember(this.route.snapshot.paramMap.get('username')).subscribe((member) => {
-      this.member = member;
-      this.getImages();
-    });
-  }
-
-  getImages(): unknown[] {
-    this.imageUrls.push({
-      small: this.member.photoUrl,
-      medium: this.member.photoUrl,
-      big: this.member.photoUrl,
-    });
-
-    return this.imageUrls;
+    this.memberService.fillMemberMap(+this.route.snapshot.paramMap.get('id'));
   }
 }

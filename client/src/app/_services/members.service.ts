@@ -8,6 +8,7 @@ import { Member } from '../_models/member';
 })
 export class MembersService {
   baseUrl = environment.apiUrl;
+  map = new Map();
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +16,11 @@ export class MembersService {
     return this.http.get<Member[]>(this.baseUrl + 'users');
   }
 
-  getMember(id: string) {
-    return this.http.get<Member>(this.baseUrl + 'users/' + id );
+  getMember(id: number) {
+    return this.http.get<Member>(this.baseUrl + 'users/' + id);
+
+    this.http.get<Member>(this.baseUrl + 'users/' + id).subscribe((_member: Member) => {
+      this.map.set(id, _member);
+    });
   }
 }

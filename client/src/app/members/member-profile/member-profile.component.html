@@ -1,9 +1,14 @@
-<div class="row">
+<div class="row" *ngIf="accountService.currentUser$ | async as user">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card">
       <div class="card-header h6">Kullanıcı Bilgilerim</div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-action"><small>Üyelik Bilgilerim</small></li>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/members', user.id, 'membership']">
+          <small>Üyelik Bilgilerim</small>
+        </a>
+        <a class="list-group-item list-group-item-action" routerLink="/members/e-mail">
+          <small>E-Posta</small>
+        </a>
         <li class="list-group-item list-group-item-action"><small>İletişim Bilgilerim</small></li>
         <li class="list-group-item list-group-item-action"><small>Şifre Değişikliği</small></li>
       </ul>

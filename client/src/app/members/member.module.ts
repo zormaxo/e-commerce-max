@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { EMailComponent } from './member-profile/e-mail/e-mail.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     MemberProfileStartComponent,
     MemberDetailComponent,
     MemberListComponent,
+    EMailComponent,
   ],
   imports: [CommonModule, SharedModule, CoreModule, FormsModule],
   exports: [
