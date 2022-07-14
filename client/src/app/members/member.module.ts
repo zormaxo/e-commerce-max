@@ -8,9 +8,8 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { EMailComponent } from './member-profile/e-mail/e-mail.component';
+import { SummaryComponent } from './member-profile/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { EMailComponent } from './member-profile/e-mail/e-mail.component';
     MemberProfileStartComponent,
     MemberDetailComponent,
     MemberListComponent,
-    EMailComponent,
+    SummaryComponent,
   ],
   imports: [CommonModule, SharedModule, CoreModule, FormsModule],
   exports: [

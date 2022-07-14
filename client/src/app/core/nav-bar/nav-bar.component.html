@@ -33,7 +33,7 @@
           </a>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
-              <a class="dropdown-item small" [routerLink]="['/members', user.id, 'membership']">Edit Profile</a>
+              <a class="dropdown-item small" routerLink='/members/membership'>Edit Profile</a>
             </li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Logout</a></li>

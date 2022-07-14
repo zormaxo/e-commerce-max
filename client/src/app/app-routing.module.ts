@@ -15,7 +15,7 @@ import { MemberProfileStartComponent } from './members/member-profile-start/memb
 import { EntryComponent } from './entry/entry.component';
 import { MachineComponent } from './shop/machine/machine.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
-import { EMailComponent } from './members/member-profile/e-mail/e-mail.component';
+import { SummaryComponent } from './members/member-profile/summary/summary.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'showcase', pathMatch: 'full' },
@@ -30,8 +30,8 @@ const routes: Routes = [
         component: MemberProfileComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: ':id/membership', component: MembershipInfoComponent },
-          { path: 'e-mail', component: EMailComponent },
+          { path: 'membership', component: MembershipInfoComponent },
+          { path: 'summary', component: SummaryComponent },
         ],
       },
     ],
