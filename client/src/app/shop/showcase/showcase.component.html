@@ -21,14 +21,13 @@
     </ul> -->
     <!-- <h5 class="text-warning ms-3">Types</h5> -->
     <ul class="list-group">
-      <li
-        class="list-group-item list-group-item-action d-flex align-items-center p-2"
+      <a
+        class="list-group-item list-group-item-action d-flex align-items-center p-2 small"
         *ngFor="let type of types"
-        [class.active]="type.id === shopParams.typeId"
-        (click)="onTypeSelected(type.name)">
-        <small> {{ type.name }}&nbsp;</small>
-        <small style="font-size: 12px"> ({{ type.count }})</small>
-      </li>
+        [routerLink]="['/', type.name.toLowerCase()]">
+        <span> {{ type.name }}</span>
+        <span class="text-muted">&nbsp;({{ type.count }})</span>
+      </a>
     </ul>
   </section>
   <section class="col-sm-8 col-md-9">

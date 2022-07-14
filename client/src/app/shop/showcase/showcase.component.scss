@@ -1,6 +1,10 @@
 .active {
-    background-color: #FFFBED;
-    border-color: #ffc107;
-    font-weight: bold;
-    color: black;
+  background-color: #fffbed;
+  border-color: #ffc107;
+  font-weight: bold;
+  color: black;
+}
+
+span:first-child:hover {
+  text-decoration: underline;
 }

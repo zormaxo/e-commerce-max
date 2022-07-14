@@ -7,6 +7,7 @@ import { OnlyNumberDirective } from '../_directives/only-number.directive';
 import { SortDirective } from '../_directives/sort.directive';
 import { FormsModule } from '@angular/forms';
 import { ProductItemComponent } from './showcase/product-item/product-item.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { ProductItemComponent } from './showcase/product-item/product-item.compo
     SortDirective,
     OnlyNumberDirective,
   ],
-  imports: [CommonModule, SharedModule, FormsModule],
+  imports: [CommonModule, SharedModule, FormsModule, CoreModule],
   exports: [
     ShowcaseComponent,
     ProductItemComponent,
