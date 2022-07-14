@@ -21,6 +21,8 @@ export class EMailComponent implements OnInit {
   }
 
   loadMember(userId: number) {
-    this.member = this.memberService.fillMemberMap(userId);
+    this.memberService.getMember(userId).subscribe((member: Member) => {
+      this.member = member;
+    });
   }
 }

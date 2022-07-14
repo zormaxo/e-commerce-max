@@ -18,6 +18,8 @@ export class MembershipInfoComponent implements OnInit {
   }
 
   loadMember() {
-    this.memberService.fillMemberMap(+this.route.snapshot.paramMap.get('id'));
+    this.memberService.getMember(+this.route.snapshot.paramMap.get('id')).subscribe((member: Member) => {
+      this.member = member;
+    });
   }
 }
