@@ -1,26 +1,51 @@
 <ng-container *ngIf="member">
-  <div class="row">
-    <div class="col-10">
+  <div class="card mb-3 shadow">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-10">
+          <form>
+            <div class="row row-cols-2">
+              <div class="col mb-3">
+                <label class="form-label">İsim</label>
+                <input type="text" class="form-control" name="username" [(ngModel)]="member.firstName" />
+              </div>
+              <div class="col mb-3">
+                <label class="form-label">Soyisim</label>
+                <input type="text" class="form-control" name="surname" [(ngModel)]="member.surname" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+          </form>
+        </div>
+        <div class="col-2">
+          <div class="card">
+            <img src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.username }}" class="card-img-top" />
+            <div class="card-footer small">Fotoğraf Yükle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-3 shadow">
+    <div class="card-body">
       <form>
         <div class="mb-3">
-          <label class="form-label">İsim</label>
-          <input type="text" class="form-control" name="username" [(ngModel)]="member.firstName" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Soyisim</label>
-          <input type="text" class="form-control" name="surname" [(ngModel)]="member.surname" />
+          <label class="form-label">E-Posta</label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="member.username" />
         </div>
         <button type="submit" class="btn btn-primary">Kaydet</button>
       </form>
     </div>
-    <div class="col-2">
-      <div class="card">
-        <img
-          src="{{ member.photoUrl || './assets/user.png' }}"
-          alt="{{ member.username }}"
-          class="card-img-top img-thumbnail" />
-        <div class="card-body">Fotoğraf Yükle</div>
-      </div>
+  </div>
+  <div class="card mb-3 shadow">
+    <div class="card-body">
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Telefon Numarası</label>
+          <input type="email" class="form-control" name="phone" [(ngModel)]="member.username" />
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+      </form>
     </div>
   </div>
 </ng-container>
