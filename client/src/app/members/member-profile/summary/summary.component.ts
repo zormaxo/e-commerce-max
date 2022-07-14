@@ -14,32 +14,29 @@ export class SummaryComponent implements OnInit {
   products: IProduct[];
   shopParams = new ShopParams(10);
   totalCount: number;
+  activeCount: number;
+  inactiveCount: number;
 
   constructor(private shopService: ShopService, private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.loadMember();
+    this.getProducts();
   }
 
-  getProducts(userId: number) {
-    this.shopParams.userId = userId;
-    this.shopParams.getAll = true;
-    this.shopService.getProducts(this.shopParams).subscribe(
-      (response) => {
-        this.products = response.data;
-        this.shopParams.pageNumber = response.pageIndex;
-        this.shopParams.pageSize = response.pageSize;
-        this.totalCount = response.count;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  loadMember() {
+  getProducts() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.getProducts(user.id);
+      this.getProductsWithUserId(user.id);
+    });
+  }
+
+  getProductsWithUserId(userId: number) {
+    this.shopParams.userId = userId;
+    this.shopParams.getAllStatus = true;
+    this.shopService.getProducts(this.shopParams).subscribe((response) => {
+      this.products = response.data;
+      this.totalCount = response.count;
+      this.activeCount = this.products.filter((x) => x.isActive).length;
+      this.inactiveCount = this.totalCount - this.activeCount;
     });
   }
 }

@@ -9,7 +9,7 @@ export class ShopParams {
   minValue: string;
   maxValue: string;
   userId: number;
-  getAll: boolean;
+  getAllStatus: boolean;
 
   constructor(pageSize = 50) {
     this.pageSize = pageSize;

@@ -22,7 +22,7 @@ namespace Core.Specification
                  (!_specParam.MaxValue.HasValue || p.Price < _specParam.MaxValue) &&
                  (!_specParam.MinValue.HasValue || p.Price > _specParam.MinValue) &&
                  (!_specParam.UserId.HasValue || p.UserId == _specParam.UserId) &&
-                 (_specParam.GetAll.HasValue || p.IsActive) &&  //true: All, false: InActive, null: Active
-                 (!(_specParam.GetAll.HasValue && _specParam.GetAll == false) || !p.IsActive);
+                 (_specParam.GetAllStatus.HasValue || p.IsActive) &&  //true: All, false: InActive, null: Active
+                 (!(_specParam.GetAllStatus.HasValue && _specParam.GetAllStatus == false) || !p.IsActive);
     }
 }

@@ -7,7 +7,7 @@
             <p class="card-text">Yayında olan ilan sayısı</p>
           </div>
           <div class="col-3">
-            <p class="card-text lead fw-bold">{{ this.totalCount }}</p>
+            <p class="card-text lead fw-bold">{{ this.activeCount }}</p>
           </div>
           <a class="stretched-link" [routerLink]="['/members/summaryq']" routerLinkActive="active"></a>
         </div>
@@ -22,7 +22,7 @@
             <p class="card-text">Toplam ilan sayısı</p>
           </div>
           <div class="col-3">
-            <p class="card-text lead fw-bold">15</p>
+            <p class="card-text lead fw-bold">{{ this.totalCount }}</p>
           </div>
           <a class="stretched-link" [routerLink]="['/members/summaryq']" routerLinkActive="active"></a>
         </div>

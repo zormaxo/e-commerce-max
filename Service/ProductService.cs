@@ -25,7 +25,7 @@ namespace Service
 
         public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
         {
-          var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
             var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
 
             var totalItems = await _productsRepo.CountAsync(countSpec);

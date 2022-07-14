@@ -9,4 +9,5 @@ export interface IProduct {
   created: Date;
   city: string;
   county: string;
+  isActive: boolean;
 }

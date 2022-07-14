@@ -11,6 +11,7 @@ namespace Core.DTOs
         public string ProductBrand { get; set; }
         public string City { get; set; }
         public string County { get; set; }
+        public bool IsActive { get; set; }
         public DateTime Created { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }
