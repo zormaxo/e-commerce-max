@@ -27,7 +27,8 @@ namespace Core.Specifications
         public bool? IsNew { get; set; }
         public int? MinValue { get; set; }
         public int? MaxValue { get; set; }
-        public bool? SelectedStatus { get; set; }
+        public bool? GetAll { get; set; }
+        public int? UserId { get; set; }
     }
 
     public enum ActiveStatus

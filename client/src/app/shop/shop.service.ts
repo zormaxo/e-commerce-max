@@ -37,8 +37,8 @@ export class ShopService {
       params = params.append('userId', shopParams.userId);
     }
 
-    if (shopParams.activeStatus !== undefined) {
-      params = params.append('activeStatus', shopParams.activeStatus);
+    if (shopParams.getAll !== undefined) {
+      params = params.append('activeStatus', shopParams.getAll);
     }
 
     if (shopParams.maxValue !== undefined) {

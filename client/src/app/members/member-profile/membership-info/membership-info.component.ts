@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
@@ -13,11 +12,7 @@ import { take } from 'rxjs';
 export class MembershipInfoComponent implements OnInit {
   member: Member;
 
-  constructor(
-    private memberService: MembersService,
-    private accountService: AccountService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private memberService: MembersService, private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.loadMember();
