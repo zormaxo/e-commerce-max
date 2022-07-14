@@ -21,6 +21,7 @@ namespace Core.Specification
                  (!_specParam.IsNew.HasValue || p.IsNew == _specParam.IsNew) &&
                  (!_specParam.MaxValue.HasValue || p.Price < _specParam.MaxValue) &&
                  (!_specParam.MinValue.HasValue || p.Price > _specParam.MinValue) &&
-                 (p.IsActive);
+                 (_specParam.SelectedStatus.HasValue || p.IsActive) &&  //true: All, false: InActive, null: Active
+                 (!(_specParam.SelectedStatus.HasValue && _specParam.SelectedStatus == false) || !p.IsActive);
     }
 }

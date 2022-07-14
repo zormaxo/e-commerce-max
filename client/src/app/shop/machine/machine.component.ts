@@ -18,7 +18,7 @@ export class MachineComponent implements OnInit {
   shopParams = new ShopParams(10);
   totalCount: number;
 
-  constructor(private machineService: ShopService) {}
+  constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -31,7 +31,7 @@ export class MachineComponent implements OnInit {
   }
 
   getProducts() {
-    this.machineService.getProducts(this.shopParams).subscribe(
+    this.shopService.getProducts(this.shopParams).subscribe(
       (response) => {
         this.products = response.data;
         this.shopParams.pageNumber = response.pageIndex;
@@ -45,7 +45,7 @@ export class MachineComponent implements OnInit {
   }
 
   getBrands() {
-    this.machineService.getBrands().subscribe(
+    this.shopService.getBrands().subscribe(
       (response) => {
         this.brands = response;
       },
@@ -56,7 +56,7 @@ export class MachineComponent implements OnInit {
   }
 
   getTypes() {
-    this.machineService.getTypes().subscribe(
+    this.shopService.getTypes().subscribe(
       (response) => {
         this.types = response;
       },

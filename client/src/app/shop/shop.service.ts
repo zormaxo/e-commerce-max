@@ -33,6 +33,14 @@ export class ShopService {
       params = params.append('isNew', shopParams.isNew);
     }
 
+    if (shopParams.userId !== undefined) {
+      params = params.append('userId', shopParams.userId);
+    }
+
+    if (shopParams.activeStatus !== undefined) {
+      params = params.append('activeStatus', shopParams.activeStatus);
+    }
+
     if (shopParams.maxValue !== undefined) {
       const maxValue = shopParams.maxValue.replaceAll('.', '');
       params = params.append('maxValue', maxValue);
