@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   declarations: [NavBarComponent],
@@ -14,7 +15,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    InputMaskModule,
   ],
-  exports: [NavBarComponent, RouterModule, BsDatepickerModule],
+  exports: [NavBarComponent, RouterModule, BsDatepickerModule, InputMaskModule],
 })
 export class CoreModule {}

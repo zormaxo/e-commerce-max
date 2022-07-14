@@ -14,6 +14,7 @@ namespace Core.Entities
         public string Surname { get; set; }
         public string LogoUrl { get; set; }
         public string PhotoUrl { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public byte[] PasswordHash { get; set; }

@@ -5,6 +5,7 @@ export interface Member {
   surname: string;
   photoUrl: string;
   logoUrl: string;
+  phoneNumber: string;
   created: Date;
   lastActive: Date;
 }

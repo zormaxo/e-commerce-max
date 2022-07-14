@@ -2,36 +2,43 @@
     "FirstName": "Omer",
     "Surname": "Kocadere",
     "Username": "okocadere@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/men/87.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/87.jpg",
+	"PhoneNumber": "5523409795"
   }, {
     "FirstName": "Ekrem",
     "Surname": "Kocadere",
     "Username": "ekrem@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/men/57.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/57.jpg",
+	"PhoneNumber": "5523409795"
   }, {
     "FirstName": "Emre",
     "Surname": "Kocadere",
     "Username": "emre@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/men/11.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/11.jpg",
+	"PhoneNumber": "5523409795"
   }, {
     "FirstName": "Şükrü Ahmet",
     "Surname": "Kocadere",
     "Username": "akocadere@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/men/93.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/93.jpg",
+	"PhoneNumber": "5322610237"
   }, {
     "FirstName": "Müberra",
     "Surname": "Kocadere",
     "Username": "muberra@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/women/54.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/women/54.jpg",
+	"PhoneNumber": "5523409795"
   }, {
     "FirstName": "Aslı",
     "Surname": "Kocadere",
     "Username": "asli@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/women/50.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/women/50.jpg",
+	"PhoneNumber": "5527277253"
   }, {
     "FirstName": "Salih",
     "Surname": "Kocadere",
     "Username": "salih@gmail.com",
-    "PhotoUrl": "https://randomuser.me/api/portraits/men/90.jpg"
+    "PhotoUrl": "https://randomuser.me/api/portraits/men/90.jpg",
+	"PhoneNumber": "5523409795"
   }
 ]

@@ -6,15 +6,19 @@
           <form>
             <div class="row row-cols-2">
               <div class="col mb-3">
-                <label class="form-label">İsim</label>
-                <input type="text" class="form-control" name="username" [(ngModel)]="member.firstName" />
+                <label class="form-label small">İsim</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  name="username"
+                  [(ngModel)]="member.firstName" />
               </div>
               <div class="col mb-3">
-                <label class="form-label">Soyisim</label>
-                <input type="text" class="form-control" name="surname" [(ngModel)]="member.surname" />
+                <label class="form-label small">Soyisim</label>
+                <input type="text" class="form-control form-control-sm" name="surname" [(ngModel)]="member.surname" />
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
           </form>
         </div>
         <div class="col-2">
@@ -26,25 +30,50 @@
       </div>
     </div>
   </div>
+
   <div class="card mb-3 shadow">
     <div class="card-body">
       <form>
         <div class="mb-3">
-          <label class="form-label">E-Posta</label>
-          <input type="email" class="form-control" name="email" [(ngModel)]="member.username" />
+          <label class="form-label small">E-Posta</label>
+          <input type="email" class="form-control form-control-sm" name="email" [(ngModel)]="member.username" />
         </div>
-        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
       </form>
     </div>
   </div>
+
   <div class="card mb-3 shadow">
     <div class="card-body">
       <form>
-        <div class="mb-3">
-          <label class="form-label">Telefon Numarası</label>
-          <input type="email" class="form-control" name="phone" [(ngModel)]="member.username" />
+        <div class="p-grid p-fluid mb-3">
+          <label class="form-label small">Telefon Numarası</label>
+          <p-inputMask
+            mask="(999) 999 99 99"
+            name="phoneNumber"
+            class="p-0 p-inputtext-sm"
+            [(ngModel)]="member.phoneNumber"></p-inputMask>
         </div>
-        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-3 shadow">
+    <div class="card-body">
+      <form>
+        <p class="small">
+          Şifreniz en az bir harf, rakam veya özel karakter içermeli. Ayrıca şifreniz en az 8 karakterden oluşmalı.
+        </p>
+        <div class="mb-3">
+          <label class="form-label small">Mevcut şifre</label>
+          <input type="password" class="form-control form-control-sm" name="password" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">Yeni şifre</label>
+          <input type="password" class="form-control form-control-sm" name="password" />
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
       </form>
     </div>
   </div>

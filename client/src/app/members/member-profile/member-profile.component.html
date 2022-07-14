@@ -3,20 +3,18 @@
     <div class="card">
       <div class="card-header h6">Kullanıcı Bilgilerim</div>
       <ul class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action" [routerLink]="['/members', user.id, 'membership']">
-          <small>Üyelik Bilgilerim</small>
+        <a class="list-group-item list-group-item-action small" [routerLink]="['/members', user.id, 'membership']">
+          Üyelik Bilgilerim
         </a>
-        <a class="list-group-item list-group-item-action" routerLink="/members/e-mail">
-          <small>E-Posta</small>
-        </a>
-        <li class="list-group-item list-group-item-action"><small>İletişim Bilgilerim</small></li>
-        <li class="list-group-item list-group-item-action"><small>Şifre Değişikliği</small></li>
+        <a class="list-group-item list-group-item-action small" routerLink="/members/e-mail"> E-Posta </a>
+        <li class="list-group-item list-group-item-action small">İletişim Bilgilerim</li>
+        <li class="list-group-item list-group-item-action small">Şifre Değişikliği</li>
       </ul>
       <div class="card-header h6">İlanlarım</div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-action"><small>Özet</small></li>
-        <li class="list-group-item list-group-item-action"><small>Yayında Olanlar</small></li>
-        <li class="list-group-item list-group-item-action"><small>Yayında Olmayanlar</small></li>
+        <li class="list-group-item list-group-item-action small">Özet</li>
+        <li class="list-group-item list-group-item-action small">Yayında Olanlar</li>
+        <li class="list-group-item list-group-item-action small">Yayında Olmayanlar</li>
       </ul>
     </div>
   </section>
