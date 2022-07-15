@@ -19,10 +19,16 @@ export class AdListComponent implements OnInit {
   shopParams = new ShopParams(10);
   totalCount: number;
 
-  constructor(private shopService: ShopService, private accountService: AccountService, private route: Router) {}
+  constructor(
+    private shopService: ShopService,
+    private accountService: AccountService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const isInactive = this.route.url.split('?')[0].split('/').pop();
+    // let omer = this.route.snapshot.url[1]?.path;
+    const isInactive = this.router.url.split('?')[0].split('/').pop();
     if (isInactive === 'pasif') {
       this.shopParams.getAllStatus = false;
     }
