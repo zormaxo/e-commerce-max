@@ -1,17 +1,28 @@
 <ng-container *ngFor="let product of products">
-  <div class="card mb-3 shadow" style="background-color: rgb(242, 242, 242)">
-    <div class="row g-0" style="height: 120px">
-      <div class="align-self-center bg-white text-center" style="width: 150px">
-        <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" class="img-fluid rounded-start" style="width: 100px"/>
+  <div class="card mb-3 shadow" style="background-color: #00000008">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <p class="card-title h6">{{ product.name }}</p>
+        </div>
+        <div class="col-auto">
+          <p style="color: brown" class="h6">{{ 123 | currency: "":"":"":"tr" }} TL</p>
+        </div>
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
+      <div class="row" style="height: 100px">
+        <div class="align-self-start bg-white text-center" style="width: 150px; background-clip: content-box">
+          <img
+            src="{{ product.pictureUrl }}"
+            alt="{{ product.name }}"
+            class="img-fluid rounded-start"
+            style="height: 100px" />
+        </div>
+        <div class="col">
+          <p class="card-text small">
             This is a wider card with supporting text below as a natural lead-in to additional content. This content is
             a little bit longer.
           </p>
-          <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+          <p class="card-text small"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
       </div>
     </div>

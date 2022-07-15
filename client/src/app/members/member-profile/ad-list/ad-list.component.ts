@@ -4,6 +4,9 @@ import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs';
+import { registerLocaleData } from '@angular/common';
+import localeTr from '@angular/common/locales/tr';
+registerLocaleData(localeTr);
 
 @Component({
   selector: 'app-ad-list',
