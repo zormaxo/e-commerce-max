@@ -16,27 +16,30 @@ import { EntryComponent } from './entry/entry.component';
 import { MachineComponent } from './shop/machine/machine.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { SummaryComponent } from './members/member-profile/summary/summary.component';
+import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'showcase', pathMatch: 'full' },
+  { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
   {
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'showcase', component: ShowcaseComponent },
+      { path: 'vitrin', component: ShowcaseComponent },
       { path: 'makine', component: MachineComponent },
       {
-        path: 'members',
+        path: 'üye',
         component: MemberProfileComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: 'membership', component: MembershipInfoComponent },
-          { path: 'summary', component: SummaryComponent },
+          { path: 'üyelik', component: MembershipInfoComponent },
+          { path: 'özet', component: SummaryComponent },
+          { path: 'ilanlar', component: AdListComponent },
+          { path: 'ilanlar/pasif', component: AdListComponent },
         ],
       },
     ],
   },
-  { path: 'entry', component: EntryComponent },
+  { path: 'giriş', component: EntryComponent },
   {
     path: '',
     canActivateChild: [AuthGuard],

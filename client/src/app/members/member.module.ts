@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
 import { SummaryComponent } from './member-profile/summary/summary.component';
+import { AdListComponent } from './member-profile/ad-list/ad-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SummaryComponent } from './member-profile/summary/summary.component';
     MemberDetailComponent,
     MemberListComponent,
     SummaryComponent,
+    AdListComponent,
   ],
   imports: [CommonModule, SharedModule, CoreModule, FormsModule],
   exports: [

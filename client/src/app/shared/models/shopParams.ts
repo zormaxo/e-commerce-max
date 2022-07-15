@@ -3,7 +3,7 @@ export class ShopParams {
   typeId = 0;
   sort = 'name';
   pageNumber = 1;
-  pageSize = 50;
+  pageSize: number;
   search: string;
   isNew: boolean;
   minValue: string;
@@ -11,7 +11,7 @@ export class ShopParams {
   userId: number;
   getAllStatus: boolean;
 
-  constructor(pageSize = 50) {
+  constructor(pageSize = 20) {
     this.pageSize = pageSize;
   }
 }

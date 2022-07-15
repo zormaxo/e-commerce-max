@@ -3,30 +3,25 @@
     <div class="card">
       <div class="card-header h6">Kullanıcı Bilgilerim</div>
       <ul class="list-group list-group-flush">
-        <a
-          class="list-group-item list-group-item-action small"
-          [routerLink]="['/members/membership']"
-          routerLinkActive="active">
+        <a class="list-group-item list-group-item-action small" routerLink="/üye/üyelik" routerLinkActive="active">
           Üyelik Bilgilerim
         </a>
       </ul>
       <div class="card-header h6">İlanlarım</div>
       <ul class="list-group list-group-flush">
-        <a
-          class="list-group-item list-group-item-action small"
-          [routerLink]="['/members/summary']"
-          routerLinkActive="active">
+        <a class="list-group-item list-group-item-action small" routerLink="/üye/özet" routerLinkActive="active">
           Özet
         </a>
         <a
           class="list-group-item list-group-item-action small"
-          [routerLink]="['/members/summary1']"
-          routerLinkActive="active">
+          routerLink="/üye/ilanlar"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
           Yayında Olanlar
         </a>
         <a
           class="list-group-item list-group-item-action small"
-          [routerLink]="['/members/summaryq']"
+          routerLink="/üye/ilanlar/pasif"
           routerLinkActive="active">
           Yayında Olmayanlar
         </a>

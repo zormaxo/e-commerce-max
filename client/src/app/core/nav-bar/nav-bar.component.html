@@ -21,7 +21,7 @@
         *ngIf="(accountService.currentUser$ | async) === null"
         href="#"
         class="btn btn-outline-dark me-1 btn-sm text-nowrap d-none d-sm-flex"
-        routerLink="entry"
+        routerLink="giriş"
         >Giriş Yap</a
       >
       <div
@@ -33,7 +33,7 @@
           </a>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
-              <a class="dropdown-item small" routerLink='/members/membership'>Edit Profile</a>
+              <a class="dropdown-item small" routerLink='/üye/üyelik'>Edit Profile</a>
             </li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Logout</a></li>
