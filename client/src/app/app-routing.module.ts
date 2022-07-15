@@ -27,12 +27,12 @@ const routes: Routes = [
       { path: 'vitrin', component: ShowcaseComponent },
       { path: 'makine', component: MachineComponent },
       {
-        path: 'üye',
+        path: 'uye',
         component: MemberProfileComponent,
         canActivate: [AuthGuard],
         children: [
-          { path: 'üyelik', component: MembershipInfoComponent },
-          { path: 'özet', component: SummaryComponent },
+          { path: 'uyelik', component: MembershipInfoComponent },
+          { path: 'ozet', component: SummaryComponent },
           { path: 'ilanlar', component: AdListComponent },
           { path: 'ilanlar/pasif', component: AdListComponent },
         ],

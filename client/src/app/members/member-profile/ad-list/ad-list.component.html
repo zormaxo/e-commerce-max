@@ -1,5 +1,5 @@
-<ng-container *ngFor="let product of products">
-  <div class="card mb-3 shadow" style="background-color: #00000008">
+<ng-container *ngFor="let product of products; let i = index">
+  <div class="card mb-3 shadow" style="background-color: #00000008; height: 180px">
     <div class="card-body">
       <div class="row">
         <div class="col">
@@ -18,11 +18,21 @@
             style="height: 100px" />
         </div>
         <div class="col">
-          <p class="card-text small">
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is
-            a little bit longer.
-          </p>
-          <p class="card-text small"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <div class="row">
+            <p class="card-text small">This is a wider card with supporting text.</p>
+            <p class="card-text small"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div class="text-end">
+              <div class="btn-group" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle btn-sm">
+                  İşlemler<span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                  <li><a class="dropdown-item small" routerLink="/uye/uyelik/ilan/duzenle">Düzenle</a></li>
+                  <li><a class="dropdown-item small" routerLink="/uye/uyelik/ilan/duzenle">Yayından kaldır</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

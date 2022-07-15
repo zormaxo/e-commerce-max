@@ -6,6 +6,7 @@ import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
+import { ActivatedRoute, Router } from '@angular/router';
 registerLocaleData(localeTr);
 
 @Component({
@@ -18,9 +19,13 @@ export class AdListComponent implements OnInit {
   shopParams = new ShopParams(10);
   totalCount: number;
 
-  constructor(private shopService: ShopService, private accountService: AccountService) {}
+  constructor(private shopService: ShopService, private accountService: AccountService, private route: Router) {}
 
   ngOnInit(): void {
+    const isInactive = this.route.url.split('?')[0].split('/').pop();
+    if (isInactive === 'pasif') {
+      this.shopParams.getAllStatus = false;
+    }
     this.getProducts();
   }
 
