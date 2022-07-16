@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { InputMaskModule } from 'primeng/inputmask';
+ import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [NavBarComponent],
@@ -15,8 +16,9 @@ import { InputMaskModule } from 'primeng/inputmask';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    AccordionModule,
     InputMaskModule,
   ],
-  exports: [NavBarComponent, RouterModule, BsDatepickerModule, InputMaskModule],
+  exports: [NavBarComponent, RouterModule, BsDatepickerModule, InputMaskModule, AccordionModule],
 })
 export class CoreModule {}
