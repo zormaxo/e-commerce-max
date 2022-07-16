@@ -12,11 +12,11 @@ namespace Service
     public class ProductService : BaseService
     {
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
-        private readonly IGenericRepository<ProductType> _productTypeRepo;
+        private readonly IGenericRepository<Category> _productTypeRepo;
         private readonly IGenericRepository<Product> _productsRepo;
 
         public ProductService(IGenericRepository<Product> productsRepo,
-            IGenericRepository<ProductType> productTypeRepo,
+            IGenericRepository<Category> productTypeRepo,
             IGenericRepository<ProductBrand> productBrandRepo,
             IMapper mapper) : base(mapper)
         {
@@ -44,7 +44,7 @@ namespace Service
                 .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
                 .Where(x => x.IsActive).CountAsync();
 
-            var inactiveProducts =  await _productsRepo.GetAll()
+            var inactiveProducts = await _productsRepo.GetAll()
                 .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
                 .Where(x => !x.IsActive).CountAsync();
 
@@ -61,12 +61,14 @@ namespace Service
 
         public async Task<IReadOnlyList<ProductBrand>> GetBrands()
         {
-            return await _productBrandRepo.ListAllAsync();
+            var omer = await _productBrandRepo.ListAllAsync();
+            return omer;
         }
 
-        public async Task<IReadOnlyList<ProductType>> GetTypes()
+        public async Task<IReadOnlyList<Category>> GetTypes()
         {
-            return await _productTypeRepo.ListAllAsync();
+            var omer = await _productTypeRepo.ListAllAsync();
+            return omer;
         }
     }
 }

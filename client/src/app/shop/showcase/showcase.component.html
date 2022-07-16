@@ -39,6 +39,24 @@
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
     </ul>
+    <ul class="list-unstyled ps-0">
+      <li class="mb-1" *ngFor="let type of types">
+        <ng-container *ngIf="type.parent === null">
+          <button
+            class="btn btn-toggle align-items-center rounded collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#home-collapse"
+            aria-expanded="true">
+            {{ type.name }}
+          </button>
+          <div class="collapse show" id="home-collapse" *ngIf="type.childCategories">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li *ngFor="let child of type.childCategories"><a href="#" class="link-dark rounded">{{child.name}}</a></li>
+            </ul>
+          </div>
+        </ng-container>
+      </li>
+    </ul>
   </section>
   <section class="col-sm-8 col-md-9">
     <div>Vitrin</div>

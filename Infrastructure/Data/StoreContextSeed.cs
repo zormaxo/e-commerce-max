@@ -1,9 +1,9 @@
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 
 namespace Infrastructure.Data
 {
@@ -67,12 +67,12 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
 
-                if (!await context.ProductTypes.AnyAsync())
+                if (!await context.Categories.AnyAsync())
                 {
                     var typesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/types.json");
-                    var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
+                    var types = JsonSerializer.Deserialize<List<Category>>(typesData);
 
-                    context.ProductTypes.AddRange(types);
+                    context.Categories.AddRange(types);
 
                     await context.SaveChangesAsync();
                 }

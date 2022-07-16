@@ -18,6 +18,16 @@
     "Id": 5,
     "Name": "İşyeri",
     "Count": 0
+  }, {
+    "Id": 6,
+    "Name": "Satılık",
+	"ParentId":5,
+    "Count": 0
+  }, {
+    "Id": 7,
+    "Name": "Kiralık",
+	"ParentId":5,
+    "Count": 0
   }
 
 ]

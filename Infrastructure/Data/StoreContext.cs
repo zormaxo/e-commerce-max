@@ -1,8 +1,8 @@
-using System.Linq.Expressions;
-using System.Reflection;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Infrastructure.Data
 {
@@ -15,7 +15,7 @@ namespace Infrastructure.Data
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<County> Counties { get; set; }
 

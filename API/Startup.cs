@@ -1,5 +1,6 @@
 using API.Extensions;
 using API.Middleware;
+using System.Text.Json.Serialization;
 
 namespace API
 {
@@ -17,7 +18,8 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
+                .ReferenceHandler = ReferenceHandler.IgnoreCycles);
             services.AddApplicationServices(_env, _config);
             services.AddControllerServices();
             services.AddSwaggerDocumentation();
