@@ -4,15 +4,20 @@
     "Count": 6
   }, {
     "Id": 2,
-    "Name": "Hats",
+    "Name": "Malzeme",
     "Count": 3
   }, {
     "Id": 3,
-    "Name": "Boots",
+    "Name": "Yarımamül",
     "Count": 5
   }, {
     "Id": 4,
-    "Name": "Gloves",
+    "Name": "Eleman",
     "Count": 4
+  }, {
+    "Id": 5,
+    "Name": "İşyeri",
+    "Count": 0
   }
+
 ]
