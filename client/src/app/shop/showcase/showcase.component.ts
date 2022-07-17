@@ -24,6 +24,8 @@ export class ShowcaseComponent implements OnInit {
     { name: 'Price: High to low', value: 'priceDesc' },
   ];
 
+  customClass = 'customClass';
+
   constructor(private shopService: ShopService, private router: Router) {}
 
   ngOnInit(): void {

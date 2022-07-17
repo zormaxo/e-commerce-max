@@ -74,6 +74,22 @@
         </div>
       </ng-container>
     </div>
+    <hr />
+    <accordion [isAnimated]="true">
+      <ng-container *ngFor="let type of types; let i = index">
+        <ng-container *ngIf="type.childCategories === null && type.parent === null">
+          <ul class="list-group">
+            <a class="list-group-item list-group-item-action small" [routerLink]="['/', type.name.toLowerCase()]">
+              <span> {{ type.name }}</span>
+              <span class="text-muted small ms-1">({{ type.count }})</span>
+            </a>
+          </ul>
+        </ng-container>
+        <accordion-group heading="Static Header" [isOpen]="true" [panelClass]="customClass" *ngIf="type.childCategories !== null">
+          <div *ngFor="let item of type.childCategories">{{ item.name }}</div>
+        </accordion-group>
+      </ng-container>
+    </accordion>
   </section>
   <section class="col-sm-8 col-md-9">
     <div>Vitrin</div>

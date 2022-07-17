@@ -9,7 +9,7 @@
 .list-group-item.active {
   background-color: #fffbed;
   border: 0px;
-  border-bottom: 1px solid #ffc107!important;
+  border-bottom: 1px solid #ffc107 !important;
   color: black;
 }
 
@@ -61,4 +61,16 @@
   border: 0;
   border-top: 1px solid #eee;
   padding: 15px 0;
+}
+
+.card.customClass .card-header {
+  padding: 0;
+  background-color: white;
+}
+
+.card.customClass .card-header .btn-link {
+  text-decoration: none;
+  font-size: 0.875em;
+  padding: 0.5rem 1rem;
+  
 }
