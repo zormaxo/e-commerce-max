@@ -20,7 +20,7 @@
       </li>
     </ul> -->
     <!-- <h5 class="text-warning ms-3">Types</h5> -->
-    <ul class="list-group">
+    <!-- <ul class="list-group">
       <a
         class="list-group-item list-group-item-action small"
         *ngFor="let type of types"
@@ -28,9 +28,10 @@
         <span> {{ type.name }}</span>
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
-    </ul>
-    <ul class="list-group">
-      <a
+    </ul> -->
+    <hr />
+    <ul class="list-group list-group-flush">
+      <!-- <a
         *ngFor="let type of types"
         class="list-group-item list-group-item-action small d-flex align-items-center"
         [routerLink]="['/', type.name.toLowerCase()]">
@@ -38,14 +39,17 @@
         <span class="ms-1"> {{ type.name }}</span>
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
+      <hr> -->
       <a
         *ngFor="let type of types"
-        class="list-group-item d-flex align-items-start small"
+        class="list-group-item d-flex align-items-center small px-2"
         [routerLink]="['/', type.name.toLowerCase()]">
         <img src="{{ '../../assets/icons/' + type.name.toLowerCase() + '.svg' }}" alt="" style="width: 24px" />
-        <div>
-          <div class="ms-1">{{ type.name }}</div>
-          <a class="nav-link px-3 py-0" *ngFor="let item of type.childCategories">{{ item.name }}</a>
+        <div class="">
+          <div class="ms-1 fw-bold">
+            {{ type.name }} <span class="text-muted small">({{ type.count }})</span>
+          </div>
+          <a class="list-group-item border-0 px-3 py-1"  [routerLink]="['/', item.name.toLowerCase()]" *ngFor="let item of type.childCategories">{{ item.name }}</a>
         </div>
       </a>
     </ul>
