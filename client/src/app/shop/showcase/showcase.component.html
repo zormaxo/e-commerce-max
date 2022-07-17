@@ -29,7 +29,7 @@
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
     </ul>
-    <ul class="list-group">
+    <!-- <ul class="list-group">
       <a
         *ngFor="let type of types"
         class="list-group-item list-group-item-action small d-flex align-items-center"
@@ -38,51 +38,41 @@
         <span class="ms-1"> {{ type.name }}</span>
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
-    </ul>
-
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1" *ngFor="let type of types">
-        <ng-container *ngIf="type.parent === null">
-          <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#home-collapse"
-            aria-expanded="true">
-            {{ type.name }}
-          </button>
-          <div class="collapse show" id="home-collapse" *ngIf="type.childCategories">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li *ngFor="let child of type.childCategories">
-                <a href="#" class="link-dark rounded">{{ child.name }}</a>
-              </li>
-            </ul>
-          </div>
-        </ng-container>
-      </li>
-    </ul>
-
+    </ul> -->
+    <hr />
     <div class="accordion" id="accordionExample">
-      <div class="accordion-item" *ngFor="let type of types; let i = index">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            [attr.data-bs-target]="'#collapse' + i">
-            {{type.name}}
-          </button>
-        </h2>
-        <div
-          *ngIf="type.childCategories"
-          id="collapse{{ i }}"
-          class="accordion-collapse collapse show"
-          aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div *ngFor="let item of type.childCategories">{{ item.name }}</div>
+      <ng-container *ngFor="let type of types; let i = index">
+        <ng-container *ngIf="type.childCategories === null && type.parent === null">
+          <ul class="list-group">
+            <a class="list-group-item list-group-item-action small" [routerLink]="['/', type.name.toLowerCase()]">
+              <span> {{ type.name }}</span>
+              <span class="text-muted small ms-1">({{ type.count }})</span>
+            </a>
+          </ul>
+        </ng-container>
+        <div class="accordion-item" *ngIf="type.childCategories !== null">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              [class.collapsed]="!type.childCategories"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse' + i">
+              {{ type.name }}
+            </button>
+          </h2>
+          <div
+            *ngIf="type.childCategories"
+            id="collapse{{ i }}"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div *ngFor="let item of type.childCategories">{{ item.name }}</div>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </section>
   <section class="col-sm-8 col-md-9">
