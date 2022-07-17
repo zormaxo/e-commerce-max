@@ -29,7 +29,7 @@
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
     </ul>
-    <!-- <ul class="list-group">
+    <ul class="list-group">
       <a
         *ngFor="let type of types"
         class="list-group-item list-group-item-action small d-flex align-items-center"
@@ -38,7 +38,17 @@
         <span class="ms-1"> {{ type.name }}</span>
         <span class="text-muted small ms-1">({{ type.count }})</span>
       </a>
-    </ul> -->
+      <a
+        *ngFor="let type of types"
+        class="list-group-item d-flex align-items-start small"
+        [routerLink]="['/', type.name.toLowerCase()]">
+        <img src="{{ '../../assets/icons/' + type.name.toLowerCase() + '.svg' }}" alt="" style="width: 24px" />
+        <div>
+          <div class="ms-1">{{ type.name }}</div>
+          <a class="nav-link px-3 py-0" *ngFor="let item of type.childCategories">{{ item.name }}</a>
+        </div>
+      </a>
+    </ul>
     <hr />
     <div class="accordion" id="accordionExample">
       <ng-container *ngFor="let type of types; let i = index">
@@ -53,12 +63,12 @@
         <div class="accordion-item" *ngIf="type.childCategories !== null">
           <h2 class="accordion-header">
             <button
-              class="accordion-button"
+              class="accordion-button py-2"
               [class.collapsed]="!type.childCategories"
               type="button"
               data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse' + i">
-              {{ type.name }}
+              <span class="small">{{ type.name }}</span>
             </button>
           </h2>
           <div
@@ -67,8 +77,13 @@
             class="accordion-collapse collapse show"
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <div *ngFor="let item of type.childCategories">{{ item.name }}</div>
+            <div class="accordion-body py-2 px-4">
+              <a
+                *ngFor="let item of type.childCategories"
+                class="nav-link small p-0 link-dark"
+                [routerLink]="['/', item.name.toLowerCase()]"
+                >{{ item.name }}
+              </a>
             </div>
           </div>
         </div>
