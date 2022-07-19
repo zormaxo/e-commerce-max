@@ -49,49 +49,54 @@
           <div class="ms-1 fw-bold">
             {{ type.name }} <span class="text-muted small">({{ type.count }})</span>
           </div>
-          <a class="list-group-item border-0 px-3 py-1"  [routerLink]="['/', item.name.toLowerCase()]" *ngFor="let item of type.childCategories">{{ item.name }}</a>
+          <a
+            class="list-group-item border-0 px-3 py-1"
+            [routerLink]="['/', item.name.toLowerCase()]"
+            *ngFor="let item of type.childCategories"
+            >{{ item.name }}</a
+          >
         </div>
       </a>
     </ul>
     <hr />
     <div class="accordion" id="accordionExample">
-      <ng-container *ngFor="let type of types; let i = index">
-        <ng-container *ngIf="type.childCategories === null && type.parent === null">
-          <ul class="list-group">
+      <ul class="list-group">
+        <ng-container *ngFor="let type of types; let i = index">
+          <ng-container *ngIf="type.childCategories === null && type.parent === null">
             <a class="list-group-item list-group-item-action small" [routerLink]="['/', type.name.toLowerCase()]">
               <span> {{ type.name }}</span>
               <span class="text-muted small ms-1">({{ type.count }})</span>
             </a>
-          </ul>
-        </ng-container>
-        <div class="accordion-item" *ngIf="type.childCategories !== null">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button py-2"
-              [class.collapsed]="!type.childCategories"
-              type="button"
-              data-bs-toggle="collapse"
-              [attr.data-bs-target]="'#collapse' + i">
-              <span class="small">{{ type.name }}</span>
-            </button>
-          </h2>
-          <div
-            *ngIf="type.childCategories"
-            id="collapse{{ i }}"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body py-2 px-4">
-              <a
-                *ngFor="let item of type.childCategories"
-                class="nav-link small p-0 link-dark"
-                [routerLink]="['/', item.name.toLowerCase()]"
-                >{{ item.name }}
-              </a>
+          </ng-container>
+          <div class="accordion-item" *ngIf="type.childCategories !== null">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button py-2"
+                [class.collapsed]="!type.childCategories"
+                type="button"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse' + i">
+                <span class="small">{{ type.name }}</span>
+              </button>
+            </h2>
+            <div
+              *ngIf="type.childCategories"
+              id="collapse{{ i }}"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body py-2 px-4">
+                <a
+                  *ngFor="let item of type.childCategories"
+                  class="nav-link small p-0 link-dark"
+                  [routerLink]="['/', item.name.toLowerCase()]"
+                  >{{ item.name }}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </ul>
     </div>
   </section>
   <section class="col-sm-8 col-md-9">

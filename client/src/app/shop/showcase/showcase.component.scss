@@ -8,3 +8,7 @@
 span:first-child:hover {
   text-decoration: underline;
 }
+
+.removeArrow::after {
+  content: none;
+}
