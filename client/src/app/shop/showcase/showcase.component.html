@@ -90,23 +90,20 @@
       </ng-container>
     </div>
     <!-- ömer -->
-
     <hr />
     <div class="accordion accordion-flush" id="accordionExample">
       <ng-container *ngFor="let type of types; let i = index">
         <div class="accordion-item" *ngIf="type.parent === null">
           <div class="accordion-header d-flex align-items-center py-1">
             <a class="small fw-bold link-dark">{{ type.name }}</a>
-            
             <a
+              id="btnLeft"
+              tabindex="0"
               class="ms-auto text-center rounded-pill"
               style="width: 50px"
-              data-bs-toggle=""
+              data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse' + i">
-              <input type="checkbox" id="btnControl" style="display: none" />
-              <label class="btn" for="btnControl">
-                <i *ngIf="type.childCategories" class="fa-solid fa-angle-down text-dark">dg</i></label
-              >
+              <i *ngIf="type.childCategories" class="fa-solid fa-angle-down text-dark"></i>
             </a>
           </div>
           <div
