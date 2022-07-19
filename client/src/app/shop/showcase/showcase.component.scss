@@ -10,19 +10,12 @@ a:hover {
 }
 
 .rounded-pill:hover {
-  background-color: #fffbed;
+  background-color: #c3dcff;
   transition-duration: 500ms;
   transition-timing-function: ease-out;
-}
-
-a:target {
 }
 
 a {
   cursor: pointer;
   text-decoration: none;
-}
-
-#btnLeft:focus {
-  transform: rotate(-180deg);
 }
