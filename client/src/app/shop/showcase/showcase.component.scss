@@ -5,10 +5,22 @@
   color: black;
 }
 
-span:first-child:hover {
+a:hover {
   text-decoration: underline;
 }
 
-.removeArrow::after {
-  content: none;
+.rounded-pill:hover {
+  background-color: #fffbed;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}
+
+a:active {
+  transform: rotate(-180deg)
+}
+
+
+a {
+  cursor: pointer;
+  text-decoration: none;
 }

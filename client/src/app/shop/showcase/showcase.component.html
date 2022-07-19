@@ -60,34 +60,65 @@
     </ul>
     <hr />
     <div class="accordion" id="accordionExample">
-        <ng-container *ngFor="let type of types; let i = index">
-          <div class="accordion-item" *ngIf="type.parent === null">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                [attr.data-bs-target]="'#collapse' + i">
-                <span class="small">{{ type.name }}</span>
-              </button>
-            </h2>
-            <div
-              *ngIf="type.childCategories"
-              id="collapse{{ i }}"
-              class="accordion-collapse collapse show"
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <a
-                  *ngFor="let item of type.childCategories"
-                  class="nav-link small p-0 link-dark"
-                  [routerLink]="['/', item.name.toLowerCase()]"
-                  >{{ item.name }}
-                </a>
+      <ng-container *ngFor="let type of types; let i = index">
+        <div class="accordion-item" *ngIf="type.parent === null">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse' + i">
+              <span class="small">{{ type.name }}</span>
+            </button>
+          </h2>
+          <div
+            *ngIf="type.childCategories"
+            id="collapse{{ i }}"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <a
+                *ngFor="let item of type.childCategories"
+                class="nav-link small p-0 link-dark"
+                [routerLink]="['/', item.name.toLowerCase()]"
+                >{{ item.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <!-- ömer -->
+    <hr />
+    <div class="accordion accordion-flush" id="accordionExample">
+      <ng-container *ngFor="let type of types; let i = index">
+        <div class="accordion-item" *ngIf="type.parent === null">
+          <div class="accordion-header d-flex align-items-center py-1">
+            <a class="small fw-bold link-dark">{{ type.name }}</a>
+            <a
+              class="ms-auto text-center rounded-pill"
+              style="width: 50px"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse' + i">
+              
+              <i *ngIf="type.childCategories" class="fa-solid fa-angle-down text-dark"></i>
+            </a>
+          </div>
+          <div
+            *ngIf="type.childCategories"
+            id="collapse{{ i }}"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body p-0 pb-1">
+              <div *ngFor="let item of type.childCategories" style="line-height:1.2rem;">
+                <a class="small link-dark" [routerLink]="['/', item.name.toLowerCase()]">{{ item.name }} </a>
               </div>
             </div>
           </div>
-        </ng-container>
+        </div>
+      </ng-container>
     </div>
     <hr />
     <hr />
