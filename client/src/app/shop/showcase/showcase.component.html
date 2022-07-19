@@ -90,19 +90,23 @@
       </ng-container>
     </div>
     <!-- ömer -->
+
     <hr />
     <div class="accordion accordion-flush" id="accordionExample">
       <ng-container *ngFor="let type of types; let i = index">
         <div class="accordion-item" *ngIf="type.parent === null">
           <div class="accordion-header d-flex align-items-center py-1">
             <a class="small fw-bold link-dark">{{ type.name }}</a>
+            
             <a
               class="ms-auto text-center rounded-pill"
               style="width: 50px"
-              data-bs-toggle="collapse"
+              data-bs-toggle=""
               [attr.data-bs-target]="'#collapse' + i">
-              
-              <i *ngIf="type.childCategories" class="fa-solid fa-angle-down text-dark"></i>
+              <input type="checkbox" id="btnControl" style="display: none" />
+              <label class="btn" for="btnControl">
+                <i *ngIf="type.childCategories" class="fa-solid fa-angle-down text-dark">dg</i></label
+              >
             </a>
           </div>
           <div
@@ -112,7 +116,7 @@
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample">
             <div class="accordion-body p-0 pb-1">
-              <div *ngFor="let item of type.childCategories" style="line-height:1.2rem;">
+              <div *ngFor="let item of type.childCategories" style="line-height: 1.2rem">
                 <a class="small link-dark" [routerLink]="['/', item.name.toLowerCase()]">{{ item.name }} </a>
               </div>
             </div>

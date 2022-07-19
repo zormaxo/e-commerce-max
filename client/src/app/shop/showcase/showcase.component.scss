@@ -15,12 +15,48 @@ a:hover {
   transition-timing-function: ease-out;
 }
 
-a:active {
-  transform: rotate(-180deg)
+#btnControl:checked + label {
+ transform: rotate(-180deg)
 }
-
 
 a {
   cursor: pointer;
   text-decoration: none;
+}
+
+#btnControl {
+    display: none;
+}
+
+.btn {
+    width: 60px;
+    height: 20px;
+    background: silver;
+    border-radius: 5px;
+    padding: 1px 3px;
+    box-shadow: 1px 1px 1px #000;
+    display: block;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd);
+    font-family: arial;
+    font-size: 12px;
+    line-height:20px;
+}
+
+.btn:hover {
+    background-image: linear-gradient(to bottom, #c3e3fa, #a5defb);
+}
+
+
+.btn:active {
+    margin-left: 1px 1px 0;
+    box-shadow: -1px -1px 1px #000;
+    outline: 1px solid black;
+    background-image: linear-gradient(to top, #f4f5f5, #dfdddd);
+}
+
+#btnControl:checked + label {
+    width: 70px;
+    height: 74px;
+    line-height: 74px;
 }
