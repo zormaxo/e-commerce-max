@@ -1,3 +1,12 @@
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .active {
   background-color: #fffbed;
   border-color: #ffc107;
@@ -5,17 +14,8 @@
   color: black;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 .rounded-pill:hover {
   background-color: #c3dcff;
   transition-duration: 500ms;
   transition-timing-function: ease-out;
-}
-
-a {
-  cursor: pointer;
-  text-decoration: none;
 }
