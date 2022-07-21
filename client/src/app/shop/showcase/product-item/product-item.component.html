@@ -1,8 +1,14 @@
-<div class="card h-100 shadow-sm">
-  <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" class="card-img-top bg-light border-bottom" />
-  <div class="card-body d-flex flex-column p-1 text-decoration-none">
-    <a href="#" class="text-decoration-none">
-      <div style="font-size: 0.75rem;" class="text-truncate text-dark stretched-link">{{ product.name }}</div>
-    </a>
+<div class="d-flex justify-content-center">
+  <div class="card shadow-sm" style="width: 133px; height: 100px">
+    <img
+      src="{{ product.pictureUrl }}"
+      alt="{{ product.name }}"
+      class="card-img-top bg-light border-bottom"
+      style="object-fit: scale-down" />
+    <div class="card-body d-flex flex-column p-1 text-decoration-none">
+      <a href="#" class="text-decoration-none">
+        <div style="font-size: 0.75rem" class="text-truncate text-dark stretched-link">{{ product.name }}</div>
+      </a>
+    </div>
   </div>
 </div>
