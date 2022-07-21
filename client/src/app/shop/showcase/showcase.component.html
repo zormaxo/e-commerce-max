@@ -4,9 +4,9 @@
       <ng-container *ngFor="let type of types; let i = index">
         <div class="accordion-item" *ngIf="type.parent === null">
           <div class="accordion-header d-flex align-items-center">
-            <img src="{{ '../../assets/icons/' + type.name.toLowerCase() + '.svg' }}" alt="" style="width: 20px" />
-            <a class="m-1 small fw-bold link-dark" [routerLink]="['/', type.name.toLowerCase()]">{{ type.name }}</a>
-            <span class="small text-muted">({{ type.count }})</span>
+            <img src="{{ '../../assets/icons/' + type.url + '.svg' }}" alt="" style="width: 20px" />
+            <a class="m-1 small fw-bold link-dark" [routerLink]="['/', type.url]">{{ type.name }}</a>
+            <small><span class="small text-muted">({{ type.count }})</span></small>
             <a
               class="ms-auto justify-content-center rounded-pill py-1"
               style="width: 30px; box-shadow: none"
@@ -21,8 +21,8 @@
             class="ms-4 accordion-collapse collapse show"
             aria-labelledby="headingOne">
             <div class="accordion-body p-0 pb-1">
-              <div *ngFor="let item of type.childCategories" style="line-height: 1.1rem">
-                <a class="small link-dark" [routerLink]="['/', item.name.toLowerCase()]">{{ item.name }} </a>
+              <div *ngFor="let item of type.childCategories">
+                <a class="small link-dark" [routerLink]="['/', item.url]">{{ item.name }} </a>
               </div>
             </div>
           </div>

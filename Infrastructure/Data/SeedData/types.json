@@ -1,33 +1,54 @@
 [{
     "Id": 1,
     "Name": "Makine",
-    "Count": 6
+    "Count": 6,
+	"Url": "makine"
   }, {
     "Id": 2,
     "Name": "Malzeme",
-    "Count": 3
+    "Count": 3,
+	"Url": "malzeme"
   }, {
     "Id": 3,
     "Name": "Yarımamül",
-    "Count": 5
+    "Count": 5,
+	"Url": "yarimamul"
   }, {
     "Id": 4,
     "Name": "Eleman",
-    "Count": 4
+    "Count": 4,
+	"Url": "eleman"
   }, {
     "Id": 5,
     "Name": "İşyeri",
-    "Count": 0
+    "Count": 0,
+	"Url": "isyeri"
   }, {
     "Id": 6,
     "Name": "Satılık",
 	"ParentId":5,
-    "Count": 0
+    "Count": 0,
+	"Url": "satilik"
   }, {
     "Id": 7,
     "Name": "Kiralık",
 	"ParentId":5,
-    "Count": 0
+    "Count": 0,
+	"Url": "kiralik"
+  }, {
+    "Name": "3D Yazıcı",
+	"ParentId":1,
+    "Count": 0,
+	"Url": "3dyazici"
+  }, {
+    "Name": "Döküm",
+	"ParentId":1,
+    "Count": 0,
+	"Url": "dokum"
+  }, {
+    "Name": "Zincir",
+	"ParentId":1,
+    "Count": 0,
+	"Url": "zincir"
   }
-
 ]
