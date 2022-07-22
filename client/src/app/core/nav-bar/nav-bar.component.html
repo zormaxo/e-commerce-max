@@ -6,12 +6,17 @@
       </div>
       <div class="col-5 col-sm me-sm-2 me-md-5">
         <div class="input-group input-group-sm border border-secondary rounded me-5">
-          <input type="search" class="form-control border-0" placeholder="Ürün veya marka ara" />
+          <input
+            (keyup.enter)="onSearch()"
+            #search
+            type="search"
+            class="form-control border-0"
+            placeholder="Ürün veya marka ara" />
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="btn btn-outline-dark border-0" type="button">
+            <button class="btn btn-outline-dark border-0" type="button" (click)="onSearch()">
               <em class="fa-solid fa-magnifying-glass"></em>
             </button>
-            <button class="btn btn-outline-dark border-0" type="button">
+            <button class="btn btn-outline-dark border-0" type="button" (click)="onReset()">
               <em class="fa-solid fa-xmark"></em>
             </button>
           </div>
@@ -33,7 +38,7 @@
           </a>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
-              <a class="dropdown-item small" routerLink='/uye/uyelik'>Edit Profile</a>
+              <a class="dropdown-item small" routerLink="/uye/uyelik">Edit Profile</a>
             </li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Logout</a></li>
