@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
-import { IType } from '../../shared/models/productType';
+import { ICategory } from '../../shared/models/productType';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../shop.service';
 
@@ -14,16 +14,50 @@ export class MachineComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
-  types: IType[];
+  categories: ICategory[];
   shopParams = new ShopParams(10);
   totalCount: number;
 
   constructor(private shopService: ShopService) {}
 
+  categories2 = [
+    { id: 1, categoryName: 'Root', parentId: 0 },
+    { id: 2, categoryName: 'Cat1', parentId: 1 },
+    { id: 3, categoryName: 'Cat2', parentId: 2 },
+    { id: 4, categoryName: 'Cat3', parentId: 5 },
+    { id: 5, categoryName: 'Cat4', parentId: 1 },
+    { id: 6, categoryName: 'Cat5', parentId: 5 },
+    { id: 7, categoryName: 'Cat6', parentId: 5 },
+    { id: 8, categoryName: 'Cat7', parentId: 1 },
+    { id: 9, categoryName: 'Cat8', parentId: 2 },
+    { id: 10, categoryName: 'Cat9', parentId: 1 },
+    { id: 11, categoryName: 'Cat10', parentId: 10 },
+    { id: 12, categoryName: 'Cat11', parentId: 1 },
+    { id: 13, categoryName: 'Cat12', parentId: 8 },
+  ];
+
   ngOnInit(): void {
     this.getProducts();
     this.getBrands();
     this.getTypes();
+
+    this.categories2.sort(function (a, b) {
+      return a.parentId < b.parentId ? -1 : a.parentId > b.parentId ? 1 : 0;
+    });
+
+    var root = document.createElement('ul'),
+      currentParentId = 1,
+      currentParentUl = root;
+    for (var i = 1; i < this.categories2.length; ++i) {
+      if (this.categories2[i].parentId !== currentParentId) {
+        currentParentId = this.categories2[i].parentId;
+        currentParentUl = document.createElement('ul');
+        root.getElementsByClassName('category_' + currentParentId)[0].appendChild(currentParentUl);
+      }
+
+      currentParentUl.innerHTML +=
+        '<li class="category_' + this.categories2[i].id + '">' + this.categories2[i].categoryName + '</li>';
+    }
   }
 
   onSearchProduct() {
@@ -58,7 +92,7 @@ export class MachineComponent implements OnInit {
   getTypes() {
     this.shopService.getTypes().subscribe(
       (response) => {
-        this.types = response;
+        this.categories = response;
       },
       (error) => {
         console.log(error);
@@ -106,5 +140,4 @@ export class MachineComponent implements OnInit {
     this.shopParams.sort = sortText;
     this.getProducts();
   }
-
 }

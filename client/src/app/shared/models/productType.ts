@@ -1,8 +1,8 @@
-export interface IType {
+export interface ICategory {
   id: number;
   name: string;
   count: number;
   url: string;
-  parent: IType;
-  childCategories: IType[];
+  parent: ICategory;
+  childCategories: ICategory[];
 }

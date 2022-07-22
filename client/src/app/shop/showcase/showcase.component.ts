@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IProduct } from '../../shared/models/product';
-import { IType as ICategory } from '../../shared/models/productType';
+import { ICategory as ICategory } from '../../shared/models/productType';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../shop.service';
 
