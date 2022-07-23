@@ -21,7 +21,7 @@ export class MachineComponent implements OnInit {
 
   constructor(private shopService: ShopService) {}
 
-  categories2 = [
+  omercat = [
     { id: 1, categoryName: 'Root', parentId: 0 },
     { id: 2, categoryName: 'Cat1', parentId: 1 },
     { id: 3, categoryName: 'Cat2', parentId: 2 },
@@ -42,28 +42,23 @@ export class MachineComponent implements OnInit {
     this.getProducts();
     this.getBrands();
     this.getTypes();
-    this.categories2.sort(function (a, b) {
-      return a.parentId < b.parentId ? -1 : a.parentId > b.parentId ? 1 : 0;
-    });
-
-    let root = document.createElement('ul'),
-      currentParentId = 1,
-      currentParentUl = root;
-    for (var i = 1; i < this.categories2.length; ++i) {
-      if (this.categories2[i].parentId !== currentParentId) {
-        currentParentId = this.categories2[i].parentId;
-        currentParentUl = document.createElement('ul');
-        root.getElementsByClassName('category_' + currentParentId)[0].appendChild(currentParentUl);
-      }
-
-      currentParentUl.innerHTML +=
-        '<li class="category_' + this.categories2[i].id + '">' + this.categories2[i].categoryName + '</li>';
-    }
-    //asd
-    document.getElementById('omer').appendChild(root);
   }
 
-  ngAfterViewInit() {}
+  generateTree(categories: ICategory[], rootElement: HTMLElement) {
+    const parentNodes = categories.filter((category) => category.parent == null);
+    parentNodes.forEach((parentNode) => processNodes(parentNode, rootElement));
+
+    function processNodes(node: ICategory, element: HTMLElement) {
+      const li = document.createElement('li');
+      li.innerText = node.name;
+      element.appendChild(li);
+      if (node.childCategories?.length) {
+        const ul = document.createElement('ul');
+        li.appendChild(ul);
+        node.childCategories.forEach((childNode) => processNodes(childNode, ul));
+      }
+    }
+  }
 
   onSearchProduct() {
     this.getProducts();
@@ -98,6 +93,7 @@ export class MachineComponent implements OnInit {
     this.shopService.getTypes().subscribe(
       (response) => {
         this.categories = response;
+        this.generateTree(response, document.getElementById('list'));
       },
       (error) => {
         console.log(error);
