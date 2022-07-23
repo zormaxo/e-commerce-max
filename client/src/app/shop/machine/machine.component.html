@@ -2,21 +2,11 @@
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card small overflow-auto" style="height: 200px">
       <div class="card-body">
-        <p class="card-text"></p>
-        <ng-container *ngFor="let type of categories; let i = index">
-          <ul class="list-unstyled" *ngIf="type.parent === null">
-            <li>{{ type.name }}</li>
-            <ul *ngIf="type.childCategories">
-              <li *ngFor="let item of type.childCategories">
-                <a href="">{{ item.name }} </a>
-              </li>
-            </ul>
-          </ul>
-        </ng-container>
+        <p class="card-text" id="omer"></p>
       </div>
     </div>
-    <div class="card mt-4">
-      <div class="card-header">Durumu</div>
+    <div class="card small mt-4">
+      <div class="card-header ">Durumu</div>
       <div class="card-body">
         <div class="card-text">
           <div class="form-check">
@@ -30,13 +20,13 @@
         </div>
       </div>
     </div>
-    <div class="card mt-4">
+    <div class="card small mt-4">
       <div class="card-header">Fiyat</div>
       <div class="card-body">
         <div class="card-text">
           <div class="row align-items-center">
             <div class="col">
-              <input type="text" class="form-control" [(ngModel)]="shopParams.minValue" appOnlyNumber />
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="shopParams.minValue" appOnlyNumber />
             </div>
             <div class="col-auto p-0">-</div>
             <div class="col">

@@ -12,6 +12,7 @@ import { ShopService } from '../shop.service';
 })
 export class MachineComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
+  @ViewChild('omerlist', { static: true }) omerlist: ElementRef;
   products: IProduct[];
   brands: IBrand[];
   categories: ICategory[];
@@ -34,18 +35,18 @@ export class MachineComponent implements OnInit {
     { id: 11, categoryName: 'Cat10', parentId: 10 },
     { id: 12, categoryName: 'Cat11', parentId: 1 },
     { id: 13, categoryName: 'Cat12', parentId: 8 },
+    { id: 6, categoryName: 'qwer', parentId: 5 },
   ];
 
   ngOnInit(): void {
     this.getProducts();
     this.getBrands();
     this.getTypes();
-
     this.categories2.sort(function (a, b) {
       return a.parentId < b.parentId ? -1 : a.parentId > b.parentId ? 1 : 0;
     });
 
-    var root = document.createElement('ul'),
+    let root = document.createElement('ul'),
       currentParentId = 1,
       currentParentUl = root;
     for (var i = 1; i < this.categories2.length; ++i) {
@@ -58,7 +59,11 @@ export class MachineComponent implements OnInit {
       currentParentUl.innerHTML +=
         '<li class="category_' + this.categories2[i].id + '">' + this.categories2[i].categoryName + '</li>';
     }
+    //asd
+    document.getElementById('omer').appendChild(root);
   }
+
+  ngAfterViewInit() {}
 
   onSearchProduct() {
     this.getProducts();
