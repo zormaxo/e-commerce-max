@@ -1,0 +1,19 @@
+#list > ul{
+ padding: 1px;
+}
+
+#list > ul ul{
+ padding-left: 10px;
+
+}
+
+
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

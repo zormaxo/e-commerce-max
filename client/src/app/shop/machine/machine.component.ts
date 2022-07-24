@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
 import { ICategory } from '../../shared/models/productType';
@@ -19,24 +19,7 @@ export class MachineComponent implements OnInit {
   shopParams = new ShopParams(10);
   totalCount: number;
 
-  constructor(private shopService: ShopService) {}
-
-  omercat = [
-    { id: 1, categoryName: 'Root', parentId: 0 },
-    { id: 2, categoryName: 'Cat1', parentId: 1 },
-    { id: 3, categoryName: 'Cat2', parentId: 2 },
-    { id: 4, categoryName: 'Cat3', parentId: 5 },
-    { id: 5, categoryName: 'Cat4', parentId: 1 },
-    { id: 6, categoryName: 'Cat5', parentId: 5 },
-    { id: 7, categoryName: 'Cat6', parentId: 5 },
-    { id: 8, categoryName: 'Cat7', parentId: 1 },
-    { id: 9, categoryName: 'Cat8', parentId: 2 },
-    { id: 10, categoryName: 'Cat9', parentId: 1 },
-    { id: 11, categoryName: 'Cat10', parentId: 10 },
-    { id: 12, categoryName: 'Cat11', parentId: 1 },
-    { id: 13, categoryName: 'Cat12', parentId: 8 },
-    { id: 6, categoryName: 'qwer', parentId: 5 },
-  ];
+  constructor(private shopService: ShopService, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -45,19 +28,26 @@ export class MachineComponent implements OnInit {
   }
 
   generateTree(categories: ICategory[], rootElement: HTMLElement) {
-    const parentNodes = categories.filter((category) => category.parent == null);
-    parentNodes.forEach((parentNode) => processNodes(parentNode, rootElement));
+    const processNodes = (node: ICategory, element: HTMLElement, addChild = true) => {
+      const div = this.renderer.createElement('div');
+      const a = this.renderer.createElement('a');
+      this.renderer.addClass(a, 'link-dark');
+      a.innerText = node.name;
 
-    function processNodes(node: ICategory, element: HTMLElement) {
-      const li = document.createElement('li');
-      li.innerText = node.name;
-      element.appendChild(li);
-      if (node.childCategories?.length) {
-        const ul = document.createElement('ul');
-        li.appendChild(ul);
-        node.childCategories.forEach((childNode) => processNodes(childNode, ul));
+      div.appendChild(a);
+      element.appendChild(div);
+      if (node.childCategories?.length && addChild) {
+        const ul = this.renderer.createElement('ul');
+        div.appendChild(ul);
+        node.childCategories.forEach((childNode) => processNodes(childNode, ul, false));
       }
-    }
+    };
+
+    const root = this.renderer.createElement('ul');
+    rootElement.appendChild(root);
+
+    const parentNodes = categories.filter((category) => category.parent == null);
+    parentNodes.forEach((parentNode) => processNodes(parentNode, root));
   }
 
   onSearchProduct() {
