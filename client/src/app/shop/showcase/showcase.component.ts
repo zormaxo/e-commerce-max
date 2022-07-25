@@ -36,7 +36,7 @@ export class ShowcaseComponent implements OnInit {
   }
 
   getCategories() {
-    this.shopService.getTypes().subscribe({
+    this.shopService.getCategories().subscribe({
       next: (response) => {
         this.categories = response;
       },

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
 import { ICategory } from '../../shared/models/productType';
@@ -15,39 +16,52 @@ export class MachineComponent implements OnInit {
   @ViewChild('omerlist', { static: true }) omerlist: ElementRef;
   products: IProduct[];
   brands: IBrand[];
-  categories: ICategory[];
   shopParams = new ShopParams(10);
   totalCount: number;
+  mainCategory: string;
 
-  constructor(private shopService: ShopService, private renderer: Renderer2) {}
+  constructor(
+    private shopService: ShopService,
+    private renderer: Renderer2,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.mainCategory = this.route.snapshot.url[0].path;
     this.getProducts();
     this.getBrands();
     this.getTypes();
   }
 
-  generateTree(categories: ICategory[], rootElement: HTMLElement) {
-    const processNodes = (node: ICategory, element: HTMLElement, addChild = true) => {
+  generateTree(rootCategory: ICategory, rootElement: HTMLElement) {
+    const processNode = (node: ICategory, element: HTMLElement, addChild = true) => {
       const div = this.renderer.createElement('div');
       const a = this.renderer.createElement('a');
       this.renderer.addClass(a, 'link-dark');
       a.innerText = node.name;
+
+      this.renderer.listen(a, 'click', () => {
+        if (addChild) {
+          this.router.navigate([node.url]);
+        } else {
+          this.router.navigate([node.url], { relativeTo: this.route });
+        }
+      });
 
       div.appendChild(a);
       element.appendChild(div);
       if (node.childCategories?.length && addChild) {
         const ul = this.renderer.createElement('ul');
         div.appendChild(ul);
-        node.childCategories.forEach((childNode) => processNodes(childNode, ul, false));
+        node.childCategories.forEach((childNode) => processNode(childNode, ul, false));
       }
     };
 
     const root = this.renderer.createElement('ul');
     rootElement.appendChild(root);
 
-    const parentNodes = categories.filter((category) => category.parent == null);
-    parentNodes.forEach((parentNode) => processNodes(parentNode, root));
+    processNode(rootCategory, root);
   }
 
   onSearchProduct() {
@@ -80,15 +94,10 @@ export class MachineComponent implements OnInit {
   }
 
   getTypes() {
-    this.shopService.getTypes().subscribe(
-      (response) => {
-        this.categories = response;
-        this.generateTree(response, document.getElementById('list'));
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.shopService.getCategories().subscribe((response) => {
+      const rootElement = response.find((x) => x.url == this.mainCategory);
+      this.generateTree(rootElement, document.getElementById('list'));
+    });
   }
 
   onBrandSelected(brandId: number) {

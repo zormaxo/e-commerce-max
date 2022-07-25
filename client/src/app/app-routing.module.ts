@@ -1,10 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule, OnInit } from '@angular/core';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -53,7 +51,7 @@ const routes: Routes = [
       { path: 'members/:username', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
 
-      { path: 'messages', component: MessagesComponent },
+      // { path: 'messages', component: MessagesComponent },
     ],
   },
   { path: 'makine', component: MachineComponent },
@@ -67,4 +65,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule implements OnInit {
+  constructor(private router: Router) {}
+  ngOnInit(): void {}
+}

@@ -5,12 +5,15 @@ import { IPagination } from '../shared/models/pagination';
 import { ICategory } from '../shared/models/productType';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
+
+  categories: ICategory[];
 
   constructor(private http: HttpClient) {}
 
@@ -73,7 +76,16 @@ export class ShopService {
     return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
   }
 
-  getTypes() {
-    return this.http.get<ICategory[]>(this.baseUrl + 'products/types');
+  getCategories() {
+    if (this.categories === undefined) {
+      return this.http.get<ICategory[]>(this.baseUrl + 'products/types').pipe(
+        map((categories: ICategory[]) => {
+          this.categories = categories;
+          return categories;
+        })
+      );
+    } else {
+      return of(this.categories);
+    }
   }
 }
