@@ -14,5 +14,11 @@ namespace Infrastructure.Data
             else
                 return source;
         }
+
+        public static IQueryable<TSource> PageBy<TSource>(
+            this IQueryable<TSource> source, int skip, int take)
+        {
+            return source.Skip(skip).Take(take);
+        }
     }
 }

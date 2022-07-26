@@ -27,16 +27,58 @@ namespace Service
 
         public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
-            var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
+            var filteredProducts = _productsRepo.GetAll()
+                .Include(x => x.ProductType)
+                .Include(x => x.ProductBrand)
+                .Include(x => x.Photos)
+                .Include(x => x.County).ThenInclude(x => x.City)
+                .Where(x => x.IsActive);
 
-            var totalItems = await _productsRepo.CountAsync(countSpec);
-            var products = await _productsRepo.ListAsync(spec);
+
+            var pagedAndfilteredProducts = filteredProducts
+                .PageBy(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
+
+
+            if (!string.IsNullOrEmpty(productParams.Sort))
+            {
+                switch (productParams.Sort)
+                {
+                    case "priceAsc":
+                        filteredProducts.OrderBy(p => p.Price);
+                        break;
+
+                    case "priceDesc":
+                        filteredProducts.OrderByDescending(p => p.Price);
+                        break;
+
+                    case "dateAsc":
+                        filteredProducts.OrderBy(p => p.Created);
+                        break;
+
+                    case "dateDesc":
+                        filteredProducts.OrderByDescending(p => p.Created);
+                        break;
+
+                    default:
+                        filteredProducts.OrderBy(n => n.Name);
+                        break;
+                }
+            }
+
+            //var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            //var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
+
+            //var totalItems = await _productsRepo.CountAsync(countSpec);
+            //var products = await _productsRepo.ListAsync(spec);
+
+            var totalItems = await filteredProducts.CountAsync();
+            var products = await pagedAndfilteredProducts.ToListAsync();
 
             var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
             return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data);
         }
+
 
         public async Task<object> GetProductsCounts(ProductSpecParams productParams)
         {
