@@ -6,6 +6,7 @@ using Core.Specifications;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
+using System.Linq.Dynamic.Core;
 
 namespace Service
 {
@@ -32,44 +33,13 @@ namespace Service
                 .Include(x => x.ProductBrand)
                 .Include(x => x.Photos)
                 .Include(x => x.County).ThenInclude(x => x.City)
+                .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
+                .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
                 .Where(x => x.IsActive);
 
-
             var pagedAndfilteredProducts = filteredProducts
-                .PageBy(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
-
-
-            if (!string.IsNullOrEmpty(productParams.Sort))
-            {
-                switch (productParams.Sort)
-                {
-                    case "priceAsc":
-                        filteredProducts.OrderBy(p => p.Price);
-                        break;
-
-                    case "priceDesc":
-                        filteredProducts.OrderByDescending(p => p.Price);
-                        break;
-
-                    case "dateAsc":
-                        filteredProducts.OrderBy(p => p.Created);
-                        break;
-
-                    case "dateDesc":
-                        filteredProducts.OrderByDescending(p => p.Created);
-                        break;
-
-                    default:
-                        filteredProducts.OrderBy(n => n.Name);
-                        break;
-                }
-            }
-
-            //var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
-            //var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
-
-            //var totalItems = await _productsRepo.CountAsync(countSpec);
-            //var products = await _productsRepo.ListAsync(spec);
+                .OrderBy(productParams.Sort ?? "name asc")
+                .PageBy(productParams);
 
             var totalItems = await filteredProducts.CountAsync();
             var products = await pagedAndfilteredProducts.ToListAsync();

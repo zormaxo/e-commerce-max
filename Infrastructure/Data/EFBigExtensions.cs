@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Core.Interfaces;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Data
 {
@@ -16,9 +17,9 @@ namespace Infrastructure.Data
         }
 
         public static IQueryable<TSource> PageBy<TSource>(
-            this IQueryable<TSource> source, int skip, int take)
+            this IQueryable<TSource> source, IPagedResultRequest request)
         {
-            return source.Skip(skip).Take(take);
+            return source.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize);
         }
     }
 }

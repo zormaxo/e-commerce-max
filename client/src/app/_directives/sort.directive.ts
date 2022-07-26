@@ -43,15 +43,15 @@ export class SortDirective implements OnInit {
       this.renderer.appendChild(this.elRef.nativeElement, this.space);
       this.renderer.appendChild(this.elRef.nativeElement, this.up);
       this.arrow = Direction.Asc;
-      sortText = this.sortTextInput + Direction.Asc;
+      sortText = this.sortTextInput + ' ' + Direction.Asc;
     } else if (this.arrow == Direction.Asc) {
       this.renderer.appendChild(this.elRef.nativeElement, this.down);
       this.arrow = Direction.Desc;
-      sortText = this.sortTextInput + Direction.Desc;
+      sortText = this.sortTextInput + ' ' + Direction.Desc;
     } else if (this.arrow == Direction.Desc) {
       this.renderer.appendChild(this.elRef.nativeElement, this.up);
       this.arrow = Direction.Asc;
-      sortText = this.sortTextInput + Direction.Asc;
+      sortText = this.sortTextInput + ' ' + Direction.Asc;
     }
     this.headerClicked.emit(sortText);
   }
@@ -73,7 +73,7 @@ export class SortDirective implements OnInit {
 }
 
 enum Direction {
-  Asc = 'Asc',
-  Desc = 'Desc',
+  Asc = 'asc',
+  Desc = 'desc',
   None = '',
 }

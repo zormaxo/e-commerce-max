@@ -1,6 +1,8 @@
+using Core.Interfaces;
+
 namespace Core.Specifications
 {
-    public class ProductSpecParams
+    public class ProductSpecParams : IPagedResultRequest
     {
         private const int MaxPageSize = 50;
         public int PageIndex { get; set; } = 1;
