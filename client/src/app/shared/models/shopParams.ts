@@ -11,6 +11,8 @@ export class ShopParams {
   userId: number;
   getAllStatus: boolean;
 
+  childCategoryIds = [];
+
   constructor(pageSize = 20) {
     this.pageSize = pageSize;
   }

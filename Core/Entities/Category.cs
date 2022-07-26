@@ -11,6 +11,5 @@ namespace Core.Entities
         public Category Parent { get; set; }
         public string Url { get; set; }
         public ICollection<Category> ChildCategories { get; set; }
-
     }
 }

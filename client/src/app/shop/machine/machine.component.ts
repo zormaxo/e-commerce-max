@@ -31,7 +31,7 @@ export class MachineComponent implements OnInit {
     this.mainCategory = this.route.snapshot.url[0].path;
     this.getProducts();
     this.getBrands();
-    this.getTypes();
+    this.getCategories();
   }
 
   generateTree(rootCategory: ICategory, rootElement: HTMLElement) {
@@ -69,6 +69,18 @@ export class MachineComponent implements OnInit {
   }
 
   getProducts() {
+    const findChild = (childNode: ICategory) => {
+      this.shopParams.childCategoryIds.push(childNode.id);
+      if (childNode.childCategories?.length) {
+        childNode.childCategories.forEach((omer) => findChild(omer));
+      }
+    };
+
+    this.shopService.getCategories().subscribe((response) => {
+      let makine = response.find((x) => x.id == 1);
+      findChild(makine);
+    });
+
     this.shopService.getProducts(this.shopParams).subscribe(
       (response) => {
         this.products = response.data;
@@ -93,7 +105,7 @@ export class MachineComponent implements OnInit {
     );
   }
 
-  getTypes() {
+  getCategories() {
     this.shopService.getCategories().subscribe((response) => {
       const rootElement = response.find((x) => x.url == this.mainCategory);
       this.generateTree(rootElement, document.getElementById('list'));
@@ -107,7 +119,7 @@ export class MachineComponent implements OnInit {
   }
 
   onTypeSelected(typeId: number) {
-    this.shopParams.typeId = typeId;
+    // this.shopParams.typeId = typeId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
