@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core;
 using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
@@ -12,18 +13,21 @@ namespace Service
 {
     public class ProductService : BaseService
     {
+        private readonly CachedItems _cachedItems;
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
-        private readonly IGenericRepository<Category> _productTypeRepo;
+        private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IGenericRepository<Product> _productsRepo;
 
         public ProductService(IGenericRepository<Product> productsRepo,
-            IGenericRepository<Category> productTypeRepo,
+            IGenericRepository<Category> categoryRepo,
             IGenericRepository<ProductBrand> productBrandRepo,
+            CachedItems cachedItems,
             IMapper mapper) : base(mapper)
         {
             _productsRepo = productsRepo;
-            _productTypeRepo = productTypeRepo;
+            _categoryRepo = categoryRepo;
             _productBrandRepo = productBrandRepo;
+            _cachedItems = cachedItems;
         }
 
         public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
@@ -37,6 +41,13 @@ namespace Service
                 .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
                 .Where(x => x.IsActive);
 
+            if (productParams.CategoryId != null)
+            {
+                List<int> categoryIds = await GetCategoryIds(productParams);
+                if (categoryIds.Count > 0)
+                    filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.ProductTypeId));
+            }
+
             var pagedAndfilteredProducts = filteredProducts
                 .OrderBy(productParams.Sort ?? "name asc")
                 .PageBy(productParams);
@@ -48,7 +59,6 @@ namespace Service
 
             return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data);
         }
-
 
         public async Task<object> GetProductsCounts(ProductSpecParams productParams)
         {
@@ -79,8 +89,35 @@ namespace Service
 
         public async Task<IReadOnlyList<Category>> GetTypes()
         {
-            var omer = await _productTypeRepo.ListAllAsync();
-            return omer;
+            if (_cachedItems.Categories.Count > 0)
+            {
+                return _cachedItems.Categories;
+            }
+            else
+            {
+                return _cachedItems.Categories = await _categoryRepo.ListAllAsync();
+            }
+        }
+
+        private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
+        {
+            var selectedCategory = (await GetTypes()).First(x => x.Id == productParams.CategoryId);
+            List<int> categoryIds = new();
+            FindChildCategories(selectedCategory);
+
+            void FindChildCategories(Category category)
+            {
+                categoryIds.Add(category.Id);
+                if (category.ChildCategories?.Count > 0)
+                {
+                    foreach (var item in category.ChildCategories)
+                    {
+                        FindChildCategories(item);
+                    }
+                }
+            }
+
+            return categoryIds;
         }
     }
 }
