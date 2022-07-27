@@ -25,7 +25,7 @@ namespace Service.Helpers
 
         public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)
         {
-            mem.MapFrom(s => s.ProductType.Name);
+            mem.MapFrom(s => s.Category.Name);
         }
     }
 }

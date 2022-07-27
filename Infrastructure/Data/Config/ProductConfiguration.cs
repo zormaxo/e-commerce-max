@@ -14,8 +14,8 @@ namespace Infrastructure.Data.Config
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
             builder.HasOne(p => p.ProductBrand).WithMany()
                 .HasForeignKey(p => p.ProductBrandId);
-            builder.HasOne(p => p.ProductType).WithMany()
-                .HasForeignKey(p => p.ProductTypeId);
+            builder.HasOne(p => p.Category).WithMany()
+                .HasForeignKey(p => p.CategoryId);
         }
     }
 }

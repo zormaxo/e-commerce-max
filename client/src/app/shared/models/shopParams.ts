@@ -1,6 +1,7 @@
 export class ShopParams {
   brandId = 0;
-  typeId = 0;
+  categoryId = 0;
+  categoryName: string;
   sort = 'name';
   pageNumber = 1;
   pageSize: number;
@@ -13,7 +14,8 @@ export class ShopParams {
 
   childCategoryIds = [];
 
-  constructor(pageSize = 20) {
+  constructor(pageSize = 20, categoryName = undefined) {
     this.pageSize = pageSize;
+    this.categoryName = categoryName;
   }
 }

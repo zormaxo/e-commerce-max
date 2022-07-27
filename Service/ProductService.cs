@@ -33,7 +33,7 @@ namespace Service
         public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
         {
             var filteredProducts = _productsRepo.GetAll()
-                .Include(x => x.ProductType)
+                .Include(x => x.Category)
                 .Include(x => x.ProductBrand)
                 .Include(x => x.Photos)
                 .Include(x => x.County).ThenInclude(x => x.City)
@@ -41,11 +41,11 @@ namespace Service
                 .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
                 .Where(x => x.IsActive);
 
-            if (productParams.CategoryId != null)
+            if (!string.IsNullOrEmpty(productParams.CategoryName))
             {
                 List<int> categoryIds = await GetCategoryIds(productParams);
                 if (categoryIds.Count > 0)
-                    filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.ProductTypeId));
+                    filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
             }
 
             var pagedAndfilteredProducts = filteredProducts
@@ -101,7 +101,7 @@ namespace Service
 
         private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
         {
-            var selectedCategory = (await GetTypes()).First(x => x.Id == productParams.CategoryId);
+            var selectedCategory = (await GetTypes()).First(x => x.Name == productParams.CategoryName);
             List<int> categoryIds = new();
             FindChildCategories(selectedCategory);
 

@@ -16,7 +16,7 @@ export class MachineComponent implements OnInit {
   @ViewChild('omerlist', { static: true }) omerlist: ElementRef;
   products: IProduct[];
   brands: IBrand[];
-  shopParams = new ShopParams(10);
+  shopParams = new ShopParams(10, "Makine");
   totalCount: number;
   mainCategory: string;
 

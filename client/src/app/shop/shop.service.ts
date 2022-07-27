@@ -24,8 +24,12 @@ export class ShopService {
       params = params.append('brandId', shopParams.brandId.toString());
     }
 
-    if (shopParams.typeId !== 0) {
-      params = params.append('typeId', shopParams.typeId.toString());
+    if (shopParams.categoryId !== 0) {
+      params = params.append('typeId', shopParams.categoryId.toString());
+    }
+
+    if (shopParams.categoryName !== undefined) {
+      params = params.append('categoryName', shopParams.categoryName);
     }
 
     if (shopParams.search) {
