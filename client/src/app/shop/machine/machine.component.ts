@@ -16,7 +16,7 @@ export class MachineComponent implements OnInit {
   @ViewChild('omerlist', { static: true }) omerlist: ElementRef;
   products: IProduct[];
   brands: IBrand[];
-  shopParams = new ShopParams(10, "Makine");
+  shopParams: ShopParams;
   totalCount: number;
   mainCategory: string;
 
@@ -29,6 +29,7 @@ export class MachineComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainCategory = this.route.snapshot.url[0].path;
+    this.shopParams = new ShopParams(10, this.mainCategory);
     this.getProducts();
     this.getBrands();
     this.getCategories();
@@ -54,7 +55,7 @@ export class MachineComponent implements OnInit {
       if (node.childCategories?.length && addChild) {
         const ul = this.renderer.createElement('ul');
         div.appendChild(ul);
-        node.childCategories.forEach((childNode) => processNode(childNode, ul, false));
+        node.childCategories.forEach((childNode) => processNode(childNode, ul, true));
       }
     };
 
@@ -108,7 +109,13 @@ export class MachineComponent implements OnInit {
   getCategories() {
     this.shopService.getCategories().subscribe((response) => {
       const rootElement = response.find((x) => x.url == this.mainCategory);
+
+      // for (var i = 0; i < omer.childNodes.length; i++) {
+      //   this.renderer.removeChild(this.buttonAreaElement.nativeElement, placeholders[i]);
+      // }
+
       this.generateTree(rootElement, document.getElementById('list'));
+      let omer = document.getElementById('list');
     });
   }
 

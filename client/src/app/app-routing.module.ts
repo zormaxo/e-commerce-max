@@ -23,13 +23,8 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: 'vitrin', component: ShowcaseComponent },
-      {
-        path: 'makine',
-        component: MachineComponent,
-        children: [
-          { path: ':subcategory', component: MembershipInfoComponent },
-        ],
-      },
+      { path: 'makine', component: MachineComponent },
+      { path: 'makine/:subcategory', component: MachineComponent },
       {
         path: 'uye',
         component: MemberProfileComponent,

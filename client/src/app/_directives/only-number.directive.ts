@@ -10,7 +10,7 @@ export class OnlyNumberDirective implements OnInit {
   // Allow key codes for special events
   private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight'];
 
-  constructor(private el: ElementRef, private renderer: Renderer2, private control: NgControl) {}
+  constructor(private el: ElementRef, private renderer: Renderer2, private ngControl: NgControl) {}
 
   ngOnInit(): void {
     this.renderer.addClass(this.el.nativeElement, 'px-1');
@@ -44,7 +44,7 @@ export class OnlyNumberDirective implements OnInit {
     const value = parseInt(this.el.nativeElement.value.replaceAll('.', ''));
     if (!isNaN(value)) {
       const number = new Intl.NumberFormat('tr-TR').format(value);
-      this.control.control.setValue(number);
+      this.ngControl.control.setValue(number);
     }
   }
 
