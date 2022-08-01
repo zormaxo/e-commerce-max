@@ -6,7 +6,7 @@
           class="list-group-item"
           *ngFor="let parent of parentCategories; let i = index"
           [routerLink]="parentCategories[1] ? ['/', parentCategories[0].url, parent.url] : ['/', parent.url]"
-          [ngStyle]="getStyleByValue(i)"
+          [ngStyle]="setListItemPadding(i)"
           >{{ parent.name }}</a
         >
         <a
@@ -14,7 +14,7 @@
           [routerLink]="
             parentCategories[0] ? ['/', parentCategories[0].url, selectedCategory.url] : ['/', selectedCategory.url]
           "
-          [ngStyle]="getStyleByValue(parentCategories.length)"
+          [ngStyle]="setListItemPadding(parentCategories.length)"
           >{{ selectedCategory.name }}</a
         >
         <a
@@ -23,7 +23,7 @@
           [routerLink]="
             parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
           "
-          [ngStyle]="getStyleByValue(parentCategories.length + 1)"
+          [ngStyle]="setListItemPadding(parentCategories.length + 1)"
           >{{ child.name }}</a
         >
       </ul>
