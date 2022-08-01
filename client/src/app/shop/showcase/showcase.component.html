@@ -1,30 +1,30 @@
 <div class="row">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="accordion accordion-flush" id="accordionExample">
-      <ng-container *ngFor="let type of categories; let i = index">
-        <div class="accordion-item" *ngIf="type.parent === null">
+      <ng-container *ngFor="let category of categories; let i = index">
+        <div class="accordion-item" *ngIf="category.parent === null">
           <div class="accordion-header d-flex align-items-center">
-            <img src="{{ '../../assets/icons/' + type.url + '.svg' }}" alt="" style="width: 20px" />
-            <a class="m-1 small fw-bold link-dark" [routerLink]="['/', type.url]">{{ type.name }}</a>
+            <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
+            <a class="m-1 small fw-bold link-dark" [routerLink]="['/', category.url]">{{ category.name }}</a>
             <small
-              ><span class="small text-muted">({{ type.count }})</span></small
+              ><span class="small text-muted">({{ category.count }})</span></small
             >
             <a
               class="ms-auto justify-content-center rounded-pill py-1"
               style="width: 30px; box-shadow: none"
               data-bs-toggle="collapse"
-              [class.accordion-button]="type.childCategories"
+              [class.accordion-button]="category.childCategories"
               [attr.data-bs-target]="'#collapse' + i">
             </a>
           </div>
           <div
-            *ngIf="type.childCategories"
+            *ngIf="category.childCategories"
             id="collapse{{ i }}"
             class="ms-4 accordion-collapse collapse show"
             aria-labelledby="headingOne">
             <div class="accordion-body p-0 pb-1">
-              <div *ngFor="let item of type.childCategories">
-                <a class="small link-dark" [routerLink]="['/', item.url]">{{ item.name }} </a>
+              <div *ngFor="let child of category.childCategories">
+                <a class="small link-dark" [routerLink]="['/', category.url, child.url]">{{ child.name }} </a>
               </div>
             </div>
           </div>

@@ -101,7 +101,8 @@ namespace Service
 
         private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
         {
-            var selectedCategory = (await GetTypes()).First(x => x.Name.ToLower() == productParams.CategoryName);
+            IReadOnlyList<Category> categories = await GetTypes();
+            var selectedCategory = (await GetTypes()).First(x => x.Url == productParams.CategoryName);
             List<int> categoryIds = new();
             FindChildCategories(selectedCategory);
 

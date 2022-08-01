@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IBrand } from '../../shared/models/brand';
 import { IProduct } from '../../shared/models/product';
 import { ICategory } from '../../shared/models/productType';
@@ -18,8 +18,9 @@ export class MachineComponent implements OnInit {
   brands: IBrand[];
   shopParams: ShopParams;
   totalCount: number;
-  mainCategory: string;
-  rootElement: ICategory;
+  categoryName: string;
+  selectedCategory: ICategory;
+  parentCategories: ICategory[] = [];
 
   constructor(
     private shopService: ShopService,
@@ -28,12 +29,30 @@ export class MachineComponent implements OnInit {
     private router: Router
   ) {}
 
+  getStyleByValue(i: number) {
+    return {
+      'padding-left': 10 * (i + 1) + 'px',
+    };
+  }
+
   ngOnInit(): void {
-    this.mainCategory = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
-    this.shopParams = new ShopParams(10, this.mainCategory);
-    this.getProducts();
-    this.getBrands();
-    this.getCategories();
+    this.route.params.subscribe((params: Params) => {
+      this.parentCategories = [];
+      this.categoryName = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
+      this.shopParams = new ShopParams(10, this.categoryName);
+      this.getProducts();
+      this.getBrands();
+      this.getCategories();
+    });
+  }
+
+  topParent(el: ICategory) {
+    if (el.parent == null) {
+      return;
+    } else {
+      this.parentCategories.unshift(el.parent);
+      this.topParent(el.parent);
+    }
   }
 
   generateTree(rootCategory: ICategory, rootElement: HTMLElement) {
@@ -109,7 +128,7 @@ export class MachineComponent implements OnInit {
 
   getCategories() {
     this.shopService.getCategories().subscribe((response) => {
-      this.rootElement = response.find((x) => x.url == this.mainCategory);
+      this.selectedCategory = response.find((x) => x.url == this.categoryName);
 
       // for (var i = 0; i < omer.childNodes.length; i++) {
       //   this.renderer.removeChild(this.buttonAreaElement.nativeElement, placeholders[i]);
@@ -117,6 +136,7 @@ export class MachineComponent implements OnInit {
 
       // this.generateTree(rootElement, document.getElementById('list'));
       let omer = document.getElementById('list');
+      this.topParent(this.selectedCategory);
     });
   }
 

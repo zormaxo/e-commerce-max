@@ -11,7 +11,6 @@ export class ShopParams {
   maxValue: string;
   userId: number;
   getAllStatus: boolean;
-
   childCategoryIds = [];
 
   constructor(pageSize = 20, categoryName = undefined) {

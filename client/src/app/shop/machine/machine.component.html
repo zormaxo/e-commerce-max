@@ -1,32 +1,31 @@
-<div class="row">
+<div class="row" *ngIf="selectedCategory">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card small overflow-auto" style="height: 200px">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngIf="rootElement.parent">{{ rootElement.parent.name }}</li>
-        <li class="list-group-item">{{ rootElement.name }}</li>
-        <li class="list-group-item" *ngFor="let item of rootElement.childCategories">{{ item.name }}</li>
-        <li>Coffee</li>
-        <li>Tea</li>
-        <li>Milk</li>
-      </ul>
-      <ul>
-        <li>Coffee</li>
-        <li>Tea</li>
-        <li>Milk</li>
-      </ul>
-      <small>Angular 2 Recursive List</small>
-      <ul>
-        <ng-template #recursiveList let-rootElement>
-          <li *ngIf="rootElement.parent">
-            {{ rootElement.parent.name }}
-            <ng-container *ngIf="rootElement.parent.parent">
-              <!-- item.subnodes.length -->
-              <ng-container
-                *ngTemplateOutlet="recursiveList; context: { $implicit: rootElement.parent }"></ng-container>
-            </ng-container>
-          </li>
-        </ng-template>
-        <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: rootElement }"></ng-container>
+        <a
+          class="list-group-item"
+          *ngFor="let parent of parentCategories; let i = index"
+          [routerLink]="parentCategories[1] ? ['/', parentCategories[0].url, parent.url] : ['/', parent.url]"
+          [ngStyle]="getStyleByValue(i)"
+          >{{ parent.name }}</a
+        >
+        <a
+          class="list-group-item"
+          [routerLink]="
+            parentCategories[0] ? ['/', parentCategories[0].url, selectedCategory.url] : ['/', selectedCategory.url]
+          "
+          [ngStyle]="getStyleByValue(parentCategories.length)"
+          >{{ selectedCategory.name }}</a
+        >
+        <a
+          class="list-group-item"
+          *ngFor="let child of selectedCategory.childCategories"
+          [routerLink]="
+            parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
+          "
+          [ngStyle]="getStyleByValue(parentCategories.length + 1)"
+          >{{ child.name }}</a
+        >
       </ul>
     </div>
     <div class="card small mt-4">
