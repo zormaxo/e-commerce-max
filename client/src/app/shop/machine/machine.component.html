@@ -1,9 +1,33 @@
 <div class="row">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card small overflow-auto" style="height: 200px">
-      <div class="card-body">
-        <div id="list"></div>
-      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngIf="rootElement.parent">{{ rootElement.parent.name }}</li>
+        <li class="list-group-item">{{ rootElement.name }}</li>
+        <li class="list-group-item" *ngFor="let item of rootElement.childCategories">{{ item.name }}</li>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+      </ul>
+      <ul>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+      </ul>
+      <small>Angular 2 Recursive List</small>
+      <ul>
+        <ng-template #recursiveList let-rootElement>
+          <li *ngIf="rootElement.parent">
+            {{ rootElement.parent.name }}
+            <ng-container *ngIf="rootElement.parent.parent">
+              <!-- item.subnodes.length -->
+              <ng-container
+                *ngTemplateOutlet="recursiveList; context: { $implicit: rootElement.parent }"></ng-container>
+            </ng-container>
+          </li>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: rootElement }"></ng-container>
+      </ul>
     </div>
     <div class="card small mt-4">
       <div class="card-header">Durumu</div>

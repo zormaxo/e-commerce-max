@@ -19,6 +19,7 @@ export class MachineComponent implements OnInit {
   shopParams: ShopParams;
   totalCount: number;
   mainCategory: string;
+  rootElement: ICategory;
 
   constructor(
     private shopService: ShopService,
@@ -28,7 +29,7 @@ export class MachineComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainCategory = this.route.snapshot.url[0].path;
+    this.mainCategory = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
     this.shopParams = new ShopParams(10, this.mainCategory);
     this.getProducts();
     this.getBrands();
@@ -108,13 +109,13 @@ export class MachineComponent implements OnInit {
 
   getCategories() {
     this.shopService.getCategories().subscribe((response) => {
-      const rootElement = response.find((x) => x.url == this.mainCategory);
+      this.rootElement = response.find((x) => x.url == this.mainCategory);
 
       // for (var i = 0; i < omer.childNodes.length; i++) {
       //   this.renderer.removeChild(this.buttonAreaElement.nativeElement, placeholders[i]);
       // }
 
-      this.generateTree(rootElement, document.getElementById('list'));
+      // this.generateTree(rootElement, document.getElementById('list'));
       let omer = document.getElementById('list');
     });
   }
