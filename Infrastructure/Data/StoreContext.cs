@@ -14,6 +14,7 @@ namespace Infrastructure.Data
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductMachine> ProductMachines { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -52,19 +53,19 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Product>()
                 .HasOne(b => b.ProductMachine)
-                .WithOne(b => b.Product).HasForeignKey<Product>(x => x.Id);
+                .WithOne(b => b.Product).HasForeignKey<ProductMachine>(x => x.Id);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker
               .Entries()
-              .Where(e => e.Entity is BaseAuditableEntity &&
+              .Where(e => e.Entity is FullAuditableEntity &&
                     (e.State == EntityState.Added || e.State == EntityState.Modified));
 
             foreach (var entityEntry in entries)
             {
-                ((BaseAuditableEntity)entityEntry.Entity).LastUpdated = DateTime.Now;
+                ((FullAuditableEntity)entityEntry.Entity).LastUpdated = DateTime.Now;
 
                 // if (entityEntry.State == EntityState.Added)
                 // {

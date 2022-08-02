@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
-    public class Product : BaseAuditableEntity
+    public class Product : FullAuditableEntity
     {
         [Required]
         public string Name { get; set; }

@@ -69,7 +69,7 @@ namespace Infrastructure.Data
 
                 if (!await context.Categories.AnyAsync())
                 {
-                    var typesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/types.json");
+                    var typesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/categories.json");
                     var types = JsonSerializer.Deserialize<List<Category>>(typesData);
 
                     context.Categories.AddRange(types);
@@ -83,6 +83,16 @@ namespace Infrastructure.Data
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
                     context.Products.AddRange(products);
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!await context.ProductMachines.AnyAsync())
+                {
+                    var machinesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/productMachines.json");
+                    var machines = JsonSerializer.Deserialize<List<ProductMachine>>(machinesData);
+
+                    context.ProductMachines.AddRange(machines);
 
                     await context.SaveChangesAsync();
                 }

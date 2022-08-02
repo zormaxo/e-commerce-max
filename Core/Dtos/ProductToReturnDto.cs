@@ -12,6 +12,7 @@ namespace Core.DTOs
         public string City { get; set; }
         public string County { get; set; }
         public bool IsActive { get; set; }
+        public bool IsNew { get; set; }
         public DateTime Created { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }

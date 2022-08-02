@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220802134450_ProductMachine2")]
+    partial class ProductMachine2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -240,15 +242,21 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsNew")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ProductMachines");
+                    b.ToTable("ProductMachine");
                 });
 
             modelBuilder.Entity("Core.Entities.Category", b =>

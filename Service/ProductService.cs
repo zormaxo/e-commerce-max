@@ -36,6 +36,7 @@ namespace Service
                 .Include(x => x.Category)
                 .Include(x => x.ProductBrand)
                 .Include(x => x.Photos)
+                .Include(x => x.ProductMachine)
                 .Include(x => x.County).ThenInclude(x => x.City)
                 .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
                 .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
