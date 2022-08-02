@@ -26,7 +26,7 @@ export class MachineComponent implements OnInit {
       this.parentCategories = [];
       this.categoryName = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.shopParams = new ShopParams(10, this.categoryName);
-      this.getProducts();
+      this.getCategoriesThenProducts();
     });
   }
 
@@ -34,39 +34,43 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  getProducts() {
+  getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((response) => {
       this.selectedCategory = response.find((x) => x.url == this.categoryName);
       this.fillParentCategoryList(this.selectedCategory);
-      this.fillChildCategoryIdList(this.selectedCategory);
-    });
 
-    this.shopService.getProducts(this.shopParams).subscribe(
-      (response) => {
-        this.products = response.data;
-        this.shopParams.pageNumber = response.pageIndex;
-        this.shopParams.pageSize = response.pageSize;
-        this.totalCount = response.count;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      this.fillChildCategoryIdList(this.selectedCategory);
+      this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+        this.products = productResponse.data;
+        this.shopParams.pageNumber = productResponse.pageIndex;
+        this.shopParams.pageSize = productResponse.pageSize;
+        this.totalCount = productResponse.count;
+      });
+    });
   }
 
-  fillChildCategoryIdList(childNode: ICategory) {
-    this.shopParams.childCategoryIds.push(childNode.id);
-    if (childNode.childCategories) {
-      childNode.childCategories.forEach((child) => this.fillChildCategoryIdList(child));
+  getProducts() {
+    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+      this.products = productResponse.data;
+      this.shopParams.pageNumber = productResponse.pageIndex;
+      this.shopParams.pageSize = productResponse.pageSize;
+      this.totalCount = productResponse.count;
+    });
+  }
+
+  fillChildCategoryIdList(selectedCategory: ICategory) {
+    this.shopParams.childCategoryIds.push(selectedCategory.id);
+    if (selectedCategory.childCategories) {
+      selectedCategory.childCategories.forEach((child) => this.fillChildCategoryIdList(child));
     }
   }
 
-  fillParentCategoryList(el: ICategory) {
-    if (el.parent == null) {
+  fillParentCategoryList(selectedCategory: ICategory) {
+    if (selectedCategory.parent == null) {
       return;
     } else {
-      this.parentCategories.unshift(el.parent);
-      this.fillParentCategoryList(el.parent);
+      this.parentCategories.unshift(selectedCategory.parent);
+      this.fillParentCategoryList(selectedCategory.parent);
     }
   }
 

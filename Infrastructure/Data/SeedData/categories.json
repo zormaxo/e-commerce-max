@@ -36,19 +36,34 @@
     "Count": 0,
 	"Url": "kiralik"
   }, {
+    "Id": 8,
     "Name": "3D Yazıcı",
 	"ParentId":1,
     "Count": 0,
-	"Url": "3dyazici"
+	"Url": "3d-yazici"
   }, {
+    "Id": 9,	  
     "Name": "Döküm",
 	"ParentId":1,
     "Count": 0,
 	"Url": "dokum"
   }, {
+    "Id": 10,
     "Name": "Zincir",
 	"ParentId":1,
     "Count": 0,
 	"Url": "zincir"
+  }, {
+    "Id": 11,	  
+    "Name": "Lda",
+	"ParentId":8,
+    "Count": 0,
+	"Url": "3d-yazici-lda"
+  }, {
+    "Id": 12,	  
+    "Name": "Lda-10",
+	"ParentId":11,
+    "Count": 0,
+	"Url": "3d-yazici-lda-10"
   }
 ]

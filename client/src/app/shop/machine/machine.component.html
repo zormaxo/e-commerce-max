@@ -76,16 +76,16 @@
             <th scope="col" style="width: 80px" appSort="price" (headerClicked)="onHeaderClicked($event)">
               <small>Fiyat</small>
             </th>
-            <th scope="col" style="width: 100px" appSort="date" (headerClicked)="onHeaderClicked($event)">
+            <th scope="col" style="width: 100px" appSort="created" (headerClicked)="onHeaderClicked($event)">
               <small>İlan Tarihi</small>
             </th>
             <th scope="col" style="width: 100px"><small>İl / İlçe</small></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products" style="line-height: 20px">
+          <tr *ngFor="let product of products" style="line-height: 20px; height: 100px;">
             <td>
-              <img src="{{ product.pictureUrl }}" style="max-height: 100px" class="img-fluid rounded-start" alt="..." />
+              <img src="{{ product.pictureUrl }}" style="max-height: 100px" class="img-fluid rounded" alt="..." />
             </td>
             <td style="text-align: start">
               <small>{{ product.name }}</small>
