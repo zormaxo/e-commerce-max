@@ -49,6 +49,10 @@ namespace Infrastructure.Data
                     }
                 }
             }
+
+            modelBuilder.Entity<Product>()
+                .HasOne(b => b.ProductMachine)
+                .WithOne(b => b.Product).HasForeignKey<Product>(x => x.Id);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

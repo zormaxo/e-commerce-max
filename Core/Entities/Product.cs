@@ -23,6 +23,7 @@ namespace Core.Entities
         public bool Showcase { get; set; }
         public bool IsNew { get; set; }
         public bool IsActive { get; set; }
+        public ProductMachine ProductMachine { get; set; }
         public ICollection<Photo> Photos { get; set; }
     }
 }

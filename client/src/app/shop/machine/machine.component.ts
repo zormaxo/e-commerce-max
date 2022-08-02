@@ -39,7 +39,6 @@ export class MachineComponent implements OnInit {
       this.selectedCategory = response.find((x) => x.url == this.categoryName);
       this.fillParentCategoryList(this.selectedCategory);
 
-      this.fillChildCategoryIdList(this.selectedCategory);
       this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
         this.products = productResponse.data;
         this.shopParams.pageNumber = productResponse.pageIndex;
@@ -56,13 +55,6 @@ export class MachineComponent implements OnInit {
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.count;
     });
-  }
-
-  fillChildCategoryIdList(selectedCategory: ICategory) {
-    this.shopParams.childCategoryIds.push(selectedCategory.id);
-    if (selectedCategory.childCategories) {
-      selectedCategory.childCategories.forEach((child) => this.fillChildCategoryIdList(child));
-    }
   }
 
   fillParentCategoryList(selectedCategory: ICategory) {
