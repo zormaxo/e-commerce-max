@@ -28,32 +28,50 @@
         >
       </ul>
     </div>
-    <div class="card small mt-4">
-      <div class="card-header">Durumu</div>
-      <div class="card-body">
-        <div class="card-text">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" />
-            <label class="form-check-label" for="rdNew"> Sıfır </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" />
-            <label class="form-check-label" for="rdSecond"> İkinci El </label>
+    <div class="accordion mt-3">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button px-3 py-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne">
+            Durumu
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+          <div class="accordion-body px-3 py-2">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" (change)="selectNew(true)"/>
+              <label class="form-check-label" for="rdNew"> Sıfır </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" (change)="selectNew(false)"/>
+              <label class="form-check-label" for="rdSecond"> İkinci El </label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card small mt-4">
-      <div class="card-header">Fiyat</div>
-      <div class="card-body">
-        <div class="card-text">
-          <div class="row align-items-center">
-            <div class="col">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="shopParams.minValue" appOnlyNumber />
-            </div>
-            <div class="col-auto p-0">-</div>
-            <div class="col">
-              <input type="text" class="form-control" [(ngModel)]="shopParams.maxValue" appOnlyNumber />
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button
+            class="accordion-button collapsed px-3 py-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseTwo">
+            Fiyat
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body px-3 py-2">
+            <div class="row align-items-center">
+              <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="shopParams.minValue" appOnlyNumber />
+              </div>
+              <div class="col-auto p-0">-</div>
+              <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="shopParams.maxValue" appOnlyNumber />
+              </div>
             </div>
           </div>
         </div>
@@ -83,7 +101,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products" style="line-height: 20px; height: 100px;">
+          <tr *ngFor="let product of products" style="line-height: 20px; height: 100px">
             <td>
               <img src="{{ product.pictureUrl }}" style="max-height: 100px" class="img-fluid rounded" alt="..." />
             </td>

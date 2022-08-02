@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../shared/models/product';
 import { ICategory } from '../../shared/models/productType';
 import { ShopParams } from '../../shared/models/shopParams';
@@ -19,7 +19,7 @@ export class MachineComponent implements OnInit {
   selectedCategory: ICategory;
   parentCategories: ICategory[] = [];
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute) {}
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
@@ -37,6 +37,9 @@ export class MachineComponent implements OnInit {
   getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((response) => {
       this.selectedCategory = response.find((x) => x.url == this.categoryName);
+      if (!this.selectedCategory) {
+        this.router.navigateByUrl('/notfound');
+      }
       this.fillParentCategoryList(this.selectedCategory);
 
       this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
@@ -94,5 +97,9 @@ export class MachineComponent implements OnInit {
     return {
       'padding-left': 10 * (i + 1) + 'px',
     };
+  }
+
+  selectNew(isNew: boolean) {
+    this.shopParams.isNew = isNew;
   }
 }

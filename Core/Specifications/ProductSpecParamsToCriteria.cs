@@ -18,7 +18,7 @@ namespace Core.Specification
                  (!_specParam.BrandId.HasValue || p.ProductBrandId == _specParam.BrandId) &&
                  //(!_specParam.CategoryId.HasValue || p.CategoryId == _specParam.CategoryId) &&
                  //(!_specParam.CategoryId.HasValue || p.CategoryId == _specParam.CategoryId) &&
-                 (!_specParam.IsNew.HasValue || p.IsNew == _specParam.IsNew) &&
+                 //(!_specParam.IsNew.HasValue || p.IsNew == _specParam.IsNew) &&
                  (!_specParam.MaxValue.HasValue || p.Price < _specParam.MaxValue) &&
                  (!_specParam.MinValue.HasValue || p.Price > _specParam.MinValue) &&
                  (!_specParam.UserId.HasValue || p.UserId == _specParam.UserId) &&
