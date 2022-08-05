@@ -102,9 +102,27 @@ export class MachineComponent implements OnInit {
   selectNew(isNew: boolean) {
     this.shopParams.isNew = isNew;
   }
+  childCategories = [];
+  fillChildCategoryIdList(selectedCategory: ICategory) {
+    this.childCategories.push(selectedCategory.id);
+    if (selectedCategory.childCategories) {
+      selectedCategory.childCategories.forEach((child) => this.fillChildCategoryIdList(child));
+    }
+    // return childCategories;
+  }
 
-  omer(categoryId) {
-    let obj = this.totalCount.find((o) => o.categoryId === categoryId);
-    return categoryId + " - " + obj.count;
+  omer(category: ICategory) {
+    this.childCategories = [];
+    this.fillChildCategoryIdList(category);
+    let omer = this.childCategories;
+    let asli = 0;
+    this.childCategories.forEach((x) => {
+      let salih = this.totalCount.find((o) => o.categoryId === x);
+      if (salih) {
+        asli += salih.count;
+      }
+    });
+
+    return asli;
   }
 }

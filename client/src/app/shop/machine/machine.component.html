@@ -1,4 +1,4 @@
-<div class="row" *ngIf="selectedCategory">
+<div class="row" *ngIf="totalCount">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card small overflow-auto" style="height: 200px">
       <ul class="list-group list-group-flush">
@@ -17,15 +17,17 @@
           [ngStyle]="setListItemPadding(parentCategories.length)"
           >{{ selectedCategory.name }}</a
         >
-        <a
-          class="list-group-item"
-          *ngFor="let child of selectedCategory.childCategories"
-          [routerLink]="
-            parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
-          "
-          [ngStyle]="setListItemPadding(parentCategories.length + 1)"
-          >{{ child.name }} <span>{{omer(child.id)}}</span>
-        </a>
+        <ng-container *ngFor="let child of selectedCategory.childCategories">
+          <li class="list-group-item" *ngIf="omer(child); let oks">
+            <a
+              [routerLink]="
+                parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
+              "
+              [ngStyle]="setListItemPadding(parentCategories.length + 1)"
+              >{{ child.name }}jk</a>
+            <span class="small text-muted"> ({{ oks }})</span>
+          </li>
+        </ng-container>
       </ul>
     </div>
     <div class="accordion mt-3">

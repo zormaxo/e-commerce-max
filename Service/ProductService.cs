@@ -17,7 +17,7 @@ namespace Service
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IGenericRepository<Product> _productsRepo;
-         
+
         public ProductService(IGenericRepository<Product> productsRepo,
             IGenericRepository<Category> categoryRepo,
             IGenericRepository<ProductBrand> productBrandRepo,
@@ -45,19 +45,21 @@ namespace Service
                 .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
                 .Where(x => x.IsActive);
 
-             var omer = filteredProducts.GroupBy(x => x.CategoryId)
+            if (!string.IsNullOrEmpty(productParams.CategoryName))
+            {
+                List<int> categoryIds = await GetCategoryIds(productParams);
+                if (categoryIds.Count > 0)
+                    filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
+
+            }
+
+            var omer = filteredProducts.GroupBy(x => x.CategoryId)
                 .Select(n => new CategoryCount
                 {
                     CategoryId = n.Key,
                     Count = n.Count()
                 }).ToList();
 
-            if (!string.IsNullOrEmpty(productParams.CategoryName))
-            {
-                List<int> categoryIds = await GetCategoryIds(productParams);
-                if (categoryIds.Count > 0)
-                    filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
-            }
 
             var pagedAndfilteredProducts = filteredProducts
                 .OrderBy(productParams.Sort ?? "name asc")
