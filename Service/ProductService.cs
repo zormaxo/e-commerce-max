@@ -17,7 +17,7 @@ namespace Service
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IGenericRepository<Product> _productsRepo;
-
+         
         public ProductService(IGenericRepository<Product> productsRepo,
             IGenericRepository<Category> categoryRepo,
             IGenericRepository<ProductBrand> productBrandRepo,
@@ -34,6 +34,7 @@ namespace Service
         {
             var filteredProducts = _productsRepo.GetAll()
                 .Include(x => x.Category)
+                .Include(x => x.Category.Parent)
                 .Include(x => x.ProductBrand)
                 .Include(x => x.Photos)
                 .Include(x => x.ProductMachine)
@@ -41,7 +42,15 @@ namespace Service
                 .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
                 .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
                 .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
+                .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
                 .Where(x => x.IsActive);
+
+             var omer = filteredProducts.GroupBy(x => x.CategoryId)
+                .Select(n => new CategoryCount
+                {
+                    CategoryId = n.Key,
+                    Count = n.Count()
+                }).ToList();
 
             if (!string.IsNullOrEmpty(productParams.CategoryName))
             {
@@ -59,7 +68,7 @@ namespace Service
 
             var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
-            return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data);
+            return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, omer, data);
         }
 
         public async Task<object> GetProductsCounts(ProductSpecParams productParams)

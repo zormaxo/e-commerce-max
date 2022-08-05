@@ -16,4 +16,10 @@ namespace Core.DTOs
         public DateTime Created { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }
+
+    public class CategoryCount
+    {
+        public int CategoryId { get; set; }
+        public int Count { get; set; }
+    }
 }

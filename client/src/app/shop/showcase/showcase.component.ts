@@ -16,6 +16,7 @@ export class ShowcaseComponent implements OnInit {
   categories: ICategory[];
   shopParams = new ShopParams();
   totalCount: number;
+  parentCategories: ICategory[] = [];
 
   constructor(private shopService: ShopService, private router: Router) {}
 
@@ -31,8 +32,21 @@ export class ShowcaseComponent implements OnInit {
         this.shopParams.pageNumber = response.pageIndex;
         this.shopParams.pageSize = response.pageSize;
         this.totalCount = response.count;
+
+        this.products.forEach((x) => {
+          this.fillParentCategoryList(x.category);
+        });
       },
     });
+  }
+
+  fillParentCategoryList(selectedCategory: ICategory) {
+    if (selectedCategory.parent == null) {
+      return;
+    } else {
+      this.parentCategories.unshift(selectedCategory.parent);
+      this.fillParentCategoryList(selectedCategory.parent);
+    }
   }
 
   getCategories() {

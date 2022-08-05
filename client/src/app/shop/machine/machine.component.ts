@@ -14,7 +14,7 @@ export class MachineComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
   products: IProduct[];
   shopParams: ShopParams;
-  totalCount: number;
+  totalCount;
   categoryName: string;
   selectedCategory: ICategory;
   parentCategories: ICategory[] = [];
@@ -101,5 +101,10 @@ export class MachineComponent implements OnInit {
 
   selectNew(isNew: boolean) {
     this.shopParams.isNew = isNew;
+  }
+
+  omer(categoryId) {
+    let obj = this.totalCount.find((o) => o.categoryId === categoryId);
+    return categoryId + " - " + obj.count;
   }
 }

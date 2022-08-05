@@ -1,3 +1,5 @@
+import { ICategory } from "./productType";
+
 export interface IProduct {
   id: number;
   name: string;
@@ -10,4 +12,5 @@ export interface IProduct {
   city: string;
   county: string;
   isActive: boolean;
+  category: ICategory;
 }

@@ -24,8 +24,8 @@
             parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
           "
           [ngStyle]="setListItemPadding(parentCategories.length + 1)"
-          >{{ child.name }}</a
-        >
+          >{{ child.name }} <span>{{omer(child.id)}}</span>
+        </a>
       </ul>
     </div>
     <div class="accordion mt-3">
@@ -42,11 +42,11 @@
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
           <div class="accordion-body px-3 py-2">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" (change)="selectNew(true)"/>
+              <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" (change)="selectNew(true)" />
               <label class="form-check-label" for="rdNew"> Sıfır </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" (change)="selectNew(false)"/>
+              <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" (change)="selectNew(false)" />
               <label class="form-check-label" for="rdSecond"> İkinci El </label>
             </div>
           </div>
