@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { IProduct } from '../../shared/models/product';
-import { ICategory as ICategory } from '../../shared/models/productType';
+import { ICategory as ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../shop.service';
 
@@ -18,7 +17,7 @@ export class ShowcaseComponent implements OnInit {
   totalCount: number;
   parentCategories: ICategory[] = [];
 
-  constructor(private shopService: ShopService, private router: Router) {}
+  constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
     this.getProducts();
@@ -31,7 +30,7 @@ export class ShowcaseComponent implements OnInit {
         this.products = response.data;
         this.shopParams.pageNumber = response.pageIndex;
         this.shopParams.pageSize = response.pageSize;
-        this.totalCount = response.count;
+        this.totalCount = response.totalCount;
 
         this.products.forEach((x) => {
           this.fillParentCategoryList(x.category);

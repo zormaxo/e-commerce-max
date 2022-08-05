@@ -1,20 +1,22 @@
-using Core.DTOs;
+using Core.Dtos;
 
 namespace Service.Helpers
 {
     public class Pagination<T> where T : class
     {
-        public Pagination(int pageIndex, int pageSize, List<CategoryCount> count, IReadOnlyList<T> data)
+        public Pagination(int pageIndex, int pageSize, List<CategoryGroupCount> categoryGroupCount, int totalCount, IReadOnlyList<T> data)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
-            Count = count;
+            CategoryGroupCount = categoryGroupCount;
+            TotalCount = totalCount;
             Data = data;
         }
 
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
-        public List<CategoryCount> Count { get; set; }
+        public int TotalCount { get; set; }
+        public List<CategoryGroupCount> CategoryGroupCount { get; set; }
         public IReadOnlyList<T> Data { get; set; }
     }
 }

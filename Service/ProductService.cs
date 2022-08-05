@@ -1,5 +1,6 @@
 using AutoMapper;
 using Core;
+using Core.Dtos;
 using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
@@ -50,27 +51,25 @@ namespace Service
                 List<int> categoryIds = await GetCategoryIds(productParams);
                 if (categoryIds.Count > 0)
                     filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
-
             }
-
-            var omer = filteredProducts.GroupBy(x => x.CategoryId)
-                .Select(n => new CategoryCount
-                {
-                    CategoryId = n.Key,
-                    Count = n.Count()
-                }).ToList();
-
 
             var pagedAndfilteredProducts = filteredProducts
                 .OrderBy(productParams.Sort ?? "name asc")
                 .PageBy(productParams);
 
-            var totalItems = await filteredProducts.CountAsync();
+            var catGrpCount = filteredProducts.GroupBy(x => x.CategoryId)
+                .Select(n => new CategoryGroupCount
+                {
+                    CategoryId = n.Key,
+                    Count = n.Count()
+                }).ToList();
+
+            var totalItems = catGrpCount.Select(x => x.Count).Aggregate((a, b) => a + b);
             var products = await pagedAndfilteredProducts.ToListAsync();
 
             var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
-            return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, omer, data);
+            return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCount, totalItems, data);
         }
 
         public async Task<object> GetProductsCounts(ProductSpecParams productParams)

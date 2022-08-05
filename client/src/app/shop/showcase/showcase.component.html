@@ -5,7 +5,7 @@
         <div class="accordion-item" *ngIf="category.parent === null">
           <div class="accordion-header d-flex align-items-center">
             <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
-            <a class="m-1 small fw-bold link-dark" [routerLink]="['/', category.url]">{{ category.name }}</a>
+            <a class="m-1 small fw-bold" [routerLink]="['/', category.url]">{{ category.name }}</a>
             <small><span class="small text-muted">({{ category.count }})</span></small>
             <a
               class="ms-auto justify-content-center rounded-pill py-1"

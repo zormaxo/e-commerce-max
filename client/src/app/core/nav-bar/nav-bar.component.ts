@@ -29,7 +29,7 @@ export class NavBarComponent {
         this.products = response.data;
         this.shopParams.pageNumber = response.pageIndex;
         this.shopParams.pageSize = response.pageSize;
-        this.totalCount = response.count;
+        this.totalCount = response.totalCount;
       },
     });
   }

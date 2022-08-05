@@ -3,29 +3,36 @@
     <div class="card small overflow-auto" style="height: 200px">
       <ul class="list-group list-group-flush">
         <a
-          class="list-group-item"
+          class="list-group-item link-dark"
           *ngFor="let parent of parentCategories; let i = index"
           [routerLink]="parentCategories[1] ? ['/', parentCategories[0].url, parent.url] : ['/', parent.url]"
-          [ngStyle]="setListItemPadding(i)"
+          [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }"
           >{{ parent.name }}</a
         >
         <a
-          class="list-group-item"
+          class="list-group-item link-dark"
           [routerLink]="
             parentCategories[0] ? ['/', parentCategories[0].url, selectedCategory.url] : ['/', selectedCategory.url]
           "
-          [ngStyle]="setListItemPadding(parentCategories.length)"
-          >{{ selectedCategory.name }}</a
+          [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 1) + 'px' }"
+          >{{ selectedCategory.name }}
+          <span *ngIf="!selectedCategory.childCategories" class="small text-muted">
+            ({{ countChildProducts(selectedCategory) }})</span
+          ></a
         >
         <ng-container *ngFor="let child of selectedCategory.childCategories">
-          <li class="list-group-item" *ngIf="omer(child); let oks">
+          <li
+            class="list-group-item"
+            *ngIf="countChildProducts(child); let productCount"
+            [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 2) + 'px' }">
             <a
+              class="text-dark link-warning"
               [routerLink]="
                 parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
               "
-              [ngStyle]="setListItemPadding(parentCategories.length + 1)"
-              >{{ child.name }}jk</a>
-            <span class="small text-muted"> ({{ oks }})</span>
+              >{{ child.name }}</a
+            >
+            <span class="small text-muted"> ({{ productCount }})</span>
           </li>
         </ng-container>
       </ul>
@@ -44,11 +51,16 @@
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
           <div class="accordion-body px-3 py-2">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="rdStatus" id="rdNew" (change)="selectNew(true)" />
+              <input
+                class="form-check-input"
+                type="radio"
+                name="rdStatus"
+                id="rdNew"
+                (change)="shopParams.isNew = true" />
               <label class="form-check-label" for="rdNew"> Sıfır </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" (change)="selectNew(false)" />
+              <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" (change)="shopParams.isNew = false" />
               <label class="form-check-label" for="rdSecond"> İkinci El </label>
             </div>
           </div>

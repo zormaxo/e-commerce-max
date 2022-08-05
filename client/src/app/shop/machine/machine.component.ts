@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../shared/models/product';
-import { ICategory } from '../../shared/models/productType';
+import { ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../shop.service';
+import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 
 @Component({
   selector: 'app-machine',
@@ -14,10 +15,11 @@ export class MachineComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
   products: IProduct[];
   shopParams: ShopParams;
-  totalCount;
+  totalCount: number;
+  categoryGroupCount: CategoryGroupCount[];
   categoryName: string;
   selectedCategory: ICategory;
-  parentCategories: ICategory[] = [];
+  parentCategories: ICategory[];
 
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
 
@@ -35,28 +37,13 @@ export class MachineComponent implements OnInit {
   }
 
   getCategoriesThenProducts() {
-    this.shopService.getCategories().subscribe((response) => {
-      this.selectedCategory = response.find((x) => x.url == this.categoryName);
+    this.shopService.getCategories().subscribe((categories) => {
+      this.selectedCategory = categories.find((x) => x.url == this.categoryName);
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
       }
       this.fillParentCategoryList(this.selectedCategory);
-
-      this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
-        this.products = productResponse.data;
-        this.shopParams.pageNumber = productResponse.pageIndex;
-        this.shopParams.pageSize = productResponse.pageSize;
-        this.totalCount = productResponse.count;
-      });
-    });
-  }
-
-  getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
-      this.products = productResponse.data;
-      this.shopParams.pageNumber = productResponse.pageIndex;
-      this.shopParams.pageSize = productResponse.pageSize;
-      this.totalCount = productResponse.count;
+      this.getProducts();
     });
   }
 
@@ -67,6 +54,16 @@ export class MachineComponent implements OnInit {
       this.parentCategories.unshift(selectedCategory.parent);
       this.fillParentCategoryList(selectedCategory.parent);
     }
+  }
+
+  getProducts() {
+    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+      this.products = productResponse.data;
+      this.shopParams.pageNumber = productResponse.pageIndex;
+      this.shopParams.pageSize = productResponse.pageSize;
+      this.totalCount = productResponse.totalCount;
+      this.categoryGroupCount = productResponse.categoryGroupCount;
+    });
   }
 
   onPageChanged(event: number) {
@@ -93,15 +90,6 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  setListItemPadding(i: number) {
-    return {
-      'padding-left': 10 * (i + 1) + 'px',
-    };
-  }
-
-  selectNew(isNew: boolean) {
-    this.shopParams.isNew = isNew;
-  }
   childCategories = [];
   fillChildCategoryIdList(selectedCategory: ICategory) {
     this.childCategories.push(selectedCategory.id);
@@ -111,13 +99,13 @@ export class MachineComponent implements OnInit {
     // return childCategories;
   }
 
-  omer(category: ICategory) {
+  countChildProducts(category: ICategory) {
     this.childCategories = [];
     this.fillChildCategoryIdList(category);
     let omer = this.childCategories;
     let asli = 0;
     this.childCategories.forEach((x) => {
-      let salih = this.totalCount.find((o) => o.categoryId === x);
+      let salih = this.categoryGroupCount.find((o) => o.categoryId === x);
       if (salih) {
         asli += salih.count;
       }
