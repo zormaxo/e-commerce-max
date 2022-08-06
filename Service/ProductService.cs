@@ -35,7 +35,6 @@ namespace Service
         {
             var filteredProducts = _productsRepo.GetAll()
                 .Include(x => x.Category)
-                .Include(x => x.Category.Parent)
                 .Include(x => x.ProductBrand)
                 .Include(x => x.Photos)
                 .Include(x => x.ProductMachine)

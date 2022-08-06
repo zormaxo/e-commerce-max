@@ -21,6 +21,8 @@ export class MachineComponent implements OnInit {
   selectedCategory: ICategory;
   parentCategories: ICategory[];
 
+  map = new Map();
+
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
@@ -90,27 +92,50 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  childCategories = [];
-  fillChildCategoryIdList(selectedCategory: ICategory) {
-    this.childCategories.push(selectedCategory.id);
-    if (selectedCategory.childCategories) {
-      selectedCategory.childCategories.forEach((child) => this.fillChildCategoryIdList(child));
+  fillChildCategoryIdList(category: ICategory, childCategories: ICategory[]) {
+    if (category.childCategories) {
+      category.childCategories.forEach((child) => this.fillChildCategoryIdList(child, childCategories));
+    } else {
+      childCategories.push(category);
     }
-    // return childCategories;
   }
 
   countChildProducts(category: ICategory) {
-    this.childCategories = [];
-    this.fillChildCategoryIdList(category);
-    let omer = this.childCategories;
-    let asli = 0;
-    this.childCategories.forEach((x) => {
-      let salih = this.categoryGroupCount.find((o) => o.categoryId === x);
-      if (salih) {
-        asli += salih.count;
+    const childCategories: ICategory[] = [];
+    this.fillChildCategoryIdList(category, childCategories);
+    let totalCount = 0;
+    childCategories.forEach((x) => {
+      const categoryToBeSummed = this.categoryGroupCount.find((o) => o.categoryId === x.id);
+      if (categoryToBeSummed) {
+        totalCount += categoryToBeSummed.count;
       }
     });
 
-    return asli;
+    return totalCount;
+  }
+
+  omer() {
+    this.shopParams.search = 'purple';
+    this.shopParams.categoryName = undefined;
+
+    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+      this.products = productResponse.data;
+      this.shopParams.pageNumber = productResponse.pageIndex;
+      this.shopParams.pageSize = productResponse.pageSize;
+      this.totalCount = productResponse.totalCount;
+      this.categoryGroupCount = productResponse.categoryGroupCount;
+      
+
+      this.shopService.getCategories().subscribe((categories) => {
+        let category = categories.find((x) => x.url == this.categoryName);
+        if (!this.selectedCategory) {
+          this.router.navigateByUrl('/notfound');
+        }
+        this.fillParentCategoryList(this.selectedCategory);
+        this.getProducts();
+      });
+    });
+
+    //  this.map.set(id, _member);
   }
 }
