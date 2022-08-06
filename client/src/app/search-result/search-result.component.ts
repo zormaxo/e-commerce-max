@@ -14,7 +14,7 @@ export class SearchResultComponent implements OnInit {
   shopParams: ShopParams = new ShopParams();
   categoryGroupCount: CategoryGroupCount[];
   allCategories: ICategory[];
-  searchTerm: string;
+
   constructor(private shopService: ShopService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class SearchResultComponent implements OnInit {
       this.categoryGroupCount = productResponse.categoryGroupCount;
 
       this.shopService.getCategories().subscribe((categories) => {
-        this.allCategories = structuredClone(categories);        
+        this.allCategories = structuredClone(categories);
 
         this.categoryGroupCount.forEach((groupCount) => {
           const category = this.allCategories.find((y) => y.id == groupCount.categoryId);

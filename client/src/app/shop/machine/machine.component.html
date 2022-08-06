@@ -2,37 +2,40 @@
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card small overflow-auto" style="height: 200px">
       <ul class="list-group list-group-flush">
-        <a
-          class="list-group-item link-dark"
-          *ngFor="let parent of parentCategories; let i = index"
-          [routerLink]="parentCategories[1] ? ['/', parentCategories[0].url, parent.url] : ['/', parent.url]"
-          [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }"
-          >{{ parent.name }}</a
-        >
-        <a
-          class="list-group-item link-dark"
-          [routerLink]="
-            parentCategories[0] ? ['/', parentCategories[0].url, selectedCategory.url] : ['/', selectedCategory.url]
-          "
-          [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 1) + 'px' }"
-          >{{ selectedCategory.name }}
+        <ng-container *ngFor="let parent of parentCategories; let i = index">
+          <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
+            <a
+              class="link-dark"
+              [routerLink]="parentCategories[1] ? ['/', parentCategories[0].url, parent.url] : ['/', parent.url]">
+              {{ parent.name }}</a
+            >
+          </li>
+        </ng-container>
+        <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 1) + 'px' }">
+          <a
+            class="link-dark"
+            [routerLink]="
+              parentCategories[0] ? ['/', parentCategories[0].url, selectedCategory.url] : ['/', selectedCategory.url]
+            ">
+            {{ selectedCategory.name }}</a
+          >
           <span *ngIf="!selectedCategory.childCategories" class="small text-muted">
-            ({{ countChildProducts(selectedCategory) }})</span
-          ></a
-        >
+            ({{ selectedCategory.count }})</span
+          >
+        </li>
         <ng-container *ngFor="let child of selectedCategory.childCategories">
           <li
             class="list-group-item"
-            *ngIf="countChildProducts(child); let productCount"
+            *ngIf="child.count"
             [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 2) + 'px' }">
             <a
-              class="text-dark link-warning"
+              class="text-dark"
               [routerLink]="
                 parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
               "
               >{{ child.name }}</a
             >
-            <span class="small text-muted"> ({{ productCount }})</span>
+            <span class="small text-muted"> ({{ child.count }})</span>
           </li>
         </ng-container>
       </ul>
@@ -60,7 +63,12 @@
               <label class="form-check-label" for="rdNew"> Sıfır </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="rdStatus" id="rdSecond" (change)="shopParams.isNew = false" />
+              <input
+                class="form-check-input"
+                type="radio"
+                name="rdStatus"
+                id="rdSecond"
+                (change)="shopParams.isNew = false" />
               <label class="form-check-label" for="rdSecond"> İkinci El </label>
             </div>
           </div>
@@ -170,5 +178,3 @@
     </div>
   </section>
 </div>
-<div class="btn btn-primary" (click)="omer()">oemr</div>
-<div *ngFor="let item of categoryGroupCount">{{item.categoryId}}</div>
