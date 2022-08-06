@@ -34,16 +34,9 @@ export class SearchResultComponent implements OnInit {
         this.categoryGroupCount.forEach((groupCount) => {
           const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
           category.count = groupCount.count;
-          this.addCountToParent(category);
+          this.shopService.addCountToParent(category, groupCount.count);
         });
       });
     });
-  }
-
-  addCountToParent(selectedCategory: ICategory) {
-    if (selectedCategory.parent) {
-      selectedCategory.parent.count += selectedCategory.count;
-      this.addCountToParent(selectedCategory.parent);
-    }
   }
 }

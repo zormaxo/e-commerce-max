@@ -18,9 +18,9 @@ export class MachineComponent implements OnInit {
   totalCount: number;
   categoryGroupCount: CategoryGroupCount[];
   categoryName: string;
-  selectedCategory: ICategory;
   parentCategories: ICategory[];
   allCategories: ICategory[];
+  selectedCategory: ICategory;
 
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
 
@@ -31,10 +31,6 @@ export class MachineComponent implements OnInit {
       this.shopParams = new ShopParams(10, this.categoryName);
       this.getCategoriesThenProducts();
     });
-  }
-
-  onSearchProduct() {
-    this.getProducts();
   }
 
   getCategoriesThenProducts() {
@@ -50,9 +46,7 @@ export class MachineComponent implements OnInit {
   }
 
   fillParentCategoryList(selectedCategory: ICategory) {
-    if (selectedCategory.parent == null) {
-      return;
-    } else {
+    if (selectedCategory.parent) {
       this.parentCategories.unshift(selectedCategory.parent);
       this.fillParentCategoryList(selectedCategory.parent);
     }
@@ -67,9 +61,9 @@ export class MachineComponent implements OnInit {
       this.categoryGroupCount = productResponse.categoryGroupCount;
 
       this.categoryGroupCount.forEach((groupCount) => {
-        const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
+        const category = this.allCategories.find((category) => category.id == groupCount.categoryId);
         category.count = groupCount.count;
-        this.addCountToParent(category, groupCount.count);
+        this.shopService.addCountToParent(category, groupCount.count);
       });
     });
   }
@@ -81,35 +75,8 @@ export class MachineComponent implements OnInit {
     }
   }
 
-  onSearch() {
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber = 1;
-    this.getProducts();
-  }
-
-  onReset() {
-    this.searchTerm.nativeElement.value = '';
-    this.shopParams = new ShopParams();
-    this.getProducts();
-  }
-
   onHeaderClicked(sortText: string) {
     this.shopParams.sort = sortText;
     this.getProducts();
-  }
-
-  fillChildCategoryIdList(category: ICategory, childCategoryList: ICategory[]) {
-    if (category.childCategories) {
-      category.childCategories.forEach((child) => this.fillChildCategoryIdList(child, childCategoryList));
-    } else {
-      childCategoryList.push(category);
-    }
-  }
-
-  addCountToParent(selectedCategory: ICategory, count: number) {
-    if (selectedCategory.parent) {
-      selectedCategory.parent.count += count;
-      this.addCountToParent(selectedCategory.parent, count);
-    }
   }
 }

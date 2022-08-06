@@ -81,12 +81,22 @@ export class ShopService {
   }
 
   getCategories() {
+    const pushChildCategories = (category: ICategory) => {
+      if (category.childCategories) {
+        category.childCategories.forEach((child) => {
+          child.parent = category;
+          this.categories.push(child);
+          pushChildCategories(child);
+        });
+      }
+    };
+
     if (this.categories === undefined) {
       return this.http.get<ICategory[]>(this.baseUrl + 'products/categories').pipe(
         map((categories: ICategory[]) => {
           this.categories = categories.filter((x) => x.parent == null);
           this.categories.forEach((x) => {
-            this.pushChildCategories(x);
+            pushChildCategories(x);
           });
           return this.categories;
         })
@@ -95,13 +105,11 @@ export class ShopService {
       return of(this.categories);
     }
   }
-  pushChildCategories(category: ICategory) {
-    if (category.childCategories) {
-      category.childCategories.forEach((child) => {
-        child.parent = category;
-        this.categories.push(child);
-        this.pushChildCategories(child);
-      });
+
+  addCountToParent(selectedCategory: ICategory, count: number) {
+    if (selectedCategory.parent) {
+      selectedCategory.parent.count += count;
+      this.addCountToParent(selectedCategory.parent, count);
     }
   }
 }
