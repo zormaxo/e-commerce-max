@@ -20,9 +20,8 @@ export class SearchResultComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams: Params) => {
       this.shopParams.search = queryParams['search-term'];
+      this.getProducts();
     });
-
-    this.getProducts();
   }
 
   getProducts() {
@@ -30,7 +29,7 @@ export class SearchResultComponent implements OnInit {
       this.categoryGroupCount = productResponse.categoryGroupCount;
 
       this.shopService.getCategories().subscribe((categories) => {
-        this.allCategories = categories;
+        this.allCategories = structuredClone(categories);        
 
         this.categoryGroupCount.forEach((groupCount) => {
           const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
