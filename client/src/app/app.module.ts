@@ -20,6 +20,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EntryComponent } from './entry/entry.component';
 import { MemberModule } from './members/member.module';
 import { ShopModule } from './shop/shop.module';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ShopModule } from './shop/shop.module';
     NotFoundComponent,
     ServerErrorComponent,
     EntryComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,

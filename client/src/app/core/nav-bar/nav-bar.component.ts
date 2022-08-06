@@ -35,9 +35,11 @@ export class NavBarComponent {
   }
 
   onSearch() {
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber = 1;
-    this.getProducts();
+    const searchTerm =this.searchTerm.nativeElement.value;
+    this.router.navigate(['search-result'], { queryParams: { 'search-term': searchTerm } });
+    // this.shopParams.search = this.searchTerm.nativeElement.value;
+    // this.shopParams.pageNumber = 1;
+    // this.getProducts();
   }
 
   onReset() {

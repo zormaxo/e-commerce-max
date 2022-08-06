@@ -15,6 +15,7 @@ import { MachineComponent } from './shop/machine/machine.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { SummaryComponent } from './members/member-profile/summary/summary.component';
 import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: 'vitrin', component: ShowcaseComponent },
+      { path: 'search-result', component: SearchResultComponent },
       { path: 'makine', component: MachineComponent },
       { path: 'makine/:subcategory', component: MachineComponent },
       {

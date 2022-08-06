@@ -1,0 +1,8 @@
+<div *ngFor="let item of allCategories">
+  <ng-container *ngIf="item.parent === null && item.count">
+    <h5>{{ item.name }} - {{ item.count }}</h5>
+    <div *ngFor="let child of item.childCategories">
+        <div *ngIf="child.count">{{ child.name }} - {{ child.count }}</div>
+    </div>
+  </ng-container>
+</div>
