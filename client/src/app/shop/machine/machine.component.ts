@@ -114,6 +114,8 @@ export class MachineComponent implements OnInit {
     return totalCount;
   }
 
+  omerParent: ICategory[] = [];
+  parentsArray: ICategory[][] = [];
   omer() {
     this.shopParams.search = 'purple';
     this.shopParams.categoryName = undefined;
@@ -124,18 +126,23 @@ export class MachineComponent implements OnInit {
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
       this.categoryGroupCount = productResponse.categoryGroupCount;
-      
 
       this.shopService.getCategories().subscribe((categories) => {
-        let category = categories.find((x) => x.url == this.categoryName);
-        if (!this.selectedCategory) {
-          this.router.navigateByUrl('/notfound');
-        }
-        this.fillParentCategoryList(this.selectedCategory);
-        this.getProducts();
+        this.categoryGroupCount.forEach((groupCount) => {
+          this.omerParent = [];
+          const category = categories.find((y) => y.id == groupCount.categoryId);
+          this.fillParent(category);
+        });
       });
     });
+  }
 
-    //  this.map.set(id, _member);
+  fillParent(selectedCategory: ICategory) {
+    this.omerParent.unshift(selectedCategory);
+    if (selectedCategory.parent == null) {
+      this.parentsArray.push(this.omerParent.slice());
+    } else {
+      this.fillParent(selectedCategory.parent);
+    }
   }
 }
