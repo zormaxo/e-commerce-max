@@ -131,6 +131,7 @@ export class MachineComponent implements OnInit {
         this.categoryGroupCount.forEach((groupCount) => {
           this.omerParent = [];
           const category = categories.find((y) => y.id == groupCount.categoryId);
+          category.count = groupCount.count;
           this.fillParent(category);
         });
       });
@@ -138,11 +139,11 @@ export class MachineComponent implements OnInit {
   }
 
   fillParent(selectedCategory: ICategory) {
-    this.omerParent.unshift(selectedCategory);
-    if (selectedCategory.parent == null) {
-      this.parentsArray.push(this.omerParent.slice());
-    } else {
+    if (selectedCategory.parent) {
+      selectedCategory.parent.count += selectedCategory.count;
       this.fillParent(selectedCategory.parent);
+    } else {
+      return;
     }
   }
 }
