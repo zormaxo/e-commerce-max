@@ -98,7 +98,7 @@ namespace Service
             return omer;
         }
 
-        public async Task<IReadOnlyList<Category>> GetTypes()
+        public async Task<IReadOnlyList<Category>> GetCategories()
         {
             if (_cachedItems.Categories.Count > 0)
             {
@@ -112,7 +112,7 @@ namespace Service
 
         private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
         {
-            var selectedCategory = (await GetTypes()).First(x => x.Url == productParams.CategoryName);
+            var selectedCategory = (await GetCategories()).First(x => x.Url == productParams.CategoryName);
             List<int> categoryIds = new();
             FindChildCategories(selectedCategory);
 

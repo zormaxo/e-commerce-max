@@ -82,14 +82,26 @@ export class ShopService {
 
   getCategories() {
     if (this.categories === undefined) {
-      return this.http.get<ICategory[]>(this.baseUrl + 'products/types').pipe(
+      return this.http.get<ICategory[]>(this.baseUrl + 'products/categories').pipe(
         map((categories: ICategory[]) => {
-          this.categories = categories;
-          return categories;
+          this.categories = categories.filter((x) => x.parent == null);
+          this.categories.forEach((x) => {
+            this.pushChildCategories(x);
+          });
+          return this.categories;
         })
       );
     } else {
       return of(this.categories);
+    }
+  }
+  pushChildCategories(category: ICategory) {
+    if (category.childCategories) {
+      category.childCategories.forEach((child) => {
+        child.parent = category;
+        this.categories.push(child);
+        this.pushChildCategories(child);
+      });
     }
   }
 }

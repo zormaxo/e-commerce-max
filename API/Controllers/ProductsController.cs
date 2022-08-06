@@ -23,7 +23,7 @@ namespace API.Controllers
         {
             return Ok(await _productSrv.GetProducts(productParams));
         }
-        
+
         [HttpGet("product-counts")]
         public async Task<ActionResult<object>> GetProductCounts([FromQuery] ProductSpecParams productParams)
         {
@@ -46,10 +46,10 @@ namespace API.Controllers
             return Ok(await _productSrv.GetBrands());
         }
 
-        [HttpGet("types")]
+        [HttpGet("categories")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetTypes()
         {
-            return Ok(await _productSrv.GetTypes());
+            return Ok(await _productSrv.GetCategories());
         }
     }
 }

@@ -20,8 +20,7 @@ export class MachineComponent implements OnInit {
   categoryName: string;
   selectedCategory: ICategory;
   parentCategories: ICategory[];
-
-  map = new Map();
+  allCategories: ICategory[];
 
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
 
@@ -40,6 +39,7 @@ export class MachineComponent implements OnInit {
 
   getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((categories) => {
+      this.allCategories = categories;
       this.selectedCategory = categories.find((x) => x.url == this.categoryName);
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
@@ -92,11 +92,11 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  fillChildCategoryIdList(category: ICategory, childCategories: ICategory[]) {
+  fillChildCategoryIdList(category: ICategory, childCategoryList: ICategory[]) {
     if (category.childCategories) {
-      category.childCategories.forEach((child) => this.fillChildCategoryIdList(child, childCategories));
+      category.childCategories.forEach((child) => this.fillChildCategoryIdList(child, childCategoryList));
     } else {
-      childCategories.push(category);
+      childCategoryList.push(category);
     }
   }
 
@@ -114,8 +114,6 @@ export class MachineComponent implements OnInit {
     return totalCount;
   }
 
-  omerParent: ICategory[] = [];
-  parentsArray: ICategory[][] = [];
   omer() {
     this.shopParams.search = 'purple';
     this.shopParams.categoryName = undefined;
@@ -127,23 +125,18 @@ export class MachineComponent implements OnInit {
       this.totalCount = productResponse.totalCount;
       this.categoryGroupCount = productResponse.categoryGroupCount;
 
-      this.shopService.getCategories().subscribe((categories) => {
-        this.categoryGroupCount.forEach((groupCount) => {
-          this.omerParent = [];
-          const category = categories.find((y) => y.id == groupCount.categoryId);
-          category.count = groupCount.count;
-          this.fillParent(category);
-        });
+      this.categoryGroupCount.forEach((groupCount) => {
+        const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
+        category.count = groupCount.count;
+        this.addCountToParent(category);
       });
     });
   }
 
-  fillParent(selectedCategory: ICategory) {
+  addCountToParent(selectedCategory: ICategory) {
     if (selectedCategory.parent) {
       selectedCategory.parent.count += selectedCategory.count;
-      this.fillParent(selectedCategory.parent);
-    } else {
-      return;
+      this.addCountToParent(selectedCategory.parent);
     }
   }
 }
