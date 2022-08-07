@@ -59,6 +59,8 @@
                 type="radio"
                 name="rdStatus"
                 id="rdNew"
+                [value]="true"
+                [(ngModel)]="shopParams.isNew"
                 (change)="shopParams.isNew = true" />
               <label class="form-check-label" for="rdNew"> Sıfır </label>
             </div>
@@ -68,6 +70,8 @@
                 type="radio"
                 name="rdStatus"
                 id="rdSecond"
+                [value]="false"
+                [(ngModel)]="shopParams.isNew"
                 (change)="shopParams.isNew = false" />
               <label class="form-check-label" for="rdSecond"> İkinci El </label>
             </div>

@@ -14,7 +14,7 @@ import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 export class MachineComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
   products: IProduct[];
-  shopParams: ShopParams;
+  shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
   categoryGroupCount: CategoryGroupCount[];
   categoryName: string;
@@ -28,7 +28,9 @@ export class MachineComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.parentCategories = [];
       this.categoryName = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
-      this.shopParams = new ShopParams(10, this.categoryName);
+      // this.shopParams = new ShopParams(10, this.categoryName);
+      // this.shopParams.isNew = false;
+      this.shopParams.categoryName = this.categoryName;
       this.getCategoriesThenProducts();
     });
   }
@@ -60,8 +62,9 @@ export class MachineComponent implements OnInit {
       this.totalCount = productResponse.totalCount;
       this.categoryGroupCount = productResponse.categoryGroupCount;
 
+      this.allCategories.forEach((category) => (category.count = 0));
       this.categoryGroupCount.forEach((groupCount) => {
-        const category = this.allCategories.find((category) => category.id == groupCount.categoryId);
+        const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
         category.count = groupCount.count;
         this.shopService.addCountToParent(category, groupCount.count);
       });
@@ -77,6 +80,10 @@ export class MachineComponent implements OnInit {
 
   onHeaderClicked(sortText: string) {
     this.shopParams.sort = sortText;
+    this.getProducts();
+  }
+
+  onSearchProduct() {
     this.getProducts();
   }
 }
