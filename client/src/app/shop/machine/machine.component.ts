@@ -17,7 +17,6 @@ export class MachineComponent implements OnInit {
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
   categoryGroupCount: CategoryGroupCount[];
-  categoryName: string;
   parentCategories: ICategory[];
   allCategories: ICategory[];
   selectedCategory: ICategory;
@@ -27,10 +26,7 @@ export class MachineComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.parentCategories = [];
-      this.categoryName = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
-      // this.shopParams = new ShopParams(10, this.categoryName);
-      // this.shopParams.isNew = false;
-      this.shopParams.categoryName = this.categoryName;
+      this.shopParams.categoryName = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.getCategoriesThenProducts();
     });
   }
@@ -38,7 +34,7 @@ export class MachineComponent implements OnInit {
   getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((categories) => {
       this.allCategories = structuredClone(categories);
-      this.selectedCategory = this.allCategories.find((x) => x.url == this.categoryName);
+      this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
       }

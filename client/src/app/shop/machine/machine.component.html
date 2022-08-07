@@ -2,20 +2,18 @@
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card small overflow-auto" style="height: 200px">
       <ul class="list-group list-group-flush">
-        <ng-container *ngFor="let parent of parentCategories; let i = index">
+        <ng-container *ngFor="let category of parentCategories; let i = index">
           <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
-            <a
-              class="link-dark"
-              [routerLink]="parentCategories[1] ? ['/', parentCategories[0].url, parent.url] : ['/', parent.url]">
-              {{ parent.name }}</a
-            >
+            <a class="link-dark" [routerLink]="['/', parentCategories[0].url, category.url]"> {{ category.name }}</a>
           </li>
         </ng-container>
         <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 1) + 'px' }">
           <a
             class="link-dark"
             [routerLink]="
-              parentCategories[0] ? ['/', parentCategories[0].url, selectedCategory.url] : ['/', selectedCategory.url]
+              parentCategories[0]
+                ? ['/', parentCategories[0].url, selectedCategory.url]
+                : ['/', selectedCategory.url, selectedCategory.url]
             ">
             {{ selectedCategory.name }}</a
           >

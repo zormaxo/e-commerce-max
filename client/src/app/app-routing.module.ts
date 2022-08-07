@@ -57,7 +57,7 @@ const routes: Routes = [
       // { path: 'messages', component: MessagesComponent },
     ],
   },
-  { path: 'makine', component: MachineComponent },
+  // { path: 'makine', component: MachineComponent },
   { path: 'errors', component: TestErrorsComponent },
   { path: 'notfound', component: NotFoundComponent },
   { path: 'servererror', component: ServerErrorComponent },
