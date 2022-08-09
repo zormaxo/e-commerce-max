@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './entry/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './entry/login/login.component';
@@ -21,11 +20,11 @@ import { EntryComponent } from './entry/entry.component';
 import { MemberModule } from './members/member.module';
 import { ShopModule } from './shop/shop.module';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     RegisterComponent,
     LoginComponent,
     ListsComponent,
@@ -46,6 +45,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
     SharedModule,
     ShopModule,
     MemberModule,
+    HomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
