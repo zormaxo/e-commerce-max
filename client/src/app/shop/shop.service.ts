@@ -6,6 +6,7 @@ import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { of } from 'rxjs';
+import { IProduct } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -74,6 +75,10 @@ export class ShopService {
     params = params.append('userId', userId);
 
     return this.http.get<unknown>(this.baseUrl + 'products/product-counts', { params: params });
+  }
+
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {
