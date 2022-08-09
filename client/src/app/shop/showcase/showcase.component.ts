@@ -22,11 +22,10 @@ export class ShowcaseComponent implements OnInit {
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
-    this.getProducts();
-    this.getCategories();
+    this.getProductsThenCategories();
   }
 
-  getProducts() {
+  getProductsThenCategories() {
     this.shopService.getProducts(this.shopParams).subscribe({
       next: (response) => {
         this.products = response.data;
@@ -34,6 +33,8 @@ export class ShowcaseComponent implements OnInit {
         this.shopParams.pageSize = response.pageSize;
         this.totalCount = response.totalCount;
         this.categoryGroupCount = response.categoryGroupCount;
+
+        this.getCategories();
       },
     });
   }
@@ -56,12 +57,12 @@ export class ShowcaseComponent implements OnInit {
   onSearch() {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopParams.pageNumber = 1;
-    this.getProducts();
+    this.getProductsThenCategories();
   }
 
   onReset() {
     this.searchTerm.nativeElement.value = '';
     this.shopParams = new ShopParams();
-    this.getProducts();
+    this.getProductsThenCategories();
   }
 }
