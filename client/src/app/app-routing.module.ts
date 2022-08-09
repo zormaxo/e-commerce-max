@@ -11,7 +11,6 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
 import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 import { EntryComponent } from './entry/entry.component';
-import { MachineComponent } from './shop/machine/machine.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { SummaryComponent } from './members/member-profile/summary/summary.component';
 import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
@@ -19,6 +18,10 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 
 const routes: Routes = [
+  {
+    path: 'makine',
+    loadChildren: () => import('./categories/machine/machine.module').then((mod) => mod.MachineModule),
+  },
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
   {
     path: '',
@@ -26,8 +29,7 @@ const routes: Routes = [
     children: [
       { path: 'vitrin', component: ShowcaseComponent },
       { path: 'search-result', component: SearchResultComponent },
-      { path: 'makine', component: MachineComponent },
-      { path: 'makine/:subcategory', component: MachineComponent },
+
       {
         path: 'uye',
         component: MemberProfileComponent,
@@ -59,7 +61,6 @@ const routes: Routes = [
       // { path: 'messages', component: MessagesComponent },
     ],
   },
-  // { path: 'makine', component: MachineComponent },
   { path: 'errors', component: TestErrorsComponent },
   { path: 'notfound', component: NotFoundComponent },
   { path: 'servererror', component: ServerErrorComponent },
