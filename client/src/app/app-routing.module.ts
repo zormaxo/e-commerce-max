@@ -16,6 +16,7 @@ import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { SummaryComponent } from './members/member-profile/summary/summary.component';
 import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -41,6 +42,7 @@ const routes: Routes = [
     ],
   },
   { path: 'giriş', component: EntryComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
   {
     path: '',
     canActivateChild: [AuthGuard],
