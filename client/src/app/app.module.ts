@@ -19,6 +19,8 @@ import { MemberModule } from './members/member.module';
 import { ShopModule } from './shop/shop.module';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { HomeModule } from './home/home.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { HomeModule } from './home/home.module';
     SearchResultComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,

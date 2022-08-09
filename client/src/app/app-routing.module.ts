@@ -18,10 +18,6 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 
 const routes: Routes = [
-  {
-    path: 'makine',
-    loadChildren: () => import('./categories/machine/machine.module').then((mod) => mod.MachineModule),
-  },
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
   {
     path: '',
@@ -29,7 +25,10 @@ const routes: Routes = [
     children: [
       { path: 'vitrin', component: ShowcaseComponent },
       { path: 'search-result', component: SearchResultComponent },
-
+      {
+        path: 'makine',
+        loadChildren: () => import('./categories/machine/machine.module').then((mod) => mod.MachineModule),
+      },
       {
         path: 'uye',
         component: MemberProfileComponent,

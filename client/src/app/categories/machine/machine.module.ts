@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MachineComponent } from './machine.component';
-import { CoreModule } from 'src/app/core/core.module';
 import { MachineRoutingModule } from './machine-routing.module';
-import { RouterModule } from '@angular/router';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [MachineComponent],
-  imports: [CommonModule, MachineRoutingModule, RouterModule],
+  imports: [CommonModule, MachineRoutingModule, CoreModule],
 })
 export class MachineModule {}

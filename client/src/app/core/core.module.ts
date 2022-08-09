@@ -1,24 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { InputMaskModule } from 'primeng/inputmask';
- import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [NavBarComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    AccordionModule,
-    InputMaskModule,
-  ],
-  exports: [NavBarComponent, RouterModule, BsDatepickerModule, InputMaskModule, AccordionModule],
+  imports: [CommonModule, RouterModule, BsDropdownModule.forRoot()],
+  exports: [NavBarComponent],
 })
 export class CoreModule {}

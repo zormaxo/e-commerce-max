@@ -11,6 +11,7 @@ import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
 import { SummaryComponent } from './member-profile/summary/summary.component';
 import { AdListComponent } from './member-profile/ad-list/ad-list.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AdListComponent } from './member-profile/ad-list/ad-list.component';
     SummaryComponent,
     AdListComponent,
   ],
-  imports: [CommonModule, SharedModule, CoreModule, FormsModule],
+  imports: [CommonModule, SharedModule, CoreModule, FormsModule, RouterModule],
   exports: [
     MemberCardComponent,
     MemberProfileComponent,
