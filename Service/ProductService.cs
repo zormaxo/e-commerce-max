@@ -101,19 +101,19 @@ namespace Service
 
         public async Task<IReadOnlyList<Category>> GetCategories()
         {
-            if (_cachedItems.Categories.Count > 0)
+            if (_cachedItems.Categories.Count == 0)
             {
-                return _cachedItems.Categories;
+                _cachedItems.Categories = await _categoryRepo.ListAllAsync();
             }
-            else
-            {
-                return _cachedItems.Categories = await _categoryRepo.ListAllAsync();
-            }
+            return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
         }
 
         private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
         {
-            var selectedCategory = (await GetCategories()).First(x => x.Url == productParams.CategoryName);
+            if (_cachedItems.Categories.Count == 0)
+                _cachedItems.Categories = await _categoryRepo.ListAllAsync();
+
+            var selectedCategory = _cachedItems.Categories.First(x => x.Url == productParams.CategoryName);
             List<int> categoryIds = new();
             FindChildCategories(selectedCategory);
 
