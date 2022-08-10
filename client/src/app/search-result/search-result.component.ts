@@ -12,8 +12,9 @@ import { ShopService } from '../shop/shop.service';
 })
 export class SearchResultComponent implements OnInit {
   shopParams: ShopParams = new ShopParams();
-  categoryGroupCount: CategoryGroupCount[];
+  categoryGroupCountList: CategoryGroupCount[];
   allCategories: ICategory[];
+  totalCount: number;
 
   constructor(private shopService: ShopService, private route: ActivatedRoute) {}
 
@@ -26,12 +27,13 @@ export class SearchResultComponent implements OnInit {
 
   getProducts() {
     this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
-      this.categoryGroupCount = productResponse.categoryGroupCount;
+      this.categoryGroupCountList = productResponse.categoryGroupCount;
+      this.totalCount = productResponse.totalCount;
 
       this.shopService.getCategories().subscribe((categories) => {
         this.allCategories = structuredClone(categories);
 
-        this.categoryGroupCount.forEach((groupCount) => {
+        this.categoryGroupCountList.forEach((groupCount) => {
           const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
           category.count = groupCount.count;
           this.shopService.addCountToParent(category, groupCount.count);

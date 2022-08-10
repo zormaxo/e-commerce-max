@@ -56,19 +56,20 @@ namespace Service
                 .OrderBy(productParams.Sort ?? "name asc")
                 .PageBy(productParams);
 
-            var catGrpCount = filteredProducts.GroupBy(x => x.CategoryId)
+            var catGrpCountList = filteredProducts.GroupBy(x => x.CategoryId)
                 .Select(n => new CategoryGroupCount
                 {
                     CategoryId = n.Key,
                     Count = n.Count()
                 }).ToList();
 
-            var totalItems = catGrpCount.Select(x => x.Count).Aggregate((a, b) => a + b);
+            var totalItems = catGrpCountList.Count == 0 ?
+                0 : catGrpCountList.Select(x => x.Count).Aggregate((a, b) => a + b);
             var products = await pagedAndfilteredProducts.ToListAsync();
 
             var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
-            return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCount, totalItems, data);
+            return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
         }
 
         public async Task<object> GetProductsCounts(ProductSpecParams productParams)

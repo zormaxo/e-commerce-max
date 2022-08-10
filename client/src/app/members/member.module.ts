@@ -7,7 +7,6 @@ import { MembershipInfoComponent } from './member-profile/membership-info/member
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { SharedModule } from '../shared/shared.module';
-import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
 import { SummaryComponent } from './member-profile/summary/summary.component';
 import { AdListComponent } from './member-profile/ad-list/ad-list.component';
@@ -24,7 +23,7 @@ import { RouterModule } from '@angular/router';
     SummaryComponent,
     AdListComponent,
   ],
-  imports: [CommonModule, SharedModule, CoreModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   exports: [
     MemberCardComponent,
     MemberProfileComponent,

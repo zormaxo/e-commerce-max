@@ -42,7 +42,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'giriş', component: EntryComponent },
+  { path: 'giris', component: EntryComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   {
     path: '',
