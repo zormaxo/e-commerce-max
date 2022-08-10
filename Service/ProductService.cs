@@ -102,9 +102,8 @@ namespace Service
         public async Task<IReadOnlyList<Category>> GetCategories()
         {
             if (_cachedItems.Categories.Count == 0)
-            {
                 _cachedItems.Categories = await _categoryRepo.ListAllAsync();
-            }
+
             return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
         }
 
@@ -119,13 +118,16 @@ namespace Service
 
             void FindChildCategories(Category category)
             {
-                categoryIds.Add(category.Id);
                 if (category.ChildCategories?.Count > 0)
                 {
                     foreach (var item in category.ChildCategories)
                     {
                         FindChildCategories(item);
                     }
+                }
+                else
+                {
+                    categoryIds.Add(category.Id);
                 }
             }
 
