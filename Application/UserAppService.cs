@@ -1,7 +1,7 @@
-using API.Errors;
 using Application.Interfaces;
 using AutoMapper;
 using Core.Dtos;
+using Core.Errors;
 
 namespace Application;
 

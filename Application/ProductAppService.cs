@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
+using Core.Errors;
 using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
 using System.Linq.Dynamic.Core;
@@ -88,13 +89,15 @@ public class ProductAppService : BaseAppService
         var spec = new ProductsWithTypesAndBrandsSpecification(id);
         var product = await _productsRepo.GetEntityWithSpec(spec);
 
+        if (product == null)
+            throw new ApiException(System.Net.HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
+
         return _mapper.Map<ProductToReturnDto>(product);
     }
 
     public async Task<IReadOnlyList<ProductBrand>> GetBrands()
     {
-        var omer = await _productBrandRepo.ListAllAsync();
-        return omer;
+        return await _productBrandRepo.ListAllAsync();
     }
 
     public async Task<IReadOnlyList<Category>> GetCategories()

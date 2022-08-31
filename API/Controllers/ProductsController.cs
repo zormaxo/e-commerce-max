@@ -1,11 +1,10 @@
-using API.Errors;
 using Application;
 using Application.Entities;
 using Application.Specifications;
 using Core.Dtos;
+using Core.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Service.Helpers;
-using System.Net;
 
 namespace API.Controllers
 {
@@ -35,9 +34,7 @@ namespace API.Controllers
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]   //swagger documentation hints
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
-            var productToReturnDto = await _productSrv.GetProduct(id);
-
-            return productToReturnDto ?? (ActionResult<ProductToReturnDto>)NotFound(new ApiResponse((int)HttpStatusCode.NotFound));
+            return await _productSrv.GetProduct(id);
         }
 
         [HttpGet("brands")]

@@ -1,9 +1,8 @@
-using API.Errors;
-using Application.Entities;
 using Application;
+using Application.Entities;
+using Core.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace API.Controllers
 {
@@ -25,7 +24,7 @@ namespace API.Controllers
         {
             var thing = _context.Products.Find(-1);
 
-            if (thing == null) return NotFound(new ApiResponse((int)HttpStatusCode.NotFound));
+            if (thing == null) return NotFound(new ApiResponse("Not Found Kuyumdan"));
 
             return Ok(thing);
         }
@@ -43,7 +42,7 @@ namespace API.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest(new ApiResponse((int)HttpStatusCode.BadRequest, "This message is from controller"));
+            return BadRequest(new ApiResponse("This message is from controller"));
         }
 
         [HttpGet("badrequest/{id}")]

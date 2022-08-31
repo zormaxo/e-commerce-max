@@ -19,7 +19,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
             var response = await _userSrv.GetUsers();
-            if (response.StatusCode != 200) return BadRequest(response);
+            //if (response.StatusCode != 200) return BadRequest(response);
             return Ok(response.Data);
         }
 
@@ -27,7 +27,7 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDto>> GetUser(int userId)
         {
             var response = await _userSrv.GetUser(userId);
-            if (response.StatusCode != 200) return BadRequest(response);
+            //if (response.StatusCode != 200) return BadRequest(response);
             return Ok(response.Data);
         }
     }

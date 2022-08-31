@@ -1,4 +1,3 @@
-using API.Errors;
 using Application.Entities;
 using Application.Interfaces;
 using Application.Services;
@@ -26,7 +25,7 @@ public class AccountAppService : BaseAppService
     public async Task<ApiResponse<UserDto>> Register(RegisterDto registerDto)
     {
         if (await UserExists(registerDto.Username))
-            return new ApiResponse<UserDto>((int)HttpStatusCode.BadRequest, "Username is taken");
+            throw new ApiException(HttpStatusCode.BadRequest, "Username is taken");
 
         using var hmac = new HMACSHA512();
 
@@ -55,7 +54,7 @@ public class AccountAppService : BaseAppService
         var user = await _appUsersRepo.GetEntityWithSpec(spec);
 
         if (user == null)
-            return new ApiResponse<UserDto>((int)HttpStatusCode.Unauthorized, "Invalid username");
+            throw new ApiException(HttpStatusCode.Unauthorized, "Invalid username");
 
         using var hmac = new HMACSHA512(user.PasswordSalt);
 
@@ -64,10 +63,7 @@ public class AccountAppService : BaseAppService
         for (int i = 0; i < computedHash.Length; i++)
         {
             if (computedHash[i] != user.PasswordHash[i])
-            {
-                throw new ApiRealException(HttpStatusCode.Unauthorized);
-            }
-            //return new ApiResponse<UserDto>((int)HttpStatusCode.Unauthorized, "Invalid password");
+                throw new ApiException(HttpStatusCode.Unauthorized, "Invalid password");
         }
 
         var userDto = new UserDto

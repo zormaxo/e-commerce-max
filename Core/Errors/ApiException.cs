@@ -1,14 +1,32 @@
-using API.Errors;
+using System.Net;
 
 namespace Core.Errors;
 
-public class ApiException : ApiResponse
+public class ApiException : Exception
 {
-    public ApiException(int statusCode, string message = null, string details = null)
-        : base(statusCode, message)
+    public ApiException(string apiMessage = null)
     {
-        Details = details;
+        HttpStatusCode = HttpStatusCode.BadRequest;
+        ApiMessage = apiMessage ?? GetDefaultMessageForStatusCode(HttpStatusCode.BadRequest);
+    }
+    public ApiException(HttpStatusCode httpStatusCode, string apiMessage = null)
+    {
+        HttpStatusCode = httpStatusCode;
+        ApiMessage = apiMessage ?? GetDefaultMessageForStatusCode(httpStatusCode);
     }
 
-    public string Details { get; set; }
+    public HttpStatusCode HttpStatusCode { get; }
+    public string ApiMessage { get; }
+
+    private static string GetDefaultMessageForStatusCode(HttpStatusCode statusCode)
+    {
+        return statusCode switch
+        {
+            HttpStatusCode.BadRequest => "A bad request, you have made",
+            HttpStatusCode.Unauthorized => "Authorized, you are not",
+            HttpStatusCode.NotFound => "Resource found, it was not",
+            HttpStatusCode.InternalServerError => "Errors are the path to the dark side.  Errors lead to anger.   Anger leads to hate.  Hate leads to career change.",
+            _ => null
+        };
+    }
 }

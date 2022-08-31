@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Application;
 
-public static class EfBigExtensions
+public static class EFBigExtensions
 {
     public static IQueryable<TSource> WhereIf<TSource>(
         this IQueryable<TSource> source,

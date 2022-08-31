@@ -17,7 +17,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             var response = await _accountSrv.Register(registerDto);
-            if (response.StatusCode != 200) return BadRequest(response);
+            //if (response.StatusCode != 200) return BadRequest(response);
             return response.Data;
         }
 
