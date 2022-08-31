@@ -1,4 +1,4 @@
-using Infrastructure;
+using Application;
 using Microsoft.EntityFrameworkCore;
 
 namespace API

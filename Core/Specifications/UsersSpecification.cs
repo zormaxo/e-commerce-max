@@ -1,6 +1,6 @@
-using Core.Entities;
+using Application.Entities;
 
-namespace Core.Specifications
+namespace Application.Specifications
 {
     public class UsersSpecification : BaseSpecifcation<AppUser>
     {

@@ -1,11 +1,11 @@
+using Application.Entities;
+using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.DTOs;
-using Core.Entities;
-using Core.Interfaces;
+using Core.Dtos;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories;
+namespace Application.Repositories;
 
 public class UserRepository : GenericRepository<AppUser>, IUserRepository
 {

@@ -1,8 +1,8 @@
-﻿using Core.Entities;
+﻿using Application.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.EntityConfigurations;
+namespace Application.EntityConfigurations;
 
 internal class ProductEntityTypeConfiguraiton : IEntityTypeConfiguration<Product>
 {

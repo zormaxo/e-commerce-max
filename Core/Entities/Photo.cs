@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Entities
+namespace Application.Entities
 {
     [Table("Photos")]
     public class Photo : BaseEntity

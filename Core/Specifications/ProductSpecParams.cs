@@ -1,6 +1,6 @@
-using Core.Interfaces;
+using Application.Interfaces;
 
-namespace Core.Specifications
+namespace Application.Specifications
 {
     public class ProductSpecParams : IPagedResultRequest
     {
@@ -16,7 +16,7 @@ namespace Core.Specifications
         }
 
         public int? BrandId { get; set; }
-        public string? CategoryName { get; set; }
+        public string CategoryName { get; set; }
         public string Sort { get; set; }
         private string _search;
 

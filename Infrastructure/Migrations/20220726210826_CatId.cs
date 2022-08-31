@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace Application.Data.Migrations
 {
     public partial class CatId : Migration
     {

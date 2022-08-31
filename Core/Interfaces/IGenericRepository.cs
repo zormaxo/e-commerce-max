@@ -1,8 +1,8 @@
-using Core.Entities;
-using Core.Specifications;
+using Application.Entities;
+using Application.Specifications;
 using System.Linq.Expressions;
 
-namespace Core.Interfaces
+namespace Application.Interfaces
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {

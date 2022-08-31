@@ -1,14 +1,14 @@
-using Core.DTOs;
+using Application;
+using Core.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Service;
 
 namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly AccountService _accountSrv;
+        private readonly AccountAppService _accountSrv;
 
-        public AccountController(AccountService accountSrv)
+        public AccountController(AccountAppService accountSrv)
         {
             _accountSrv = accountSrv;
         }

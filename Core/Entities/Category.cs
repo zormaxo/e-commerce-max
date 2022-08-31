@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Entities
+namespace Application.Entities
 {
     [Index(nameof(Name), IsUnique = true)]
     public class Category : BaseEntity

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.DTOs
+namespace Core.Dtos
 {
     public class RegisterDto
     {

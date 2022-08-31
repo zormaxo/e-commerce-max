@@ -1,7 +1,7 @@
-using Core.DTOs;
-using Core.Entities;
+using Application.Entities;
+using Core.Dtos;
 
-namespace Core.Interfaces
+namespace Application.Interfaces
 {
     public interface IUserRepository
     {

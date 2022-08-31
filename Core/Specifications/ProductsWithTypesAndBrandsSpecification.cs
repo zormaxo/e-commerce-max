@@ -1,8 +1,8 @@
-using Core.Entities;
-using Core.Specification;
+using Application.Entities;
+using Application.Specification;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Specifications
+namespace Application.Specifications
 {
     public class ProductsWithTypesAndBrandsSpecification : BaseSpecifcation<Product>
     {

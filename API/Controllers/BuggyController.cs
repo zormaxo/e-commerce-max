@@ -1,6 +1,6 @@
 using API.Errors;
-using Core.Entities;
-using Infrastructure;
+using Application.Entities;
+using Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

@@ -1,7 +1,7 @@
-﻿using Core.Interfaces;
+﻿using Application.Interfaces;
 using System.Linq.Expressions;
 
-namespace Infrastructure;
+namespace Application;
 
 public static class EfBigExtensions
 {

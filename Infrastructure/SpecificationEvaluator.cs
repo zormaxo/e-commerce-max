@@ -1,8 +1,8 @@
-using Core.Entities;
-using Core.Specifications;
+using Application.Entities;
+using Application.Specifications;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure;
+namespace Application;
 
 public static class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
 {

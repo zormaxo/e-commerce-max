@@ -1,11 +1,11 @@
-using Core.Entities;
-using Infrastructure.EntityConfigurations;
+using Application.Entities;
+using Application.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Infrastructure;
+namespace Application;
 
 public class StoreContext : DbContext
 {

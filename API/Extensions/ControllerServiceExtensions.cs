@@ -1,17 +1,15 @@
-using Core;
-using Service;
+using Application;
 
-namespace API.Extensions
+namespace API.Extensions;
+
+public static class ControllerServiceExtensions
 {
-    public static class ControllerServiceExtensions
+    public static IServiceCollection AddControllerServices(this IServiceCollection services)
     {
-        public static IServiceCollection AddControllerServices(this IServiceCollection services)
-        {
-            services.AddSingleton<CachedItems>();
-            services.AddScoped<ProductService>();
-            services.AddScoped<AccountService>();
-            services.AddScoped<UserService>();
-            return services;
-        }
+        services.AddSingleton<CachedItems>();
+        services.AddScoped<ProductAppService>();
+        services.AddScoped<AccountAppService>();
+        services.AddScoped<UserAppService>();
+        return services;
     }
 }

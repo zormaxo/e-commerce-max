@@ -1,8 +1,8 @@
-using Core.Entities;
-using Core.Interfaces;
+using Application.Entities;
+using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories;
+namespace Application.Repositories;
 
 public class ProductRepository : GenericRepository<Product>, IProductRepository
 {

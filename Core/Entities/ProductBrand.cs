@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Entities
+namespace Application.Entities
 {
     public class ProductBrand : BaseEntity
     {

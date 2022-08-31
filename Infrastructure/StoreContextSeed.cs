@@ -1,11 +1,11 @@
-using Core.Entities;
+using Application.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace Infrastructure;
+namespace Application;
 
 public class StoreContextSeed
 {

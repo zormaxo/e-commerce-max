@@ -1,16 +1,16 @@
-using Core.DTOs;
+using Application;
+using Core.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Service;
 
 namespace API.Controllers
 {
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly UserService _userSrv;
+        private readonly UserAppService _userSrv;
 
-        public UsersController(UserService userSrv)
+        public UsersController(UserAppService userSrv)
         {
             _userSrv = userSrv;
         }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace Application.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     [Migration("20220726205027_Index")]

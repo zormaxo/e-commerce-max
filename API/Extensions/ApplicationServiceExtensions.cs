@@ -1,53 +1,52 @@
 using API.Errors;
-using Core.Interfaces;
-using Core.Service.Helpers;
-using Infrastructure;
-using Infrastructure.Repositories;
+using Application;
+using Application.Interfaces;
+using Application.Mapping;
+using Application.Repositories;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Service.Helpers;
 
-namespace API.Extensions
+namespace API.Extensions;
+
+public static class ApplicationServiceExtensions
 {
-    public static class ApplicationServiceExtensions
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddAutoMapper(typeof(MappingProfiles));
+
+        services.Configure<ApiBehaviorOptions>(options =>
         {
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddAutoMapper(typeof(MappingProfiles));
-
-            services.Configure<ApiBehaviorOptions>(options =>
+            options.InvalidModelStateResponseFactory = actionContext =>
             {
-                options.InvalidModelStateResponseFactory = actionContext =>
+                var errors = actionContext.ModelState
+                    .Where(e => e.Value.Errors.Count > 0)
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x => x.ErrorMessage).ToArray();
+
+                var errorResponse = new ApiValidationErrorResponse
                 {
-                    var errors = actionContext.ModelState
-                        .Where(e => e.Value.Errors.Count > 0)
-                        .SelectMany(x => x.Value.Errors)
-                        .Select(x => x.ErrorMessage).ToArray();
-
-                    var errorResponse = new ApiValidationErrorResponse
-                    {
-                        Errors = errors
-                    };
-
-                    return new BadRequestObjectResult(errorResponse);
+                    Errors = errors
                 };
-            });
 
-            void optionsAction(DbContextOptionsBuilder x)
+                return new BadRequestObjectResult(errorResponse);
+            };
+        });
+
+        void optionsAction(DbContextOptionsBuilder x)
+        {
+            x.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            if (env.IsDevelopment())
             {
-                x.UseSqlite(config.GetConnectionString("DefaultConnection"));
-                if (env.IsDevelopment())
-                {
-                    x.EnableSensitiveDataLogging();
-                    //// x.LogTo(Console.WriteLine, LogLevel.Information);
-                }
+                x.EnableSensitiveDataLogging();
+                //// x.LogTo(Console.WriteLine, LogLevel.Information);
             }
-            services.AddDbContext<StoreContext>(optionsAction);
-
-            return services;
         }
+        services.AddDbContext<StoreContext>(optionsAction);
+
+        return services;
     }
 }

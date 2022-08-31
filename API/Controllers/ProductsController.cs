@@ -1,9 +1,9 @@
 using API.Errors;
-using Core.DTOs;
-using Core.Entities;
-using Core.Specifications;
+using Application;
+using Application.Entities;
+using Application.Specifications;
+using Core.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Service;
 using Service.Helpers;
 using System.Net;
 
@@ -11,9 +11,9 @@ namespace API.Controllers
 {
     public class ProductsController : BaseApiController
     {
-        private readonly ProductService _productSrv;
+        private readonly ProductAppService _productSrv;
 
-        public ProductsController(ProductService productSrv)
+        public ProductsController(ProductAppService productSrv)
         {
             _productSrv = productSrv;
         }

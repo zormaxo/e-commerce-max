@@ -1,7 +1,7 @@
-using Core.Entities;
-using Core.Specification;
+using Application.Entities;
+using Application.Specification;
 
-namespace Core.Specifications
+namespace Application.Specifications
 {
     public class ProductsWithFiltersForCountSpecification : BaseSpecifcation<Product>
     {
