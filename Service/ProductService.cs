@@ -5,7 +5,7 @@ using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
-using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
 using System.Linq.Dynamic.Core;
@@ -110,7 +110,7 @@ namespace Service
         private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
         {
             if (_cachedItems.Categories.Count == 0)
-                _cachedItems.Categories = await _categoryRepo.ListAllAsync();
+                _cachedItems.Categories = await _categoryRepo .ListAllAsync();
 
             var selectedCategory = _cachedItems.Categories.First(x => x.Url == productParams.CategoryName);
             List<int> categoryIds = new();

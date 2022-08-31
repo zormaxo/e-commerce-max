@@ -7,6 +7,5 @@ import { CoreModule } from '../core/core.module';
 @NgModule({
   declarations: [HomeComponent],
   imports: [CommonModule, RouterModule, CoreModule],
-  exports: [HomeComponent, RouterModule],
 })
 export class HomeModule {}
