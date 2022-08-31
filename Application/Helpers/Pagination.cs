@@ -1,4 +1,4 @@
-using Core.Dtos;
+using Application.Helpers;
 
 namespace Service.Helpers
 {

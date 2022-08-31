@@ -45,7 +45,7 @@ public class ProductAppService : BaseAppService
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
-            List<int> categoryIds = await GetCategoryIds(productParams);
+            List<int> categoryIds = await GetCategoryIds(productParams.CategoryName);
             if (categoryIds.Count > 0)
                 filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
         }
@@ -105,12 +105,12 @@ public class ProductAppService : BaseAppService
         return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
     }
 
-    private async Task<List<int>> GetCategoryIds(ProductSpecParams productParams)
+    private async Task<List<int>> GetCategoryIds(string categoryName)
     {
         if (_cachedItems.Categories.Count == 0)
             _cachedItems.Categories = await _categoryRepo.ListAllAsync();
 
-        var selectedCategory = _cachedItems.Categories.First(x => x.Url == productParams.CategoryName);
+        var selectedCategory = _cachedItems.Categories.First(x => x.Url == categoryName);
         List<int> categoryIds = new();
         FindChildCategories(selectedCategory);
 

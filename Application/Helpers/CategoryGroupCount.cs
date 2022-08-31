@@ -1,4 +1,4 @@
-﻿namespace Core.Dtos;
+﻿namespace Application.Helpers;
 
 public class CategoryGroupCount
 {
