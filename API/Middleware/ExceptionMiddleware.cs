@@ -26,21 +26,21 @@ public class ExceptionMiddleware
         catch (ApiException ex)
         {
             var response = _env.IsDevelopment()
-                ? new ApiExceptionResponse(ex.ApiMessage, ex.Message, ex.StackTrace)
-                : new ApiExceptionResponse(ex.ApiMessage);
+                ? new ApiErrorResponse(ex.ApiMessage, ex.Message, ex.StackTrace)
+                : new ApiErrorResponse(ex.ApiMessage);
 
             await CreateExceptionResponse(ex, ex.HttpStatusCode, response);
         }
         catch (Exception ex)
         {
             var response = _env.IsDevelopment()
-                ? new ApiExceptionResponse(nameof(ExceptionMiddleware),ex.Message, ex.StackTrace)
-                : new ApiExceptionResponse(nameof(ExceptionMiddleware));
+                ? new ApiErrorResponse(nameof(ExceptionMiddleware), ex.Message, ex.StackTrace)
+                : new ApiErrorResponse(nameof(ExceptionMiddleware));
 
             await CreateExceptionResponse(ex, HttpStatusCode.InternalServerError, response);
         }
 
-        async Task CreateExceptionResponse(Exception ex, HttpStatusCode httpStatusCode, ApiExceptionResponse response)
+        async Task CreateExceptionResponse(Exception ex, HttpStatusCode httpStatusCode, ApiErrorResponse response)
         {
             _logger.LogError(ex, ex.Message);
             context.Response.ContentType = "application/json";

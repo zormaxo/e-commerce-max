@@ -1,9 +1,9 @@
-using API.Errors;
 using Application;
 using Application.Interfaces;
 using Application.Mapping;
 using Application.Repositories;
 using Application.Services;
+using Core.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,10 +27,7 @@ public static class ApplicationServiceExtensions
                     .SelectMany(x => x.Value.Errors)
                     .Select(x => x.ErrorMessage).ToArray();
 
-                var errorResponse = new ApiValidationErrorResponse
-                {
-                    Errors = errors
-                };
+                var errorResponse = new ApiErrorResponse<IEnumerable<string>>(errors);
 
                 return new BadRequestObjectResult(errorResponse);
             };
