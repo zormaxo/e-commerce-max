@@ -5,6 +5,7 @@ using Application.Services;
 using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
+using Core.Errors;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -63,7 +64,10 @@ public class AccountAppService : BaseAppService
         for (int i = 0; i < computedHash.Length; i++)
         {
             if (computedHash[i] != user.PasswordHash[i])
-                return new ApiResponse<UserDto>((int)HttpStatusCode.Unauthorized, "Invalid password");
+            {
+                throw new ApiRealException(HttpStatusCode.Unauthorized);
+            }
+            //return new ApiResponse<UserDto>((int)HttpStatusCode.Unauthorized, "Invalid password");
         }
 
         var userDto = new UserDto

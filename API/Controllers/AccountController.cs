@@ -25,7 +25,6 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var response = await _accountSrv.Login(loginDto);
-            if (response.StatusCode != 200) return Unauthorized(response);
             return response.Data;
         }
     }
