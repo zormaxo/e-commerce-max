@@ -1,21 +1,57 @@
-<div class="row" *ngIf="product">
-    <div class="col-6">
-        <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid w-100">
+<ng-container *ngIf="product">
+  <div class="row">
+    <h5>{{ product.name }}</h5>
+    <hr />
+  </div>
+  <div class="row">
+    <div class="col-auto">
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style="display: inline-block"></ngx-gallery>
     </div>
-    <div class="col-6">
-        <h3>{{product.name}}</h3>
-        <p>{{product.price | currency}}</p>
-        <div class="d-flex justify-content-start align-items-center">
-            <i class="fa fa-minus-circle text-warning mr-2" style="cursor: pointer; font-size: 2em;"></i>
-            <span class="font-weight-bold" style="font-size: 1.5em;">2</span>
-            <i class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
-            <button class="btn btn-outline-secondary btn-lg ml-4">Add to Cart</button>
+    <div class="col-3">
+      <p class="text-primary fw-bold">{{ product.price | currency }}</p>
+      <div class="text-primary fw-bold small">{{ product.city }} / {{ product.county }}</div>
+      <hr />
+      <table class="table table-sm small">
+        <tbody>
+          <tr>
+            <td>İlan no</td>
+            <td>#{{ product.id }}</td>
+          </tr>
+          <tr>
+            <td>İlan tarihi</td>
+            <td>12.02.2022</td>
+          </tr>
+          <tr>
+            <td>Durumu</td>
+            <td>{{ product.isNew }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <div class="card small shadow" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.user.firstName }} {{ product.user.surname }}</h5>
+          <div class="card-text">
+            <p class="text-muted">Hesap açma tarihi {{ product.user.created }}</p>
+            <a href="" class="text-decoration-none">Tüm İlanları</a>
+            <p>Cep {{ product.user.phoneNumber }}</p>
+          </div>
+          <a href="#" class="btn btn-primary">Mesaj Gönder</a>
         </div>
+      </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-12 ml-3">
-            <h4>Description</h4>
-            <p>{{product.description}}</p>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <h5 class="card-header">Açıklama</h5>
+        <div class="card-body">
+          <div class="card-text">
+            <p>{{ product.description }}</p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</ng-container>

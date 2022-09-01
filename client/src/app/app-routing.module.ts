@@ -22,13 +22,14 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: 'vitrin', component: ShowcaseComponent },
+      { path: 'product/:id', component: ProductDetailsComponent },
       {
         path: 'search-result',
         loadChildren: () => import('./search-result/search-result.module').then((mod) => mod.SearchResultModule),
       },
       {
         path: 'makine',
-        loadChildren: () => import('./categories/machine/machine.module').then((mod) => mod.MachineModule),
+        loadChildren: () => import('./shop/categories/machine/machine.module').then((mod) => mod.MachineModule),
       },
       {
         path: 'uye',
@@ -47,7 +48,6 @@ const routes: Routes = [
     path: 'giris',
     loadChildren: () => import('./entry/entry.module').then((mod) => mod.EntryModule),
   },
-  { path: 'product/:id', component: ProductDetailsComponent },
   {
     path: '',
     canActivateChild: [AuthGuard],

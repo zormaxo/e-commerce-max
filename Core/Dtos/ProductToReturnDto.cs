@@ -14,6 +14,7 @@ namespace Core.Dtos
         public bool IsActive { get; set; }
         public bool IsNew { get; set; }
         public DateTime Created { get; set; }
+        public MemberDto User { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }
 }

@@ -16,8 +16,6 @@ public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, st
 
     public string Resolve(Product source, ProductToReturnDto destination, string destMember, ResolutionContext context)
     {
-
-
         var url = source.Photos.FirstOrDefault(x => x.IsMain)?.Url;
         if (!string.IsNullOrEmpty(url))
         {

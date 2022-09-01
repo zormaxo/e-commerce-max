@@ -9,7 +9,7 @@
 .list-group-item.active {
   background-color: #fffbed;
   border: 0px;
-  border-bottom: 1px solid #ffc107!important;
+  border-bottom: 1px solid #ffc107 !important;
   color: black;
 }
 
@@ -62,3 +62,15 @@
   border-top: 1px solid #eee;
   padding: 15px 0;
 }
+
+.ngx-gallery-thumbnail:not(.ngx-gallery-active:not(a)) {
+  border: 0 !important;
+}
+
+.ngx-gallery-thumbnail.ngx-gallery-active {
+  border: 1px solid darkblue !important;
+}
+
+// .ngx-gallery-layout.thumbnails-bottom {
+//   padding: 10px;
+// }

@@ -1,4 +1,6 @@
-import { ICategory } from "./category";
+import { Member } from 'src/app/_models/member';
+import { Photo } from 'src/app/_models/photo';
+import { ICategory } from './category';
 
 export interface IProduct {
   id: number;
@@ -13,4 +15,6 @@ export interface IProduct {
   county: string;
   isActive: boolean;
   category: ICategory;
+  photos: Photo[];
+  user: Member;
 }

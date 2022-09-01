@@ -17,6 +17,7 @@ import { ShowcaseModule } from './shop/showcase/showcase.module';
 import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
