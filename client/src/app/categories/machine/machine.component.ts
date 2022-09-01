@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../shared/models/product';
 import { ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
-import { ShopService } from '../../shop/shop.service';
+import { ShopService } from '../../_services/shop.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 
 @Component({

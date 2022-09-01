@@ -13,7 +13,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberModule } from './members/member.module';
-import { ShopModule } from './shop/shop.module';
+import { ShowcaseModule } from './shop/showcase/showcase.module';
 import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,7 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     CoreModule,
     SharedModule,
-    ShopModule,
+    ShowcaseModule,
     MemberModule,
     HomeModule,
   ],

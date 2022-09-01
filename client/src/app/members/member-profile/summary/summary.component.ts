@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
-import { ShopService } from 'src/app/shop/shop.service';
+import { ShopService } from 'src/app/_services/shop.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs';
 

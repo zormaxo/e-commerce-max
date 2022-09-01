@@ -3,8 +3,16 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
     "Photos": [{
-        "Url": "images/products/sb-ang1.png",
+        "Url": "https://picsum.photos/200/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 8,
@@ -17,8 +25,16 @@
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 150,
     "Photos": [{
-        "Url": "images/products/sb-ang2.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 8,
@@ -31,8 +47,16 @@
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
     "Photos": [{
-        "Url": "images/products/sb-core1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 9,
@@ -45,8 +69,16 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 300,
     "Photos": [{
-        "Url": "images/products/sb-core2.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 9,
@@ -59,7 +91,15 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 250,
     "Photos": [{
-        "Url": "images/products/sb-react1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300",
         "IsMain": true
       }
     ],
@@ -73,8 +113,16 @@
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
     "Price": 120,
     "Photos": [{
-        "Url": "images/products/sb-ts1.png",
+        "Url": "https://picsum.photos/250/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 10,
@@ -87,8 +135,16 @@
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 10,
     "Photos": [{
-        "Url": "images/products/hat-core1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/350/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 11,
@@ -101,8 +157,16 @@
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 8,
     "Photos": [{
-        "Url": "images/products/hat-react1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/450/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 11,
@@ -115,8 +179,16 @@
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 15,
     "Photos": [{
-        "Url": "images/products/hat-react2.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/550/300",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 12,
@@ -129,7 +201,15 @@
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 18,
     "Photos": [{
-        "Url": "images/products/glove-code1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/650/300",
         "IsMain": true
       }
     ],
@@ -143,8 +223,16 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 15,
     "Photos": [{
-        "Url": "images/products/glove-code2.png",
+        "Url": "https://picsum.photos/200/350",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 6,
@@ -157,8 +245,16 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
     "Price": 16,
     "Photos": [{
-        "Url": "images/products/glove-react1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/350",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 7,
@@ -171,8 +267,16 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 14,
     "Photos": [{
-        "Url": "images/products/glove-react2.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/350",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 7,
@@ -185,8 +289,16 @@
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 250,
     "Photos": [{
-        "Url": "images/products/boot-redis1.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/350",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 8,
@@ -199,7 +311,15 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 189.99,
     "Photos": [{
-        "Url": "images/products/boot-core2.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/350",
         "IsMain": true
       }
     ],
@@ -213,11 +333,18 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 199.99,
     "Photos": [{
-        "Url": "images/products/boot-core1.png",
+        "Url": "https://picsum.photos/200/400",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/300/300"
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
-
     "CategoryId": 10,
     "UserId": 1,
     "Showcase": true,
@@ -228,8 +355,16 @@
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
     "Price": 150,
     "Photos": [{
-        "Url": "images/products/boot-ang2.png",
+        "Url": "https://picsum.photos/200/300"
+      }, {
+        "Url": "https://picsum.photos/300/400",
         "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/400/300"
+      }, {
+        "Url": "https://picsum.photos/500/300"
+      }, {
+        "Url": "https://picsum.photos/600/300"
       }
     ],
     "CategoryId": 11,
@@ -241,9 +376,17 @@
     "Name": "Angular Blue Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
-    "Photos": [{
-        "Url": "images/products/boot-ang1.png",
+	"Photos": [{
+        "Url": "images/products/sb-ang2.png"
+      }, {
+        "Url": "images/products/sb-core1.png",
         "IsMain": true
+      }, {
+        "Url": "images/products/sb-core2.png"
+      }, {
+        "Url": "images/products/sb-react1.png"
+      }, {
+        "Url": "images/products/sb-ts1.png"
       }
     ],
     "CategoryId": 12,

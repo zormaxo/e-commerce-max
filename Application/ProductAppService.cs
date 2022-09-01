@@ -35,7 +35,7 @@ public class ProductAppService : BaseAppService
         var filteredProducts = _productsRepo.GetAll()
             .Include(x => x.Category)
             .Include(x => x.ProductBrand)
-            .Include(x => x.Photos)
+            .Include(x => x.Photos.Where(y => y.IsMain))
             .Include(x => x.ProductMachine)
             .Include(x => x.County).ThenInclude(x => x.City)
             .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
@@ -43,6 +43,7 @@ public class ProductAppService : BaseAppService
             .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .Where(x => x.IsActive);
+            //.Where(x => x.Photos.FirstOrDefault(y => y.IsMain).Url);
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {

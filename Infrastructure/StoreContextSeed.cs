@@ -18,7 +18,7 @@ public class StoreContextSeed
         {
             if (!await context.Cities.AnyAsync())
             {
-                var cityData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/cities.json");
+                var cityData = await File.ReadAllTextAsync("../Infrastructure/SeedData/cities.json");
                 var cities = JsonSerializer.Deserialize<List<City>>(cityData);
 
                 context.Cities.AddRange(cities);
@@ -28,7 +28,7 @@ public class StoreContextSeed
 
             if (!await context.Counties.AnyAsync())
             {
-                var countyData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/counties.json");
+                var countyData = await File.ReadAllTextAsync("../Infrastructure/SeedData/counties.json");
                 var counties = JsonSerializer.Deserialize<List<County>>(countyData);
 
                 context.Counties.AddRange(counties);
@@ -38,7 +38,7 @@ public class StoreContextSeed
 
             if (!await context.Users.AnyAsync())
             {
-                var userData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/users.json");
+                var userData = await File.ReadAllTextAsync("../Infrastructure/SeedData/users.json");
                 var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
                 context.Users.AddRange(users);
@@ -59,7 +59,7 @@ public class StoreContextSeed
 
             if (!await context.ProductBrands.AnyAsync())
             {
-                var brandsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/brands.json");
+                var brandsData = await File.ReadAllTextAsync("../Infrastructure/SeedData/brands.json");
                 var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
                 context.ProductBrands.AddRange(brands);
@@ -69,7 +69,7 @@ public class StoreContextSeed
 
             if (!await context.Categories.AnyAsync())
             {
-                var typesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/categories.json");
+                var typesData = await File.ReadAllTextAsync("../Infrastructure/SeedData/categories.json");
                 var types = JsonSerializer.Deserialize<List<Category>>(typesData);
 
                 context.Categories.AddRange(types);
@@ -79,7 +79,7 @@ public class StoreContextSeed
 
             if (!await context.Products.AnyAsync())
             {
-                var productsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/products.json");
+                var productsData = await File.ReadAllTextAsync("../Infrastructure/SeedData/products.json");
                 var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
                 context.Products.AddRange(products);
@@ -89,7 +89,7 @@ public class StoreContextSeed
 
             if (!await context.ProductMachines.AnyAsync())
             {
-                var machinesData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/productMachines.json");
+                var machinesData = await File.ReadAllTextAsync("../Infrastructure/SeedData/productMachines.json");
                 var machines = JsonSerializer.Deserialize<List<ProductMachine>>(machinesData);
 
                 context.ProductMachines.AddRange(machines);
