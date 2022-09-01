@@ -18,6 +18,7 @@ import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
+import { SearchResultModule } from './search-result/search-result.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
     SharedModule,
     ShowcaseModule,
     MemberModule,
+    SearchResultModule,
     HomeModule,
   ],
   providers: [
