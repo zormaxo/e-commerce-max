@@ -3,7 +3,8 @@ import { MachineComponent } from './machine.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: MachineComponent },
+  // { path: '', component: MachineComponent },
+  { path: '', redirectTo: 'makine', pathMatch: 'full' },
   { path: ':subcategory', component: MachineComponent },
 ];
 

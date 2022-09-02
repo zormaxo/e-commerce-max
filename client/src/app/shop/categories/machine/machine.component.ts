@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
@@ -11,7 +11,7 @@ import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
   templateUrl: './machine.component.html',
   styleUrls: ['./machine.component.scss'],
 })
-export class MachineComponent implements OnInit {
+export class MachineComponent implements OnInit, AfterViewInit {
   @ViewChild('search', { static: false }) searchTerm: ElementRef;
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
@@ -24,7 +24,13 @@ export class MachineComponent implements OnInit {
 
   filterShopParams: ShopParams;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    this.shopParams.search = navigation?.extras?.state?.searchTerm;
+  }
+  ngAfterViewInit(): void {
+    this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {

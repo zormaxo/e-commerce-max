@@ -1,12 +1,37 @@
-<div *ngFor="let item of allCategories">
-  <ng-container *ngIf="item.parent === null && item.count">
-    <h5>{{ item.name }} - {{ item.count }}</h5>
-    <div *ngFor="let child of item.childCategories">
-        <div *ngIf="child.count">{{ child.name }} - {{ child.count }}</div>
+<div class="h5">
+  <span class="fw-bold">{{ shopParams.search }}</span> aramanız için
+  <span style="color: brown" class="fw-bold">{{ totalCount }}</span> ilan bulundu.
+</div>
+<hr />
+
+<div class="row">
+  <ng-container *ngFor="let item of allCategories">
+    <div class="col-2" *ngIf="item.parent === null && item.count">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <img src="{{ '../assets/icons/' + item.url + '.svg' }}" alt="" style="width: 50px" class="text-center" />
+          <div class="card-text">
+            <a class="small link-dark" [routerLink]="['/', item.url]" [state]="{ searchTerm: shopParams.search }">
+              {{ item.name }}
+              <div>
+                <span class="h5">{{ item.count }}</span> ilan
+              </div>
+            </a>
+            <hr />
+            <div class="small text-start" *ngFor="let child of item.childCategories">
+              <a
+                class="small link-dark"
+                *ngIf="child.count"
+                [routerLink]="['/', item.url, child.url]"
+                [state]="{ searchTerm: shopParams.search }">
+                {{ child.name }} ({{ child.count }})
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </ng-container>
 </div>
-<div *ngIf="!totalCount">
-  0 product found
-</div>
-
+<hr />
+<div *ngIf="!totalCount">0 product found</div>
