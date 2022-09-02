@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { ICategory } from 'src/app/shared/models/category';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from '../../_services/shop.service';
 
@@ -11,6 +12,7 @@ import { ShopService } from '../../_services/shop.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
+  parentCategories: ICategory[] = [];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -55,6 +57,17 @@ export class ProductDetailsComponent implements OnInit {
     this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product) => {
       this.product = product;
       this.galleryImages = this.getImages();
+      this.shopService.getCategories().subscribe((categories) => {
+        const selectedCategory = structuredClone(categories).find((x) => x.url == this.product.category.url);
+        this.fillParentCategoryList(selectedCategory);
+      });
     });
+  }
+
+  fillParentCategoryList(selectedCategory: ICategory) {
+    if (selectedCategory.parent) {
+      this.parentCategories.unshift(selectedCategory.parent);
+      this.fillParentCategoryList(selectedCategory.parent);
+    }
   }
 }

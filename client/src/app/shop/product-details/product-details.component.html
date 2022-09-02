@@ -1,4 +1,15 @@
 <ng-container *ngIf="product">
+  <nav style="background-color: #eaeaea; font-size: 0.9rem" class="p-1 mb-2">
+    <ol class="breadcrumb small m-0">
+      <li class="breadcrumb-item"><a routerLink="/">Anasayfa</a></li>
+      <li class="breadcrumb-item" *ngFor="let category of parentCategories">
+        <a [routerLink]="['/', parentCategories[0].url, category.url]">{{ category.name }}</a>
+      </li>
+      <li class="breadcrumb-item active text-dark">{{ this.product.category.name }}</li>
+    </ol>
+  </nav>
+</ng-container>
+<ng-container *ngIf="product">
   <div class="row">
     <h5>{{ product.name }}</h5>
     <hr />

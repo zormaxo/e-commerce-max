@@ -1,3 +1,5 @@
+using Application.Entities;
+
 namespace Core.Dtos
 {
     public class ProductToReturnDto
@@ -15,6 +17,7 @@ namespace Core.Dtos
         public bool IsNew { get; set; }
         public DateTime Created { get; set; }
         public MemberDto User { get; set; }
+        public Category Category { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
     }
 }

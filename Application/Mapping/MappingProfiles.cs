@@ -17,6 +17,7 @@ public class MappingProfiles : Profile
             .ForMember(d => d.County, o => o.MapFrom(s => s.County.CountyName))
             .ForMember(d => d.City, o => o.MapFrom(s => s.County.City.CityName))
             .ForMember(d => d.IsNew, o => o.MapFrom(s => s.ProductMachine.IsNew))
+            .ForMember(d => d.Category, o => o.MapFrom(s => s.Category))
             .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
 
         CreateMap<AppUser, MemberDto>();
