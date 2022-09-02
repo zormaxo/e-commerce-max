@@ -12,7 +12,7 @@ import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
   styleUrls: ['./machine.component.scss'],
 })
 export class MachineComponent implements OnInit {
-  @ViewChild('search', { static: true }) searchTerm: ElementRef;
+  @ViewChild('search', { static: false }) searchTerm: ElementRef;
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
@@ -79,7 +79,14 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  onSearchProduct() {
+  filterResults() {
+    this.shopParams.search = this.searchTerm.nativeElement.value;
     this.getProducts();
   }
+
+  // onSearch() {
+  //   this.shopParams.search = this.searchTerm.nativeElement.value;
+  //   this.shopParams.pageNumber = 1;
+  //   this.getProducts();
+  // }
 }

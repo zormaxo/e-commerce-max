@@ -40,7 +40,7 @@ public class ProductAppService : BaseAppService
             .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
             .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
             .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
-            .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
+            .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search.ToLower()))
             .Where(x => x.IsActive);
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))
@@ -92,9 +92,6 @@ public class ProductAppService : BaseAppService
             .Include(x => x.County).ThenInclude(x => x.City)
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
-        //var product = await _productsRepo.GetAll().Include(x => x.Photos).Where(x => x.Id == id).FirstOrDefaultAsync();
-        //var spec = new Products WithTypesAndBrandsSpecification(id);
-        //var product = await _productsRepo.GetEntityWithSpec(spec);
 
         if (product == null)
             throw new ApiException(System.Net.HttpStatusCode.NotFound, $"Product with id: {id} is not found.");

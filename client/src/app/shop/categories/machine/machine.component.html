@@ -100,12 +100,67 @@
           </div>
         </div>
       </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button
+            class="accordion-button collapsed px-3 py-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree">
+            Kelime ile filtrele
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse">
+          <div class="accordion-body px-3 py-2">
+            <input (keyup.enter)="filterResults()" type="text" class="form-control mr-2" #search placeholder="Ara" />
+          </div>
+        </div>
+      </div>
     </div>
     <div class="text-end">
-      <button class="btn btn-primary btn-sm mt-3 px-5" (click)="onSearchProduct()">Ara</button>
+      <button class="btn btn-primary mt-3 px-5" (click)="filterResults()">Ara</button>
     </div>
   </section>
   <section class="col-sm-8 col-md-9">
+    <div class="card">
+      <div class="card-body p-2">
+        <div class="card-text small">
+          Aramanızda <span style="color: brown" class="fw-bold">{{ totalCount }}</span> ilan bulundu
+        </div>
+        <div>
+          <div *ngIf="this.shopParams.search" class="small me-2" style="display: inline-block">
+            <span style="display: inline-block; vertical-align: middle" class="me-1">Arama kelimesi: </span>
+            <button class="btn btn-outline-warning btn-sm filter">
+              {{ this.shopParams.search }} <em class="fa-solid fa-xmark"></em>
+            </button>
+          </div>
+          <div *ngIf="this.shopParams.isNew" class="small me-2" style="display: inline-block">
+            <span style="display: inline-block; vertical-align: middle" class="me-1">Durumu: </span>
+            <button class="btn btn-outline-warning btn-sm filter">
+              {{ this.shopParams.isNew ? "Sıfır":"İkinci El" }} <em class="fa-solid fa-xmark"></em>
+            </button>
+          </div>
+          <div *ngIf="this.shopParams.minValue" class="small me-2" style="display: inline-block">
+            <span style="display: inline-block; vertical-align: middle" class="me-1">Kelime: </span>
+            <button class="btn btn-outline-warning btn-sm filter">
+              {{ this.shopParams.minValue }} <em class="fa-solid fa-xmark"></em>
+            </button>
+          </div>
+          <div *ngIf="this.shopParams.maxValue" class="small me-2" style="display: inline-block">
+            <span style="display: inline-block; vertical-align: middle" class="me-1">Kelime: </span>
+            <button class="btn btn-outline-warning btn-sm filter">
+              {{ this.shopParams.maxValue }} <em class="fa-solid fa-xmark"></em>
+            </button>
+          </div>
+          <div class="small" style="display: inline-block">
+            <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">Kelime: </span>
+            <button class="btn btn-outline-secondary btn-sm filter">
+              this.shopParams.search <em class="fa-solid fa-xmark"></em>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="d-none d-md-block">
       <table
         class="table table-sm table-striped table-hover table-bordered align-middle sortable"
