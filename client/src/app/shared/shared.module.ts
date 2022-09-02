@@ -7,10 +7,9 @@ import { PagerComponent } from './components/pager/pager.component';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
 
 @NgModule({
-  declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent],
+  declarations: [PagerComponent, PagingHeaderComponent],
   imports: [
     CommonModule,
     BsDropdownModule.forRoot(),
@@ -29,7 +28,6 @@ import { FilterSummaryComponent } from './components/filter-summary/filter-summa
     PagingHeaderComponent,
     PagerComponent,
     NgxGalleryModule,
-    FilterSummaryComponent,
   ],
 })
 export class SharedModule {}
