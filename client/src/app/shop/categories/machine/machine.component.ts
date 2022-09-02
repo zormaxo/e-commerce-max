@@ -17,16 +17,20 @@ export class MachineComponent implements OnInit {
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
   categoryGroupCount: CategoryGroupCount[];
+  categoryName: string;
   parentCategories: ICategory[];
   allCategories: ICategory[];
   selectedCategory: ICategory;
+
+  filterShopParams: ShopParams;
 
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.parentCategories = [];
-      this.shopParams.categoryName = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
+      this.shopParams.categoryName = this.categoryName =
+        this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.getCategoriesThenProducts();
     });
   }
@@ -79,14 +83,16 @@ export class MachineComponent implements OnInit {
     this.getProducts();
   }
 
-  filterResults() {
+  onSearch() {
     this.shopParams.search = this.searchTerm.nativeElement.value;
+    this.shopParams.pageNumber = 1;
+    this.filterShopParams = structuredClone(this.shopParams);
     this.getProducts();
   }
 
-  // onSearch() {
-  //   this.shopParams.search = this.searchTerm.nativeElement.value;
-  //   this.shopParams.pageNumber = 1;
-  //   this.getProducts();
-  // }
+  onResetClicked(event: ShopParams) {
+    this.shopParams = structuredClone(event);
+    this.shopParams.categoryName = this.categoryName;
+    this.getProducts();
+  }
 }
