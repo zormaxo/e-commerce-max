@@ -15,7 +15,7 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 8,
+    "CategoryId": 12,
     "UserId": 1,
     "Showcase": true,
     "CountyId": 34,
@@ -37,7 +37,7 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 8,
+    "CategoryId": 20,
     "UserId": 1,
     "Showcase": true,
     "CountyId": 123,
@@ -147,7 +147,7 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 11,
+    "CategoryId": 12,
     "UserId": 2,
     "Showcase": true,
     "CountyId": 555,
@@ -169,7 +169,7 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 11,
+    "CategoryId": 22,
     "UserId": 3,
     "Showcase": true,
     "CountyId": 487,
@@ -301,7 +301,7 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 8,
+    "CategoryId": 20,
     "UserId": 2,
     "Showcase": true,
     "CountyId": 459,
@@ -367,7 +367,7 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 11,
+    "CategoryId": 20,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 784,

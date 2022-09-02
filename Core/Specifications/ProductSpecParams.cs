@@ -18,19 +18,6 @@ public class ProductSpecParams : IPagedResultRequest
     public int? BrandId { get; set; }
     public string CategoryName { get; set; }
     public string Sort { get; set; }
-
-    public bool? GetAllStatus { get; set; }
-
-    public int? UserId
-    {
-        get; set;
-    }
-
-    public FilterParams FilterParams { get; set; }
-}
-
-public class FilterParams
-{
     private string _search;
 
     public string Search
@@ -42,4 +29,6 @@ public class FilterParams
     public bool? IsNew { get; set; }
     public int? MinValue { get; set; }
     public int? MaxValue { get; set; }
+    public bool? GetAllStatus { get; set; }
+    public int? UserId { get; set; }
 }

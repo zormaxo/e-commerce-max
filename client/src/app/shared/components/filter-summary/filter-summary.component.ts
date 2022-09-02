@@ -27,17 +27,41 @@ export class FilterSummaryComponent implements OnChanges {
   }
 
   onResetClick(event: SearchFilter) {
-    if (event == SearchFilter.isNew) {
-      this.filterShopParams.isNew = undefined;
-    } else {
-      this.filterShopParams = new ShopParams(10);
+    switch (event) {
+      case SearchFilter.isNew:
+        this.filterShopParams.isNew = undefined;
+        break;
+      case SearchFilter.price:
+        this.filterShopParams.minValue = undefined;
+        this.filterShopParams.maxValue = undefined;
+        this.price = undefined;
+        break;
+      case SearchFilter.search:
+        this.filterShopParams.search = undefined;
+        break;
+      default:
+        this.filterShopParams = undefined;
     }
-    this.resetClicked.emit(this.filterShopParams);
+
+    if (
+      this.filterShopParams &&
+      !this.filterShopParams.isNew &&
+      !this.filterShopParams.minValue &&
+      !this.filterShopParams.maxValue &&
+      !this.filterShopParams.search
+    ) {
+      this.filterShopParams = undefined;
+    }
+
+    this.resetClicked.emit(this.filterShopParams ?? new ShopParams(10));
+    console.log('ömer');
   }
 }
 
 export enum SearchFilter {
-  isNew = 'asc',
-  Desc = 'desc',
-  None = '',
+  isNew,
+  minValue,
+  maxValue,
+  search,
+  price,
 }

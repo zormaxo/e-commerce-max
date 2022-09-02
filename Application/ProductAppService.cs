@@ -37,10 +37,10 @@ public class ProductAppService : BaseAppService
             .Include(x => x.Photos.Where(y => y.IsMain))
             .Include(x => x.ProductMachine)
             .Include(x => x.County).ThenInclude(x => x.City)
-            .WhereIf(productParams.FilterParams.MaxValue.HasValue, p => p.Price < productParams.FilterParams.MaxValue)
-            .WhereIf(productParams.FilterParams.MinValue.HasValue, p => p.Price > productParams.FilterParams.MinValue)
-            .WhereIf(productParams.FilterParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.FilterParams.IsNew)
-            .WhereIf(!string.IsNullOrEmpty(productParams.FilterParams.Search), p => p.Name.ToLower().Contains(productParams.FilterParams.Search))
+            .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
+            .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
+            .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
+            .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .Where(x => x.IsActive);
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))

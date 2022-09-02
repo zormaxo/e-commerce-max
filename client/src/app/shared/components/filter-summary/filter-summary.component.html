@@ -6,7 +6,7 @@
     <div *ngIf="filterShopParams">
       <div *ngIf="this.filterShopParams.search" class="small me-2" style="display: inline-block">
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">Arama kelimesi: </span>
-        <button class="btn btn-outline-secondary btn-sm filter">
+        <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.search)">
           {{ this.filterShopParams.search }} <em class="fa-solid fa-xmark"></em>
         </button>
       </div>
@@ -18,7 +18,9 @@
       </div>
       <div *ngIf="this.price" class="small me-2" style="display: inline-block">
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">Fiyat: </span>
-        <button class="btn btn-outline-secondary btn-sm filter">{{ price }} <em class="fa-solid fa-xmark"></em></button>
+        <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.price)">
+          {{ price }} <em class="fa-solid fa-xmark"></em>
+        </button>
       </div>
       <button class="btn btn-outline-danger btn-sm filter ms-4" (click)="onResetClick()">Tümünü Temizle</button>
     </div>
