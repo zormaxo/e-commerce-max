@@ -125,7 +125,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products" style="line-height: 20px; height: 100px">
+          <tr
+            *ngFor="let product of products"
+            style="line-height: 20px; height: 100px"
+            routerLink="/product/{{ product.id }}">
             <td>
               <img src="{{ product.pictureUrl }}" style="max-height: 100px" class="img-fluid rounded" alt="..." />
             </td>

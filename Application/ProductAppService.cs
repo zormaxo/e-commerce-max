@@ -88,8 +88,9 @@ public class ProductAppService : BaseAppService
         var product = await _productsRepo.GetAll()
             .Include(x => x.Category)
             .Include(x => x.Photos)
-            .Include(x=>x.User)
+            .Include(x => x.User)
             .Include(x => x.County).ThenInclude(x => x.City)
+            .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
         //var product = await _productsRepo.GetAll().Include(x => x.Photos).Where(x => x.Id == id).FirstOrDefaultAsync();
         //var spec = new Products WithTypesAndBrandsSpecification(id);
