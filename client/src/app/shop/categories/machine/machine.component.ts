@@ -92,6 +92,7 @@ export class MachineComponent implements OnInit {
 
   onResetClicked(event: ShopParams) {
     this.shopParams = structuredClone(event);
+    this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
     this.shopParams.categoryName = this.categoryName;
     this.getProducts();
   }

@@ -37,7 +37,7 @@ export class FilterSummaryComponent implements OnChanges {
         this.price = undefined;
         break;
       case SearchFilter.search:
-        this.filterShopParams.search = undefined;
+        this.filterShopParams.search = '';
         break;
       default:
         this.filterShopParams = undefined;

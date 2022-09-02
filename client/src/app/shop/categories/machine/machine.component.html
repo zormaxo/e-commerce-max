@@ -110,7 +110,7 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse">
           <div class="accordion-body px-3 py-2">
-            <input (keyup.enter)="filterResults()" type="text" class="form-control mr-2" #search placeholder="Ara" />
+            <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #search placeholder="Ara" />
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@
       <app-pager [pageSize]="shopParams.pageSize" [totalCount]="totalCount" (pageChanged)="onPageChanged($event)">
       </app-pager>
     </div>
-    <div class="d-flex justify-content-between align-items-center pb-2">
+    <div class="d-flex justify-content-center pb-2">
       <app-paging-header
         [totalCount]="totalCount"
         [pageSize]="shopParams.pageSize"
