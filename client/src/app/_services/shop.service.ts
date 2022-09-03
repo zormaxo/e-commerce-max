@@ -113,10 +113,10 @@ export class ShopService {
     }
   }
 
-  addCountToParent(selectedCategory: ICategory, count: number) {
+  addCountToParents(selectedCategory: ICategory, count: number) {
     if (selectedCategory.parent) {
       selectedCategory.parent.count += count;
-      this.addCountToParent(selectedCategory.parent, count);
+      this.addCountToParents(selectedCategory.parent, count);
     }
   }
 

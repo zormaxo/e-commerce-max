@@ -48,7 +48,7 @@ export class ShowcaseComponent implements OnInit {
         this.categoryGroupCount.forEach((groupCount) => {
           const category = this.categories.find((x) => x.id == groupCount.categoryId);
           category.count = groupCount.count;
-          this.shopService.addCountToParent(category, groupCount.count);
+          this.shopService.addCountToParents(category, groupCount.count);
         });
       },
     });

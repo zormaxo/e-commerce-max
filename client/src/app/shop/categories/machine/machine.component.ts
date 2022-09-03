@@ -18,13 +18,12 @@ export class MachineComponent implements OnInit, AfterViewInit {
   totalCount: number;
   categoryGroupCount: CategoryGroupCount[];
   categoryName: string;
-  parentCategories: ICategory[];
   allCategories: ICategory[];
   selectedCategory: ICategory;
 
   filterShopParams: ShopParams;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) {
+  constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
   }
@@ -34,7 +33,6 @@ export class MachineComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
-      this.parentCategories = [];
       this.shopParams.categoryName = this.categoryName =
         this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.getCategoriesThenProducts();
@@ -43,21 +41,14 @@ export class MachineComponent implements OnInit, AfterViewInit {
 
   getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((categories) => {
-      this.allCategories = structuredClone(categories);
+      this.allCategories = categories;
       this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
       }
-      this.fillParentCategoryList(this.selectedCategory);
+      this.shopService.fillParentCategoryList(this.selectedCategory.id);
       this.getProducts();
     });
-  }
-
-  fillParentCategoryList(selectedCategory: ICategory) {
-    if (selectedCategory.parent) {
-      this.parentCategories.unshift(selectedCategory.parent);
-      this.fillParentCategoryList(selectedCategory.parent);
-    }
   }
 
   getProducts() {
@@ -72,7 +63,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
       this.categoryGroupCount.forEach((groupCount) => {
         const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
         category.count = groupCount.count;
-        this.shopService.addCountToParent(category, groupCount.count);
+        this.shopService.addCountToParents(category, groupCount.count);
       });
     });
   }

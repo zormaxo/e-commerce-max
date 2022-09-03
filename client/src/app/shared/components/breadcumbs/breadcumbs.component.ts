@@ -8,7 +8,8 @@ import { ICategory } from '../../models/category';
   styleUrls: ['./breadcumbs.component.scss'],
 })
 export class BreadcumbsComponent implements OnChanges {
-  @Input() parentCategories: ICategory[] = [];
+  @Input() allCategories: ICategory[];
+  @Input() parentCategories: ICategory[];
   @Input() selectedCategoryId: number;
 
   selectedCategory: ICategory;
@@ -16,8 +17,14 @@ export class BreadcumbsComponent implements OnChanges {
   constructor(private shopService: ShopService) {}
 
   ngOnChanges(): void {
-    this.shopService.getCategories().subscribe((categories) => {
-      this.selectedCategory = categories.find((x) => x.id == this.selectedCategoryId);
-    });
+    if (this.allCategories == undefined) {
+      this.shopService.getCategories().subscribe((categories) => {
+        this.selectedCategory = categories.find((x) => x.id == this.selectedCategoryId);
+        this.allCategories = categories;
+      });
+    }
+    else{
+      this.selectedCategory = this.allCategories.find((x) => x.id == this.selectedCategoryId);
+    }
   }
 }
