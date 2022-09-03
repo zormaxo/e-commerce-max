@@ -1,4 +1,4 @@
-<ng-container *ngIf="parentCategories">
+<ng-container *ngIf="shopService.parentCategories$ | async as parentCategories">
   <nav style="background-color: #eaeaea; font-size: 0.9rem" class="p-1 mb-2">
     <ol class="breadcrumb small m-0">
       <li class="breadcrumb-item"><a routerLink="/">Anasayfa</a></li>

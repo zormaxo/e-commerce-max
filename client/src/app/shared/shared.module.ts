@@ -10,9 +10,10 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
 import { BreadcumbsComponent } from './components/breadcumbs/breadcumbs.component';
 import { RouterModule } from '@angular/router';
+import { LeftNavComponent } from './components/left-nav/left-nav.component';
 
 @NgModule({
-  declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent],
+  declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent, LeftNavComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -34,6 +35,7 @@ import { RouterModule } from '@angular/router';
     NgxGalleryModule,
     FilterSummaryComponent,
     BreadcumbsComponent,
+    LeftNavComponent,
   ],
 })
 export class SharedModule {}

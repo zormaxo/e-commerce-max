@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ShopService } from 'src/app/_services/shop.service';
 import { ICategory } from '../../models/category';
 
@@ -9,22 +9,22 @@ import { ICategory } from '../../models/category';
 })
 export class BreadcumbsComponent implements OnChanges {
   @Input() allCategories: ICategory[];
-  @Input() parentCategories: ICategory[];
   @Input() selectedCategoryId: number;
 
   selectedCategory: ICategory;
 
-  constructor(private shopService: ShopService) {}
+  constructor(public shopService: ShopService) {}
 
   ngOnChanges(): void {
     if (this.allCategories == undefined) {
       this.shopService.getCategories().subscribe((categories) => {
-        this.selectedCategory = categories.find((x) => x.id == this.selectedCategoryId);
         this.allCategories = categories;
+        this.selectedCategory = categories.find((x) => x.id == this.selectedCategoryId);
+        this.shopService.fillParentCategoryList(this.selectedCategory);
       });
-    }
-    else{
+    } else {
       this.selectedCategory = this.allCategories.find((x) => x.id == this.selectedCategoryId);
+      this.shopService.fillParentCategoryList(this.selectedCategory);
     }
   }
 }

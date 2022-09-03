@@ -120,14 +120,10 @@ export class ShopService {
     }
   }
 
-  fillParentCategoryList(selectedCategoryId: number): void {
+  fillParentCategoryList(selectedCategory: ICategory): void {
     const parentCategories: ICategory[] = [];
-    let selectedCategory: ICategory;
-    this.getCategories().subscribe((categories) => {
-      selectedCategory = categories.find((x) => x.id == selectedCategoryId);
-      fillList(selectedCategory);
-      this.parentCategoriesSource.next(parentCategories);
-    });
+    fillList(selectedCategory);
+    this.parentCategoriesSource.next(parentCategories);
 
     function fillList(selectedCategory: ICategory) {
       if (selectedCategory.parent) {

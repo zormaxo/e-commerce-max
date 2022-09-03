@@ -46,7 +46,6 @@ export class MachineComponent implements OnInit, AfterViewInit {
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
       }
-      this.shopService.fillParentCategoryList(this.selectedCategory.id);
       this.getProducts();
     });
   }
