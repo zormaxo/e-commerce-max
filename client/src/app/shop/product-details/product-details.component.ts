@@ -16,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute) {}
+  constructor(public shopService: ShopService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadProduct();
@@ -57,17 +57,7 @@ export class ProductDetailsComponent implements OnInit {
     this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product) => {
       this.product = product;
       this.galleryImages = this.getImages();
-      this.shopService.getCategories().subscribe((categories) => {
-        const selectedCategory = structuredClone(categories).find((x) => x.url == this.product.category.url);
-        this.fillParentCategoryList(selectedCategory);
-      });
-    });
-  }
-
-  fillParentCategoryList(selectedCategory: ICategory) {
-    if (selectedCategory.parent) {
-      this.parentCategories.unshift(selectedCategory.parent);
-      this.fillParentCategoryList(selectedCategory.parent);
-    }
+      this.shopService.fillParentCategoryList(product.category.id)
+    });    
   }
 }

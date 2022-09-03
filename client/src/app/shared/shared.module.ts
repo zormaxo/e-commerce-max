@@ -8,11 +8,14 @@ import { PagingHeaderComponent } from './components/paging-header/paging-header.
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
+import { BreadcumbsComponent } from './components/breadcumbs/breadcumbs.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent],
+  declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent],
   imports: [
     CommonModule,
+    RouterModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
@@ -30,6 +33,7 @@ import { FilterSummaryComponent } from './components/filter-summary/filter-summa
     PagerComponent,
     NgxGalleryModule,
     FilterSummaryComponent,
+    BreadcumbsComponent,
   ],
 })
 export class SharedModule {}

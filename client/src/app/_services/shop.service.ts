@@ -5,7 +5,7 @@ import { IPagination } from '../shared/models/pagination';
 import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
-import { of } from 'rxjs';
+import { of, ReplaySubject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
 
 @Injectable({
@@ -15,6 +15,8 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
 
   categories: ICategory[];
+  private parentCategoriesSource = new ReplaySubject<ICategory[]>(1);
+  parentCategories$ = this.parentCategoriesSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -115,6 +117,23 @@ export class ShopService {
     if (selectedCategory.parent) {
       selectedCategory.parent.count += count;
       this.addCountToParent(selectedCategory.parent, count);
+    }
+  }
+
+  fillParentCategoryList(selectedCategoryId: number): void {
+    const parentCategories: ICategory[] = [];
+    let selectedCategory: ICategory;
+    this.getCategories().subscribe((categories) => {
+      selectedCategory = categories.find((x) => x.id == selectedCategoryId);
+      fillList(selectedCategory);
+      this.parentCategoriesSource.next(parentCategories);
+    });
+
+    function fillList(selectedCategory: ICategory) {
+      if (selectedCategory.parent) {
+        parentCategories.unshift(selectedCategory.parent);
+        fillList(selectedCategory.parent);
+      }
     }
   }
 }
