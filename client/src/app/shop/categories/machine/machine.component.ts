@@ -27,6 +27,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
   }
+  
   ngAfterViewInit(): void {
     this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
   }

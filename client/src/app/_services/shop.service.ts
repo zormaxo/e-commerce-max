@@ -15,8 +15,8 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
 
   categories: ICategory[];
-  private parentCategoriesSource = new ReplaySubject<ICategory[]>(1);
-  parentCategories$ = this.parentCategoriesSource.asObservable();
+  private customCategorySource = new ReplaySubject(1);
+  customCategory$ = this.customCategorySource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -120,10 +120,14 @@ export class ShopService {
     }
   }
 
-  fillParentCategoryList(selectedCategory: ICategory): void {
+  generateCustomCategory(selectedCategoryId: number): void {
     const parentCategories: ICategory[] = [];
-    fillList(selectedCategory);
-    this.parentCategoriesSource.next(parentCategories);
+    let selectedCategory;
+    this.getCategories().subscribe((categories) => {
+      selectedCategory = categories.find((x) => x.id == selectedCategoryId);
+      fillList(selectedCategory);
+      this.customCategorySource.next({ selectedCategory, parentCategories });
+    });
 
     function fillList(selectedCategory: ICategory) {
       if (selectedCategory.parent) {
