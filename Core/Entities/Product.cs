@@ -1,3 +1,4 @@
+using Core.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Application.Entities
@@ -22,7 +23,9 @@ namespace Application.Entities
         public int CountyId { get; set; }
         public bool Showcase { get; set; }
         public bool IsActive { get; set; }
+        public int Currency { get; set; }
         public ProductMachine ProductMachine { get; set; }
         public ICollection<Photo> Photos { get; set; }
+
     }
 }

@@ -1,5 +1,5 @@
 using Application.Entities;
-using Application.EntityConfigurations;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
@@ -20,6 +20,7 @@ public class StoreContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<County> Counties { get; set; }
+    public DbSet<Currency> Currency { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

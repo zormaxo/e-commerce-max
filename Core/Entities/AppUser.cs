@@ -1,6 +1,7 @@
+using Application.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Entities
+namespace Core.Entities
 {
     public class AppUser : FullAuditableEntity
     {

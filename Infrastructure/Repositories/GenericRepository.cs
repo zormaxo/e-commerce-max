@@ -1,6 +1,6 @@
-using Application.Entities;
 using Application.Interfaces;
 using Application.Specifications;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

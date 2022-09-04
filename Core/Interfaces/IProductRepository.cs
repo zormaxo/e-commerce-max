@@ -1,4 +1,5 @@
 using Application.Entities;
+using Core.Entities;
 
 namespace Application.Interfaces
 {

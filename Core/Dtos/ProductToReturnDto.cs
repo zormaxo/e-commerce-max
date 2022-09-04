@@ -1,4 +1,4 @@
-using Application.Entities;
+using Core.Entities;
 
 namespace Core.Dtos
 {

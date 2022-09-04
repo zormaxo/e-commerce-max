@@ -4,8 +4,11 @@ using Application.Interfaces;
 using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
+using Core.Entities;
 using Core.Errors;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using RestSharp;
 using Service.Helpers;
 using System.Linq.Dynamic.Core;
 
@@ -21,8 +24,7 @@ public class ProductAppService : BaseAppService
     public ProductAppService(IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
-        CachedItems cachedItems,
-        IMapper mapper) : base(mapper)
+        CachedItems cachedItems, IMapper mapper, StoreContext context) : base(mapper, context)
     {
         _productsRepo = productsRepo;
         _categoryRepo = categoryRepo;
@@ -106,9 +108,11 @@ public class ProductAppService : BaseAppService
 
     public async Task<IReadOnlyList<Category>> GetCategories()
     {
+        Task getCurrency = GetCurrency();
         if (_cachedItems.Categories.Count == 0)
             _cachedItems.Categories = await _categoryRepo.ListAllAsync();
 
+        getCurrency.Wait();
         return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
     }
 
@@ -137,5 +141,18 @@ public class ProductAppService : BaseAppService
         }
 
         return categoryIds;
+    }
+
+    public async Task GetCurrency()
+    {
+        var client = new RestClient($"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
+        var request = new RestRequest();
+        var response = await client.GetAsync(request);
+
+        var currencyDto = JsonConvert.DeserializeObject<CurrencyDto>(response.Content);
+        var currency = _mapper.Map<Currency>(currencyDto);
+
+        _context.Add(currency);
+        await _context.SaveChangesAsync();
     }
 }

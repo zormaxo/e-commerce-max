@@ -1,5 +1,5 @@
-using Application.Entities;
 using Core.Dtos;
+using Core.Entities;
 
 namespace Application.Interfaces
 {

@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Application.Entities;
+using System.ComponentModel.DataAnnotations;
 
-namespace Application.Entities
+namespace Core.Entities;
+
+public class City : BaseEntity
 {
-    public class City : BaseEntity
-    {
-        [Required]
-        public string CityName { get; set; }
-        public ICollection<County> Counties { get; set; }
-    }
+    [Required]
+    public string CityName { get; set; }
+    public ICollection<County> Counties { get; set; }
 }

@@ -1,6 +1,7 @@
 using Application.Entities;
 using AutoMapper;
 using Core.Dtos;
+using Core.Entities;
 
 namespace Application.Mapping;
 
@@ -23,6 +24,11 @@ public class MappingProfiles : Profile
         CreateMap<AppUser, MemberDto>();
         CreateMap<Photo, PhotoDto>()
             .ForMember(d => d.Url, o => o.MapFrom<PhotoUrlResolver>());
+        CreateMap<CurrencyDto, Currency>()
+            .ForMember(d => d.Eur, o => o.MapFrom(s => s.Rates.EUR))
+            .ForMember(d => d.Try, o => o.MapFrom(s => s.Rates.TRY))
+            .ForMember(d => d.Gbp, o => o.MapFrom(s => s.Rates.GBP))
+            .ForMember(d => d.Usd, o => o.MapFrom(s => s.Rates.USD));
     }
 
     public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

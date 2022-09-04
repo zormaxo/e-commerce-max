@@ -3,16 +3,18 @@ using System;
 using Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Application.Data.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220903213249_Update1")]
+    partial class Update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -263,17 +265,17 @@ namespace Application.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Eur")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Eur")
+                        .HasColumnType("TEXT");
 
-                    b.Property<double>("Gbp")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Gbp")
+                        .HasColumnType("TEXT");
 
-                    b.Property<double>("Try")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Try")
+                        .HasColumnType("TEXT");
 
-                    b.Property<double>("Usd")
-                        .HasColumnType("REAL");
+                    b.Property<string>("Usd")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

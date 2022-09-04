@@ -1,4 +1,4 @@
-namespace Application.Entities
+namespace Core.Entities
 {
     public class BaseAuditableEntity : BaseEntity
     {

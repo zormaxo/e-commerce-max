@@ -1,8 +1,8 @@
-using Application.Entities;
 using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Core.Dtos;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Repositories;

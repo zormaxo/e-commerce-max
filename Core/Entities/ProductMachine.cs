@@ -1,3 +1,5 @@
+using Core.Entities;
+
 namespace Application.Entities
 {
     public class ProductMachine : BaseAuditableEntity

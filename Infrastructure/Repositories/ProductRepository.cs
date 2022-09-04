@@ -1,5 +1,6 @@
 using Application.Entities;
 using Application.Interfaces;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Repositories;

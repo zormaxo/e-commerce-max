@@ -1,4 +1,5 @@
 using Application.Entities;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
@@ -88,6 +89,16 @@ public class StoreContextSeed
             }
 
             if (!await context.ProductMachines.AnyAsync())
+            {
+                var machinesData = await File.ReadAllTextAsync("../Infrastructure/SeedData/productMachines.json");
+                var machines = JsonSerializer.Deserialize<List<ProductMachine>>(machinesData);
+
+                context.ProductMachines.AddRange(machines);
+
+                await context.SaveChangesAsync();
+            }
+
+            if (!await context.Currency.Where(x=>x.Date.Date == DateTime.Now.Date).AnyAsync())
             {
                 var machinesData = await File.ReadAllTextAsync("../Infrastructure/SeedData/productMachines.json");
                 var machines = JsonSerializer.Deserialize<List<ProductMachine>>(machinesData);
