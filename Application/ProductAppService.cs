@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RestSharp;
 using Service.Helpers;
-using System.Linq.Dynamic.Core;
 
 namespace Application;
 
@@ -54,7 +53,7 @@ public class ProductAppService : BaseAppService
         }
 
         var pagedAndfilteredProducts = filteredProducts
-            .EfBigOrderBy(productParams.Sort ?? "name asc")
+            .EfBigOrderBy(productParams.Sort, _cachedItems)
             .EfBigPageBy(productParams);
 
         var catGrpCountList = filteredProducts.GroupBy(x => x.CategoryId)

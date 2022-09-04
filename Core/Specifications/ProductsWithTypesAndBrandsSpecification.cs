@@ -1,5 +1,5 @@
-using Application.Entities;
 using Application.Specification;
+using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Specifications

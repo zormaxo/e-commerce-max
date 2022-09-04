@@ -1,5 +1,5 @@
 using Application;
-using Application.Entities;
+using Core.Entities;
 using Core.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

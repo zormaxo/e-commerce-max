@@ -1,6 +1,6 @@
-using Application.Entities;
 using AutoMapper;
 using Core.Dtos;
+using Core.Entities;
 using Microsoft.Extensions.Configuration;
 
 namespace Application.Mapping;

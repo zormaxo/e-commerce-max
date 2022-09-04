@@ -1,5 +1,5 @@
-using Application.Entities;
 using Application.Specification;
+using Core.Entities;
 
 namespace Application.Specifications
 {
