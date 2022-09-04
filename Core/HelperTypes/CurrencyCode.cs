@@ -1,10 +1,10 @@
 ﻿namespace Core.HelperTypes
 {
-
     public enum CurrencyCode
     {
-        TRY,
+        TRY = 1,
         USD,
         EUR,
+        GBP
     }
 }

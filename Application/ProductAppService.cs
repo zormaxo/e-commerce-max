@@ -6,6 +6,7 @@ using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Core.Errors;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RestSharp;
@@ -53,8 +54,8 @@ public class ProductAppService : BaseAppService
         }
 
         var pagedAndfilteredProducts = filteredProducts
-            .OrderBy(productParams.Sort ?? "name asc")
-            .PageBy(productParams);
+            .EfBigOrderBy(productParams.Sort ?? "name asc")
+            .EfBigPageBy(productParams);
 
         var catGrpCountList = filteredProducts.GroupBy(x => x.CategoryId)
             .Select(n => new CategoryGroupCount
@@ -65,6 +66,7 @@ public class ProductAppService : BaseAppService
 
         var totalItems = catGrpCountList.Count == 0 ?
             0 : catGrpCountList.Select(x => x.Count).Aggregate((a, b) => a + b);
+
         var products = await pagedAndfilteredProducts.ToListAsync();
 
         var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);

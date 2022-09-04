@@ -3,9 +3,9 @@
     public class Currency : BaseEntity
     {
         public DateTime Date { get; set; }
-        public double Try { get; set; }
-        public double Usd { get; set; }
-        public double Eur { get; set; }
-        public double Gbp { get; set; }
+        public decimal Try { get; set; }
+        public decimal Usd { get; set; }
+        public decimal Eur { get; set; }
+        public decimal Gbp { get; set; }
     }
 }

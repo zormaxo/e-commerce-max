@@ -20,21 +20,21 @@
 
     public class Rates
     {
-        public double TRY { get; set; }
+        //public double TRY { get; set; }
         //public string GBP { get; set; }
         //public string EUR { get; set; }
         //public string USD { get; set; }
 
-        //private double _try;
-        //public double TRY
-        //{
-        //    get => _try;
-        //    set
-        //    {
-        //        _ = double.TryParse($"{value:F2}", out double newValue);
-        //        _try = newValue;
-        //    }
-        //}
+        private double _try;
+        public double TRY
+        {
+            get => _try;
+            set
+            {
+                _ = double.TryParse($"{value:F2}", out double newValue);
+                _try = newValue;
+            }
+        }
 
         private double _gbp;
 

@@ -1,4 +1,6 @@
 using Application;
+using AutoMapper;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -16,8 +18,10 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<StoreContext>();
+                var mapper = services.GetRequiredService<IMapper>();
+                var cahcedItems = services.GetRequiredService<CachedItems>();
                 await context.Database.MigrateAsync();
-                await StoreContextSeed.SeedAsync(context, loggerFactory);
+                await StoreContextSeed.SeedAsync(context, loggerFactory, mapper, cahcedItems);
             }
             catch (Exception ex)
             {
