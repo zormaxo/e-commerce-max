@@ -42,7 +42,7 @@ export class ShowcaseComponent implements OnInit {
   getCategories() {
     this.shopService.getCategories().subscribe({
       next: (response) => {
-        this.categories = structuredClone(response);
+        this.categories = response;
 
         this.categories.forEach((category) => (category.count = 0));
         this.categoryGroupCount.forEach((groupCount) => {

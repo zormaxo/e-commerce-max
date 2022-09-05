@@ -1,7 +1,12 @@
 <div class="row">
   <app-breadcumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcumbs>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
-    <app-left-nav *ngIf="products" [selectedCategoryId]="selectedCategory.id" [products]="products"></app-left-nav>
+    <app-left-nav
+      *ngIf="products"
+      [selectedCategoryId]="selectedCategory.id"
+      [products]="products"
+      [selectedCategory]="selectedCategory"
+      [allCategories]="allCategories"></app-left-nav>
     <div class="accordion mt-3">
       <div class="accordion-item">
         <h2 class="accordion-header">

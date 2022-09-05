@@ -1,4 +1,51 @@
-<div *ngIf="shopService.customCategory$ | async as customCategory">
+<div>
+  <div class="card small overflow-auto" style="height: 200px">
+    <ul class="list-group list-group-flush" *ngIf="products">
+      <ng-container *ngFor="let category of parentCategories; let i = index">
+        <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
+          <a class="link-dark" [routerLink]="['/', parentCategories[0].url, category.url]">
+            {{ category.name }}</a
+          >
+        </li>
+      </ng-container>
+      <li
+        class="list-group-item link-dark"
+        [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 1) + 'px' }">
+        <a
+          class="link-dark"
+          [routerLink]="
+            parentCategories[0]
+              ? ['/', parentCategories[0].url, selectedCategory.url]
+              : ['/', selectedCategory.url, selectedCategory.url]
+          ">
+          {{ selectedCategory.name }}</a
+        >
+        <span *ngIf="!selectedCategory.childCategories" class="small text-muted">
+          ({{ selectedCategory.count }})</span
+        >
+      </li>
+      <ng-container *ngFor="let child of selectedCategory.childCategories">
+        <li
+          class="list-group-item"
+          *ngIf="child.count"
+          [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 2) + 'px' }">
+          <a
+            class="text-dark"
+            [routerLink]="
+              parentCategories[0]
+                ? ['/', parentCategories[0].url, child.url]
+                : ['/', selectedCategory.url, child.url]
+            "
+            >{{ child.name }}</a
+          >
+          <span class="small text-muted"> ({{ child.count }})</span>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
+
+<!-- <div *ngIf="shopService.customCategory$ | async as customCategory">
   <div class="card small overflow-auto" style="height: 200px">
     <ul class="list-group list-group-flush" *ngIf="products">
       <ng-container *ngFor="let category of customCategory.parentCategories; let i = index">
@@ -43,4 +90,4 @@
       </ng-container>
     </ul>
   </div>
-</div>
+</div> -->

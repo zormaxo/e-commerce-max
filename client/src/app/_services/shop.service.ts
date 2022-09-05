@@ -109,11 +109,11 @@ export class ShopService {
           this.categories.forEach((x) => {
             pushChildCategories(x);
           });
-          return this.categories;
+          return structuredClone(this.categories);
         })
       );
     } else {
-      return of(this.categories);
+      return of(structuredClone(this.categories));
     }
   }
 

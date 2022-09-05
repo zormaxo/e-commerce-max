@@ -9,9 +9,7 @@ import { IProduct } from '../../models/product';
   styleUrls: ['./left-nav.component.scss'],
 })
 export class LeftNavComponent implements OnChanges {
-  @Input() selectedCategoryId: number;
   @Input() products: IProduct[];
-
   @Input() allCategories: ICategory[];
   @Input() selectedCategory: ICategory;
   parentCategories: ICategory[] = [];
@@ -19,13 +17,14 @@ export class LeftNavComponent implements OnChanges {
   constructor(public shopService: ShopService) {}
 
   ngOnChanges(): void {
-    this.shopService.generateFilteredCategory(this.selectedCategoryId);
+    this.parentCategories = [];
+    this.fillParents(this.selectedCategory);
   }
 
-  fillList(selectedCategory: ICategory) {
+  fillParents(selectedCategory: ICategory) {
     if (selectedCategory.parent) {
       this.parentCategories.unshift(selectedCategory.parent);
-      this.fillList(selectedCategory.parent);
+      this.fillParents(selectedCategory.parent);
     }
   }
 }

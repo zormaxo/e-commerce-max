@@ -44,7 +44,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
 
   getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((categories) => {
-      this.allCategories = structuredClone(categories);
+      this.allCategories = categories;
       this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
