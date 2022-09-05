@@ -143,21 +143,12 @@ export class ShopService {
   }
 
   generateFilteredCategory(selectedCategoryId: number): void {
-    // const parentCategories: ICategory[] = [];
     let selectedCategory: ICategory;
     this.getCategories().subscribe((categories) => {
       selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
-      // fillParentList(selectedCategory);
       const parentCategories = this.fillParentCategoryList(selectedCategory);
       this.customCategorySource.next({ selectedCategory, parentCategories });
     });
-
-    // function fillParentList(selectedCategory: ICategory) {
-    //   if (selectedCategory.parent) {
-    //     parentCategories.unshift(selectedCategory.parent);
-    //     fillParentList(selectedCategory.parent);
-    //   }
-    // }
   }
 
   fillParentCategoryList(selectedCategory: ICategory): ICategory[] {
@@ -171,5 +162,14 @@ export class ShopService {
         fillList(selectedCategory.parent);
       }
     }
+  }
+
+  formData;
+  public setFormData(formData: any): void {
+    this.formData = formData;
+  }
+
+  public getFormData(): any {
+    return this.formData;
   }
 }

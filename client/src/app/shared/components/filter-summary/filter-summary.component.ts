@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { ShopService } from 'src/app/_services/shop.service';
+import { IAddress } from '../../models/address';
 import { CurrencyType } from '../../models/currency';
 import { ShopParams } from '../../models/shopParams';
 
@@ -11,6 +12,7 @@ import { ShopParams } from '../../models/shopParams';
 export class FilterSummaryComponent implements OnChanges {
   @Input() filterShopParams: ShopParams;
   @Input() totalCount: number;
+  @Input() cities: IAddress[];
   @Output() resetClicked = new EventEmitter<ShopParams>();
 
   searchFilter = SearchFilter;
@@ -43,10 +45,10 @@ export class FilterSummaryComponent implements OnChanges {
         this.filterShopParams.search = this.shopService.searchTerm = '';
         break;
       case SearchFilter.cityId:
-        this.filterShopParams.cityId = '';
+        this.filterShopParams.cityId = 0;
         break;
       case SearchFilter.countyId:
-        this.filterShopParams.countyId = '';
+        this.filterShopParams.countyId = 0;
         break;
       default:
         this.filterShopParams = undefined;
@@ -65,6 +67,14 @@ export class FilterSummaryComponent implements OnChanges {
 
     this.resetClicked.emit(this.filterShopParams ?? new ShopParams(10));
     console.log('ömer');
+  }
+
+  getCityName(cityId: number) {
+    return this.cities.find((x) => x.id == cityId).name;
+  }
+
+  getCountyName(cityId: number, countyId: number) {
+    return this.cities.find((x) => x.id == cityId).counties.find((x) => x.id == countyId).name;
   }
 }
 

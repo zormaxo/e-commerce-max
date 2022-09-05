@@ -16,16 +16,17 @@
           {{ this.filterShopParams.isNew ? "Sıfır" : "İkinci El" }} <em class="fa-solid fa-xmark"></em>
         </button>
       </div>
-      <div *ngIf="this.filterShopParams.cityId" class="small me-2" style="display: inline-block">
+      <div *ngIf="this.filterShopParams.cityId && cities" class="small me-2" style="display: inline-block">
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">İl: </span>
         <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.city)">
-          {{ this.filterShopParams.cityId }} <em class="fa-solid fa-xmark"></em>
+          {{ getCityName(this.filterShopParams.cityId) }} <em class="fa-solid fa-xmark"></em>
         </button>
       </div>
-      <div *ngIf="this.filterShopParams.countyId" class="small me-2" style="display: inline-block">
+      <div *ngIf="this.filterShopParams.countyId && cities" class="small me-2" style="display: inline-block">
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">İlçe: </span>
         <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.county)">
-          {{ this.filterShopParams.countyId }} <em class="fa-solid fa-xmark"></em>
+          {{ getCountyName(this.filterShopParams.cityId, this.filterShopParams.countyId) }}
+          <em class="fa-solid fa-xmark"></em>
         </button>
       </div>
       <div *ngIf="this.price" class="small me-2" style="display: inline-block">

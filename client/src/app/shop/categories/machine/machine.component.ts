@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
@@ -31,8 +31,8 @@ export class MachineComponent implements OnInit, AfterViewInit {
   constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
-    this.shopParams.cityId = navigation?.extras?.state?.city;
-    this.shopParams.countyId = navigation?.extras?.state?.county;
+    this.shopParams.cityId = navigation?.extras?.state?.cityId ?? 0;
+    this.shopParams.countyId = navigation?.extras?.state?.countyId ?? 0;
     if (this.shopParams.search || this.shopParams.cityId || this.shopParams.countyId) {
       this.filterShopParams = new ShopParams();
       if (this.shopParams.search) this.filterShopParams.search = this.shopParams.search;
@@ -50,7 +50,12 @@ export class MachineComponent implements OnInit, AfterViewInit {
       this.shopParams.categoryName = this.categoryName =
         this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.getCategoriesThenProducts();
-      this.shopService.getCities().subscribe((cities) => (this.cities = cities));
+      this.shopService.getCities().subscribe((cities) => {
+        this.cities = cities;
+        if (this.shopParams.cityId) {
+          this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
+        }
+      });
     });
   }
 
@@ -99,8 +104,8 @@ export class MachineComponent implements OnInit, AfterViewInit {
     this.shopParams.pageNumber = 1;
     if (
       (this.shopParams.search == '' || this.shopParams.search == undefined) &&
-      (this.shopParams.cityId == '' || this.shopParams.cityId == undefined) &&
-      (this.shopParams.countyId == '' || this.shopParams.countyId == undefined) &&
+      (this.shopParams.cityId == 0 || this.shopParams.cityId == undefined) &&
+      (this.shopParams.countyId == 0 || this.shopParams.countyId == undefined) &&
       this.shopParams.isNew == undefined &&
       (this.shopParams.maxValue == '' || this.shopParams.maxValue == undefined) &&
       (this.shopParams.minValue == '' || this.shopParams.minValue == undefined)
@@ -118,7 +123,8 @@ export class MachineComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
 
-  onSelectChange(selectedValue) {
-    this.shopService.getCounties(selectedValue).subscribe((counties) => (this.counties = counties));
+  onSelectChange(selectedValue: number) {
+    this.counties = this.cities.find((x) => x.id == selectedValue)?.counties;
+    // this.shopService.getCounties(selectedValue).subscribe((counties) => (this.counties = counties));
   }
 }

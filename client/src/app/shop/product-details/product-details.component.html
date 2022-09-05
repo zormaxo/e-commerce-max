@@ -13,14 +13,14 @@
       <div class="text-primary fw-bold small">
         <a
           [routerLink]="['/', parentCategories[0].url, selectedCategory.url]"
-          [state]="{ city: product.county.city.id }"
-          >{{ product.county.city.cityName }}</a
+          [state]="{ cityId: product.county.city.id }"
+          >{{ product.county.city.name }}</a
         >
         /
         <a
           [routerLink]="['/', parentCategories[0].url, selectedCategory.url]"
-          [state]="{ county: product.county.id }"
-          >{{ product.county.countyName }}</a
+          [state]="{ cityId: product.county.city.id, countyId: product.county.id }"
+          >{{ product.county.name }}</a
         >
       </div>
       <hr />

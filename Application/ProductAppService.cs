@@ -44,10 +44,10 @@ public class ProductAppService : BaseAppService
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MaxValue
                 : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productParams.MaxValue
                 : x.Price < productParams.MaxValue)
-            .WhereIf(productParams.MinValue.HasValue, x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try < productParams.MinValue
-                : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MinValue
-                : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productParams.MinValue
-                : x.Price < productParams.MinValue)
+            .WhereIf(productParams.MinValue.HasValue, x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try > productParams.MinValue
+                : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try > productParams.MinValue
+                : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try > productParams.MinValue
+                : x.Price > productParams.MinValue)
             .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .WhereIf(productParams.CountyId.HasValue, p => p.County.Id == productParams.CountyId)
