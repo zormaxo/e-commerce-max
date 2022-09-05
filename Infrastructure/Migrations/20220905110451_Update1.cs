@@ -30,10 +30,10 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Try = table.Column<string>(type: "TEXT", nullable: true),
-                    Usd = table.Column<string>(type: "TEXT", nullable: true),
-                    Eur = table.Column<string>(type: "TEXT", nullable: true),
-                    Gbp = table.Column<string>(type: "TEXT", nullable: true)
+                    Try = table.Column<double>(type: "REAL", nullable: false),
+                    Usd = table.Column<double>(type: "REAL", nullable: false),
+                    Eur = table.Column<double>(type: "REAL", nullable: false),
+                    Gbp = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {

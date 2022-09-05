@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220903215103_Update2")]
-    partial class Update2
+    [Migration("20220905110451_Update1")]
+    partial class Update1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,67 +63,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Photos");
-                });
-
-            modelBuilder.Entity("Application.Entities.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CountyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Currency")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductBrandId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Showcase")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("CountyId");
-
-                    b.HasIndex("ProductBrandId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Application.Entities.ProductBrand", b =>
@@ -282,6 +221,67 @@ namespace Infrastructure.Migrations
                     b.ToTable("Currency");
                 });
 
+            modelBuilder.Entity("Core.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CountyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Currency")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductBrandId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Showcase")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CountyId");
+
+                    b.HasIndex("ProductBrandId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Application.Entities.County", b =>
                 {
                     b.HasOne("Core.Entities.City", "City")
@@ -295,7 +295,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Application.Entities.Photo", b =>
                 {
-                    b.HasOne("Application.Entities.Product", "Product")
+                    b.HasOne("Core.Entities.Product", "Product")
                         .WithMany("Photos")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -304,7 +304,27 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Application.Entities.Product", b =>
+            modelBuilder.Entity("Application.Entities.ProductMachine", b =>
+                {
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithOne("ProductMachine")
+                        .HasForeignKey("Application.Entities.ProductMachine", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Core.Entities.Category", b =>
+                {
+                    b.HasOne("Core.Entities.Category", "Parent")
+                        .WithMany("ChildCategories")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("Core.Entities.Product", b =>
                 {
                     b.HasOne("Core.Entities.Category", "Category")
                         .WithMany()
@@ -339,36 +359,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Application.Entities.ProductMachine", b =>
-                {
-                    b.HasOne("Application.Entities.Product", "Product")
-                        .WithOne("ProductMachine")
-                        .HasForeignKey("Application.Entities.ProductMachine", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Core.Entities.Category", b =>
-                {
-                    b.HasOne("Core.Entities.Category", "Parent")
-                        .WithMany("ChildCategories")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
             modelBuilder.Entity("Application.Entities.County", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Application.Entities.Product", b =>
-                {
-                    b.Navigation("Photos");
-
-                    b.Navigation("ProductMachine");
                 });
 
             modelBuilder.Entity("Core.Entities.AppUser", b =>
@@ -384,6 +377,13 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.City", b =>
                 {
                     b.Navigation("Counties");
+                });
+
+            modelBuilder.Entity("Core.Entities.Product", b =>
+                {
+                    b.Navigation("Photos");
+
+                    b.Navigation("ProductMachine");
                 });
 #pragma warning restore 612, 618
         }
