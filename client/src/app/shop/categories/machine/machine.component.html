@@ -50,13 +50,61 @@
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
           <div class="accordion-body px-3 py-2">
+            <div class="btn-group mb-1">
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnradio"
+                id="btnradio1"
+                checked
+                [value]="currencyType.TL"
+                [(ngModel)]="shopParams.currency" />
+              <label class="btn btn-sm btn-outline-secondary" for="btnradio1">TL</label>
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnradio"
+                id="btnradio2"
+                [value]="currencyType.USD"
+                [(ngModel)]="shopParams.currency" />
+              <label class="btn btn-sm btn-outline-secondary" for="btnradio2">USD</label>
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnradio"
+                id="btnradio3"
+                [value]="currencyType.EUR"
+                [(ngModel)]="shopParams.currency" />
+              <label class="btn btn-sm btn-outline-secondary" for="btnradio3">EUR</label>
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="btnradio"
+                id="btnradio4"
+                [value]="currencyType.GBP"
+                [(ngModel)]="shopParams.currency" />
+              <label class="btn btn-sm btn-outline-secondary" for="btnradio4">GBP</label>
+            </div>
             <div class="row align-items-center">
               <div class="col">
-                <input type="text" class="form-control" [(ngModel)]="shopParams.minValue" appOnlyNumber />
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="shopParams.minValue"
+                  appOnlyNumber
+                  [placeholder]="'min ' + currencyType[shopParams.currency]" />
               </div>
               <div class="col-auto p-0">-</div>
               <div class="col">
-                <input type="text" class="form-control" [(ngModel)]="shopParams.maxValue" appOnlyNumber />
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="shopParams.maxValue"
+                  appOnlyNumber
+                  [placeholder]="'max ' + currencyType[shopParams.currency]" />
               </div>
             </div>
           </div>

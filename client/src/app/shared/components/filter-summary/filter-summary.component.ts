@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { CurrencyType } from '../../models/currency';
 import { ShopParams } from '../../models/shopParams';
 
 @Component({
@@ -18,11 +19,12 @@ export class FilterSummaryComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.filterShopParams?.minValue && this.filterShopParams?.maxValue) {
-      this.price = `${this.filterShopParams.minValue} - ${this.filterShopParams.maxValue} `;
+      this.price = `${this.filterShopParams.minValue} ${CurrencyType[this.filterShopParams.currency]} - 
+      ${this.filterShopParams.maxValue} ${CurrencyType[this.filterShopParams.currency]}`;
     } else if (this.filterShopParams?.minValue) {
-      this.price = `${this.filterShopParams.minValue} ve üzeri`;
+      this.price = `${this.filterShopParams.minValue} ${CurrencyType[this.filterShopParams.currency]} ve üzeri`;
     } else if (this.filterShopParams?.maxValue) {
-      this.price = `${this.filterShopParams.minValue} ve altında`;
+      this.price = `${this.filterShopParams.maxValue} ${CurrencyType[this.filterShopParams.currency]} ve altında`;
     }
   }
 

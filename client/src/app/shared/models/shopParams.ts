@@ -1,3 +1,5 @@
+import { CurrencyType } from './currency';
+
 export class ShopParams {
   brandId = 0;
   categoryId = 0;
@@ -10,6 +12,7 @@ export class ShopParams {
   minValue: string;
   maxValue: string;
   userId: number;
+  currency: CurrencyType = CurrencyType.TL;
   getAllStatus: boolean;
 
   constructor(pageSize = 20, categoryName = undefined) {

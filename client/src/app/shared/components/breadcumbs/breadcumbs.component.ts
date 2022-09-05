@@ -12,6 +12,6 @@ export class BreadcumbsComponent implements OnInit {
   constructor(public shopService: ShopService) {}
 
   ngOnInit(): void {
-    this.shopService.generateCustomCategory(this.selectedCategoryId);
+    this.shopService.generateFilteredCategory(this.selectedCategoryId);
   }
 }

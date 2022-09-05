@@ -121,6 +121,8 @@ public class StoreContextSeed
             {
                 cachedItems.Currency = currencyObj;
             }
+
+            cachedItems.Categories = await context.Categories.ToListAsync();
         }
         catch (Exception ex)
         {

@@ -5,6 +5,7 @@ import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
 import { ShopService } from '../../../_services/shop.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
+import { CurrencyType } from 'src/app/shared/models/currency';
 
 @Component({
   selector: 'app-machine',
@@ -22,12 +23,13 @@ export class MachineComponent implements OnInit, AfterViewInit {
   selectedCategory: ICategory;
 
   filterShopParams: ShopParams;
+  currencyType = CurrencyType;
 
   constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
   }
-  
+
   ngAfterViewInit(): void {
     this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
   }
@@ -42,7 +44,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
 
   getCategoriesThenProducts() {
     this.shopService.getCategories().subscribe((categories) => {
-      this.allCategories = categories;
+      this.allCategories = structuredClone(categories);
       this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');

@@ -20,13 +20,13 @@ public static class EFBigExtensions
             return source;
     }
 
-    public static IQueryable<TSource> EfBigPageBy<TSource>(
+    public static IQueryable<TSource> EFBigPageBy<TSource>(
         this IQueryable<TSource> source, IPagedResultRequest request)
     {
         return source.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize);
     }
 
-    public static IQueryable<TSource> EfBigOrderBy<TSource>(
+    public static IQueryable<TSource> EFBigOrderBy<TSource>(
     this IQueryable<TSource> source, string sort, CachedItems _cachedItems) where TSource : IPrice
     {
         //return source.Currency switch

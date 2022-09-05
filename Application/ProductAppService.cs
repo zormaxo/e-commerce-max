@@ -6,10 +6,9 @@ using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Core.Errors;
+using Core.HelperTypes;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using RestSharp;
 using Service.Helpers;
 
 namespace Application;
@@ -34,13 +33,24 @@ public class ProductAppService : BaseAppService
 
     public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
     {
+        CalculateMaxMinVal(productParams);
+
         var filteredProducts = _productsRepo.GetAll()
             .Include(x => x.Category)
             .Include(x => x.Photos.Where(y => y.IsMain))
             .Include(x => x.ProductMachine)
             .Include(x => x.County).ThenInclude(x => x.City)
-            .WhereIf(productParams.MaxValue.HasValue, p => p.Price < productParams.MaxValue)
-            .WhereIf(productParams.MinValue.HasValue, p => p.Price > productParams.MinValue)
+            .WhereIf(productParams.MaxValue.HasValue, x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try < productParams.MaxValue
+                : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MaxValue
+                : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productParams.MaxValue
+                : x.Price < productParams.MaxValue)
+            .WhereIf(productParams.MinValue.HasValue, x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try < productParams.MinValue
+                : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MinValue
+                : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productParams.MinValue
+                : x.Price < productParams.MinValue)
+
+
+
             .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .Where(x => x.IsActive);
@@ -53,8 +63,8 @@ public class ProductAppService : BaseAppService
         }
 
         var pagedAndfilteredProducts = filteredProducts
-            .EfBigOrderBy(productParams.Sort, _cachedItems)
-            .EfBigPageBy(productParams);
+            .EFBigOrderBy(productParams.Sort, _cachedItems)
+            .EFBigPageBy(productParams);
 
         var catGrpCountList = filteredProducts.GroupBy(x => x.CategoryId)
             .Select(n => new CategoryGroupCount
@@ -71,6 +81,31 @@ public class ProductAppService : BaseAppService
         var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
         return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
+    }
+
+    private void CalculateMaxMinVal(ProductSpecParams productParams)
+    {
+        if (productParams.MinValue.HasValue)
+            productParams.MinValue = productParams.Currency switch
+            {
+                CurrencyCode.USD => (int)((decimal)productParams.MinValue * (int)_cachedItems.Currency.Try),
+                CurrencyCode.EUR => (int)((decimal)productParams.MinValue / (int)_cachedItems.Currency.Eur * (int)_cachedItems.Currency.Try),
+                CurrencyCode.GBP => (int)((decimal)productParams.MinValue / (int)_cachedItems.Currency.Gbp * (int)_cachedItems.Currency.Try),
+                CurrencyCode.TRY => (int)((decimal)productParams.MinValue),
+                _ => productParams.MinValue,
+            };
+
+        if (productParams.MaxValue.HasValue)
+        {
+            productParams.MaxValue = productParams.Currency switch
+            {
+                CurrencyCode.USD => (int)((decimal)productParams.MaxValue * _cachedItems.Currency.Try),
+                CurrencyCode.EUR => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Eur * _cachedItems.Currency.Try),
+                CurrencyCode.GBP => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try),
+                CurrencyCode.TRY => (int)((decimal)productParams.MaxValue),
+                _ => productParams.MaxValue,
+            };
+        }
     }
 
     public async Task<object> GetProductsCounts(ProductSpecParams productParams)
@@ -98,7 +133,6 @@ public class ProductAppService : BaseAppService
 
         if (product == null)
             throw new ApiException(System.Net.HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
-        var omer = _mapper.Map<ProductToReturnDto>(product);
         return _mapper.Map<ProductToReturnDto>(product);
     }
 
@@ -107,13 +141,8 @@ public class ProductAppService : BaseAppService
         return await _productBrandRepo.ListAllAsync();
     }
 
-    public async Task<IReadOnlyList<Category>> GetCategories()
+    public IReadOnlyList<Category> GetCategories()
     {
-        Task getCurrency = GetCurrency();
-        if (_cachedItems.Categories.Count == 0)
-            _cachedItems.Categories = await _categoryRepo.ListAllAsync();
-
-        getCurrency.Wait();
         return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
     }
 
@@ -142,18 +171,5 @@ public class ProductAppService : BaseAppService
         }
 
         return categoryIds;
-    }
-
-    public async Task GetCurrency()
-    {
-        var client = new RestClient($"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
-        var request = new RestRequest();
-        var response = await client.GetAsync(request);
-
-        var currencyDto = JsonConvert.DeserializeObject<CurrencyDto>(response.Content);
-        var currency = _mapper.Map<Currency>(currencyDto);
-
-        _context.Add(currency);
-        await _context.SaveChangesAsync();
     }
 }

@@ -1,4 +1,5 @@
 using Application.Interfaces;
+using Core.HelperTypes;
 
 namespace Application.Specifications;
 
@@ -31,4 +32,5 @@ public class ProductSpecParams : IPagedResultRequest
     public int? MaxValue { get; set; }
     public bool? GetAllStatus { get; set; }
     public int? UserId { get; set; }
+    public CurrencyCode Currency { get; set; }
 }

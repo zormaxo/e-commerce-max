@@ -3,18 +3,13 @@
     public class CurrencyDto
     {
         private string _date;
-        private Rates rates;
 
         public string Date
         {
             get => _date;
             set => _date = value.Split('+')[0];
         }
-        public Rates Rates
-        {
-            get { return rates; }
-            set { rates = value; }
-        }
+        public Rates Rates { get; set; }
         public string Base { get; set; }
     }
 

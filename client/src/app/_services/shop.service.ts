@@ -51,6 +51,10 @@ export class ShopService {
       params = params.append('getAllStatus', shopParams.getAllStatus);
     }
 
+    if (shopParams.currency !== undefined) {
+      params = params.append('currency', shopParams.currency);
+    }
+
     if (shopParams.maxValue !== undefined) {
       const maxValue = shopParams.maxValue.replaceAll('.', '');
       params = params.append('maxValue', maxValue);
@@ -120,11 +124,11 @@ export class ShopService {
     }
   }
 
-  generateCustomCategory(selectedCategoryId: number): void {
+  generateFilteredCategory(selectedCategoryId: number): void {
     const parentCategories: ICategory[] = [];
-    let selectedCategory;
+    let selectedCategory: ICategory;
     this.getCategories().subscribe((categories) => {
-      selectedCategory = categories.find((x) => x.id == selectedCategoryId);
+      selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
       fillList(selectedCategory);
       this.customCategorySource.next({ selectedCategory, parentCategories });
     });

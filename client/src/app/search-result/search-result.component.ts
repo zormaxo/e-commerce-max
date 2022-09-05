@@ -31,7 +31,7 @@ export class SearchResultComponent implements OnInit {
       this.totalCount = productResponse.totalCount;
 
       this.shopService.getCategories().subscribe((categories) => {
-        this.allCategories = structuredClone(categories);
+        this.allCategories = categories;
 
         this.categoryGroupCountList.forEach((groupCount) => {
           const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
