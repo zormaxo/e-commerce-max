@@ -41,12 +41,12 @@ export class ShopService {
       params = params.append('search', shopParams.search);
     }
 
-    if (shopParams.county) {
-      params = params.append('county', shopParams.county);
+    if (shopParams.countyId) {
+      params = params.append('countyId', shopParams.countyId);
     }
 
-    if (shopParams.city) {
-      params = params.append('city', shopParams.city);
+    if (shopParams.cityId) {
+      params = params.append('cityId', shopParams.cityId);
     }
 
     if (shopParams.isNew !== undefined) {

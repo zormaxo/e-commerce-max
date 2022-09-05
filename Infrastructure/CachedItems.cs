@@ -1,5 +1,4 @@
-﻿using Application.Entities;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace Infrastructure;
 

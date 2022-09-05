@@ -31,13 +31,13 @@ export class MachineComponent implements OnInit, AfterViewInit {
   constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
-    this.shopParams.city = navigation?.extras?.state?.city;
-    this.shopParams.county = navigation?.extras?.state?.county;
-    if (this.shopParams.search || this.shopParams.city || this.shopParams.county) {
+    this.shopParams.cityId = navigation?.extras?.state?.city;
+    this.shopParams.countyId = navigation?.extras?.state?.county;
+    if (this.shopParams.search || this.shopParams.cityId || this.shopParams.countyId) {
       this.filterShopParams = new ShopParams();
       if (this.shopParams.search) this.filterShopParams.search = this.shopParams.search;
-      if (this.shopParams.city) this.filterShopParams.city = this.shopParams.city;
-      if (this.shopParams.county) this.filterShopParams.county = this.shopParams.county;
+      if (this.shopParams.cityId) this.filterShopParams.cityId = this.shopParams.cityId;
+      if (this.shopParams.countyId) this.filterShopParams.countyId = this.shopParams.countyId;
     }
   }
 
@@ -99,8 +99,8 @@ export class MachineComponent implements OnInit, AfterViewInit {
     this.shopParams.pageNumber = 1;
     if (
       (this.shopParams.search == '' || this.shopParams.search == undefined) &&
-      (this.shopParams.city == '' || this.shopParams.city == undefined) &&
-      (this.shopParams.county == '' || this.shopParams.county == undefined) &&
+      (this.shopParams.cityId == '' || this.shopParams.cityId == undefined) &&
+      (this.shopParams.countyId == '' || this.shopParams.countyId == undefined) &&
       this.shopParams.isNew == undefined &&
       (this.shopParams.maxValue == '' || this.shopParams.maxValue == undefined) &&
       (this.shopParams.minValue == '' || this.shopParams.minValue == undefined)

@@ -42,11 +42,11 @@ export class FilterSummaryComponent implements OnChanges {
       case SearchFilter.search:
         this.filterShopParams.search = this.shopService.searchTerm = '';
         break;
-      case SearchFilter.city:
-        this.filterShopParams.search = this.shopService.searchTerm = '';
+      case SearchFilter.cityId:
+        this.filterShopParams.cityId = '';
         break;
-      case SearchFilter.county:
-        this.filterShopParams.search = this.shopService.searchTerm = '';
+      case SearchFilter.countyId:
+        this.filterShopParams.countyId = '';
         break;
       default:
         this.filterShopParams = undefined;
@@ -74,6 +74,6 @@ export enum SearchFilter {
   maxValue,
   search,
   price,
-  city,
-  county,
+  cityId,
+  countyId,
 }

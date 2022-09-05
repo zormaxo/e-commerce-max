@@ -12,8 +12,7 @@ namespace Core.Dtos
         public string PictureUrl { get; set; }
         public string ProductType { get; set; }
         public string ProductBrand { get; set; }
-        public string City { get; set; }
-        public string County { get; set; }
+        public County County { get; set; }
         public bool IsActive { get; set; }
         public bool IsNew { get; set; }
         public DateTime Created { get; set; }

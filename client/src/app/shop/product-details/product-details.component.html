@@ -11,13 +11,17 @@
     <div class="col-3">
       <p class="text-primary fw-bold">{{ product.priceText }}</p>
       <div class="text-primary fw-bold small">
-        <a [routerLink]="['/', parentCategories[0].url, selectedCategory.url]" [state]="{ city: product.city }">{{
-          product.city
-        }}</a>
+        <a
+          [routerLink]="['/', parentCategories[0].url, selectedCategory.url]"
+          [state]="{ city: product.county.city.id }"
+          >{{ product.county.city.cityName }}</a
+        >
         /
-        <a [routerLink]="['/', parentCategories[0].url, selectedCategory.url]" [state]="{ county: product.county }">{{
-          product.county
-        }}</a>
+        <a
+          [routerLink]="['/', parentCategories[0].url, selectedCategory.url]"
+          [state]="{ county: product.county.id }"
+          >{{ product.county.countyName }}</a
+        >
       </div>
       <hr />
       <table class="table table-sm small">

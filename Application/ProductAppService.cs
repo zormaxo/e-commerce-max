@@ -16,7 +16,6 @@ namespace Application;
 public class ProductAppService : BaseAppService
 {
     private readonly CachedItems _cachedItems;
-    private readonly StoreContext _context;
     private readonly IGenericRepository<ProductBrand> _productBrandRepo;
     private readonly IGenericRepository<Category> _categoryRepo;
     private readonly IGenericRepository<Product> _productsRepo;
@@ -30,7 +29,6 @@ public class ProductAppService : BaseAppService
         _categoryRepo = categoryRepo;
         _productBrandRepo = productBrandRepo;
         _cachedItems = cachedItems;
-        _context = context;
     }
 
     public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
@@ -52,8 +50,8 @@ public class ProductAppService : BaseAppService
                 : x.Price < productParams.MinValue)
             .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
-            .WhereIf(!string.IsNullOrEmpty(productParams.County), p => p.County.CountyName == productParams.County)
-            .WhereIf(!string.IsNullOrEmpty(productParams.City), p => p.County.City.CityName == productParams.City)
+            .WhereIf(productParams.CountyId.HasValue, p => p.County.Id == productParams.CountyId)
+            .WhereIf(productParams.CityId.HasValue, p => p.County.CityId == productParams.CityId)
             .Where(x => x.IsActive);
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))

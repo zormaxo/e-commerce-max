@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   parentCategories: ICategory[];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-  selectedCategory;
+  selectedCategory: ICategory;
   constructor(public shopService: ShopService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {

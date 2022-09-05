@@ -1,15 +1,12 @@
-﻿using Core.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Application.Entities
+namespace Core.Entities;
+
+public class County : BaseEntity
 {
-    public class County : BaseEntity
-    {
-        [Required]
-        public string CountyName { get; set; }
-        public City City { get; set; }
-        public int CityId { get; set; }
-        public ICollection<Product> Products { get; set; }
-    }
+    [Required]
+    public string CountyName { get; set; }
+    public City City { get; set; }
+    public int CityId { get; set; }
+    public ICollection<Product> Products { get; set; }
 }
