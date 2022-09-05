@@ -28,6 +28,11 @@ export class MachineComponent implements OnInit, AfterViewInit {
   constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
+    if (this.shopParams.search ) {
+          this.filterShopParams = new ShopParams();
+          this.filterShopParams.search = this.shopParams.search;
+    }
+
   }
 
   ngAfterViewInit(): void {

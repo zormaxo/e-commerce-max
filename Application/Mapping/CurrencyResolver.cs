@@ -8,13 +8,6 @@ namespace Application.Mapping;
 
 public class CurrencyResolver : IValueResolver<Product, ProductToReturnDto, string>
 {
-    private readonly CachedItems _cachedItems;
-
-    public CurrencyResolver(CachedItems cachedItems)
-    {
-        _cachedItems = cachedItems;
-    }
-
     public string Resolve(Product source, ProductToReturnDto destination, string destMember, ResolutionContext context)
     {
         return source.Currency switch

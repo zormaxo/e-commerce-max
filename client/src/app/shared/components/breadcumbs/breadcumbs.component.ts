@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ShopService } from 'src/app/_services/shop.service';
 
 @Component({
@@ -6,12 +6,12 @@ import { ShopService } from 'src/app/_services/shop.service';
   templateUrl: './breadcumbs.component.html',
   styleUrls: ['./breadcumbs.component.scss'],
 })
-export class BreadcumbsComponent implements OnInit {
+export class BreadcumbsComponent implements OnChanges {
   @Input() selectedCategoryId: number;
 
   constructor(public shopService: ShopService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.shopService.generateFilteredCategory(this.selectedCategoryId);
   }
 }

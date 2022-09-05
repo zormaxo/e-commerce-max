@@ -57,7 +57,7 @@ namespace API.Controllers
         public async Task<ActionResult<string>> GetCurrency()
         {
             var httpResponseMessage = await _client.GetAsync(
-                $"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
+                "https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
             var response = await httpResponseMessage.Content.ReadAsStringAsync();
 
             var jsonElement = JsonSerializer.Deserialize<JsonElement>(response);

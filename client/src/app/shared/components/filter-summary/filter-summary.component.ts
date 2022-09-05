@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { ShopService } from 'src/app/_services/shop.service';
 import { CurrencyType } from '../../models/currency';
 import { ShopParams } from '../../models/shopParams';
 
@@ -15,7 +16,7 @@ export class FilterSummaryComponent implements OnChanges {
   searchFilter = SearchFilter;
   price: string;
 
-  constructor() {}
+  constructor(private shopService: ShopService) {}
 
   ngOnChanges(): void {
     if (this.filterShopParams?.minValue && this.filterShopParams?.maxValue) {
@@ -39,10 +40,11 @@ export class FilterSummaryComponent implements OnChanges {
         this.price = undefined;
         break;
       case SearchFilter.search:
-        this.filterShopParams.search = '';
+        this.filterShopParams.search = this.shopService.searchTerm = '';
         break;
       default:
         this.filterShopParams = undefined;
+        this.shopService.searchTerm = '';
     }
 
     if (

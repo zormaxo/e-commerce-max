@@ -17,6 +17,7 @@ export class ShopService {
   categories: ICategory[];
   private customCategorySource = new ReplaySubject(1);
   customCategory$ = this.customCategorySource.asObservable();
+  searchTerm: string; //relation between nav and productList
 
   constructor(private http: HttpClient) {}
 

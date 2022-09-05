@@ -48,9 +48,6 @@ public class ProductAppService : BaseAppService
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MinValue
                 : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productParams.MinValue
                 : x.Price < productParams.MinValue)
-
-
-
             .WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .Where(x => x.IsActive);
@@ -86,6 +83,7 @@ public class ProductAppService : BaseAppService
     private void CalculateMaxMinVal(ProductSpecParams productParams)
     {
         if (productParams.MinValue.HasValue)
+        {
             productParams.MinValue = productParams.Currency switch
             {
                 CurrencyCode.USD => (int)((decimal)productParams.MinValue * (int)_cachedItems.Currency.Try),
@@ -94,6 +92,7 @@ public class ProductAppService : BaseAppService
                 CurrencyCode.TRY => (int)((decimal)productParams.MinValue),
                 _ => productParams.MinValue,
             };
+        }
 
         if (productParams.MaxValue.HasValue)
         {

@@ -15,6 +15,4 @@ public class BaseAppService
     {
         _context = context;
     }
-
-
 }

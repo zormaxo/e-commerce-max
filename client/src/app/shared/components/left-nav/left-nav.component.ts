@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ShopService } from 'src/app/_services/shop.service';
 import { ICategory } from '../../models/category';
-import { IProduct } from '../../models/product';
 
 @Component({
   selector: 'app-left-nav',
@@ -9,7 +8,6 @@ import { IProduct } from '../../models/product';
   styleUrls: ['./left-nav.component.scss'],
 })
 export class LeftNavComponent implements OnChanges {
-  @Input() products: IProduct[];
   @Input() allCategories: ICategory[];
   @Input() selectedCategory: ICategory;
   parentCategories: ICategory[] = [];

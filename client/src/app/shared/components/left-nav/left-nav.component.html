@@ -1,6 +1,6 @@
 <div>
   <div class="card small overflow-auto" style="height: 200px">
-    <ul class="list-group list-group-flush" *ngIf="products">
+    <ul class="list-group list-group-flush">
       <ng-container *ngFor="let category of parentCategories; let i = index">
         <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
           <a class="link-dark" [routerLink]="['/', parentCategories[0].url, category.url]">

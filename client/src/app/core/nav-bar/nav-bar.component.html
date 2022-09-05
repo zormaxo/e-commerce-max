@@ -8,7 +8,7 @@
         <div class="input-group input-group-sm border border-secondary rounded me-5">
           <input
             (keyup.enter)="onSearch()"
-            #search
+            [(ngModel)]="shopService.searchTerm"
             type="search"
             class="form-control border-0"
             placeholder="Ürün veya marka ara" />

@@ -105,7 +105,7 @@ public class StoreContextSeed
             var currencyObj = await context.Currency.FirstOrDefaultAsync(x => x.Date.Date == DateTime.Now.Date);
             if (currencyObj == null)
             {
-                var client = new RestClient($"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
+                var client = new RestClient("https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
                 var request = new RestRequest();
                 var response = await client.GetAsync(request);
 
