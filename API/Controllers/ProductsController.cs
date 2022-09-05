@@ -2,7 +2,9 @@ using Application;
 using Application.Entities;
 using Application.Specifications;
 using Core.Dtos;
+using Core.Entities;
 using Core.Errors;
+using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Service.Helpers;
 
@@ -11,10 +13,12 @@ namespace API.Controllers
     public class ProductsController : BaseApiController
     {
         private readonly ProductAppService _productSrv;
+        private readonly CachedItems _cachedItems;
 
-        public ProductsController(ProductAppService productSrv)
+        public ProductsController(ProductAppService productSrv, CachedItems cachedItems)
         {
             _productSrv = productSrv;
+            _cachedItems = cachedItems;
         }
 
         [HttpGet]
@@ -47,6 +51,18 @@ namespace API.Controllers
         public ActionResult<IReadOnlyList<ProductBrand>> GetTypes()
         {
             return Ok(_productSrv.GetCategories());
+        }
+
+        [HttpGet("cities")]
+        public ActionResult<IReadOnlyList<City>> Cities()
+        {
+            return Ok(_cachedItems.Cities);
+        }
+
+        [HttpGet("counties/{id}")]
+        public ActionResult<IReadOnlyList<County>> Counties(string id)
+        {
+            return Ok(_cachedItems.Counties.Where(x => x.City.CityName == id));
         }
     }
 }

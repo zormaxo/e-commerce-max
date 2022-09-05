@@ -1,4 +1,4 @@
-<ng-container *ngIf="product">
+<ng-container *ngIf="parentCategories">
   <app-breadcumbs [selectedCategoryId]="product.category.id"></app-breadcumbs>
   <div class="row">
     <h5>{{ product.name }}</h5>
@@ -9,8 +9,16 @@
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style="display: inline-block"></ngx-gallery>
     </div>
     <div class="col-3">
-      <p class="text-primary fw-bold">{{ product.price | currency }}</p>
-      <div class="text-primary fw-bold small">{{ product.city }} / {{ product.county }}</div>
+      <p class="text-primary fw-bold">{{ product.priceText }}</p>
+      <div class="text-primary fw-bold small">
+        <a [routerLink]="['/', parentCategories[0].url, selectedCategory.url]" [state]="{ city: product.city }">{{
+          product.city
+        }}</a>
+        /
+        <a [routerLink]="['/', parentCategories[0].url, selectedCategory.url]" [state]="{ county: product.county }">{{
+          product.county
+        }}</a>
+      </div>
       <hr />
       <table class="table table-sm small">
         <tbody>

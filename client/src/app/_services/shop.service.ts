@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { of, ReplaySubject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
+import { IAddress } from '../shared/models/address';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,14 @@ export class ShopService {
 
     if (shopParams.search) {
       params = params.append('search', shopParams.search);
+    }
+
+    if (shopParams.county) {
+      params = params.append('county', shopParams.county);
+    }
+
+    if (shopParams.city) {
+      params = params.append('city', shopParams.city);
     }
 
     if (shopParams.isNew !== undefined) {
@@ -92,6 +101,14 @@ export class ShopService {
     return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
   }
 
+  getCities() {
+    return this.http.get<IAddress[]>(this.baseUrl + 'products/cities');
+  }
+
+  getCounties(id: number) {
+    return this.http.get<IAddress[]>(this.baseUrl + 'products/counties/' + id);
+  }
+
   getCategories() {
     const pushChildCategories = (category: ICategory) => {
       if (category.childCategories) {
@@ -126,13 +143,27 @@ export class ShopService {
   }
 
   generateFilteredCategory(selectedCategoryId: number): void {
-    const parentCategories: ICategory[] = [];
+    // const parentCategories: ICategory[] = [];
     let selectedCategory: ICategory;
     this.getCategories().subscribe((categories) => {
       selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
-      fillList(selectedCategory);
+      // fillParentList(selectedCategory);
+      const parentCategories = this.fillParentCategoryList(selectedCategory);
       this.customCategorySource.next({ selectedCategory, parentCategories });
     });
+
+    // function fillParentList(selectedCategory: ICategory) {
+    //   if (selectedCategory.parent) {
+    //     parentCategories.unshift(selectedCategory.parent);
+    //     fillParentList(selectedCategory.parent);
+    //   }
+    // }
+  }
+
+  fillParentCategoryList(selectedCategory: ICategory): ICategory[] {
+    const parentCategories = [];
+    fillList(selectedCategory);
+    return parentCategories;
 
     function fillList(selectedCategory: ICategory) {
       if (selectedCategory.parent) {

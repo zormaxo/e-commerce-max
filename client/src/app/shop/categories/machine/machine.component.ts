@@ -6,6 +6,7 @@ import { ShopParams } from '../../../shared/models/shopParams';
 import { ShopService } from '../../../_services/shop.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
+import { IAddress } from 'src/app/shared/models/address';
 
 @Component({
   selector: 'app-machine',
@@ -21,6 +22,8 @@ export class MachineComponent implements OnInit, AfterViewInit {
   categoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;
+  cities: IAddress[];
+  counties: IAddress[];
 
   filterShopParams: ShopParams;
   currencyType = CurrencyType;
@@ -28,11 +31,14 @@ export class MachineComponent implements OnInit, AfterViewInit {
   constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
-    if (this.shopParams.search ) {
-          this.filterShopParams = new ShopParams();
-          this.filterShopParams.search = this.shopParams.search;
+    this.shopParams.city = navigation?.extras?.state?.city;
+    this.shopParams.county = navigation?.extras?.state?.county;
+    if (this.shopParams.search || this.shopParams.city || this.shopParams.county) {
+      this.filterShopParams = new ShopParams();
+      if (this.shopParams.search) this.filterShopParams.search = this.shopParams.search;
+      if (this.shopParams.city) this.filterShopParams.city = this.shopParams.city;
+      if (this.shopParams.county) this.filterShopParams.county = this.shopParams.county;
     }
-
   }
 
   ngAfterViewInit(): void {
@@ -44,6 +50,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
       this.shopParams.categoryName = this.categoryName =
         this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.getCategoriesThenProducts();
+      this.shopService.getCities().subscribe((cities) => (this.cities = cities));
     });
   }
 
@@ -90,6 +97,16 @@ export class MachineComponent implements OnInit, AfterViewInit {
   onSearch() {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopParams.pageNumber = 1;
+    if (
+      (this.shopParams.search == '' || this.shopParams.search == undefined) &&
+      (this.shopParams.city == '' || this.shopParams.city == undefined) &&
+      (this.shopParams.county == '' || this.shopParams.county == undefined) &&
+      this.shopParams.isNew == undefined &&
+      (this.shopParams.maxValue == '' || this.shopParams.maxValue == undefined) &&
+      (this.shopParams.minValue == '' || this.shopParams.minValue == undefined)
+    ) {
+      return;
+    }
     this.filterShopParams = structuredClone(this.shopParams);
     this.getProducts();
   }
@@ -99,5 +116,9 @@ export class MachineComponent implements OnInit, AfterViewInit {
     this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
     this.shopParams.categoryName = this.categoryName;
     this.getProducts();
+  }
+
+  onSelectChange(selectedValue) {
+    this.shopService.getCounties(selectedValue).subscribe((counties) => (this.counties = counties));
   }
 }

@@ -15,14 +15,28 @@ export class LeftNavComponent implements OnChanges {
   constructor(public shopService: ShopService) {}
 
   ngOnChanges(): void {
-    this.parentCategories = [];
-    this.fillParents(this.selectedCategory);
+    // this.parentCategories = [];
+    // this.fillParents(this.selectedCategory);
+    this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
   }
 
-  fillParents(selectedCategory: ICategory) {
-    if (selectedCategory.parent) {
-      this.parentCategories.unshift(selectedCategory.parent);
-      this.fillParents(selectedCategory.parent);
-    }
-  }
+  // fillParents(selectedCategory: ICategory) {
+  //   if (selectedCategory.parent) {
+  //     this.parentCategories.unshift(selectedCategory.parent);
+  //     this.fillParents(selectedCategory.parent);
+  //   }
+  // }
+
+  // fillParentCategoryList(selectedCategory: ICategory): ICategory[] {
+  //   const parentCategories = [];
+  //   fillList(selectedCategory.parent);
+  //   return parentCategories;
+
+  //   function fillList(selectedCategory: ICategory) {
+  //     if (selectedCategory.parent) {
+  //       this.parentCategories.unshift(selectedCategory.parent);
+  //       fillList(selectedCategory.parent);
+  //     }
+  //   }
+  // }
 }

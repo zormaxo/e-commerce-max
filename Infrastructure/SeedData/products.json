@@ -19,7 +19,8 @@
     "UserId": 1,
     "Showcase": true,
     "CountyId": 34,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 1
   }, {
     "Name": "Green Angular Board 3000",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -41,7 +42,8 @@
     "UserId": 1,
     "Showcase": true,
     "CountyId": 123,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 2
   }, {
     "Name": "Core Board Speed Rush 3",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -63,7 +65,8 @@
     "UserId": 2,
     "Showcase": true,
     "CountyId": 565,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 3
   }, {
     "Name": "Net Core Super Board",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -85,7 +88,8 @@
     "UserId": 6,
     "Showcase": true,
     "CountyId": 23,
-    "IsActive": false
+    "IsActive": false,
+	"Currency": 4
   }, {
     "Name": "React Board Super Whizzy Fast",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -107,7 +111,8 @@
     "UserId": 4,
     "Showcase": true,
     "CountyId": 87,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 1
   }, {
     "Name": "Typescript Entry Board",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -129,7 +134,8 @@
     "UserId": 1,
     "Showcase": true,
     "CountyId": 645,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 2
   }, {
     "Name": "Core Blue Hat",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -151,7 +157,8 @@
     "UserId": 2,
     "Showcase": true,
     "CountyId": 555,
-    "IsActive": false
+    "IsActive": false,
+	"Currency": 3
   }, {
     "Name": "Green React Woolen Hat",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -173,7 +180,8 @@
     "UserId": 3,
     "Showcase": true,
     "CountyId": 487,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 4
   }, {
     "Name": "Purple React Woolen Hat",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -195,7 +203,8 @@
     "UserId": 4,
     "Showcase": true,
     "CountyId": 654,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 1
   }, {
     "Name": "Blue Code Gloves",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -217,7 +226,8 @@
     "UserId": 5,
     "Showcase": true,
     "CountyId": 866,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 2
   }, {
     "Name": "Green Code Gloves",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -239,7 +249,8 @@
     "UserId": 5,
     "Showcase": true,
     "CountyId": 911,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 3
   }, {
     "Name": "Purple React Gloves",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
@@ -261,7 +272,8 @@
     "UserId": 6,
     "Showcase": true,
     "CountyId": 188,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 4
   }, {
     "Name": "Green React Gloves",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -283,7 +295,8 @@
     "UserId": 1,
     "Showcase": true,
     "CountyId": 777,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 1
   }, {
     "Name": "Redis Red Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -305,7 +318,8 @@
     "UserId": 2,
     "Showcase": true,
     "CountyId": 459,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 2
   }, {
     "Name": "Core Red Boots",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -327,7 +341,8 @@
     "UserId": 3,
     "Showcase": true,
     "CountyId": 345,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 3
   }, {
     "Name": "Core Purple Boots",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -349,7 +364,8 @@
     "UserId": 1,
     "Showcase": true,
     "CountyId": 612,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 4
   }, {
     "Name": "Angular Purple Boots",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -371,7 +387,8 @@
     "UserId": 5,
     "Showcase": true,
     "CountyId": 784,
-    "IsActive": true
+    "IsActive": true,
+	"Currency": 1
   }, {
     "Name": "Angular Blue Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -393,6 +410,7 @@
     "UserId": 4,
     "Showcase": true,
     "CountyId": 803,
-    "IsActive": false
+    "IsActive": false,
+	"Currency": 2
   }
 ]

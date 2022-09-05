@@ -12,10 +12,10 @@ import { ShopService } from '../../_services/shop.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
-  parentCategories: ICategory[] = [];
+  parentCategories: ICategory[];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
-
+  selectedCategory;
   constructor(public shopService: ShopService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -57,6 +57,12 @@ export class ProductDetailsComponent implements OnInit {
     this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product) => {
       this.product = product;
       this.galleryImages = this.getImages();
-    });    
+      this.shopService.getCategories().subscribe((categories) => {
+        this.selectedCategory = categories.find((x: { id: number }) => x.id == product.category.id);
+        this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
+      });
+    });
   }
+
+  onFilter() {}
 }

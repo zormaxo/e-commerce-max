@@ -30,6 +30,8 @@ public class ProductSpecParams : IPagedResultRequest
     public bool? IsNew { get; set; }
     public int? MinValue { get; set; }
     public int? MaxValue { get; set; }
+    public string City { get; set; }
+    public string County { get; set; }
     public bool? GetAllStatus { get; set; }
     public int? UserId { get; set; }
     public CurrencyCode Currency { get; set; }

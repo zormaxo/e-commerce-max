@@ -123,6 +123,8 @@ public class StoreContextSeed
             }
 
             cachedItems.Categories = await context.Categories.ToListAsync();
+            cachedItems.Cities = await context.Cities.ToListAsync();
+            cachedItems.Counties = await context.Counties.ToListAsync();
         }
         catch (Exception ex)
         {

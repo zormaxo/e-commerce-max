@@ -11,6 +11,8 @@ export class ShopParams {
   isNew: boolean;
   minValue: string;
   maxValue: string;
+  city: string;
+  county: string;
   userId: number;
   currency: CurrencyType = CurrencyType.TL;
   getAllStatus: boolean;

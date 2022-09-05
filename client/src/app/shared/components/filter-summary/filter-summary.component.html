@@ -16,6 +16,18 @@
           {{ this.filterShopParams.isNew ? "Sıfır" : "İkinci El" }} <em class="fa-solid fa-xmark"></em>
         </button>
       </div>
+      <div *ngIf="this.filterShopParams.city" class="small me-2" style="display: inline-block">
+        <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">İl: </span>
+        <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.city)">
+          {{ this.filterShopParams.city }} <em class="fa-solid fa-xmark"></em>
+        </button>
+      </div>
+      <div *ngIf="this.filterShopParams.county" class="small me-2" style="display: inline-block">
+        <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">İlçe: </span>
+        <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.county)">
+          {{ this.filterShopParams.county }} <em class="fa-solid fa-xmark"></em>
+        </button>
+      </div>
       <div *ngIf="this.price" class="small me-2" style="display: inline-block">
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">Fiyat: </span>
         <button class="btn btn-outline-secondary btn-sm filter" (click)="onResetClick(searchFilter.price)">

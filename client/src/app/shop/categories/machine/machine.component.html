@@ -1,10 +1,7 @@
 <div class="row">
   <app-breadcumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcumbs>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
-    <app-left-nav
-      *ngIf="products"
-      [selectedCategory]="selectedCategory"
-      [allCategories]="allCategories"></app-left-nav>
+    <app-left-nav *ngIf="products" [selectedCategory]="selectedCategory" [allCategories]="allCategories"></app-left-nav>
     <div class="accordion mt-3">
       <div class="accordion-item">
         <h2 class="accordion-header">
@@ -110,6 +107,35 @@
                   [placeholder]="'max ' + currencyType[shopParams.currency]" />
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button
+            class="accordion-button collapsed px-3 py-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#address">
+            Adres
+          </button>
+        </h2>
+        <div id="address" class="accordion-collapse collapse">
+          <div class="accordion-body px-3 py-2">
+            <select
+              class="form-select form-select-sm mb-1"
+              *ngIf="cities"
+              [(ngModel)]="shopParams.city"
+              (change)="onSelectChange($event.target.value)">
+              <option selected>Şehir Seçin</option>
+              <option value="101">Kuyumcukent</option>
+              <option value="102">Kapalıçarşı</option>
+              <option *ngFor="let city of cities" [value]="city.cityName">{{ city.cityName }}</option>
+            </select>
+            <select class="form-select form-select-sm" *ngIf="counties" [(ngModel)]="shopParams.county">
+              <option selected>Şehir Seçin</option>
+              <option *ngFor="let county of counties" [value]="county.countyName">{{ county.countyName }}</option>
+            </select>
           </div>
         </div>
       </div>
