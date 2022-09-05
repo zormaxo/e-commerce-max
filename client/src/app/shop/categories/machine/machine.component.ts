@@ -39,6 +39,13 @@ export class MachineComponent implements OnInit, AfterViewInit {
       if (this.shopParams.cityId) this.filterShopParams.cityId = this.shopParams.cityId;
       if (this.shopParams.countyId) this.filterShopParams.countyId = this.shopParams.countyId;
     }
+
+    this.shopService.getCities().subscribe((cities) => {
+      this.cities = cities;
+      if (this.shopParams.cityId) {
+        this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -50,12 +57,6 @@ export class MachineComponent implements OnInit, AfterViewInit {
       this.shopParams.categoryName = this.categoryName =
         this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
       this.getCategoriesThenProducts();
-      this.shopService.getCities().subscribe((cities) => {
-        this.cities = cities;
-        if (this.shopParams.cityId) {
-          this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
-        }
-      });
     });
   }
 
