@@ -11,6 +11,7 @@ import { take } from 'rxjs';
 })
 export class MembershipInfoComponent implements OnInit {
   member: Member;
+  val4: string = '5523409795';
 
   constructor(private memberService: MembersService, private accountService: AccountService) {}
 

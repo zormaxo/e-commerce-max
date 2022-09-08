@@ -9,7 +9,6 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
-import { MemberProfileStartComponent } from './members/member-profile-start/member-profile-start.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { SummaryComponent } from './members/member-profile/summary/summary.component';
 import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
@@ -52,11 +51,6 @@ const routes: Routes = [
     path: '',
     canActivateChild: [AuthGuard],
     children: [
-      {
-        path: 'members/a/:username',
-        component: MemberProfileStartComponent,
-      },
-      { path: 'members/a', component: MemberProfileStartComponent },
       { path: 'members/:username', component: MemberDetailComponent },
       { path: 'lists', component: ListsComponent },
     ],
