@@ -13,6 +13,7 @@ import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { SummaryComponent } from './members/member-profile/summary/summary.component';
 import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -34,26 +35,13 @@ const routes: Routes = [
         path: 'uye',
         component: MemberProfileComponent,
         canActivate: [AuthGuard],
-        children: [
-          { path: 'uyelik', component: MembershipInfoComponent },
-          { path: 'ozet', component: SummaryComponent },
-          { path: 'ilanlar', component: AdListComponent },
-          { path: 'ilanlar/pasif', component: AdListComponent },
-        ],
+        loadChildren: () => import('./members/member.module').then((mod) => mod.MemberModule),
       },
     ],
   },
   {
     path: 'giris',
     loadChildren: () => import('./entry/entry.module').then((mod) => mod.EntryModule),
-  },
-  {
-    path: '',
-    canActivateChild: [AuthGuard],
-    children: [
-      { path: 'members/:username', component: MemberDetailComponent },
-      { path: 'lists', component: ListsComponent },
-    ],
   },
   { path: 'errors', component: TestErrorsComponent },
   { path: 'notfound', component: NotFoundComponent },

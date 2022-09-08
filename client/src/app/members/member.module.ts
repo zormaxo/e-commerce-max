@@ -10,6 +10,7 @@ import { SummaryComponent } from './member-profile/summary/summary.component';
 import { AdListComponent } from './member-profile/ad-list/ad-list.component';
 import { RouterModule } from '@angular/router';
 import { InputMaskModule } from 'primeng/inputmask';
+import { MemberRoutingModule } from './member-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     SummaryComponent,
     AdListComponent,
   ],
-  imports: [CommonModule, FormsModule, RouterModule, InputMaskModule],
+  imports: [CommonModule, FormsModule, MemberRoutingModule, InputMaskModule],
   exports: [
     MemberCardComponent,
     MemberProfileComponent,
