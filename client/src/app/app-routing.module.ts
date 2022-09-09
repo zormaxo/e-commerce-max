@@ -1,19 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { ListsComponent } from './lists/lists.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { MemberProfileComponent } from './members/member-profile/member-profile.component';
-import { MembershipInfoComponent } from './members/member-profile/membership-info/membership-info.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
-import { SummaryComponent } from './members/member-profile/summary/summary.component';
-import { AdListComponent } from './members/member-profile/ad-list/ad-list.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -33,9 +26,12 @@ const routes: Routes = [
       },
       {
         path: 'uye',
-        component: MemberProfileComponent,
         canActivate: [AuthGuard],
-        loadChildren: () => import('./members/member.module').then((mod) => mod.MemberModule),
+        loadChildren: () => import('./member-profile/member-profile.module').then((mod) => mod.MemberProfileModule),
+      },
+      {
+        path: 'management',
+        loadChildren: () => import('./management/management.module').then((mod) => mod.ManagementModule),
       },
     ],
   },
