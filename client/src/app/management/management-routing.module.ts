@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberListComponent } from './member-list/member-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'omer', pathMatch: 'full' },
-  { path: 'omer', component: MemberListComponent },
+  { path: '', component: MemberListComponent },
+  { path: ':username', component: MemberDetailComponent },
 ];
 
 @NgModule({
