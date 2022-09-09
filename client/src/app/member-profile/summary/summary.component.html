@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="counts">
   <div class="col-4">
     <div class="card mb-3">
       <div class="card-body align-items-center">
@@ -9,7 +9,7 @@
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.activeProducts }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['/members/summaryq']" routerLinkActive="active"></a>
+          <a class="stretched-link" [routerLink]="['ilanlar']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.activeProducts + counts.inactiveProducts }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['/members/summaryq']" routerLinkActive="active"></a>
+          <a class="stretched-link" [routerLink]="['ilanlar/pasif']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
           <div class="col-3">
             <p class="card-text lead fw-bold">15</p>
           </div>
-          <a class="stretched-link" [routerLink]="['/members/summaryq']" routerLinkActive="active"></a>
+          <a class="stretched-link" [routerLink]="['ilanlar/favoriler']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
