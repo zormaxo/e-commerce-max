@@ -11,6 +11,7 @@ import { FilterSummaryComponent } from './components/filter-summary/filter-summa
 import { BreadcumbsComponent } from './components/breadcumbs/breadcumbs.component';
 import { RouterModule } from '@angular/router';
 import { LeftNavComponent } from './components/left-nav/left-nav.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent, LeftNavComponent],
@@ -24,6 +25,7 @@ import { LeftNavComponent } from './components/left-nav/left-nav.component';
     }),
     PaginationModule.forRoot(),
     NgxGalleryModule,
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -33,6 +35,7 @@ import { LeftNavComponent } from './components/left-nav/left-nav.component';
     PagingHeaderComponent,
     PagerComponent,
     NgxGalleryModule,
+    NgxMaskModule,
     FilterSummaryComponent,
     BreadcumbsComponent,
     LeftNavComponent,

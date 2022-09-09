@@ -48,7 +48,7 @@
           <div class="card-text">
             <p class="text-muted">Hesap açma tarihi {{ product.user.created }}</p>
             <a href="" class="text-decoration-none">Tüm İlanları</a>
-            <p>Cep {{ product.user.phoneNumber }}</p>
+            <p>Cep {{ product.user.phoneNumber | mask: "(000) 000 00 00" }}</p>
           </div>
           <a href="#" class="btn btn-primary">Mesaj Gönder</a>
         </div>

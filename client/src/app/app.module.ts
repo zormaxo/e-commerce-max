@@ -12,7 +12,6 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
-import { MemberProfileModule } from './member-profile/member-profile.module';
 import { ShowcaseModule } from './shop/showcase/showcase.module';
 import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 import { SearchResultModule } from './search-result/search-result.module';
 import { ManagementModule } from './management/management.module';
+import { MemberProfileModule } from './member-profile/member-profile.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { ManagementModule } from './management/management.module';
     MemberProfileModule,
     SearchResultModule,
     HomeModule,
-    ManagementModule,
+    ManagementModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

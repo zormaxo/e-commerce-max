@@ -52,7 +52,10 @@ public class ProductAppService : BaseAppService
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .WhereIf(productParams.CountyId.HasValue, p => p.County.Id == productParams.CountyId)
             .WhereIf(productParams.CityId.HasValue, p => p.County.CityId == productParams.CityId)
-            .Where(x => x.IsActive);
+            .WhereIf(!productParams.GetAllStatus.HasValue, p => p.IsActive) //true: All, false: InActive, null: Active
+            .WhereIf(productParams.GetAllStatus.HasValue && productParams.GetAllStatus == false, p => !p.IsActive)
+            .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId);
+        //.Where(x => x.IsActive)
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
