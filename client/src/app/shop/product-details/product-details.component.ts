@@ -54,11 +54,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   loadProduct() {
-    this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product) => {
-      this.product = product;
+    this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product: any) => {
+      this.product = product.data;
       this.galleryImages = this.getImages();
       this.shopService.getCategories().subscribe((categories) => {
-        this.selectedCategory = categories.find((x: { id: number }) => x.id == product.category.id);
+        this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.category.id);
         this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
       });
     });

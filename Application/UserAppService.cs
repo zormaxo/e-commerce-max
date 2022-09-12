@@ -1,7 +1,6 @@
 using Application.Interfaces;
 using AutoMapper;
 using Core.Dtos;
-using Core.Response;
 
 namespace Application;
 
@@ -14,15 +13,15 @@ public class UserAppService : BaseAppService
         _userRepository = userRepository;
     }
 
-    public async Task<ApiResponse<IEnumerable<MemberDto>>> GetUsers()
+    public async Task<IEnumerable<MemberDto>> GetUsers()
     {
-        var users = await _userRepository.GetMembersAsync();
-        return new ApiResponse<IEnumerable<MemberDto>>(users);
+        return await _userRepository.GetMembersAsync();
+      
     }
 
-    public async Task<ApiResponse<MemberDto>> GetUser(int id)
+    public async Task<MemberDto> GetUser(int id)
     {
-        var user = await _userRepository.GetMemberAsync(id);
-        return new ApiResponse<MemberDto>(user);
+        return await _userRepository.GetMemberAsync(id);
+
     }
 }

@@ -5,7 +5,6 @@ using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Core.Errors;
-using Core.Response;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -23,7 +22,7 @@ public class AccountAppService : BaseAppService
         _tokenService = tokenService;
     }
 
-    public async Task<ApiResponse<UserDto>> Register(RegisterDto registerDto)
+    public async Task<UserDto> Register(RegisterDto registerDto)
     {
         if (await UserExists(registerDto.Username))
             throw new ApiException(HttpStatusCode.BadRequest, "Username is taken");
@@ -46,10 +45,10 @@ public class AccountAppService : BaseAppService
             Token = _tokenService.CreateToken(user)
         };
 
-        return new ApiResponse<UserDto>(userDto);
+        return userDto;
     }
 
-    public async Task<ApiResponse<UserDto>> Login(LoginDto loginDto)
+    public async Task<UserDto> Login(LoginDto loginDto)
     {
         var spec = new UsersSpecification(loginDto.Username);
         var user = await _appUsersRepo.GetEntityWithSpec(spec);
@@ -74,7 +73,7 @@ public class AccountAppService : BaseAppService
             Token = _tokenService.CreateToken(user)
         };
 
-        return new ApiResponse<UserDto>(userDto);
+        return userDto;
     }
 
     private async Task<bool> UserExists(string username)

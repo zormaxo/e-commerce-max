@@ -18,17 +18,13 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            var response = await _userSrv.GetUsers();
-            //if (response.StatusCode != 200) return BadRequest(response);
-            return Ok(response.Data);
+            return Ok(await _userSrv.GetUsers());
         }
 
         [HttpGet("{userId}")]
         public async Task<ActionResult<MemberDto>> GetUser(int userId)
         {
-            var response = await _userSrv.GetUser(userId);
-            //if (response.StatusCode != 200) return BadRequest(response);
-            return Ok(response.Data);
+            return await _userSrv.GetUser(userId);
         }
     }
 }

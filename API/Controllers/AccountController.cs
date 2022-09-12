@@ -16,16 +16,13 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            var response = await _accountSrv.Register(registerDto);
-            //if (response.StatusCode != 200) return BadRequest(response);
-            return response.Data;
+            return await _accountSrv.Register(registerDto);
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var response = await _accountSrv.Login(loginDto);
-            return response.Data;
+            return await _accountSrv.Login(loginDto);
         }
     }
 }
