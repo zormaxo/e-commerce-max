@@ -1,5 +1,6 @@
 using API.Extensions;
 using API.Middleware;
+using DotNet.ResponseWrapper.Sample.Api.Middleware;
 using System.Text.Json.Serialization;
 
 namespace API
@@ -41,6 +42,7 @@ namespace API
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
