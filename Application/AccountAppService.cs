@@ -5,6 +5,7 @@ using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Core.Errors;
+using Core.Response;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;

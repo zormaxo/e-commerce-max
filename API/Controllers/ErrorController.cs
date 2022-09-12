@@ -1,3 +1,4 @@
+using Core.Errors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -7,10 +8,11 @@ namespace API.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]     //we dont want swagger to add this.
     public class ErrorController : BaseApiController
     {
-        public IActionResult Error(int code)
+        public ActionResult<ApiErrorResponse> Error(int code)
         {
             string message = GetDefaultMessageForStatusCode((HttpStatusCode)code);
-            return new ObjectResult($"{message}: {code}");
+            //return new ObjectResult($"{message}: {code}");
+            return new ApiErrorResponse($"{message}: {code}");
         }
 
         private static string GetDefaultMessageForStatusCode(HttpStatusCode statusCode)

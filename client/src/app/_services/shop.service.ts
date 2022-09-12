@@ -79,9 +79,9 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageNumber.toString());
     params = params.append('pageSize', shopParams.pageSize.toString());
 
-    return this.http.get<IPagination>(this.baseUrl + 'products', { observe: 'response', params }).pipe(
-      map((response) => {
-        return response.body;
+    return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
+      map((response: any) => {
+        return response.body.data;
       })
     );
   }
@@ -97,17 +97,17 @@ export class ShopService {
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
-  getBrands() {
-    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
-  }
+  // getBrands() {
+  //   return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
+  // }
 
   getCities() {
     return this.http.get<IAddress[]>(this.baseUrl + 'products/cities');
   }
 
-  getCounties(id: number) {
-    return this.http.get<IAddress[]>(this.baseUrl + 'products/counties/' + id);
-  }
+  // getCounties(id: number) {
+  //   return this.http.get<IAddress[]>(this.baseUrl + 'products/counties/' + id);
+  // }
 
   updateProduct(product: IProduct) {
     return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
@@ -125,9 +125,9 @@ export class ShopService {
     };
 
     if (this.categories === undefined) {
-      return this.http.get<ICategory[]>(this.baseUrl + 'products/categories').pipe(
-        map((categories: ICategory[]) => {
-          this.categories = categories.filter((x) => x.parent == null);
+      return this.http.get(this.baseUrl + 'products/categories').pipe(
+        map((asd : any) => {
+          this.categories = asd.data.filter((x) => x.parent == null);
           this.categories.forEach((x) => {
             pushChildCategories(x);
           });

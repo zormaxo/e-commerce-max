@@ -1,27 +1,17 @@
 namespace Core.Errors;
 
-public class ApiErrorResponse<T> : ApiResponse<string>
+public class ApiErrorResponse
 {
-    public ApiErrorResponse(T apiMessage, string exMessage = null, string stackTrace = null) : base(false)
+    public ApiErrorResponse(object apiMessage, string exMessage = null, string stackTrace = null, int? code = null)
     {
-        Error.Message = apiMessage;
-        Error.ExceptionMessage = exMessage;
-        Error.Details = stackTrace;
+        Message = apiMessage;
+        ExceptionMessage = exMessage;
+        Details = stackTrace;
+        Code = code;
     }
 
-    public Error<T> Error { get; set; } = new Error<T>();
-}
-
-public class ApiErrorResponse : ApiErrorResponse<string>
-{
-    public ApiErrorResponse(string apiMessage, string exMessage = null, string stackTrace = null)
-        : base(apiMessage, exMessage, stackTrace) { }
-}
-
-public class Error<T>
-{
-    public int Code { get; set; }
-    public T Message { get; set; }
+    public int? Code { get; set; }
+    public object Message { get; set; }
     public string ExceptionMessage { get; set; }
     public string Details { get; set; }
 }

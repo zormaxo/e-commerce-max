@@ -17,8 +17,8 @@ export class AccountService {
 
   login(model: unknown) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
-      map((response: User) => {
-        const user = response;
+      map((response: any) => {
+        const user = response.data;
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
@@ -29,8 +29,8 @@ export class AccountService {
 
   register(model: unknown) {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
-      map((user: User) => {
-        if (user) {
+      map((user: any) => {
+        if (user.data) {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
         }

@@ -3,7 +3,6 @@ using Application.Entities;
 using Application.Specifications;
 using Core.Dtos;
 using Core.Entities;
-using Core.Errors;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Service.Helpers;
@@ -35,7 +34,7 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiErrorResponse<string>), StatusCodes.Status404NotFound)]   //swagger documentation hints
+        //[ProducesResponseType(typeof(ApiErrorResponse<string>), StatusCodes.Status404NotFound)]   //swagger documentation hints
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             return await _productSrv.GetProduct(id);
@@ -43,7 +42,6 @@ namespace API.Controllers
 
         [HttpPost("update-product")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiErrorResponse<string>), StatusCodes.Status404NotFound)]   //swagger documentation hints
         public async Task<int> UpdateProduct(Product product)
         {
             return await _productSrv.UpdateProduct(product);

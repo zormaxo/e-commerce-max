@@ -44,7 +44,9 @@ namespace API.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest(new ApiErrorResponse("This message is from controller"));
+            return BadRequest(
+                "This message is from controller"
+                );
         }
 
         [HttpGet("badrequest/{id}")]
@@ -54,14 +56,13 @@ namespace API.Controllers
         }
 
         [HttpGet("currency")]
-        public async Task<ActionResult<string>> GetCurrency()
+        public async Task<ActionResult<JsonElement>> GetCurrency()
         {
             var httpResponseMessage = await _client.GetAsync(
                 "https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
             var response = await httpResponseMessage.Content.ReadAsStringAsync();
 
-            var jsonElement = JsonSerializer.Deserialize<JsonElement>(response);
-            return JsonSerializer.Serialize(jsonElement, new JsonSerializerOptions() { WriteIndented = true });
+            return JsonSerializer.Deserialize<JsonElement>(response);
         }
     }
 }

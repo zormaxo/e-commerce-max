@@ -1,6 +1,5 @@
 using API.Extensions;
 using API.Middleware;
-using DotNet.ResponseWrapper.Sample.Api.Middleware;
 using System.Text.Json.Serialization;
 
 namespace API
@@ -33,16 +32,16 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseSwaggerDocumentation();
-            app.UseStatusCodePagesWithReExecute("/errors/{0}");  //for non-exist endpoints
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");  //for non-exist endpoints
             app.UseRouting();
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
