@@ -41,7 +41,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
     }
 
     this.shopService.getCities().subscribe((cities: any) => {
-      this.cities = cities.data;
+      this.cities = cities.result;
       if (this.shopParams.cityId) {
         this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
       }

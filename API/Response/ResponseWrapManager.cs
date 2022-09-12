@@ -1,5 +1,4 @@
-﻿using Core.Errors;
-using Microsoft.AspNetCore.Http.Extensions;
+﻿using Microsoft.AspNetCore.Http.Extensions;
 using System.Net;
 
 namespace API.Response;
@@ -12,14 +11,13 @@ public static class ResponseWrapManager
     /// <summary>
     /// The Response Wrapper method handles customizations and generate Formatted Response.
     /// </summary>
-    /// <param name="result">The Result</param>
+    /// <param name="response">The Result</param>
     /// <param name="context">The HTTP Context</param>
-    /// <param name="exception">The Exception</param>
     /// <returns>Sample Response Object</returns>
-    public static SampleResponse ResponseWrapper(object result, HttpContext context)
+    public static ApiResponse ResponseWrapper(object response, HttpContext context)
     {
         var requestUrl = context.Request.GetDisplayUrl();
-        var data = result;
+        var responseBody = response;
         object error = null;
         var status = true;
         var httpStatusCode = (HttpStatusCode)context.Response.StatusCode;
@@ -27,12 +25,12 @@ public static class ResponseWrapManager
         if (context.Response.StatusCode != (int)HttpStatusCode.Accepted && context.Response.StatusCode != (int)HttpStatusCode.OK)
         {
             status = false;
-            data = null;
-            error = result;
+            responseBody = null;
+            error = response;
         }
 
         // NOTE: Add any further customizations if needed here
 
-        return new SampleResponse(requestUrl, data, error, status, httpStatusCode);
+        return new ApiResponse(requestUrl, responseBody, error, status, httpStatusCode);
     }
 }

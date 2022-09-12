@@ -25,7 +25,7 @@ export class SummaryComponent implements OnInit {
   getProducts() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
       this.shopService.getProductCounts(user.id).subscribe((counts: any) => {
-        this.counts = counts.data;
+        this.counts = counts.result;
       });
     });
   }

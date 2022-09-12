@@ -81,7 +81,7 @@ export class ShopService {
 
     return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
       map((response: any) => {
-        return response.body.data;
+        return response.body.result;
       })
     );
   }
@@ -127,7 +127,7 @@ export class ShopService {
     if (this.categories === undefined) {
       return this.http.get(this.baseUrl + 'products/categories').pipe(
         map((asd : any) => {
-          this.categories = asd.data.filter((x) => x.parent == null);
+          this.categories = asd.result.filter((x) => x.parent == null);
           this.categories.forEach((x) => {
             pushChildCategories(x);
           });

@@ -1,5 +1,4 @@
-﻿using Core.Errors;
-using System.Net;
+﻿using System.Net;
 
 namespace API.Response;
 
@@ -7,25 +6,25 @@ namespace API.Response;
 /// Sample Response class with Request Url, Data, Error, Status, httpStatusCode etc.
 /// </summary>
 [Serializable]
-public class SampleResponse
+public class ApiResponse
 {
 	/// <summary>
 	/// The Sample Response Constructor
 	/// </summary>
 	/// <param name="requestUrl">The Request Url</param>
-	/// <param name="data">The Data</param>
+	/// <param name="response">The Data</param>
 	/// <param name="error">The Error</param>
 	/// <param name="status">The Status</param>
 	/// <param name="httpStatusCode">The Http Status Code</param>
-	public SampleResponse(
+	public ApiResponse(
 		string requestUrl,
-		object data,
-        object error,
+		object response,
+		object error,
 		bool status = false,
 		HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError)
 	{
 		RequestUrl = requestUrl;
-		Data = data;
+		Result = response;
 		Error = error;
 		Status = status;
 		StatusCode = httpStatusCode;
@@ -39,7 +38,7 @@ public class SampleResponse
 	/// <summary>
 	/// The Response Data
 	/// </summary>
-	public object Data { get; set; }
+	public object Result { get; set; }
 
 	/// <summary>
 	/// The Response Error

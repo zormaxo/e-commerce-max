@@ -62,23 +62,23 @@ public class ResponseWrapperMiddleware
         var responseBodyText = new StreamReader(memoryStream).ReadToEnd();
 
         // Deserializing Controller Response to an object
-        var result = new object();
+        var responseObj = new object();
         try
         {
-            result = JsonConvert.DeserializeObject(responseBodyText);
+            responseObj = JsonConvert.DeserializeObject(responseBodyText);
 
         }
         catch
         {
             if (context.Response.StatusCode != (int)HttpStatusCode.Accepted && context.Response.StatusCode != (int)HttpStatusCode.OK)
-                result = new ApiErrorResponse(responseBodyText);
+                responseObj = new ApiErrorResponse(responseBodyText);
             else
-                result = responseBodyText;
+                responseObj = responseBodyText;
 
         }
 
         // Invoking Customizations Method to handle Custom Formatted Response
-        var response = ResponseWrapManager.ResponseWrapper(result, context);
+        var response = ResponseWrapManager.ResponseWrapper(responseObj, context);
 
         // returing response to caller
         await context.Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }));
