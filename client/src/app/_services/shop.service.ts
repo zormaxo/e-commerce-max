@@ -109,6 +109,10 @@ export class ShopService {
     return this.http.get<IAddress[]>(this.baseUrl + 'products/counties/' + id);
   }
 
+  updateProduct(product: IProduct) {
+    return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
+  }
+
   getCategories() {
     const pushChildCategories = (category: ICategory) => {
       if (category.childCategories) {
@@ -162,14 +166,5 @@ export class ShopService {
         fillList(selectedCategory.parent);
       }
     }
-  }
-
-  formData;
-  public setFormData(formData: any): void {
-    this.formData = formData;
-  }
-
-  public getFormData(): any {
-    return this.formData;
   }
 }

@@ -41,6 +41,14 @@ namespace API.Controllers
             return await _productSrv.GetProduct(id);
         }
 
+        [HttpPost("update-product")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiErrorResponse<string>), StatusCodes.Status404NotFound)]   //swagger documentation hints
+        public async Task<int> UpdateProduct(Product product)
+        {
+            return await _productSrv.UpdateProduct(product);
+        }
+
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetBrands()
         {

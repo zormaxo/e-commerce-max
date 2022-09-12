@@ -7,6 +7,7 @@ import { take } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 registerLocaleData(localeTr);
 
 @Component({
@@ -18,18 +19,19 @@ export class AdListComponent implements OnInit {
   products: IProduct[];
   shopParams = new ShopParams(10);
   totalCount: number;
+  inActivePage;
 
   constructor(
     private shopService: ShopService,
     private accountService: AccountService,
     private router: Router,
-    private route: ActivatedRoute
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    // let omer = this.route.snapshot.url[1]?.path;
     const isInactive = this.router.url.split('?')[0].split('/').pop();
-    if (isInactive === 'pasif') {
+    this.inActivePage = isInactive === 'pasif' ? false : true;
+    if (!this.inActivePage) {
       this.shopParams.getAllStatus = false;
     }
     this.getProducts();
@@ -44,6 +46,14 @@ export class AdListComponent implements OnInit {
         this.shopParams.pageSize = response.pageSize;
         this.totalCount = response.totalCount;
       });
+    });
+  }
+
+  onActive(product: IProduct, activeStatus: boolean) {
+    product.isActive = activeStatus;
+    this.shopService.updateProduct(product).subscribe(() => {
+      this.toastr.success(`${activeStatus ? 'Aktif' : 'Pasif'} edildi`);
+      this.getProducts();
     });
   }
 }

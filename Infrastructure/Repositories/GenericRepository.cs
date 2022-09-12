@@ -8,7 +8,7 @@ namespace Application.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
-    internal readonly StoreContext _context;
+    public readonly StoreContext _context;
     private readonly DbSet<T> _dbSet;
 
     public GenericRepository(StoreContext context)

@@ -150,7 +150,6 @@ public class ProductAppService : BaseAppService
         return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
     }
 
-
     private async Task<List<int>> GetCategoryIds(string categoryName)
     {
         if (_cachedItems.Categories.Count == 0)
@@ -176,5 +175,12 @@ public class ProductAppService : BaseAppService
         }
 
         return categoryIds;
+    }
+
+    public async Task<int> UpdateProduct(Product product)
+    {
+        Product productObj = await _productsRepo.GetByIdAsync(product.Id);
+        _mapper.Map(product, productObj);
+        return await _productsRepo.SaveChangesAsync();
     }
 }

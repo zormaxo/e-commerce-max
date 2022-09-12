@@ -6,7 +6,7 @@
           <p class="card-title h6">{{ product.name }}</p>
         </div>
         <div class="col-auto">
-          <p style="color: brown" class="h6">{{ product.price | currency: "":"":"":"tr" }} TL</p>
+          <p style="color: brown" class="h6">{{ product.priceText }}</p>
         </div>
       </div>
       <div class="row" style="height: 100px">
@@ -22,13 +22,18 @@
             <p class="card-text small">This is a wider card with supporting text.</p>
             <p class="card-text small"><small class="text-muted">Last updated 3 mins ago</small></p>
             <div class="text-end">
-              <div class="btn-group" dropdown>
-                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle btn-sm">
-                  İşlemler<span class="caret"></span>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
+                  İşlemler
                 </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                  <li><a class="dropdown-item small" routerLink="/uye/uyelik/ilan/duzenle">Düzenle</a></li>
-                  <li><a class="dropdown-item small" routerLink="/uye/uyelik/ilan/duzenle">Yayından kaldır</a></li>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" routerLink="/uye/uyelik/ilan/duzenle">Düzenle</a></li>
+                  <li *ngIf="this.inActivePage">
+                    <a class="dropdown-item" (click)="onActive(product, false)">Yayından kaldır</a>
+                  </li>
+                  <li *ngIf="!this.inActivePage">
+                    <a class="dropdown-item" (click)="onActive(product, true)">Yayına al</a>
+                  </li>
                 </ul>
               </div>
             </div>

@@ -30,6 +30,9 @@ public class MappingProfiles : Profile
             .ForMember(d => d.Try, o => o.MapFrom(s => s.Rates.TRY))
             .ForMember(d => d.Gbp, o => o.MapFrom(s => s.Rates.GBP))
             .ForMember(d => d.Usd, o => o.MapFrom(s => s.Rates.USD));
+        CreateMap<Product, Product>()
+             .IgnoreAllMembers()
+             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive));
     }
 
     public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)
