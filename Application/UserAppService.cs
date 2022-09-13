@@ -1,6 +1,7 @@
 using Application.Interfaces;
 using AutoMapper;
 using Core.Dtos;
+using System.Security.Claims;
 
 namespace Application;
 
@@ -21,5 +22,12 @@ public class UserAppService : BaseAppService
     public async Task<MemberDto> GetUser(int id)
     {
         return await _userRepository.GetMemberAsync(id);
+    }
+ 
+    public async Task UpdateUser(MemberUpdateDto memberUpdateDto, string username)
+    {
+        var user = await _userRepository.GetUserByUsernameAsync(username);
+        _mapper.Map(memberUpdateDto, user);
+        await _userRepository.SaveAllAsync();
     }
 }

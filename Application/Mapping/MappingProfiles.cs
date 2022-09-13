@@ -33,6 +33,8 @@ public class MappingProfiles : Profile
         CreateMap<Product, Product>()
              .IgnoreAllMembers()
              .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive));
+        CreateMap<MemberUpdateDto, AppUser>()
+             .ForAllMembers(opts => opts.Condition((_, __, srcMember) => srcMember != null)); 
     }
 
     public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

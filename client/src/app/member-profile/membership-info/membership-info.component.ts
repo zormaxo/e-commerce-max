@@ -42,9 +42,48 @@ export class MembershipInfoComponent implements OnInit {
     });
   }
 
-  updateMember() {
-    this.toastr.success('Profile updated successfully');
-    this.nameSurnameForm.reset(this.member);
+  updateMember(form: NgForm) {
+    const updateClone: Member = structuredClone(this.member);
+
+    switch (form) {
+      case this.nameSurnameForm:
+        updateClone.phoneNumber = null;
+        updateClone.username = null;
+        break;
+      case this.emailForm:
+        updateClone.firstName = null;
+        updateClone.phoneNumber = null;
+        updateClone.surname = null;
+        break;
+      case this.phoneForm:
+        updateClone.firstName = null;
+        updateClone.username = null;
+        updateClone.surname = null;
+        break;
+      default:
+        break;
+    }
+
+    this.memberService.updateMember(updateClone).subscribe(() => {
+      this.toastr.success('Profile updated successfully');
+      switch (form) {
+        case this.nameSurnameForm:
+          this.memberClone.firstName = this.member.firstName;
+          this.memberClone.surname = this.member.surname;
+          this.nameSurnameForm.reset(this.member);
+          break;
+        case this.emailForm:
+          this.memberClone.username = this.member.username;
+          this.emailForm.reset(this.member);
+          break;
+        case this.phoneForm:
+          this.memberClone.phoneNumber = this.member.phoneNumber;
+          this.phoneForm.reset(this.member);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   onReset(form: NgForm) {

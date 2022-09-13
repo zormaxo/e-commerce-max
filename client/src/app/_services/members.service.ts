@@ -10,6 +10,7 @@ import { Observable, of } from 'rxjs';
 })
 export class MembersService {
   baseUrl = environment.apiUrl;
+  members: Member[] = [];
   map = new Map();
 
   constructor(private http: HttpClient) {}
@@ -30,5 +31,14 @@ export class MembersService {
         })
       );
     }
+  }
+
+  updateMember(member: Member) {
+    return this.http.put(this.baseUrl + 'users', member).pipe(
+      map(() => {
+        const index = this.members.indexOf(member);
+        this.members[index] = member;
+      })
+    );
   }
 }

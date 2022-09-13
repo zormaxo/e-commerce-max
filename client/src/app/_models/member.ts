@@ -1,7 +1,7 @@
 export interface Member {
   id: number;
   username: string;
-  firstname: string;
+  firstName: string;
   surname: string;
   photoUrl: string;
   logoUrl: string;

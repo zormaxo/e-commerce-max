@@ -6,7 +6,7 @@
           <div class="alert alert-info small" *ngIf="nameSurnameForm.dirty">
             Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
           </div>
-          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateMember()">
+          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateMember(nameSurnameForm)">
             <div class="row row-cols-2">
               <div class="col mb-3">
                 <label class="form-label small">İsim</label>
@@ -22,7 +22,13 @@
               </div>
             </div>
             <button [disabled]="!nameSurnameForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
-            <button class="btn btn-sm btn-danger ms-2" type="button" (click)="onReset(nameSurnameForm)">İptal</button>
+            <button
+              [disabled]="!nameSurnameForm.dirty"
+              class="btn btn-sm btn-danger ms-2"
+              type="button"
+              (click)="onReset(nameSurnameForm)">
+              İptal
+            </button>
           </form>
         </div>
         <div class="col-2">
@@ -40,13 +46,19 @@
       <div class="alert alert-info small" *ngIf="emailForm.dirty">
         Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
       </div>
-      <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateMember()">
+      <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateMember(emailForm)">
         <div class="mb-3">
           <label class="form-label small">E-Posta</label>
           <input type="email" class="form-control form-control-sm" name="username" [(ngModel)]="member.username" />
         </div>
         <button [disabled]="!emailForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
-        <button class="btn btn-sm btn-danger ms-2" type="button" (click)="onReset(emailForm)">İptal</button>
+        <button
+          [disabled]="!emailForm.dirty"
+          class="btn btn-sm btn-danger ms-2"
+          type="button"
+          (click)="onReset(emailForm)">
+          İptal
+        </button>
       </form>
     </div>
   </div>
@@ -56,7 +68,7 @@
       <div class="alert alert-info small" *ngIf="phoneForm.dirty">
         Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
       </div>
-      <form #phoneForm="ngForm" id="phoneForm" (ngSubmit)="updateMember()">
+      <form #phoneForm="ngForm" id="phoneForm" (ngSubmit)="updateMember(phoneForm)">
         <div class="p-grid p-fluid mb-3">
           <label class="form-label small">Telefon Numarası</label>
           <input
@@ -67,7 +79,13 @@
             [showMaskTyped]="true" />
         </div>
         <button [disabled]="!phoneForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
-        <button class="btn btn-sm btn-danger ms-2" type="button" (click)="onReset(phoneForm)">İptal</button>
+        <button
+          [disabled]="!phoneForm.dirty"
+          class="btn btn-sm btn-danger ms-2"
+          type="button"
+          (click)="onReset(phoneForm)">
+          İptal
+        </button>
       </form>
     </div>
   </div>
