@@ -11,26 +11,27 @@ import { Observable, of } from 'rxjs';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
-  map = new Map();
 
   constructor(private http: HttpClient) {}
 
   getMembers() {
-    return this.http.get<Member[]>(this.baseUrl + 'users');
+    if (this.members.length > 0) return of(this.members);
+    return this.http.get(this.baseUrl + 'users').pipe(
+      map((response: any) => {
+        this.members = response.result;
+        return response.result;
+      })
+    );
   }
 
-  getMember(id: number): Observable<Member> {
-    const member: Member = this.map.get(id);
-    if (member !== undefined) {
-      return of(member);
-    } else {
-      return this.http.get<Member>(this.baseUrl + 'users/' + id).pipe(
-        map((_member: Member) => {
-          this.map.set(id, _member);
-          return _member;
-        })
-      );
-    }
+  getMember(userId: number) {
+    const member = this.members.find((x) => x.id === userId);
+    if (member !== undefined) return of(member);
+    return this.http.get(this.baseUrl + 'users/' + userId).pipe(
+      map((response: any) => {
+        return response.result;
+      })
+    );
   }
 
   updateMember(member: Member) {

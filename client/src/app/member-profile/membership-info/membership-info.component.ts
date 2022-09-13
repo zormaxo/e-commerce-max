@@ -35,8 +35,8 @@ export class MembershipInfoComponent implements OnInit {
 
   loadMember() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.memberService.getMember(user.id).subscribe((member: any) => {
-        this.member = member.result;
+      this.memberService.getMember(user.id).subscribe((member: Member) => {
+        this.member = member;
         this.memberClone = structuredClone(this.member);
       });
     });
