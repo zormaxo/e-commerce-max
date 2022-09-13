@@ -16,12 +16,10 @@ public class UserAppService : BaseAppService
     public async Task<IEnumerable<MemberDto>> GetUsers()
     {
         return await _userRepository.GetMembersAsync();
-      
     }
 
     public async Task<MemberDto> GetUser(int id)
     {
         return await _userRepository.GetMemberAsync(id);
-
     }
 }

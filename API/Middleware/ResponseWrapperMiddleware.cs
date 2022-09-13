@@ -66,7 +66,6 @@ public class ResponseWrapperMiddleware
         try
         {
             responseObj = JsonConvert.DeserializeObject(responseBodyText);
-
         }
         catch
         {
@@ -74,7 +73,6 @@ public class ResponseWrapperMiddleware
                 responseObj = new ApiErrorResponse(responseBodyText);
             else
                 responseObj = responseBodyText;
-
         }
 
         // Invoking Customizations Method to handle Custom Formatted Response
@@ -85,7 +83,5 @@ public class ResponseWrapperMiddleware
     }
 }
 
-
 //https://stackoverflow.com/questions/43403941/how-to-read-asp-net-core-response-body
 //https://stackoverflow.com/questions/72385997/net-core-api-modify-response-globally
-
