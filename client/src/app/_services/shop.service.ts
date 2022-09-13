@@ -97,17 +97,9 @@ export class ShopService {
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
-  // getBrands() {
-  //   return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
-  // }
-
   getCities() {
     return this.http.get<IAddress[]>(this.baseUrl + 'products/cities');
   }
-
-  // getCounties(id: number) {
-  //   return this.http.get<IAddress[]>(this.baseUrl + 'products/counties/' + id);
-  // }
 
   updateProduct(product: IProduct) {
     return this.http.post<number>(this.baseUrl + 'products/update-product/', product);

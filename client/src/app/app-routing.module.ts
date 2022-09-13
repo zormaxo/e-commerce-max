@@ -31,6 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'uyeler',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./management/management.module').then((mod) => mod.ManagementModule),
       },
     ],

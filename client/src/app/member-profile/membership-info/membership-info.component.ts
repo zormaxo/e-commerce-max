@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { take } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-membership-info',
@@ -10,9 +12,22 @@ import { take } from 'rxjs';
   styleUrls: ['./membership-info.component.scss'],
 })
 export class MembershipInfoComponent implements OnInit {
+  @ViewChild('nameSurnameForm') nameSurnameForm: NgForm;
+  @ViewChild('emailForm') emailForm: NgForm;
+  @ViewChild('phoneForm') phoneForm: NgForm;
   member: Member;
+  memberClone: Member;
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+    if (this.nameSurnameForm.dirty || this.emailForm.dirty || this.phoneForm.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
-  constructor(private memberService: MembersService, private accountService: AccountService) {}
+  constructor(
+    private memberService: MembersService,
+    private accountService: AccountService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.loadMember();
@@ -20,9 +35,19 @@ export class MembershipInfoComponent implements OnInit {
 
   loadMember() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.memberService.getMember(user.id).subscribe((member:any) => {
+      this.memberService.getMember(user.id).subscribe((member: any) => {
         this.member = member.result;
+        this.memberClone = structuredClone(this.member);
       });
     });
+  }
+
+  updateMember() {
+    this.toastr.success('Profile updated successfully');
+    this.nameSurnameForm.reset(this.member);
+  }
+
+  onReset(form: NgForm) {
+    form.reset(this.memberClone);
   }
 }

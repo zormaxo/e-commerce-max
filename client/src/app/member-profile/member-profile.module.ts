@@ -7,10 +7,11 @@ import { MembershipInfoComponent } from './membership-info/membership-info.compo
 import { MemberProfileComponent } from './member-profile.component';
 import { SummaryComponent } from './summary/summary.component';
 import { AdListComponent } from './ad-list/ad-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [MemberProfileComponent, MembershipInfoComponent, SummaryComponent, AdListComponent],
-  imports: [CommonModule, FormsModule, MemberProfileRoutingModule, InputMaskModule],
+  imports: [CommonModule, FormsModule, MemberProfileRoutingModule, InputMaskModule, SharedModule],
   exports: [],
 })
 export class MemberProfileModule {}

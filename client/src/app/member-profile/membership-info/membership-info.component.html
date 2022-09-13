@@ -3,14 +3,17 @@
     <div class="card-body">
       <div class="row">
         <div class="col-10">
-          <form>
+          <div class="alert alert-info small" *ngIf="nameSurnameForm.dirty">
+            Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
+          </div>
+          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateMember()">
             <div class="row row-cols-2">
               <div class="col mb-3">
                 <label class="form-label small">İsim</label>
                 <input
                   type="text"
                   class="form-control form-control-sm"
-                  name="username"
+                  name="firstName"
                   [(ngModel)]="member.firstName" />
               </div>
               <div class="col mb-3">
@@ -18,7 +21,8 @@
                 <input type="text" class="form-control form-control-sm" name="surname" [(ngModel)]="member.surname" />
               </div>
             </div>
-            <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+            <button [disabled]="!nameSurnameForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+            <button class="btn btn-sm btn-danger ms-2" type="button" (click)="onReset(nameSurnameForm)">İptal</button>
           </form>
         </div>
         <div class="col-2">
@@ -33,35 +37,44 @@
 
   <div class="card mb-3 shadow">
     <div class="card-body">
-      <form>
+      <div class="alert alert-info small" *ngIf="emailForm.dirty">
+        Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
+      </div>
+      <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateMember()">
         <div class="mb-3">
           <label class="form-label small">E-Posta</label>
-          <input type="email" class="form-control form-control-sm" name="email" [(ngModel)]="member.username" />
+          <input type="email" class="form-control form-control-sm" name="username" [(ngModel)]="member.username" />
         </div>
-        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button [disabled]="!emailForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button class="btn btn-sm btn-danger ms-2" type="button" (click)="onReset(emailForm)">İptal</button>
       </form>
     </div>
   </div>
 
   <div class="card mb-3 shadow">
     <div class="card-body">
-      <form>
+      <div class="alert alert-info small" *ngIf="phoneForm.dirty">
+        Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
+      </div>
+      <form #phoneForm="ngForm" id="phoneForm" (ngSubmit)="updateMember()">
         <div class="p-grid p-fluid mb-3">
           <label class="form-label small">Telefon Numarası</label>
-          <p-inputMask
-            mask="(999) 999 99 99"
+          <input
+            [(ngModel)]="member.phoneNumber"
             name="phoneNumber"
-            class="p-0 p-inputtext-sm"
-            [(ngModel)]="member.phoneNumber"></p-inputMask>
+            class="form-control form-control-sm"
+            mask="(000) 000 00 00"
+            [showMaskTyped]="true" />
         </div>
-        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button [disabled]="!phoneForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button class="btn btn-sm btn-danger ms-2" type="button" (click)="onReset(phoneForm)">İptal</button>
       </form>
     </div>
   </div>
 
   <div class="card mb-3 shadow">
     <div class="card-body">
-      <form>
+      <form #passwordForm="ngForm" id="passwordForm" (ngSubmit)="updateMember()">
         <p class="small">
           Şifreniz en az bir harf, rakam veya özel karakter içermeli. Ayrıca şifreniz en az 8 karakterden oluşmalı.
         </p>
@@ -73,7 +86,7 @@
           <label class="form-label small">Yeni şifre</label>
           <input type="password" class="form-control form-control-sm" name="password" />
         </div>
-        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button [disabled]="!passwordForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
       </form>
     </div>
   </div>

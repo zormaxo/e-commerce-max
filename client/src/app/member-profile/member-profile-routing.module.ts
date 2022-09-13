@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PreventUnsavedChangesGuard } from '../_guards/prevent-unsaved-changes.guard';
 import { AdListComponent } from './ad-list/ad-list.component';
 import { MemberProfileComponent } from './member-profile.component';
 import { MembershipInfoComponent } from './membership-info/membership-info.component';
@@ -11,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: MemberProfileComponent,
     children: [
-      { path: 'uyelik', component: MembershipInfoComponent },
+      { path: 'uyelik', component: MembershipInfoComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'ozet', component: SummaryComponent },
       { path: 'ilanlar', component: AdListComponent },
       { path: 'ilanlar/pasif', component: AdListComponent },
