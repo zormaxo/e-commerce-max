@@ -30,7 +30,7 @@ const routes: Routes = [
         loadChildren: () => import('./member-profile/member-profile.module').then((mod) => mod.MemberProfileModule),
       },
       {
-        path: 'management',
+        path: 'uyeler',
         loadChildren: () => import('./management/management.module').then((mod) => mod.ManagementModule),
       },
     ],

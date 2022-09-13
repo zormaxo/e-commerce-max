@@ -5,7 +5,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 
 const routes: Routes = [
   { path: '', component: MemberListComponent },
-  { path: ':username', component: MemberDetailComponent },
+  { path: ':userId', component: MemberDetailComponent },
 ];
 
 @NgModule({
