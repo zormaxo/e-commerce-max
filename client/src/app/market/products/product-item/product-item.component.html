@@ -1,5 +1,9 @@
-<div class="card h-100 shadow-sm">
-  <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" class="card-img-top bg-info" />
+<div class="card h-100 shadow-sm" >
+  <img
+    src="{{ product.pictureUrl }}"
+    alt="{{ product.name }}"
+    class="card-img-top text-bg-light "
+    style="height: 200px; object-fit: contain" />
   <div class="card-body d-flex flex-column">
     <a routerLink="/market/{{ product.id }}">
       <h6 class="text-uppercase">{{ product.name }}</h6>
