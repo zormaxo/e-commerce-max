@@ -5,6 +5,7 @@ import { MembersService } from 'src/app/_services/members.service';
 import { take } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-membership-info',
@@ -44,14 +45,20 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUserFirstLastName() {
     this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+      this.toastr.success('Profile updated successfully');
       this.memberClone.firstName = this.member.firstName;
       this.memberClone.surname = this.member.surname;
       this.nameSurnameForm.reset(this.member);
+
+      const user: User = JSON.parse(localStorage.getItem('user'));
+      user.firstName = this.member.firstName;
+      this.accountService.setCurrentUser(user);
     });
   }
 
   updateUsername() {
     this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+      this.toastr.success('Profile updated successfully');
       this.memberClone.username = this.member.username;
       this.emailForm.reset(this.member);
     });
@@ -59,6 +66,7 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUserPhone() {
     this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+      this.toastr.success('Profile updated successfully');
       this.memberClone.phoneNumber = this.member.phoneNumber;
       this.phoneForm.reset(this.member);
     });
