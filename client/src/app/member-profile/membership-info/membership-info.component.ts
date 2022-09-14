@@ -57,7 +57,7 @@ export class MembershipInfoComponent implements OnInit {
   }
 
   updateUsername() {
-    this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+    this.memberService.updateUsername(this.member).subscribe(() => {
       this.toastr.success('Profile updated successfully');
       this.memberClone.username = this.member.username;
       this.emailForm.reset(this.member);
@@ -65,7 +65,7 @@ export class MembershipInfoComponent implements OnInit {
   }
 
   updateUserPhone() {
-    this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+    this.memberService.updateUserPhone(this.member).subscribe(() => {
       this.toastr.success('Profile updated successfully');
       this.memberClone.phoneNumber = this.member.phoneNumber;
       this.phoneForm.reset(this.member);

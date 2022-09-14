@@ -6,22 +6,38 @@
           <div class="alert alert-info small" *ngIf="nameSurnameForm.dirty">
             Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
           </div>
-          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateUserFirstLastName() ">
-            <div class="row row-cols-2">
-              <div class="col mb-3">
+          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateUserFirstLastName()">
+            <div class="row row-cols-2 mb-3">
+              <div class="col">
                 <label class="form-label small">İsim</label>
                 <input
                   type="text"
                   class="form-control form-control-sm"
                   name="firstName"
-                  [(ngModel)]="member.firstName" />
+                  [(ngModel)]="member.firstName"
+                  #firstName="ngModel"
+                  required />
+                <span class="form-text" *ngIf="!firstName.valid && firstName.touched">Please enter a valid name!</span>
               </div>
-              <div class="col mb-3">
+              <div class="col">
                 <label class="form-label small">Soyisim</label>
-                <input type="text" class="form-control form-control-sm" name="surname" [(ngModel)]="member.surname" />
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  name="surname"
+                  #surname="ngModel"
+                  [(ngModel)]="member.surname"
+                  required />
+                <span class="form-text" *ngIf="!surname.valid && surname.touched">Please enter a valid surname!</span>
               </div>
             </div>
-            <button [disabled]="!nameSurnameForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+
+            <button
+              [disabled]="!nameSurnameForm.dirty || !nameSurnameForm.valid"
+              type="submit"
+              class="btn btn-sm btn-primary">
+              Güncelle
+            </button>
             <button
               [disabled]="!nameSurnameForm.dirty"
               class="btn btn-sm btn-danger ms-2"
@@ -49,9 +65,19 @@
       <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateUsername()">
         <div class="mb-3">
           <label class="form-label small">E-Posta</label>
-          <input type="email" class="form-control form-control-sm" name="username" [(ngModel)]="member.username" />
+          <input
+            type="email"
+            class="form-control form-control-sm"
+            name="username"
+            [(ngModel)]="member.username"
+            #email="ngModel"
+            required
+            email />
+          <span class="form-text" *ngIf="!email.valid && email.touched">Please enter a valid mail!</span>
         </div>
-        <button [disabled]="!emailForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button [disabled]="!emailForm.dirty || !emailForm.valid" type="submit" class="btn btn-sm btn-primary">
+          Güncelle
+        </button>
         <button
           [disabled]="!emailForm.dirty"
           class="btn btn-sm btn-danger ms-2"
@@ -76,9 +102,14 @@
             name="phoneNumber"
             class="form-control form-control-sm"
             mask="(000) 000 00 00"
-            [showMaskTyped]="true" />
+            [showMaskTyped]="true"
+            #phone="ngModel"
+            required />
+          <span class="form-text" *ngIf="!phone.valid && phone.touched">Please enter a valid phone!</span>
         </div>
-        <button [disabled]="!phoneForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button [disabled]="!phoneForm.dirty || !phoneForm.valid" type="submit" class="btn btn-sm btn-primary">
+          Güncelle
+        </button>
         <button
           [disabled]="!phoneForm.dirty"
           class="btn btn-sm btn-danger ms-2"
@@ -98,13 +129,15 @@
         </p>
         <div class="mb-3">
           <label class="form-label small">Mevcut şifre</label>
-          <input type="password" class="form-control form-control-sm" name="password" />
+          <input type="password" class="form-control form-control-sm" name="oldPassword" ngModel required />
         </div>
         <div class="mb-3">
           <label class="form-label small">Yeni şifre</label>
-          <input type="password" class="form-control form-control-sm" name="password" />
+          <input type="password" class="form-control form-control-sm" name="newPassword" ngModel required />
         </div>
-        <button [disabled]="!passwordForm.dirty" type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+        <button [disabled]="!passwordForm.dirty || !passwordForm.valid" type="submit" class="btn btn-sm btn-primary">
+          Güncelle
+        </button>
       </form>
     </div>
   </div>
