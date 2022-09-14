@@ -22,6 +22,7 @@ import { ManagementModule } from './management/management.module';
 import { MemberProfileModule } from './member-profile/member-profile.module';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MarketModule } from './market/market.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HomeModule,
     ManagementModule,
     NgxSpinnerModule,
+    MarketModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
