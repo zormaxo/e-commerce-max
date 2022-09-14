@@ -42,47 +42,25 @@ export class MembershipInfoComponent implements OnInit {
     });
   }
 
-  updateMember(form: NgForm) {
-    const updateClone: Member = structuredClone(this.member);
+  updateUserFirstLastName() {
+    this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+      this.memberClone.firstName = this.member.firstName;
+      this.memberClone.surname = this.member.surname;
+      this.nameSurnameForm.reset(this.member);
+    });
+  }
 
-    switch (form) {
-      case this.nameSurnameForm:
-        updateClone.phoneNumber = null;
-        updateClone.username = null;
-        break;
-      case this.emailForm:
-        updateClone.firstName = null;
-        updateClone.phoneNumber = null;
-        updateClone.surname = null;
-        break;
-      case this.phoneForm:
-        updateClone.firstName = null;
-        updateClone.username = null;
-        updateClone.surname = null;
-        break;
-      default:
-        break;
-    }
+  updateUsername() {
+    this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+      this.memberClone.username = this.member.username;
+      this.emailForm.reset(this.member);
+    });
+  }
 
-    this.memberService.updateMember(updateClone).subscribe(() => {
-      this.toastr.success('Profile updated successfully');
-      switch (form) {
-        case this.nameSurnameForm:
-          this.memberClone.firstName = this.member.firstName;
-          this.memberClone.surname = this.member.surname;
-          this.nameSurnameForm.reset(this.member);
-          break;
-        case this.emailForm:
-          this.memberClone.username = this.member.username;
-          this.emailForm.reset(this.member);
-          break;
-        case this.phoneForm:
-          this.memberClone.phoneNumber = this.member.phoneNumber;
-          this.phoneForm.reset(this.member);
-          break;
-        default:
-          break;
-      }
+  updateUserPhone() {
+    this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
+      this.memberClone.phoneNumber = this.member.phoneNumber;
+      this.phoneForm.reset(this.member);
     });
   }
 

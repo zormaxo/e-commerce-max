@@ -1,5 +1,6 @@
 using Application;
-using Core.Dtos;
+using AutoMapper;
+using Core.Dtos.Member;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -10,10 +11,12 @@ namespace API.Controllers
     public class UsersController : BaseApiController
     {
         private readonly UserAppService _userSrv;
+        private readonly IMapper _mapper;
 
-        public UsersController(UserAppService userSrv)
+        public UsersController(UserAppService userSrv, IMapper mapper)
         {
             _userSrv = userSrv;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -28,8 +31,34 @@ namespace API.Controllers
             return await _userSrv.GetUser(userId);
         }
 
-        [HttpPut]
-        public async Task UpdateUser(MemberUpdateDto memberUpdateDto)
+        [HttpPut("updateUserFirstLastName")]
+        public async Task UpdateUserFirstLastName(MemberNameUpdateDto memberNameUpdateDto)
+        {
+            var memberUpdateDto = new MemberUpdateDto();
+            _mapper.Map(memberNameUpdateDto, memberUpdateDto);
+
+            await UpdateUser(memberUpdateDto);
+        }
+
+        [HttpPut("updateUsername")]
+        public async Task UpdateUsername(MemberUsernameUpdateDto memberUsernameUpdateDto)
+        {
+            var memberUpdateDto = new MemberUpdateDto();
+            _mapper.Map(memberUsernameUpdateDto, memberUpdateDto);
+
+            await UpdateUser(memberUpdateDto);
+        }
+
+        [HttpPut("updateUserPhone")]
+        public async Task UpdateUserPhone(MemberPhoneUpdateDto memberPhoneUpdateDto)
+        {
+            var memberUpdateDto = new MemberUpdateDto();
+            _mapper.Map(memberPhoneUpdateDto, memberUpdateDto);
+
+            await UpdateUser(memberUpdateDto);
+        }
+
+        private async Task UpdateUser(MemberUpdateDto memberUpdateDto)
         {
             var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             await _userSrv.UpdateUser(memberUpdateDto, username);

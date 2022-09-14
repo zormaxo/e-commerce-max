@@ -1,7 +1,6 @@
 using Application.Interfaces;
 using AutoMapper;
-using Core.Dtos;
-using System.Security.Claims;
+using Core.Dtos.Member;
 
 namespace Application;
 
@@ -23,7 +22,7 @@ public class UserAppService : BaseAppService
     {
         return await _userRepository.GetMemberAsync(id);
     }
- 
+
     public async Task UpdateUser(MemberUpdateDto memberUpdateDto, string username)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);

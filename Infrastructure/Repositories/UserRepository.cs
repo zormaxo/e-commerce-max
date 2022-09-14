@@ -1,7 +1,7 @@
 using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.Dtos;
+using Core.Dtos.Member;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 

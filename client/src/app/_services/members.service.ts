@@ -34,12 +34,15 @@ export class MembersService {
     );
   }
 
-  updateMember(member: Member) {
-    return this.http.put(this.baseUrl + 'users', member).pipe(
-      map(() => {
-        const index = this.members.indexOf(member);
-        this.members[index] = member;
-      })
-    );
+  updateUserFirstLastName(member: Member) {
+    return this.http.put(this.baseUrl + 'users/updateUserFirstLastName', member);
+  }
+
+  updateUsername(member: Member) {
+    return this.http.put(this.baseUrl + 'users/updateUsername', member);
+  }
+
+  updateUserPhone(member: Member) {
+    return this.http.put(this.baseUrl + 'users/updateUserPhone', member);
   }
 }

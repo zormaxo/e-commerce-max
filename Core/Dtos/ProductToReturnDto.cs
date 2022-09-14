@@ -1,3 +1,4 @@
+using Core.Dtos.Member;
 using Core.Entities;
 
 namespace Core.Dtos

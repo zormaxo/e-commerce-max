@@ -1,6 +1,7 @@
 using Application.Entities;
 using AutoMapper;
 using Core.Dtos;
+using Core.Dtos.Member;
 using Core.Entities;
 
 namespace Application.Mapping;
@@ -34,7 +35,10 @@ public class MappingProfiles : Profile
              .IgnoreAllMembers()
              .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive));
         CreateMap<MemberUpdateDto, AppUser>()
-             .ForAllMembers(opts => opts.Condition((_, __, srcMember) => srcMember != null)); 
+             .ForAllMembers(opts => opts.Condition((_, __, srcMember) => srcMember != null));
+        CreateMap<MemberNameUpdateDto, MemberUpdateDto>();
+        CreateMap<MemberPhoneUpdateDto, MemberUpdateDto>();
+        CreateMap<MemberUsernameUpdateDto, MemberUpdateDto>();
     }
 
     public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

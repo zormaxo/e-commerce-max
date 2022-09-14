@@ -32,9 +32,9 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseSwaggerDocumentation();
             app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
-            app.UseSwaggerDocumentation();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseStatusCodePagesWithReExecute("/errors/{0}");  //for non-exist endpoints

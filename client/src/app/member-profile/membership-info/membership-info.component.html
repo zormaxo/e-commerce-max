@@ -6,7 +6,7 @@
           <div class="alert alert-info small" *ngIf="nameSurnameForm.dirty">
             Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
           </div>
-          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateMember(nameSurnameForm)">
+          <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateUserFirstLastName() ">
             <div class="row row-cols-2">
               <div class="col mb-3">
                 <label class="form-label small">İsim</label>
@@ -46,7 +46,7 @@
       <div class="alert alert-info small" *ngIf="emailForm.dirty">
         Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
       </div>
-      <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateMember(emailForm)">
+      <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateUsername()">
         <div class="mb-3">
           <label class="form-label small">E-Posta</label>
           <input type="email" class="form-control form-control-sm" name="username" [(ngModel)]="member.username" />
@@ -68,7 +68,7 @@
       <div class="alert alert-info small" *ngIf="phoneForm.dirty">
         Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
       </div>
-      <form #phoneForm="ngForm" id="phoneForm" (ngSubmit)="updateMember(phoneForm)">
+      <form #phoneForm="ngForm" id="phoneForm" (ngSubmit)="updateUserPhone()">
         <div class="p-grid p-fluid mb-3">
           <label class="form-label small">Telefon Numarası</label>
           <input
