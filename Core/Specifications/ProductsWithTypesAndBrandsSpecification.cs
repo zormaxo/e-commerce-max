@@ -30,11 +30,11 @@ namespace Application.Specifications
                         break;
 
                     case "dateAsc":
-                        AddOrderBy(p => p.Created);
+                        AddOrderBy(p => p.CreatedDate);
                         break;
 
                     case "dateDesc":
-                        AddOrderByDescending(p => p.Created);
+                        AddOrderByDescending(p => p.CreatedDate);
                         break;
 
                     default:

@@ -60,7 +60,7 @@ namespace API.Controllers
 
         private async Task UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             await _userSrv.UpdateUser(memberUpdateDto, username);
         }
     }

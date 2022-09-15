@@ -11,7 +11,7 @@ public class TokenService : ITokenService
 {
     private readonly SymmetricSecurityKey _key;
 
-    public TokenService(IConfiguration config)
+    public TokenService(IConfiguration config, IHttpContextAccessor httpContextAccessor)
     {
         _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
     }
@@ -20,7 +20,8 @@ public class TokenService : ITokenService
     {
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.NameId, user.Username)
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
 
         var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

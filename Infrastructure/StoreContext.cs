@@ -64,11 +64,13 @@ public class StoreContext : DbContext
         foreach (var entityEntry in entries)
         {
             var fullAuditableEntity = (FullAuditableEntity)entityEntry.Entity;
-            fullAuditableEntity.LastUpdated = DateTime.Now;
+            fullAuditableEntity.ModifiedDate = DateTime.Now;
 
             if (entityEntry.State == EntityState.Added)
-                fullAuditableEntity.Created = DateTime.Now;
+                fullAuditableEntity.CreatedDate = DateTime.Now;
         }
+
+        //var username = HttpContext.Current.User.Identity.Name;
 
         return base.SaveChangesAsync(cancellationToken);
     }
