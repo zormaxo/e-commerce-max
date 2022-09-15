@@ -1,5 +1,6 @@
 using Application.Entities;
 using Core.Entities;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
@@ -9,8 +10,11 @@ namespace Application;
 
 public class StoreContext : DbContext
 {
-    public StoreContext(DbContextOptions<StoreContext> options) : base(options)
+    private readonly UserResolverService _userService;
+
+    public StoreContext(DbContextOptions<StoreContext> options, UserResolverService userService) : base(options)
     {
+        _userService = userService;
     }
 
     public DbSet<AppUser> Users { get; set; }
@@ -64,13 +68,17 @@ public class StoreContext : DbContext
         foreach (var entityEntry in entries)
         {
             var fullAuditableEntity = (FullAuditableEntity)entityEntry.Entity;
+            var userId = _userService.GetUserId();
+
             fullAuditableEntity.ModifiedDate = DateTime.Now;
+            fullAuditableEntity.ModifiedBy = userId;
 
             if (entityEntry.State == EntityState.Added)
+            {
                 fullAuditableEntity.CreatedDate = DateTime.Now;
+                fullAuditableEntity.ModifiedBy = userId;
+            }
         }
-
-        //var username = HttpContext.Current.User.Identity.Name;
 
         return base.SaveChangesAsync(cancellationToken);
     }

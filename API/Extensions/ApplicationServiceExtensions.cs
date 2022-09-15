@@ -4,6 +4,7 @@ using Application.Mapping;
 using Application.Repositories;
 using Application.Services;
 using Core.Errors;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ public static class ApplicationServiceExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
     {
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<UserResolverService>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddAutoMapper(typeof(MappingProfiles));

@@ -52,6 +52,7 @@ export class MembershipInfoComponent implements OnInit {
 
       const user: User = JSON.parse(localStorage.getItem('user'));
       user.firstName = this.member.firstName;
+      localStorage.setItem('user', JSON.stringify(user));
       this.accountService.setCurrentUser(user);
     });
   }

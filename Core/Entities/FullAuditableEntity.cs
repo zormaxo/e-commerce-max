@@ -6,7 +6,7 @@ namespace Application.Entities
     {
         public DateTime ModifiedDate { get; set; } = DateTime.Now;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
+        public int CreatedBy { get; set; }
+        public int ModifiedBy { get; set; }
     }
 }

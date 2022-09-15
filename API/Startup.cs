@@ -27,6 +27,7 @@ namespace API
             services.AddSwaggerDocumentation();
             services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")));
             services.AddIdentityServices(_config);
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
