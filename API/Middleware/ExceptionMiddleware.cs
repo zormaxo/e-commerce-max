@@ -1,4 +1,5 @@
 using Core.Errors;
+using Core.Exceptions;
 using System.Net;
 using System.Text.Json;
 
@@ -26,21 +27,21 @@ public class ExceptionMiddleware
         catch (ApiException ex)
         {
             var response = _env.IsDevelopment()
-                ? new ApiErrorResponse(ex.ApiMessage, ex.Message, ex.StackTrace)
-                : new ApiErrorResponse(ex.ApiMessage);
+                ? new ApiErrorObject(ex.ApiMessage, ex)
+                : new ApiErrorObject(ex.ApiMessage);
 
             await CreateExceptionResponse(ex, ex.HttpStatusCode, response);
         }
         catch (Exception ex)
         {
             var response = _env.IsDevelopment()
-                ? new ApiErrorResponse(nameof(ExceptionMiddleware), ex.Message, ex.StackTrace)
-                : new ApiErrorResponse(nameof(ExceptionMiddleware));
+                ? new ApiErrorObject(nameof(ExceptionMiddleware), ex)
+                : new ApiErrorObject(nameof(ExceptionMiddleware));
 
             await CreateExceptionResponse(ex, HttpStatusCode.InternalServerError, response);
         }
 
-        async Task CreateExceptionResponse(Exception ex, HttpStatusCode httpStatusCode, ApiErrorResponse response)
+        async Task CreateExceptionResponse(Exception ex, HttpStatusCode httpStatusCode, ApiErrorObject response)
         {
             _logger.LogError(ex, ex.Message);
             context.Response.ContentType = "application/json";

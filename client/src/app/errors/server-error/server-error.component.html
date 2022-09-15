@@ -2,6 +2,7 @@
 <ng-container *ngIf="error">
   <h5 class="text-danger">Error: {{ error.error.message }}</h5>
   <h5 class="text-danger">Error: {{ error.error.exceptionMessage }}</h5>
+  <h5 class="text-danger">Error: {{ error.error.innerExceptionMessage }}</h5>
   <p class="font-weight-bold">Note: If you are seeing this then Angular is probably not to blame</p>
   <p>What to do next?</p>
   <ol>

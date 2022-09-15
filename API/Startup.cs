@@ -34,12 +34,14 @@ namespace API
         public void Configure(IApplicationBuilder app)
         {
             app.UseSwaggerDocumentation();
+
             app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
             app.UseStatusCodePagesWithReExecute("/errors/{0}");  //for non-exist endpoints
+            app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();

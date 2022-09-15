@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Core.Errors;
+namespace Core.Exceptions;
 
 public class ApiException : Exception
 {

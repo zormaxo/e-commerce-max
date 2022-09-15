@@ -28,7 +28,9 @@ namespace API.Controllers
         [HttpGet("{userId}")]
         public async Task<ActionResult<MemberDto>> GetUser(int userId)
         {
-            return await _userSrv.GetUser(userId);
+            var user = await _userSrv.GetUser(userId);
+
+            return user == null ? BadRequest("User not found") : (ActionResult<MemberDto>)user;
         }
 
         [HttpPut("updateUserFirstLastName")]

@@ -5,7 +5,7 @@ using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
-using Core.Errors;
+using Core.Exceptions;
 using Core.HelperTypes;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;

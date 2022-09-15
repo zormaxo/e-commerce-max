@@ -8,11 +8,11 @@ namespace API.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]     //we dont want swagger to add this.
     public class ErrorController : BaseApiController
     {
-        public ActionResult<ApiErrorResponse> Error(int code)
+        public ActionResult<ApiErrorObject> Error(int code)
         {
             string message = GetDefaultMessageForStatusCode((HttpStatusCode)code);
             //return new ObjectResult($"{message}: {code}");
-            return new ApiErrorResponse($"{message}: {code}");
+            return new ApiErrorObject($"{message}: {code}");
         }
 
         private static string GetDefaultMessageForStatusCode(HttpStatusCode statusCode)

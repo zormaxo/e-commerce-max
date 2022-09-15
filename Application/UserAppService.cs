@@ -15,7 +15,9 @@ public class UserAppService : BaseAppService
 
     public async Task<IEnumerable<MemberDto>> GetUsers()
     {
-        return await _userRepository.GetMembersAsync();
+        var omer = await _userRepository.GetMembersAsync();
+
+        return omer;
     }
 
     public async Task<MemberDto> GetUser(int id)

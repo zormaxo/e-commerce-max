@@ -63,6 +63,12 @@ public class ResponseWrapperMiddleware
 
         // Deserializing Controller Response to an object
         var responseObj = new object();
+        if (context.Response.StatusCode == (int)HttpStatusCode.NoContent)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
+            context.Response.ContentLength = null;
+        }
+
         try
         {
             responseObj = JsonConvert.DeserializeObject(responseBodyText);
@@ -70,7 +76,7 @@ public class ResponseWrapperMiddleware
         catch
         {
             if (context.Response.StatusCode != (int)HttpStatusCode.Accepted && context.Response.StatusCode != (int)HttpStatusCode.OK)
-                responseObj = new ApiErrorResponse(responseBodyText);
+                responseObj = new ApiErrorObject(responseBodyText);
             else
                 responseObj = responseBodyText;
         }

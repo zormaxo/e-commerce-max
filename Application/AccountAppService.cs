@@ -4,7 +4,7 @@ using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
-using Core.Errors;
+using Core.Exceptions;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -31,6 +31,8 @@ public class AccountAppService : BaseAppService
 
         var user = new AppUser
         {
+            FirstName = registerDto.FirstName,
+            Surname = registerDto.Surname,
             Username = registerDto.Username.ToLower(),
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
             PasswordSalt = hmac.Key
@@ -42,6 +44,7 @@ public class AccountAppService : BaseAppService
         var userDto = new UserDto
         {
             FirstName = user.FirstName,
+            UserId = user.Id,
             Token = _tokenService.CreateToken(user)
         };
 
@@ -68,7 +71,7 @@ public class AccountAppService : BaseAppService
 
         var userDto = new UserDto
         {
-            Id = user.Id,
+            UserId = user.Id,
             FirstName = user.FirstName,
             Token = _tokenService.CreateToken(user)
         };

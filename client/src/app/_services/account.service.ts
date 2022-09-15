@@ -29,11 +29,10 @@ export class AccountService {
 
   register(model: unknown) {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
-      map((user: any) => {
-        if (user.result) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
-        }
+      map((response: any) => {
+        const user = response.result;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUserSource.next(user);
       })
     );
   }

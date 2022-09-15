@@ -29,7 +29,7 @@ public static class ApplicationServiceExtensions
                     .SelectMany(x => x.Value.Errors)
                     .Select(x => x.ErrorMessage).ToArray();
 
-                var errorResponse = new ApiErrorResponse(errors);
+                var errorResponse = new ApiErrorObject(errors);
 
                 return new BadRequestObjectResult(errorResponse);
             };

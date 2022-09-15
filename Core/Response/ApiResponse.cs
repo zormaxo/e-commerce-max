@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Core.Errors;
+using System.Net;
 
 namespace API.Response;
 
@@ -19,7 +20,7 @@ public class ApiResponse
 	public ApiResponse(
 		string requestUrl,
 		object response,
-		object error,
+		ApiErrorObject error,
 		bool status = false,
 		HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError)
 	{
@@ -43,7 +44,7 @@ public class ApiResponse
 	/// <summary>
 	/// The Response Error
 	/// </summary>
-	public object Error { get; set; }
+	public ApiErrorObject Error { get; set; }
 
 	/// <summary>
 	/// The Response Status

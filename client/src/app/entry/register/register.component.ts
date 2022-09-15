@@ -12,16 +12,12 @@ export class RegisterComponent {
   @Output() cancelRegister = new EventEmitter<boolean>();
   model: { username?: string; password?: string } = {};
 
-  constructor(private accountService: AccountService, private toastr: ToastrService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router) {}
 
   register() {
     this.accountService.register(this.model).subscribe({
       next: () => {
-        this.router.navigateByUrl('');
-      },
-      error: (error) => {
-        console.log(error);
-        this.toastr.error(error.message);
+        this.router.navigateByUrl('/');
       },
     });
   }

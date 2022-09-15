@@ -19,10 +19,6 @@ export class LoginComponent {
       next: () => {
         this.router.navigateByUrl('');
       },
-      error: (error) => {
-        console.log(error);
-        this.toastr.error(error.error.message);
-      },
     });
   }
 }

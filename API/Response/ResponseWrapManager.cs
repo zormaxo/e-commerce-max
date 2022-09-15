@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
+﻿using Core.Errors;
+using Microsoft.AspNetCore.Http.Extensions;
+using Newtonsoft.Json.Linq;
 using System.Net;
 
 namespace API.Response;
@@ -18,15 +20,17 @@ public static class ResponseWrapManager
     {
         var requestUrl = context.Request.GetDisplayUrl();
         var responseBody = response;
-        object error = null;
+        ApiErrorObject error = null;
         var status = true;
         var httpStatusCode = (HttpStatusCode)context.Response.StatusCode;
 
-        if (context.Response.StatusCode != (int)HttpStatusCode.Accepted && context.Response.StatusCode != (int)HttpStatusCode.OK)
+        if (context.Response.StatusCode != (int)HttpStatusCode.Accepted &&
+            context.Response.StatusCode != (int)HttpStatusCode.OK &&
+            context.Response.StatusCode != (int)HttpStatusCode.NoContent)
         {
             status = false;
             responseBody = null;
-            error = response;
+            error = response is ApiErrorObject @object ? @object : ((JObject)response).ToObject<ApiErrorObject>();
         }
 
         // NOTE: Add any further customizations if needed here

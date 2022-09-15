@@ -39,7 +39,7 @@ export class AdListComponent implements OnInit {
 
   getProducts() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.shopParams.userId = user.id;
+      this.shopParams.userId = user.userId;
       this.shopService.getProducts(this.shopParams).subscribe((response) => {
         this.products = response.data;
         this.shopParams.pageNumber = response.pageIndex;

@@ -18,7 +18,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
     public async Task<MemberDto> GetMemberAsync(int id)
     {
-        return await _context.Users
+        return  await _context.Users
             .Where(x => x.Id == id)
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
@@ -26,9 +26,11 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
     public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
-        return await _context.Users
+        var omer = await _context.Users
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
+
+        return omer;
     }
 
     public async Task<AppUser> GetUserByIdAsync(int id)

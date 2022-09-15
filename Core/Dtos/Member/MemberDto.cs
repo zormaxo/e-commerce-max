@@ -9,6 +9,6 @@ public class MemberDto
     public string PhotoUrl { get; set; }
     public string LogoUrl { get; set; }
     public string PhoneNumber { get; set; }
-    public DateTime Created { get; set; }
+    public DateTime CreatedDate { get; set; }
     public DateTime LastActive { get; set; }
 }
