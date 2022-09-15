@@ -63,13 +63,13 @@ public class StoreContext : DbContext
 
         foreach (var entityEntry in entries)
         {
-            ((FullAuditableEntity)entityEntry.Entity).LastUpdated = DateTime.Now;
+            var fullAuditableEntity = (FullAuditableEntity)entityEntry.Entity;
+            fullAuditableEntity.LastUpdated = DateTime.Now;
 
-            // if (entityEntry.State == EntityState.Added)
-            // {
-            //   ((BaseAuditableEntity)entityEntry.Entity).CreationDate = DateTime.Now;
-            // }
+            if (entityEntry.State == EntityState.Added)
+                fullAuditableEntity.Created = DateTime.Now;
         }
+
         return base.SaveChangesAsync(cancellationToken);
     }
 }
