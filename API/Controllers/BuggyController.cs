@@ -1,6 +1,5 @@
 using Application;
 using Core.Entities;
-using Core.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -11,10 +10,17 @@ namespace API.Controllers
     {
         private readonly StoreContext _context;
         private readonly HttpClient _client;
+
         public BuggyController(StoreContext context, HttpClient client)
         {
             _context = context;
             _client = client;
+        }
+
+        [HttpGet("badrequest")]
+        public ActionResult GetBadRequest()
+        {
+            return BadRequest("This message is from controller");
         }
 
         [Authorize]
@@ -39,18 +45,6 @@ namespace API.Controllers
             var thingToReturn = thing.ToString();
 
             return Ok(thingToReturn);
-        }
-
-        [HttpGet("badrequest")]
-        public ActionResult GetBadRequest()
-        {
-            return BadRequest("This message is from controller");
-        }
-
-        [HttpGet("badrequest/{id}")]
-        public ActionResult GetBadRequest(int id)
-        {
-            return Ok(id);
         }
 
         [HttpGet("currency")]

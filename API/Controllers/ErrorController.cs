@@ -11,8 +11,7 @@ namespace API.Controllers
         public ActionResult<ApiErrorObject> Error(int code)
         {
             string message = GetDefaultMessageForStatusCode((HttpStatusCode)code);
-            //return new ObjectResult($"{message}: {code}");
-            return new ApiErrorObject($"{message}: {code}");
+            return new ObjectResult($"{message}: {code}");
         }
 
         private static string GetDefaultMessageForStatusCode(HttpStatusCode statusCode)

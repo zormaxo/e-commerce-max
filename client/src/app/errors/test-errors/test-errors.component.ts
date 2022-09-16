@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-test-errors',
@@ -7,21 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./test-errors.component.scss'],
 })
 export class TestErrorsComponent {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   validationErrors: string[] = [];
 
   constructor(private http: HttpClient) {}
-
-  get404Error() {
-    this.http.get(this.baseUrl + 'buggy/notfound').subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
 
   get400Error() {
     this.http.get(this.baseUrl + 'buggy/badrequest').subscribe({
@@ -34,8 +24,8 @@ export class TestErrorsComponent {
     });
   }
 
-  get500Error() {
-    this.http.get(this.baseUrl + 'buggy/servererror').subscribe({
+  get401Error() {
+    this.http.get(this.baseUrl + 'buggy/auth').subscribe({
       next: (response) => {
         console.log(response);
       },
@@ -45,8 +35,19 @@ export class TestErrorsComponent {
     });
   }
 
-  get401Error() {
-    this.http.get(this.baseUrl + 'buggy/auth').subscribe({
+  get404Error() {
+    this.http.get(this.baseUrl + 'buggy/notfound').subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  get500Error() {
+    this.http.get(this.baseUrl + 'buggy/servererror').subscribe({
       next: (response) => {
         console.log(response);
       },
