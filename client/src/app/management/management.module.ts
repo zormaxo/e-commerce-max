@@ -8,7 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
 import { FormsModule } from '@angular/forms';
-import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -18,6 +17,6 @@ import { FileUploadModule } from 'ng2-file-upload';
     MemberEditComponent,
     PhotoEditorComponent,
   ],
-  imports: [CommonModule, SharedModule, ManagementRoutingModule, FormsModule, FileUploadModule],
+  imports: [CommonModule, SharedModule, ManagementRoutingModule, FormsModule],
 })
 export class ManagementModule {}

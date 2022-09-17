@@ -1,18 +1,2 @@
-<router-outlet></router-outlet>
-<hr />
-<div
-  ng2FileDrop
-  [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
-  (fileOver)="fileOverBase($event)"
-  [uploader]="uploader"
-  class="card bg-faded p-3 text-center mb-3 my-drop-zone">
-  <i class="fa fa-upload fa-3x"></i>
-  Drop photos here
-</div>
-
-Multiple
-<input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
-
-Single
-<input type="file" ng2FileSelect [uploader]="uploader" />
-<ngx-spinner type="ball-scale-multiple"> <h3>Loading...</h3> </ngx-spinner><app-nav></app-nav>
+ <router-outlet></router-outlet>
+ <ngx-spinner type="ball-scale-multiple"> <h3>Loading...</h3> </ngx-spinner><app-nav></app-nav>

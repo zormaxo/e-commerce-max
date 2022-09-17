@@ -27,7 +27,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     PaginationModule.forRoot(),
     NgxGalleryModule,
     NgxMaskModule.forRoot(),
-
+    FileUploadModule,
   ],
   exports: [
     BsDropdownModule,
@@ -41,6 +41,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FilterSummaryComponent,
     BreadcumbsComponent,
     LeftNavComponent,
+    FileUploadModule,
   ],
 })
 export class SharedModule {}
