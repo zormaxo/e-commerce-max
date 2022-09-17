@@ -50,7 +50,7 @@
             <a href="" class="text-decoration-none">Tüm İlanları</a>
             <p>Cep {{ product.user.phoneNumber | mask: "(000) 000 00 00" }}</p>
           </div>
-          <a href="#" class="btn btn-primary">Mesaj Gönder</a>
+          <a href="#" class="btn btn-primary btn-sm">Mesaj Gönder</a>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
   <div class="row mt-5">
     <div class="col-12">
       <div class="card shadow-sm">
-        <h5 class="card-header">Açıklama</h5>
+        <span class="card-header h6">Açıklama</span>
         <div class="card-body">
           <div class="card-text">
             <p>{{ product.description }}</p>
