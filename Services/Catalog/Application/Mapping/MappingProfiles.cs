@@ -23,7 +23,9 @@ public class MappingProfiles : Profile
             .ForMember(d => d.PriceText, o => o.MapFrom<CurrencyResolver>())
             .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
 
-        CreateMap<AppUser, MemberDto>();
+        CreateMap<AppUser, MemberDto>()
+                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
+                     src.Photos.FirstOrDefault(x => x.IsMain).Url));
         CreateMap<ProductPhoto, PhotoDto>()
             .ForMember(d => d.Url, o => o.MapFrom<PhotoUrlResolver>());
         CreateMap<UserPhoto, PhotoDto>();

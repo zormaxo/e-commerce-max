@@ -1,3 +1,5 @@
+import { Photo } from "./photo";
+
 export interface Member {
   id: number;
   username: string;
@@ -8,4 +10,5 @@ export interface Member {
   phoneNumber: string;
   created: Date;
   lastActive: Date;
+  photos: Photo[];
 }

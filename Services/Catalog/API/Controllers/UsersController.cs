@@ -33,7 +33,13 @@ namespace Application.Controllers
             return user == null ? BadRequest("User not found") : (ActionResult<MemberDto>)user;
         }
 
-        [HttpPut("updateUserFirstLastName")]
+        [HttpPut("update-member")]
+        public async Task UpdateMember(MemberUpdateDto memberUpdateDto)
+        {
+            await UpdateUser(memberUpdateDto);
+        }
+
+        [HttpPut("update-user-first-last-name")]
         public async Task UpdateUserFirstLastName(MemberNameUpdateDto memberNameUpdateDto)
         {
             var memberUpdateDto = new MemberUpdateDto();
@@ -42,7 +48,7 @@ namespace Application.Controllers
             await UpdateUser(memberUpdateDto);
         }
 
-        [HttpPut("updateUsername")]
+        [HttpPut("update-username")]
         public async Task UpdateUsername(MemberUsernameUpdateDto memberUsernameUpdateDto)
         {
             var memberUpdateDto = new MemberUpdateDto();
@@ -51,7 +57,7 @@ namespace Application.Controllers
             await UpdateUser(memberUpdateDto);
         }
 
-        [HttpPut("updateUserPhone")]
+        [HttpPut("update-user-phone")]
         public async Task UpdateUserPhone(MemberPhoneUpdateDto memberPhoneUpdateDto)
         {
             var memberUpdateDto = new MemberUpdateDto();

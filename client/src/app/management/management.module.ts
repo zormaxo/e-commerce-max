@@ -5,9 +5,19 @@ import { ManagementRoutingModule } from './management-routing.module';
 import { MemberCardComponent } from './member-card/member-card.component';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { MemberEditComponent } from './member-edit/member-edit.component';
+import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
+import { FormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
-  declarations: [MemberListComponent, MemberCardComponent, MemberDetailComponent],
-  imports: [CommonModule, SharedModule, ManagementRoutingModule],
+  declarations: [
+    MemberListComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    PhotoEditorComponent,
+  ],
+  imports: [CommonModule, SharedModule, ManagementRoutingModule, FormsModule, FileUploadModule],
 })
 export class ManagementModule {}

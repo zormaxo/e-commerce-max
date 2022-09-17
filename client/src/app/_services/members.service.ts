@@ -34,15 +34,19 @@ export class MembersService {
     );
   }
 
+  updateMember(member: Member) {
+    return this.http.put(this.baseUrl + 'users/update-member', member);
+  }
+
   updateUserFirstLastName(member: Member) {
-    return this.http.put(this.baseUrl + 'users/updateUserFirstLastName', member);
+    return this.http.put(this.baseUrl + 'users/update-user-first-last-name', member);
   }
 
   updateUsername(member: Member) {
-    return this.http.put(this.baseUrl + 'users/updateUsername', member);
+    return this.http.put(this.baseUrl + 'users/update-username', member);
   }
 
   updateUserPhone(member: Member) {
-    return this.http.put(this.baseUrl + 'users/updateUserPhone', member);
+    return this.http.put(this.baseUrl + 'users/update-user-phone', member);
   }
 }

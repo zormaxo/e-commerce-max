@@ -23,6 +23,7 @@ import { MemberProfileModule } from './member-profile/member-profile.module';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MarketModule } from './market/market.module';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MarketModule } from './market/market.module';
     ManagementModule,
     NgxSpinnerModule,
     MarketModule,
+    FileUploadModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

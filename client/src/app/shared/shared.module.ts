@@ -12,6 +12,7 @@ import { BreadcumbsComponent } from './components/breadcumbs/breadcumbs.componen
 import { RouterModule } from '@angular/router';
 import { LeftNavComponent } from './components/left-nav/left-nav.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent, LeftNavComponent],
@@ -26,6 +27,7 @@ import { NgxMaskModule } from 'ngx-mask';
     PaginationModule.forRoot(),
     NgxGalleryModule,
     NgxMaskModule.forRoot(),
+
   ],
   exports: [
     BsDropdownModule,
