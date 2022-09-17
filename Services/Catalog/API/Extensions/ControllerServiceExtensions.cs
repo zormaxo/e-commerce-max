@@ -1,8 +1,6 @@
-using Application;
-using Application.Helpers;
 using Infrastructure;
 
-namespace API.Extensions;
+namespace Application.Extensions;
 
 public static class ControllerServiceExtensions
 {

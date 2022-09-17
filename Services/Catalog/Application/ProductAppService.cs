@@ -1,6 +1,7 @@
 using Application.Entities;
 using Application.Helpers;
 using Application.Interfaces;
+using Application.Services;
 using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
@@ -8,8 +9,10 @@ using Core.Entities;
 using Core.Exceptions;
 using Core.HelperTypes;
 using Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
+using System.Net;
 
 namespace Application;
 
@@ -17,17 +20,20 @@ public class ProductAppService : BaseAppService
 {
     private readonly CachedItems _cachedItems;
     private readonly IGenericRepository<ProductBrand> _productBrandRepo;
+    private readonly IPhotoService _photoService;
     private readonly IGenericRepository<Category> _categoryRepo;
     private readonly IGenericRepository<Product> _productsRepo;
 
     public ProductAppService(IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
+        IPhotoService photoService,
         CachedItems cachedItems, IMapper mapper, StoreContext context) : base(mapper, context)
     {
         _productsRepo = productsRepo;
         _categoryRepo = categoryRepo;
         _productBrandRepo = productBrandRepo;
+        _photoService = photoService;
         _cachedItems = cachedItems;
     }
 
@@ -55,7 +61,6 @@ public class ProductAppService : BaseAppService
             .WhereIf(!productParams.GetAllStatus.HasValue, p => p.IsActive) //true: All, false: InActive, null: Active
             .WhereIf(productParams.GetAllStatus.HasValue && productParams.GetAllStatus == false, p => !p.IsActive)
             .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId);
-        //.Where(x => x.IsActive)
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
@@ -136,7 +141,7 @@ public class ProductAppService : BaseAppService
             .FirstOrDefaultAsync();
 
         if (product == null)
-            throw new ApiException(System.Net.HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
+            throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
         return _mapper.Map<ProductToReturnDto>(product);
     }
 
@@ -177,10 +182,39 @@ public class ProductAppService : BaseAppService
         return categoryIds;
     }
 
-    public async Task<int> UpdateProduct(Product product)
+    public async Task<bool> UpdateProduct(Product product)
     {
         Product productObj = await _productsRepo.GetByIdAsync(product.Id);
         _mapper.Map(product, productObj);
         return await _productsRepo.SaveChangesAsync();
+    }
+
+    public async Task<PhotoDto> AddPhoto(IFormFile file, int productId)
+    {
+        var product = await _productsRepo.GetAll().FirstOrDefaultAsync(x => x.Id == productId);
+
+        var result = await _photoService.AddPhotoAsync(file);
+
+        if (result.Error != null) throw new ApiException(result.Error.Message);
+
+        var photo = new ProductPhoto
+        {
+            Url = result.SecureUrl.AbsoluteUri,
+            PublicId = result.PublicId
+        };
+
+        if (product.Photos.Count == 0)
+        {
+            photo.IsMain = true;
+        }
+
+        product.Photos.Add(photo);
+
+        if (await _productsRepo.SaveChangesAsync())
+        {
+            return _mapper.Map<PhotoDto>(photo);
+        }
+
+        throw new ApiException("Problem addding photo");
     }
 }

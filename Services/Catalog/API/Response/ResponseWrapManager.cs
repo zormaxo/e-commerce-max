@@ -1,9 +1,8 @@
 ﻿using Core.Errors;
 using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json.Linq;
-using System.Net;
 
-namespace API.Response;
+namespace Application.Response;
 
 /// <summary>
 /// Response Wrap Manager to handle any customizations on result and return Custom Formatted Response.
@@ -22,11 +21,9 @@ public static class ResponseWrapManager
         var responseBody = response;
         ApiErrorObject error = null;
         var status = true;
-        var httpStatusCode = (HttpStatusCode)context.Response.StatusCode;
+        var httpStatusCode = context.Response.StatusCode;
 
-        if (context.Response.StatusCode != (int)HttpStatusCode.Accepted &&
-            context.Response.StatusCode != (int)HttpStatusCode.OK &&
-            context.Response.StatusCode != (int)HttpStatusCode.NoContent)
+        if (context.Response.StatusCode >= 400)
         {
             status = false;
             responseBody = null;

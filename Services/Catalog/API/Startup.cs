@@ -1,8 +1,8 @@
-using API.Extensions;
-using API.Middleware;
+using Application.Extensions;
+using Application.Middleware;
 using System.Text.Json.Serialization;
 
-namespace API
+namespace Application
 {
     public class Startup
     {

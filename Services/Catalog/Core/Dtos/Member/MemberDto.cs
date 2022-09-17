@@ -11,4 +11,5 @@ public class MemberDto
     public string PhoneNumber { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime LastActive { get; set; }
+    public ICollection<PhotoDto> Photos { get; set; }
 }

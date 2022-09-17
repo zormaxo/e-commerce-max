@@ -12,8 +12,8 @@ public class ApiErrorObject
     }
 
     public object Message { get; set; }
-    public string Details { get; set; }
-    public int? Code { get; set; }
     public string ExceptionMessage { get; set; }
     public string InnerExceptionMessage { get; set; }
+    public int? Code { get; set; }
+    public string Details { get; set; }
 }

@@ -62,8 +62,8 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         return SpecificationEvaluator<T>.GetQuery(_dbSet.AsQueryable(), spec);
     }
 
-    public async Task<int> SaveChangesAsync()
+    public async Task<bool> SaveChangesAsync()
     {
-        return await _context.SaveChangesAsync();
+        return await _context.SaveChangesAsync() > 0;
     }
 }

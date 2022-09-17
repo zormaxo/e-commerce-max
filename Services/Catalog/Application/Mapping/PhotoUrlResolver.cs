@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Application.Mapping;
 
-public class PhotoUrlResolver : IValueResolver<Photo, PhotoDto, string>
+public class PhotoUrlResolver : IValueResolver<ProductPhoto, PhotoDto, string>
 {
     private readonly IConfiguration _config;
 
@@ -14,7 +14,7 @@ public class PhotoUrlResolver : IValueResolver<Photo, PhotoDto, string>
         _config = config;
     }
 
-    public string Resolve(Photo source, PhotoDto destination, string destMember, ResolutionContext context)
+    public string Resolve(ProductPhoto source, PhotoDto destination, string destMember, ResolutionContext context)
     {
         if (!string.IsNullOrEmpty(source.Url))
         {

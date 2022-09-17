@@ -3,7 +3,7 @@ using Core.Exceptions;
 using System.Net;
 using System.Text.Json;
 
-namespace API.Middleware;
+namespace Application.Middleware;
 
 public class ExceptionMiddleware
 {

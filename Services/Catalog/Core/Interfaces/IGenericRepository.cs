@@ -22,6 +22,6 @@ namespace Application.Interfaces
 
         Task<int> CountAsync(ISpecification<T> spec);
 
-        Task<int> SaveChangesAsync();
+        Task<bool> SaveChangesAsync();
     }
 }

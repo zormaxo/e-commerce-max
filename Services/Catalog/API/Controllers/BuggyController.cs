@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-namespace API.Controllers
+namespace Application.Controllers
 {
     public class BuggyController : BaseApiController
     {

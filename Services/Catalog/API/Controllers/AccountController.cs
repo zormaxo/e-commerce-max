@@ -2,7 +2,7 @@ using Application;
 using Core.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace Application.Controllers
 {
     public class AccountController : BaseApiController
     {

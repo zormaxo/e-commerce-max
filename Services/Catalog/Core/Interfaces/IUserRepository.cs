@@ -18,5 +18,6 @@ namespace Application.Interfaces
         Task<IEnumerable<MemberDto>> GetMembersAsync();
 
         Task<MemberDto> GetMemberAsync(int id);
+        Task<AppUser> GetUserByIdIncludePhotoAsync(int id);
     }
 }

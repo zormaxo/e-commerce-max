@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace API.Extensions
+namespace Application.Extensions
 {
     public static class IdentityServiceExtensions
     {

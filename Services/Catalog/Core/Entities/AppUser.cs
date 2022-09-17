@@ -14,7 +14,6 @@ namespace Core.Entities
         [Required]
         public string Surname { get; set; }
         public string LogoUrl { get; set; }
-        public string PhotoUrl { get; set; }
         public string PhoneNumber { get; set; }
 
         [Required]
@@ -24,5 +23,6 @@ namespace Core.Entities
         public byte[] PasswordSalt { get; set; }
         public DateTime LastActive { get; set; }
         public ICollection<Product> Products { get; set; }
+        public ICollection<UserPhoto> Photos { get; set; }
     }
 }

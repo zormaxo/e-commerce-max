@@ -3,7 +3,7 @@ using AutoMapper;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace API
+namespace Application
 {
     public class Program
     {

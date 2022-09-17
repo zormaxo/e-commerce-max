@@ -2,7 +2,7 @@ using Core.Errors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace API.Controllers
+namespace Application.Controllers
 {
     [Route("errors/{code}")]
     [ApiExplorerSettings(IgnoreApi = true)]     //we dont want swagger to add this.

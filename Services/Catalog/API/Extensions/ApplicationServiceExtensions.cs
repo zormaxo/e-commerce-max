@@ -1,4 +1,4 @@
-using Application;
+using Application.Helpers;
 using Application.Interfaces;
 using Application.Mapping;
 using Application.Repositories;
@@ -8,13 +8,15 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Extensions;
+namespace Application.Extensions;
 
 public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IWebHostEnvironment env, IConfiguration config)
     {
+        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<UserResolverService>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();

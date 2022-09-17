@@ -1,10 +1,10 @@
-﻿using API.Response;
+﻿using Application.Response;
 using Core.Errors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net;
 
-namespace API.Middleware;
+namespace Application.Middleware;
 
 /// <summary>
 /// Response Wrapper Middleware to Request Delegate and handles Request/Response Customizations.

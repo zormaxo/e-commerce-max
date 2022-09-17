@@ -3,16 +3,18 @@ using System;
 using Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Application.Data.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220917063337_Update6")]
+    partial class Update6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -97,7 +99,7 @@ namespace Application.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPhotos");
+                    b.ToTable("UserPhoto");
                 });
 
             modelBuilder.Entity("Core.Entities.AppUser", b =>
