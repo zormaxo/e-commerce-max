@@ -17,6 +17,6 @@ public class UserResolverService
     }
     public int GetUserId()
     {
-        return Convert.ToInt32(_context.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        return Convert.ToInt32(_context.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value);
     }
 }

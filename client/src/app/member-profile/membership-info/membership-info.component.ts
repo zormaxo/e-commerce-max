@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
@@ -6,6 +6,9 @@ import { take } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_models/user';
+import { FileUploader } from 'ng2-file-upload';
+import { environment } from 'src/environments/environment';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-membership-info',
@@ -24,14 +27,69 @@ export class MembershipInfoComponent implements OnInit {
     }
   }
 
+  uploader: FileUploader;
+  hasBaseDropzoneOver = false;
+  baseUrl = environment.apiUrl;
+  user: User;
+  modalRef?: BsModalRef;
+
   constructor(
     private memberService: MembersService,
     private accountService: AccountService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private modalService: BsModalService
+  ) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => (this.user = user));
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
 
   ngOnInit(): void {
     this.loadMember();
+    this.initializeUploader();
+  }
+
+  fileOverBase(e: any) {
+    this.hasBaseDropzoneOver = e;
+  }
+
+  initializeUploader() {
+    this.uploader = new FileUploader({
+      url: this.baseUrl + 'users/add-photo-and-set-main',
+      authToken: 'Bearer ' + this.user.token,
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 10 * 1024 * 1024,
+    });
+
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const photoResp = JSON.parse(response);
+        this.member.photos.push(photoResp.result);
+        this.user.photoUrl = photoResp.result.url;
+        this.accountService.setCurrentUser(this.user);
+        this.member.photoUrl = photoResp.result.url;
+        this.member.photos.forEach((p) => {
+          if (p.isMain) p.isMain = false;
+          if (p.id === photoResp.result.id) p.isMain = true;
+        });
+      }
+      this.modalRef.hide();
+    };
+  }
+
+  deletePhoto(photoId: number) {
+    this.memberService.deletePhoto(photoId).subscribe(() => {
+      this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
+    });
   }
 
   loadMember() {

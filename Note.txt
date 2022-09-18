@@ -1,3 +1,6 @@
 cd .\Services\Catalog\
 dotnet ef migrations add Update1 -p Infrastructure -s API -o Migrations
 dotnet ef database update -p Infrastructure -s API
+
+
+PRAGMA foreign_keys = ON;

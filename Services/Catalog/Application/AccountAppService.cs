@@ -5,6 +5,7 @@ using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
 using Core.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -53,8 +54,9 @@ public class AccountAppService : BaseAppService
 
     public async Task<UserDto> Login(LoginDto loginDto)
     {
-        var spec = new UsersSpecification(loginDto.Username);
-        var user = await _appUsersRepo.GetEntityWithSpec(spec);
+        var user = await _appUsersRepo.GetAll()
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.Username == loginDto.Username);
 
         if (user == null)
             throw new ApiException(HttpStatusCode.Unauthorized, "Invalid username");
@@ -73,7 +75,8 @@ public class AccountAppService : BaseAppService
         {
             UserId = user.Id,
             FirstName = user.FirstName,
-            Token = _tokenService.CreateToken(user)
+            Token = _tokenService.CreateToken(user),
+            PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
         };
 
         return userDto;

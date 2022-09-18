@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { LeftNavComponent } from './components/left-nav/left-nav.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent, LeftNavComponent],
@@ -28,6 +29,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     NgxGalleryModule,
     NgxMaskModule.forRoot(),
     FileUploadModule,
+    ModalModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -42,6 +44,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     BreadcumbsComponent,
     LeftNavComponent,
     FileUploadModule,
+    ModalModule,
   ],
 })
 export class SharedModule {}

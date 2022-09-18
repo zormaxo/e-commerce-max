@@ -5,5 +5,6 @@ namespace Core.Dtos
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string Token { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

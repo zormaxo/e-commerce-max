@@ -22,7 +22,7 @@ internal class AuditEntry
 
     public bool HasTemporaryProperties => TemporaryProperties.Any();
 
-    public Audit ToAudit()
+    public Audit ToAudit(int userId)
     {
         var audit = new Audit
         {
@@ -31,7 +31,8 @@ internal class AuditEntry
             KeyValues = JsonConvert.SerializeObject(KeyValues),
             OldValues = OldValues.Count == 0 ? null : JsonConvert.SerializeObject(OldValues, Formatting.Indented),
             NewValues = NewValues.Count == 0 ? null : JsonConvert.SerializeObject(NewValues, Formatting.Indented),
-            Action = Action
+            Action = Action,
+            UserId = userId
         };
         return audit;
     }

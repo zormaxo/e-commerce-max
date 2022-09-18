@@ -15,12 +15,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 12,
+    "CategoryId": 6,
     "UserId": 1,
     "Showcase": true,
     "CountyId": 34,
     "IsActive": true,
-	"Currency": 1
+    "ProductBrandId": 1,
+    "Currency": 1,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Green Angular Board 3000",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -38,12 +42,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 20,
+    "CategoryId": 7,
     "UserId": 1,
     "Showcase": true,
     "CountyId": 123,
     "IsActive": true,
-	"Currency": 2
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Core Board Speed Rush 3",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -66,7 +74,11 @@
     "Showcase": true,
     "CountyId": 565,
     "IsActive": true,
-	"Currency": 3
+    "ProductBrandId": 1,
+    "Currency": 3,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Net Core Super Board",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -89,7 +101,11 @@
     "Showcase": true,
     "CountyId": 23,
     "IsActive": false,
-	"Currency": 4
+    "ProductBrandId": 1,
+    "Currency": 4,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "React Board Super Whizzy Fast",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -112,7 +128,8 @@
     "Showcase": true,
     "CountyId": 87,
     "IsActive": true,
-	"Currency": 1
+    "ProductBrandId": 1,
+    "Currency": 1
   }, {
     "Name": "Typescript Entry Board",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -135,7 +152,11 @@
     "Showcase": true,
     "CountyId": 645,
     "IsActive": true,
-	"Currency": 2
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Core Blue Hat",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -158,7 +179,11 @@
     "Showcase": true,
     "CountyId": 555,
     "IsActive": false,
-	"Currency": 3
+    "ProductBrandId": 1,
+    "Currency": 3,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Green React Woolen Hat",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -176,12 +201,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 22,
+    "CategoryId": 12,
     "UserId": 3,
     "Showcase": true,
     "CountyId": 487,
     "IsActive": true,
-	"Currency": 4
+    "ProductBrandId": 1,
+    "Currency": 4,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Purple React Woolen Hat",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -199,12 +228,13 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 12,
+    "CategoryId": 13,
     "UserId": 4,
     "Showcase": true,
     "CountyId": 654,
     "IsActive": true,
-	"Currency": 1
+    "ProductBrandId": 1,
+    "Currency": 1
   }, {
     "Name": "Blue Code Gloves",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -222,12 +252,16 @@
         "IsMain": true
       }
     ],
-    "CategoryId": 6,
+    "CategoryId": 13,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 866,
     "IsActive": true,
-	"Currency": 2
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Green Code Gloves",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -245,12 +279,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 6,
+    "CategoryId": 14,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 911,
     "IsActive": true,
-	"Currency": 3
+    "ProductBrandId": 1,
+    "Currency": 3,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Purple React Gloves",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
@@ -268,12 +306,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 7,
+    "CategoryId": 14,
     "UserId": 6,
     "Showcase": true,
     "CountyId": 188,
     "IsActive": true,
-	"Currency": 4
+    "ProductBrandId": 1,
+    "Currency": 4,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Green React Gloves",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -291,12 +333,13 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 7,
+    "CategoryId": 14,
     "UserId": 1,
     "Showcase": true,
     "CountyId": 777,
     "IsActive": true,
-	"Currency": 1
+    "ProductBrandId": 1,
+    "Currency": 1
   }, {
     "Name": "Redis Red Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -314,12 +357,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 20,
+    "CategoryId": 6,
     "UserId": 2,
     "Showcase": true,
     "CountyId": 459,
     "IsActive": true,
-	"Currency": 2
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Core Red Boots",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
@@ -342,7 +389,11 @@
     "Showcase": true,
     "CountyId": 345,
     "IsActive": true,
-	"Currency": 3
+    "ProductBrandId": 1,
+    "Currency": 3,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Core Purple Boots",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
@@ -360,12 +411,16 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 10,
+    "CategoryId": 9,
     "UserId": 1,
     "Showcase": true,
     "CountyId": 612,
     "IsActive": true,
-	"Currency": 4
+    "ProductBrandId": 1,
+    "Currency": 4,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }, {
     "Name": "Angular Purple Boots",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -383,17 +438,18 @@
         "Url": "https://picsum.photos/600/300"
       }
     ],
-    "CategoryId": 20,
+    "CategoryId": 10,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 784,
     "IsActive": true,
-	"Currency": 1
+    "ProductBrandId": 1,
+    "Currency": 1
   }, {
     "Name": "Angular Blue Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
-	"Photos": [{
+    "Photos": [{
         "Url": "images/products/sb-ang2.png"
       }, {
         "Url": "images/products/sb-core1.png",
@@ -406,11 +462,15 @@
         "Url": "images/products/sb-ts1.png"
       }
     ],
-    "CategoryId": 12,
+    "CategoryId": 9,
     "UserId": 4,
     "Showcase": true,
     "CountyId": 803,
     "IsActive": false,
-	"Currency": 2
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductMachine": {
+      "IsNew": false
+    }
   }
 ]

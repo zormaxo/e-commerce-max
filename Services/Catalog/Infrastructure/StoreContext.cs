@@ -11,11 +11,12 @@ namespace Application;
 
 public class StoreContext : DbContext
 {
-    private readonly UserResolverService _userService;
+    private readonly int _userId;
+    private bool processAudit;
 
     public StoreContext(DbContextOptions<StoreContext> options, UserResolverService userService) : base(options)
     {
-        _userService = userService;
+        _userId = userService.GetUserId();
     }
 
     public DbSet<Audit> Audits { get; set; }
@@ -60,47 +61,54 @@ public class StoreContext : DbContext
         }
     }
 
-    public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var auditEntries = OnBeforeSaveChanges();
-        var saveResult = await base.SaveChangesAsync(cancellationToken);
+        if (ChangeTracker.Entries().Any(x => x.Entity is Audit && x.State != EntityState.Unchanged))
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+        else
+        {
+            var auditEntries = OnBeforeSaveChanges();
+            var saveResult = await base.SaveChangesAsync(cancellationToken);
 
-        if (auditEntries.Count > 0)
-            await OnAfterSaveChanges(auditEntries);
+            if (auditEntries.Count > 0)
+                await OnAfterSaveChanges(auditEntries);
 
-        return saveResult;
+            return saveResult;
+        }
     }
 
     private List<AuditEntry> OnBeforeSaveChanges()
     {
         var entries = ChangeTracker
           .Entries()
-          .Where(e => e.Entity is FullAuditableEntity &&
-                (e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted));
+          .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
 
         var auditEntries = new List<AuditEntry>();
 
         foreach (var entityEntry in entries)
         {
-            var fullAuditableEntity = (FullAuditableEntity)entityEntry.Entity;
-            var userId = _userService.GetUserId();
-
-            fullAuditableEntity.ModifiedDate = DateTime.Now;
-            fullAuditableEntity.ModifiedBy = userId;
-
-            if (entityEntry.State == EntityState.Added)
+            if (entityEntry.Entity is FullAuditableEntity fullAuditableEntity)
             {
-                fullAuditableEntity.CreatedDate = DateTime.Now;
-                fullAuditableEntity.ModifiedBy = userId;
+                //var fullAuditableEntity =  (FullAuditableEntity)entityEntry.Entity;
+
+                fullAuditableEntity.ModifiedDate = DateTime.Now;
+                fullAuditableEntity.ModifiedBy = _userId;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    fullAuditableEntity.CreatedDate = DateTime.Now;
+                    fullAuditableEntity.ModifiedBy = _userId;
+                }
             }
 
             var auditEntry = new AuditEntry(entityEntry)
             {
                 TableName = entityEntry.Metadata.GetTableName(),
-                Action = entityEntry.State.ToString()
+                Action = entityEntry.State.ToString(),
             };
             auditEntries.Add(auditEntry);
-
 
             foreach (var property in entityEntry.Properties)
             {
@@ -140,7 +148,7 @@ public class StoreContext : DbContext
 
         foreach (var pendingAuditEntry in auditEntries.Where(q => !q.HasTemporaryProperties))
         {
-            Audits.Add(pendingAuditEntry.ToAudit());
+            Audits.Add(pendingAuditEntry.ToAudit(_userId));
         }
 
         return auditEntries.Where(q => q.HasTemporaryProperties).ToList();
@@ -161,9 +169,9 @@ public class StoreContext : DbContext
                     auditEntry.NewValues[prop.Metadata.Name] = prop.CurrentValue;
                 }
             }
-            Audits.Add(auditEntry.ToAudit());
+            Audits.Add(auditEntry.ToAudit(_userId));
         }
 
         return SaveChangesAsync();
-    }  
+    }
 }

@@ -1,245 +1,245 @@
 [{
     "Id": 1,
-    "CityName": "Adana"
+    "Name": "Adana"
   }, {
     "Id": 2,
-    "CityName": "Adıyaman"
+    "Name": "Adıyaman"
   }, {
     "Id": 3,
-    "CityName": "Afyon"
+    "Name": "Afyon"
   }, {
     "Id": 4,
-    "CityName": "Ağrı"
+    "Name": "Ağrı"
   }, {
     "Id": 5,
-    "CityName": "Amasya"
+    "Name": "Amasya"
   }, {
     "Id": 6,
-    "CityName": "Ankara"
+    "Name": "Ankara"
   }, {
     "Id": 7,
-    "CityName": "Antalya"
+    "Name": "Antalya"
   }, {
     "Id": 8,
-    "CityName": "Artvin"
+    "Name": "Artvin"
   }, {
     "Id": 9,
-    "CityName": "Aydın"
+    "Name": "Aydın"
   }, {
     "Id": 10,
-    "CityName": "Balıkesir"
+    "Name": "Balıkesir"
   }, {
     "Id": 11,
-    "CityName": "Bilecik"
+    "Name": "Bilecik"
   }, {
     "Id": 12,
-    "CityName": "Bingöl"
+    "Name": "Bingöl"
   }, {
     "Id": 13,
-    "CityName": "Bitlis"
+    "Name": "Bitlis"
   }, {
     "Id": 14,
-    "CityName": "Bolu"
+    "Name": "Bolu"
   }, {
     "Id": 15,
-    "CityName": "Burdur"
+    "Name": "Burdur"
   }, {
     "Id": 16,
-    "CityName": "Bursa"
+    "Name": "Bursa"
   }, {
     "Id": 17,
-    "CityName": "Çanakkale"
+    "Name": "Çanakkale"
   }, {
     "Id": 18,
-    "CityName": "Çankırı"
+    "Name": "Çankırı"
   }, {
     "Id": 19,
-    "CityName": "Çorum"
+    "Name": "Çorum"
   }, {
     "Id": 20,
-    "CityName": "Denizli"
+    "Name": "Denizli"
   }, {
     "Id": 21,
-    "CityName": "Diyarbakır"
+    "Name": "Diyarbakır"
   }, {
     "Id": 22,
-    "CityName": "Edirne"
+    "Name": "Edirne"
   }, {
     "Id": 23,
-    "CityName": "Elazığ"
+    "Name": "Elazığ"
   }, {
     "Id": 24,
-    "CityName": "Erzincan"
+    "Name": "Erzincan"
   }, {
     "Id": 25,
-    "CityName": "Erzurum"
+    "Name": "Erzurum"
   }, {
     "Id": 26,
-    "CityName": "Eskişehir"
+    "Name": "Eskişehir"
   }, {
     "Id": 27,
-    "CityName": "Gaziantep"
+    "Name": "Gaziantep"
   }, {
     "Id": 28,
-    "CityName": "Giresun"
+    "Name": "Giresun"
   }, {
     "Id": 29,
-    "CityName": "Gümüşhane"
+    "Name": "Gümüşhane"
   }, {
     "Id": 30,
-    "CityName": "Hakkari"
+    "Name": "Hakkari"
   }, {
     "Id": 31,
-    "CityName": "Hatay"
+    "Name": "Hatay"
   }, {
     "Id": 32,
-    "CityName": "Isparta"
+    "Name": "Isparta"
   }, {
     "Id": 33,
-    "CityName": "Mersin"
+    "Name": "Mersin"
   }, {
     "Id": 34,
-    "CityName": "İstanbul"
+    "Name": "İstanbul"
   }, {
     "Id": 35,
-    "CityName": "İzmir"
+    "Name": "İzmir"
   }, {
     "Id": 36,
-    "CityName": "Kars"
+    "Name": "Kars"
   }, {
     "Id": 37,
-    "CityName": "Kastamonu"
+    "Name": "Kastamonu"
   }, {
     "Id": 38,
-    "CityName": "Kayseri"
+    "Name": "Kayseri"
   }, {
     "Id": 39,
-    "CityName": "Kırklareli"
+    "Name": "Kırklareli"
   }, {
     "Id": 40,
-    "CityName": "Kırşehir"
+    "Name": "Kırşehir"
   }, {
     "Id": 41,
-    "CityName": "Kocaeli"
+    "Name": "Kocaeli"
   }, {
     "Id": 42,
-    "CityName": "Konya"
+    "Name": "Konya"
   }, {
     "Id": 43,
-    "CityName": "Kütahya"
+    "Name": "Kütahya"
   }, {
     "Id": 44,
-    "CityName": "Malatya"
+    "Name": "Malatya"
   }, {
     "Id": 45,
-    "CityName": "Manisa"
+    "Name": "Manisa"
   }, {
     "Id": 46,
-    "CityName": "K.Maraş"
+    "Name": "K.Maraş"
   }, {
     "Id": 47,
-    "CityName": "Mardin"
+    "Name": "Mardin"
   }, {
     "Id": 48,
-    "CityName": "Muğla"
+    "Name": "Muğla"
   }, {
     "Id": 49,
-    "CityName": "Muş"
+    "Name": "Muş"
   }, {
     "Id": 50,
-    "CityName": "Nevşehir"
+    "Name": "Nevşehir"
   }, {
     "Id": 51,
-    "CityName": "Niğde"
+    "Name": "Niğde"
   }, {
     "Id": 52,
-    "CityName": "Ordu"
+    "Name": "Ordu"
   }, {
     "Id": 53,
-    "CityName": "Rize"
+    "Name": "Rize"
   }, {
     "Id": 54,
-    "CityName": "Sakarya"
+    "Name": "Sakarya"
   }, {
     "Id": 55,
-    "CityName": "Samsun"
+    "Name": "Samsun"
   }, {
     "Id": 56,
-    "CityName": "Siirt"
+    "Name": "Siirt"
   }, {
     "Id": 57,
-    "CityName": "Sinop"
+    "Name": "Sinop"
   }, {
     "Id": 58,
-    "CityName": "Sivas"
+    "Name": "Sivas"
   }, {
     "Id": 59,
-    "CityName": "Tekirdağ"
+    "Name": "Tekirdağ"
   }, {
     "Id": 60,
-    "CityName": "Tokat"
+    "Name": "Tokat"
   }, {
     "Id": 61,
-    "CityName": "Trabzon"
+    "Name": "Trabzon"
   }, {
     "Id": 62,
-    "CityName": "Tunceli"
+    "Name": "Tunceli"
   }, {
     "Id": 63,
-    "CityName": "Şanlıurfa"
+    "Name": "Şanlıurfa"
   }, {
     "Id": 64,
-    "CityName": "Uşak"
+    "Name": "Uşak"
   }, {
     "Id": 65,
-    "CityName": "Van"
+    "Name": "Van"
   }, {
     "Id": 66,
-    "CityName": "Yozgat"
+    "Name": "Yozgat"
   }, {
     "Id": 67,
-    "CityName": "Zonguldak"
+    "Name": "Zonguldak"
   }, {
     "Id": 68,
-    "CityName": "Aksaray"
+    "Name": "Aksaray"
   }, {
     "Id": 69,
-    "CityName": "Bayburt"
+    "Name": "Bayburt"
   }, {
     "Id": 70,
-    "CityName": "Karaman"
+    "Name": "Karaman"
   }, {
     "Id": 71,
-    "CityName": "Kırıkkale"
+    "Name": "Kırıkkale"
   }, {
     "Id": 72,
-    "CityName": "Batman"
+    "Name": "Batman"
   }, {
     "Id": 73,
-    "CityName": "Şırnak"
+    "Name": "Şırnak"
   }, {
     "Id": 74,
-    "CityName": "Bartın"
+    "Name": "Bartın"
   }, {
     "Id": 75,
-    "CityName": "Ardahan"
+    "Name": "Ardahan"
   }, {
     "Id": 76,
-    "CityName": "Iğdır"
+    "Name": "Iğdır"
   }, {
     "Id": 77,
-    "CityName": "Yalova"
+    "Name": "Yalova"
   }, {
     "Id": 78,
-    "CityName": "Karabük"
+    "Name": "Karabük"
   }, {
     "Id": 79,
-    "CityName": "Kilis"
+    "Name": "Kilis"
   }, {
     "Id": 80,
-    "CityName": "Osmaniye"
+    "Name": "Osmaniye"
   }, {
     "Id": 81,
-    "CityName": "Düzce"
+    "Name": "Düzce"
   }
 ]
