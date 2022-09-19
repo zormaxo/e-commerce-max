@@ -1,11 +1,11 @@
 version: '3.4'
 
 services:
-  catalogdb:
+  catalogdb_srv:
     image: mongo
 
-  catalog.api:
-    image: ${DOCKER_REGISTRY-}catalogapi
+  catalog.api_srv:
+    image: ${DOCKER_REGISTRY-}catalogapi-kuyumdan
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
