@@ -39,21 +39,19 @@ public static class EFBigExtensions
         //};
         if (sort == "price asc")
         {
-            source = source.OrderBy(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try
+            return source.OrderBy(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try
                 : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try : x.Price);
         }
         else if (sort == "price desc")
         {
-            source = source.OrderByDescending(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try
+            return source.OrderByDescending(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try
                 : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try : x.Price);
         }
         else
         {
-            source = source.OrderBy(sort ?? "name asc");
+            return source.OrderBy(sort ?? "name asc");
         }
-
-        return source;
     }
 }

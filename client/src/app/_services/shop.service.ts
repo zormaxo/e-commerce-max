@@ -23,57 +23,7 @@ export class ShopService {
   constructor(private http: HttpClient) {}
 
   getProducts(shopParams: ShopParams) {
-    let params = new HttpParams();
-
-    if (shopParams.categoryId !== undefined) {
-      params = params.append('typeId', shopParams.categoryId.toString());
-    }
-
-    if (shopParams.categoryName !== undefined) {
-      params = params.append('categoryName', shopParams.categoryName);
-    }
-
-    if (shopParams.search) {
-      params = params.append('search', shopParams.search);
-    }
-
-    if (shopParams.countyId) {
-      params = params.append('countyId', shopParams.countyId);
-    }
-
-    if (shopParams.cityId) {
-      params = params.append('cityId', shopParams.cityId);
-    }
-
-    if (shopParams.isNew !== undefined) {
-      params = params.append('isNew', shopParams.isNew);
-    }
-
-    if (shopParams.userId !== undefined) {
-      params = params.append('userId', shopParams.userId);
-    }
-
-    if (shopParams.getAllStatus !== undefined) {
-      params = params.append('getAllStatus', shopParams.getAllStatus);
-    }
-
-    if (shopParams.currency !== undefined) {
-      params = params.append('currency', shopParams.currency);
-    }
-
-    if (shopParams.maxValue !== undefined) {
-      const maxValue = shopParams.maxValue.replaceAll('.', '');
-      params = params.append('maxValue', maxValue);
-    }
-
-    if (shopParams.minValue !== undefined && shopParams.maxValue !== '0') {
-      const minValue = shopParams.minValue.replaceAll('.', '');
-      params = params.append('minValue', minValue);
-    }
-
-    params = params.append('sort', shopParams.sort);
-    params = params.append('pageIndex', shopParams.pageNumber.toString());
-    params = params.append('pageSize', shopParams.pageSize.toString());
+    const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination>>) => {
@@ -99,7 +49,7 @@ export class ShopService {
   }
 
   getCities() {
-    return this.http.get<IAddress[]>(this.baseUrl + 'products/cities');
+    return this.http.get<IAddress[]>(this.baseUrl + 'shared/cities');
   }
 
   updateProduct(product: IProduct) {
@@ -118,7 +68,7 @@ export class ShopService {
     };
 
     if (this.categories === undefined) {
-      return this.http.get(this.baseUrl + 'products/categories').pipe(
+      return this.http.get(this.baseUrl + 'categories').pipe(
         map((response: ApiResponse<ICategory[]>) => {
           this.categories = response.result.filter((x) => x.parent == null);
           this.categories.forEach((x) => {
@@ -165,7 +115,7 @@ export class ShopService {
   private generateHttpParams(shopParams: ShopParams) {
     let params = new HttpParams();
 
-    if (shopParams.categoryId !== 0) {
+    if (shopParams.categoryId !== undefined) {
       params = params.append('typeId', shopParams.categoryId.toString());
     }
 

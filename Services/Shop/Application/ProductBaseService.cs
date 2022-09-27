@@ -16,13 +16,13 @@ using System.Net;
 
 namespace Application;
 
-public abstract class ProductService : BaseAppService
+public abstract class ProductBaseService : BaseAppService
 {
     private readonly CachedItems _cachedItems;
     private readonly IPhotoService _photoService;
     private readonly IGenericRepository<Category> _categoryRepo;
     private readonly IGenericRepository<Product> _productsRepo;
-    protected ProductService(IGenericRepository<Product> productsRepo,
+    protected ProductBaseService(IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
         IPhotoService photoService,
         CachedItems cachedItems, IMapper mapper, StoreContext context) : base(mapper, context)

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application;
 
-public class ProductMaterialAppService : ProductService
+public class ProductMaterialAppService : ProductBaseService
 {
     public ProductMaterialAppService(IGenericRepository<Product> productsRepo,
        IGenericRepository<Category> categoryRepo,
