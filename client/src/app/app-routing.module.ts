@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: () => import('./shop/categories/machine/machine.module').then((mod) => mod.MachineModule),
       },
       {
+        path: 'malzeme',
+        loadChildren: () => import('./shop/categories/material/material.module').then((mod) => mod.MaterialModule),
+      },
+      {
         path: 'uye',
         canActivate: [AuthGuard],
         loadChildren: () => import('./member-profile/member-profile.module').then((mod) => mod.MemberProfileModule),

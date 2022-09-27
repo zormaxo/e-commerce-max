@@ -1,5 +1,4 @@
 using Application.Interfaces;
-using Application.Specifications;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -40,26 +39,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
     {
         return await _dbSet.AnyAsync(predicate);
-    }
-
-    public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
-    {
-        return await ApplySpecification(spec).FirstOrDefaultAsync();
-    }
-
-    public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
-    {
-        return await ApplySpecification(spec).ToListAsync();
-    }
-
-    public async Task<int> CountAsync(ISpecification<T> spec)
-    {
-        return await ApplySpecification(spec).CountAsync();
-    }
-
-    private IQueryable<T> ApplySpecification(ISpecification<T> spec)
-    {
-        return SpecificationEvaluator<T>.GetQuery(_dbSet.AsQueryable(), spec);
     }
 
     public async Task<bool> SaveChangesAsync()

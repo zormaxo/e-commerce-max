@@ -14,9 +14,19 @@ import { LeftNavComponent } from './components/left-nav/left-nav.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SortDirective } from '../_directives/sort.directive';
+import { OnlyNumberDirective } from '../_directives/only-number.directive';
 
 @NgModule({
-  declarations: [PagerComponent, PagingHeaderComponent, FilterSummaryComponent, BreadcumbsComponent, LeftNavComponent],
+  declarations: [
+    PagerComponent,
+    PagingHeaderComponent,
+    FilterSummaryComponent,
+    BreadcumbsComponent,
+    LeftNavComponent,
+    SortDirective,
+    OnlyNumberDirective,
+  ],
   imports: [
     CommonModule,
     RouterModule,

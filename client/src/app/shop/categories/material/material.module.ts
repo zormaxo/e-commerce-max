@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MachineComponent } from './machine.component';
-import { MachineRoutingModule } from './machine-routing.module';
+import { MaterialComponent } from './material.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SortDirective } from 'src/app/_directives/sort.directive';
 import { OnlyNumberDirective } from 'src/app/_directives/only-number.directive';
 import { FormsModule } from '@angular/forms';
+import { MaterialRoutingModule } from './material-routing.module';
+
+
 
 @NgModule({
-  declarations: [MachineComponent],
-  imports: [CommonModule, FormsModule, MachineRoutingModule, SharedModule],
+  declarations: [MaterialComponent],
+  imports: [CommonModule, FormsModule, MaterialRoutingModule, SharedModule],
 })
-export class MachineModule {}
+export class MaterialModule {}

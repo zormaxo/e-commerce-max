@@ -26,5 +26,6 @@ public class Product : FullAuditableEntity, IPrice
     public bool IsActive { get; set; }
     public CurrencyCode Currency { get; set; }
     public ProductMachine ProductMachine { get; set; }
+    public ProductMaterial ProductMaterial { get; set; }
     public ICollection<ProductPhoto> Photos { get; set; }
 }

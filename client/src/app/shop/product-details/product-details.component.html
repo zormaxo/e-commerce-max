@@ -12,13 +12,21 @@
       <p class="text-primary fw-bold">{{ product.priceText }}</p>
       <div class="text-primary fw-bold small">
         <a
-          [routerLink]="['/', parentCategories[0].url, selectedCategory.url]"
+          [routerLink]="
+            parentCategories[0]
+              ? ['/', parentCategories[0].url, selectedCategory.url]
+              : ['/', selectedCategory.url, selectedCategory.url]
+          "
           [state]="{ cityId: product.county.city.id }"
           >{{ product.county.city.name }}</a
         >
         /
         <a
-          [routerLink]="['/', parentCategories[0].url, selectedCategory.url]"
+          [routerLink]="
+            parentCategories[0]
+              ? ['/', parentCategories[0].url, selectedCategory.url]
+              : ['/', selectedCategory.url, selectedCategory.url]
+          "
           [state]="{ cityId: product.county.city.id, countyId: product.county.id }"
           >{{ product.county.name }}</a
         >

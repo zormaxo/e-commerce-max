@@ -12,7 +12,6 @@ namespace Application;
 public class StoreContext : DbContext
 {
     private readonly int _userId;
-    private bool processAudit;
 
     public StoreContext(DbContextOptions<StoreContext> options, UserResolverService userService) : base(options)
     {
@@ -23,6 +22,7 @@ public class StoreContext : DbContext
     public DbSet<AppUser> Users { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductMachine> ProductMachines { get; set; }
+    public DbSet<ProductMaterial> ProductMaterials { get; set; }
     public DbSet<ProductBrand> ProductBrands { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<City> Cities { get; set; }
