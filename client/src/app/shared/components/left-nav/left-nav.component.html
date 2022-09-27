@@ -16,7 +16,7 @@
           ">
           {{ selectedCategory.name }}</a
         >
-        <span *ngIf="!selectedCategory.childCategories" class="small text-muted"> ({{ selectedCategory.count }})</span>
+        <span *ngIf="selectedCategory.childCategories.length === 0" class="small text-muted"> ({{ selectedCategory.count }})</span>
       </li>
       <ng-container *ngFor="let child of selectedCategory.childCategories">
         <li
