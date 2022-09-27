@@ -4,7 +4,7 @@ import { IProduct } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
 import { ShopService } from '../../../_services/shop.service';
-import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
+import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
 
@@ -18,7 +18,7 @@ export class MaterialComponent implements OnInit {
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
-  categoryGroupCount: CategoryGroupCount[];
+  categoryGroupCount: CategoryProductCount[];
   categoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;

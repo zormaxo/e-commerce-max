@@ -20,7 +20,7 @@ namespace Application.Controllers
             _cachedItems = cachedItems;
         }
 
-        [HttpGet]
+        [HttpGet("products-material")]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             return Ok(await _productMachineSrv.GetProducts(productParams));

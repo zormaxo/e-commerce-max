@@ -3,7 +3,7 @@ import { IProduct } from '../../shared/models/product';
 import { ICategory as ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../../_services/shop.service';
-import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
+import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 
 @Component({
   selector: 'app-showcase',
@@ -17,7 +17,7 @@ export class ShowcaseComponent implements OnInit {
   shopParams = new ShopParams();
   totalCount: number;
   parentCategories: ICategory[] = [];
-  categoryGroupCount: CategoryGroupCount[];
+  categoryGroupCount: CategoryProductCount[];
 
   constructor(private shopService: ShopService) {}
 

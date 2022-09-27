@@ -1,5 +1,5 @@
 <div class="row">
-  <app-breadcumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcumbs>
+  <app-breadcrumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumbs>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <app-left-nav *ngIf="products" [selectedCategory]="selectedCategory" [allCategories]="allCategories"></app-left-nav>
     <form #form="ngForm">

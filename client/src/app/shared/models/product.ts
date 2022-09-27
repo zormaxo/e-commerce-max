@@ -10,7 +10,6 @@ export interface IProduct {
   priceText: string;
   pictureUrl: string;
   productType: string;
-  productBrand: string;
   created: Date;
   city: string;
   county: string;

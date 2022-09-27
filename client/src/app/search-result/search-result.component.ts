@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ICategory } from '../shared/models/category';
-import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
+import { CategoryProductCount } from '../shared/models/categoryGroupCount';
 import { ShopParams } from '../shared/models/shopParams';
 import { ShopService } from '../_services/shop.service';
 
@@ -12,7 +12,7 @@ import { ShopService } from '../_services/shop.service';
 })
 export class SearchResultComponent implements OnInit {
   shopParams: ShopParams = new ShopParams();
-  categoryGroupCountList: CategoryGroupCount[];
+  categoryGroupCountList: CategoryProductCount[];
   allCategories: ICategory[];
   totalCount: number;
 

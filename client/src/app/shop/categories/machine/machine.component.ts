@@ -5,7 +5,7 @@ import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
 import { IPagination } from '../../../shared/models/pagination';
 import { ShopService } from '../../../_services/shop.service';
-import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
+import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
 import { HttpParams } from '@angular/common/http';
@@ -20,7 +20,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
-  categoryGroupCount: CategoryGroupCount[];
+  categoryGroupCount: CategoryProductCount[];
   categoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;

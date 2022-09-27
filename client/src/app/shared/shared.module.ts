@@ -8,7 +8,7 @@ import { PagingHeaderComponent } from './components/paging-header/paging-header.
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
-import { BreadcumbsComponent } from './components/breadcumbs/breadcumbs.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
 import { LeftNavComponent } from './components/left-nav/left-nav.component';
 import { NgxMaskModule } from 'ngx-mask';
@@ -22,7 +22,7 @@ import { OnlyNumberDirective } from '../_directives/only-number.directive';
     PagerComponent,
     PagingHeaderComponent,
     FilterSummaryComponent,
-    BreadcumbsComponent,
+    BreadcrumbComponent,
     LeftNavComponent,
     SortDirective,
     OnlyNumberDirective,
@@ -51,7 +51,7 @@ import { OnlyNumberDirective } from '../_directives/only-number.directive';
     NgxGalleryModule,
     NgxMaskModule,
     FilterSummaryComponent,
-    BreadcumbsComponent,
+    BreadcrumbComponent,
     LeftNavComponent,
     FileUploadModule,
     ModalModule,

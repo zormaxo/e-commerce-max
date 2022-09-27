@@ -1,4 +1,4 @@
-<ng-container *ngIf="shopService.customCategory$ | async as customCategory">
+<ng-container *ngIf="shopService.categoryWithParents$ | async as customCategory">
   <nav style="background-color: #eaeaea; font-size: 0.8rem" class="p-1 mb-2">
     <ol class="breadcrumb small m-0">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>

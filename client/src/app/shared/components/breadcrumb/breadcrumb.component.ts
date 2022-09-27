@@ -2,16 +2,16 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { ShopService } from 'src/app/_services/shop.service';
 
 @Component({
-  selector: 'app-breadcumbs',
-  templateUrl: './breadcumbs.component.html',
-  styleUrls: ['./breadcumbs.component.scss'],
+  selector: 'app-breadcrumb',
+  templateUrl: './breadcrumb.component.html',
+  styleUrls: ['./breadcrumb.component.scss'],
 })
-export class BreadcumbsComponent implements OnChanges {
+export class BreadcrumbComponent implements OnChanges {
   @Input() selectedCategoryId: number;
 
   constructor(public shopService: ShopService) {}
 
   ngOnChanges(): void {
-    this.shopService.generateFilteredCategory(this.selectedCategoryId);
+    this.shopService.generateBreadcrumb(this.selectedCategoryId);
   }
 }

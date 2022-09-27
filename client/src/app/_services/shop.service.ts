@@ -1,13 +1,13 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IBrand } from '../shared/models/brand';
 import { IPagination } from '../shared/models/pagination';
 import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
-import { of, ReplaySubject } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
 import { IAddress } from '../shared/models/address';
+import { ApiResponse } from '../_models/api-response/api-response';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,8 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
 
   categories: ICategory[];
-  private customCategorySource = new ReplaySubject(1);
-  customCategory$ = this.customCategorySource.asObservable();
+  private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
+  categoryWithParents$ = this.categoryWithParents.asObservable();
   searchTerm: string; //relation between nav and productList
 
   constructor(private http: HttpClient) {}
@@ -25,11 +25,7 @@ export class ShopService {
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
 
-    if (shopParams.brandId !== 0) {
-      params = params.append('brandId', shopParams.brandId.toString());
-    }
-
-    if (shopParams.categoryId !== 0) {
+    if (shopParams.categoryId !== undefined) {
       params = params.append('typeId', shopParams.categoryId.toString());
     }
 
@@ -80,7 +76,7 @@ export class ShopService {
     params = params.append('pageSize', shopParams.pageSize.toString());
 
     return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
-      map((response: any) => {
+      map((response: HttpResponse<ApiResponse<IPagination>>) => {
         return response.body.result;
       })
     );
@@ -90,7 +86,12 @@ export class ShopService {
     let params = new HttpParams();
     params = params.append('userId', userId);
 
-    return this.http.get<unknown>(this.baseUrl + 'products/product-counts', { params: params });
+    return this.http.get<{ activeProducts: number; inactiveProducts: number }>(
+      this.baseUrl + 'products/product-counts',
+      {
+        params: params,
+      }
+    );
   }
 
   getProduct(id: number) {
@@ -105,7 +106,7 @@ export class ShopService {
     return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
   }
 
-  getCategories() {
+  getCategories(): Observable<ICategory[]> {
     const pushChildCategories = (category: ICategory) => {
       if (category.childCategories) {
         category.childCategories.forEach((child) => {
@@ -118,8 +119,8 @@ export class ShopService {
 
     if (this.categories === undefined) {
       return this.http.get(this.baseUrl + 'products/categories').pipe(
-        map((asd: any) => {
-          this.categories = asd.result.filter((x) => x.parent == null);
+        map((response: ApiResponse<ICategory[]>) => {
+          this.categories = response.result.filter((x) => x.parent == null);
           this.categories.forEach((x) => {
             pushChildCategories(x);
           });
@@ -131,6 +132,7 @@ export class ShopService {
     }
   }
 
+  //Adds product counts to parent categories cumulatively
   addCountToParents(selectedCategory: ICategory, count: number) {
     if (selectedCategory.parent) {
       selectedCategory.parent.count += count;
@@ -138,12 +140,12 @@ export class ShopService {
     }
   }
 
-  generateFilteredCategory(selectedCategoryId: number): void {
+  generateBreadcrumb(selectedCategoryId: number): void {
     let selectedCategory: ICategory;
     this.getCategories().subscribe((categories) => {
       selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
       const parentCategories = this.fillParentCategoryList(selectedCategory);
-      this.customCategorySource.next({ selectedCategory, parentCategories });
+      this.categoryWithParents.next({ selectedCategory, parentCategories });
     });
   }
 
@@ -160,12 +162,8 @@ export class ShopService {
     }
   }
 
-  getProducts2(shopParams: ShopParams) {
+  private generateHttpParams(shopParams: ShopParams) {
     let params = new HttpParams();
-
-    if (shopParams.brandId !== 0) {
-      params = params.append('brandId', shopParams.brandId.toString());
-    }
 
     if (shopParams.categoryId !== 0) {
       params = params.append('typeId', shopParams.categoryId.toString());
@@ -221,22 +219,26 @@ export class ShopService {
   }
 
   getMachineProducts(shopParams: ShopParams) {
-    const params: HttpParams = this.getProducts2(shopParams);
+    const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'productsMachine', { observe: 'response', params }).pipe(
-      map((response: any) => {
-        return response.body.result;
-      })
-    );
+    return this.http
+      .get<ApiResponse<IPagination>>(this.baseUrl + 'products-machine', { observe: 'response', params })
+      .pipe(
+        map((response) => {
+          return response.body.result;
+        })
+      );
   }
 
   getMaterialProducts(shopParams: ShopParams) {
-    const params: HttpParams = this.getProducts2(shopParams);
+    const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'productsMaterial', { observe: 'response', params }).pipe(
-      map((response: any) => {
-        return response.body.result;
-      })
-    );
+    return this.http
+      .get<ApiResponse<IPagination>>(this.baseUrl + 'products-material', { observe: 'response', params })
+      .pipe(
+        map((response) => {
+          return response.body.result;
+        })
+      );
   }
 }
