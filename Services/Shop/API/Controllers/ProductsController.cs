@@ -28,20 +28,6 @@ namespace Application.Controllers
             return Ok(await _productSrv.GetActiveInactiveProducts(productParams));
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
-        {
-            return await _productSrv.GetProduct(id);
-        }
-
-        [HttpPost("update-product")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<bool> UpdateProduct(Product product)
-        {
-            return await _productSrv.UpdateProduct(product);
-        }
-
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
         {

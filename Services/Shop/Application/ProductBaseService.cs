@@ -90,7 +90,7 @@ public abstract class ProductBaseService : BaseAppService
         return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
     }
 
-    public async Task<object> GetProductsCounts(ProductSpecParams productParams)
+    public async Task<object> GetActiveInactiveProducts(ProductSpecParams productParams)
     {
         var activeProducts = await _productsRepo.GetAll()
             .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
@@ -116,11 +116,6 @@ public abstract class ProductBaseService : BaseAppService
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
         return _mapper.Map<ProductToReturnDto>(product);
-    }
-
-    public IReadOnlyList<Category> GetCategories()
-    {
-        return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
     }
 
     public async Task<bool> UpdateProduct(Product product)

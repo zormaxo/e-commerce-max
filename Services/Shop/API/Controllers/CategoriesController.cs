@@ -13,8 +13,8 @@ namespace Application.Controllers
         }
 
 
-        [HttpGet()]
-        public ActionResult<IReadOnlyList<ProductBrand>> GetTypes()
+        [HttpGet]
+        public ActionResult<IReadOnlyList<ProductBrand>> GetCategories()
         {
             return Ok(_productSrv.GetCategories());
         }
