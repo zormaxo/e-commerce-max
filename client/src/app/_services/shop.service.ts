@@ -118,7 +118,7 @@ export class ShopService {
 
     if (this.categories === undefined) {
       return this.http.get(this.baseUrl + 'products/categories').pipe(
-        map((asd : any) => {
+        map((asd: any) => {
           this.categories = asd.result.filter((x) => x.parent == null);
           this.categories.forEach((x) => {
             pushChildCategories(x);
@@ -158,5 +158,85 @@ export class ShopService {
         fillList(selectedCategory.parent);
       }
     }
+  }
+
+  getProducts2(shopParams: ShopParams) {
+    let params = new HttpParams();
+
+    if (shopParams.brandId !== 0) {
+      params = params.append('brandId', shopParams.brandId.toString());
+    }
+
+    if (shopParams.categoryId !== 0) {
+      params = params.append('typeId', shopParams.categoryId.toString());
+    }
+
+    if (shopParams.categoryName !== undefined) {
+      params = params.append('categoryName', shopParams.categoryName);
+    }
+
+    if (shopParams.search) {
+      params = params.append('search', shopParams.search);
+    }
+
+    if (shopParams.countyId) {
+      params = params.append('countyId', shopParams.countyId);
+    }
+
+    if (shopParams.cityId) {
+      params = params.append('cityId', shopParams.cityId);
+    }
+
+    if (shopParams.isNew !== undefined) {
+      params = params.append('isNew', shopParams.isNew);
+    }
+
+    if (shopParams.userId !== undefined) {
+      params = params.append('userId', shopParams.userId);
+    }
+
+    if (shopParams.getAllStatus !== undefined) {
+      params = params.append('getAllStatus', shopParams.getAllStatus);
+    }
+
+    if (shopParams.currency !== undefined) {
+      params = params.append('currency', shopParams.currency);
+    }
+
+    if (shopParams.maxValue !== undefined) {
+      const maxValue = shopParams.maxValue.replaceAll('.', '');
+      params = params.append('maxValue', maxValue);
+    }
+
+    if (shopParams.minValue !== undefined && shopParams.maxValue !== '0') {
+      const minValue = shopParams.minValue.replaceAll('.', '');
+      params = params.append('minValue', minValue);
+    }
+
+    params = params.append('sort', shopParams.sort);
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageSize', shopParams.pageSize.toString());
+
+    return params;
+  }
+
+  getMachineProducts(shopParams: ShopParams) {
+    const params: HttpParams = this.getProducts2(shopParams);
+
+    return this.http.get(this.baseUrl + 'productsMachine', { observe: 'response', params }).pipe(
+      map((response: any) => {
+        return response.body.result;
+      })
+    );
+  }
+
+  getMaterialProducts(shopParams: ShopParams) {
+    const params: HttpParams = this.getProducts2(shopParams);
+
+    return this.http.get(this.baseUrl + 'productsMaterial', { observe: 'response', params }).pipe(
+      map((response: any) => {
+        return response.body.result;
+      })
+    );
   }
 }

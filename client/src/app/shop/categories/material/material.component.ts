@@ -72,7 +72,7 @@ export class MaterialComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+    this.shopService.getMaterialProducts(this.shopParams).subscribe((productResponse) => {
       this.products = productResponse.data;
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;

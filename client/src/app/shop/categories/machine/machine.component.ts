@@ -1,12 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
+import { IPagination } from '../../../shared/models/pagination';
 import { ShopService } from '../../../_services/shop.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-machine',
@@ -72,7 +74,7 @@ export class MachineComponent implements OnInit, AfterViewInit {
   }
 
   getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+    this.shopService.getMachineProducts(this.shopParams).subscribe((productResponse: IPagination) => {
       this.products = productResponse.data;
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;

@@ -12,40 +12,38 @@ using Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
-using Shop.Application;
 using System.Net;
 
 namespace Application;
 
-public class ProductAppService : BaseAppService
+public abstract class ProductService : BaseAppService
 {
     private readonly CachedItems _cachedItems;
-    private readonly IGenericRepository<ProductBrand> _productBrandRepo;
     private readonly IPhotoService _photoService;
     private readonly IGenericRepository<Category> _categoryRepo;
     private readonly IGenericRepository<Product> _productsRepo;
-
-    public ProductAppService(IGenericRepository<Product> productsRepo,
+    protected ProductService(IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
-        IGenericRepository<ProductBrand> productBrandRepo,
         IPhotoService photoService,
         CachedItems cachedItems, IMapper mapper, StoreContext context) : base(mapper, context)
     {
         _productsRepo = productsRepo;
         _categoryRepo = categoryRepo;
-        _productBrandRepo = productBrandRepo;
         _photoService = photoService;
         _cachedItems = cachedItems;
     }
 
+    protected IQueryable<Product> FilteredProducts { get; set; }
+    protected ProductSpecParams ProductParams { get; set; }
+
     public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
     {
+        ProductParams = productParams;
         CalculateMaxMinVal(productParams);
 
-        var filteredProducts = _productsRepo.GetAll()
+        FilteredProducts = _productsRepo.GetAll()
             .Include(x => x.Category)
             .Include(x => x.Photos.Where(y => y.IsMain))
-            //.Include(x => x.ProductMachine)
             .Include(x => x.County).ThenInclude(x => x.City)
             .WhereIf(productParams.MaxValue.HasValue, x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try < productParams.MaxValue
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MaxValue
@@ -55,7 +53,6 @@ public class ProductAppService : BaseAppService
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try > productParams.MinValue
                 : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try > productParams.MinValue
                 : x.Price > productParams.MinValue)
-            //.WhereIf(productParams.IsNew.HasValue, p => p.ProductMachine.IsNew == productParams.IsNew)
             .WhereIf(!string.IsNullOrEmpty(productParams.Search), p => p.Name.ToLower().Contains(productParams.Search))
             .WhereIf(productParams.CountyId.HasValue, p => p.County.Id == productParams.CountyId)
             .WhereIf(productParams.CityId.HasValue, p => p.County.CityId == productParams.CityId)
@@ -63,28 +60,20 @@ public class ProductAppService : BaseAppService
             .WhereIf(productParams.GetAllStatus.HasValue && productParams.GetAllStatus == false, p => !p.IsActive)
             .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId);
 
+        AddCategoryFiltering();
+
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
             List<int> categoryIds = await GetCategoryIds(productParams.CategoryName);
             if (categoryIds.Count > 0)
-                filteredProducts = filteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
+                FilteredProducts = FilteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
         }
 
-        var pagedAndfilteredProducts = filteredProducts
+        var pagedAndfilteredProducts = FilteredProducts
             .EFBigOrderBy(productParams.Sort, _cachedItems)
             .EFBigPageBy(productParams);
 
-        switch (productParams.CategoryName)
-        {
-            case "malzeme":
-                ProductMachineHelper.FilterProduct(filteredProducts, productParams);
-                break;
-            default:
-                break;
-        }
-
-
-        var catGrpCountList = filteredProducts.GroupBy(x => x.CategoryId)
+        var catGrpCountList = FilteredProducts.GroupBy(x => x.CategoryId)
             .Select(n => new CategoryGroupCount
             {
                 CategoryId = n.Key,
@@ -99,33 +88,6 @@ public class ProductAppService : BaseAppService
         var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
         return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
-    }
-
-    private void CalculateMaxMinVal(ProductSpecParams productParams)
-    {
-        if (productParams.MinValue.HasValue)
-        {
-            productParams.MinValue = productParams.Currency switch
-            {
-                CurrencyCode.USD => (int)((decimal)productParams.MinValue * (int)_cachedItems.Currency.Try),
-                CurrencyCode.EUR => (int)((decimal)productParams.MinValue / (int)_cachedItems.Currency.Eur * (int)_cachedItems.Currency.Try),
-                CurrencyCode.GBP => (int)((decimal)productParams.MinValue / (int)_cachedItems.Currency.Gbp * (int)_cachedItems.Currency.Try),
-                CurrencyCode.TRY => (int)((decimal)productParams.MinValue),
-                _ => productParams.MinValue,
-            };
-        }
-
-        if (productParams.MaxValue.HasValue)
-        {
-            productParams.MaxValue = productParams.Currency switch
-            {
-                CurrencyCode.USD => (int)((decimal)productParams.MaxValue * _cachedItems.Currency.Try),
-                CurrencyCode.EUR => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Eur * _cachedItems.Currency.Try),
-                CurrencyCode.GBP => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try),
-                CurrencyCode.TRY => (int)((decimal)productParams.MaxValue),
-                _ => productParams.MaxValue,
-            };
-        }
     }
 
     public async Task<object> GetProductsCounts(ProductSpecParams productParams)
@@ -156,41 +118,9 @@ public class ProductAppService : BaseAppService
         return _mapper.Map<ProductToReturnDto>(product);
     }
 
-    public async Task<IReadOnlyList<ProductBrand>> GetBrands()
-    {
-        return await _productBrandRepo.ListAllAsync();
-    }
-
     public IReadOnlyList<Category> GetCategories()
     {
         return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
-    }
-
-    private async Task<List<int>> GetCategoryIds(string categoryName)
-    {
-        if (_cachedItems.Categories.Count == 0)
-            _cachedItems.Categories = await _categoryRepo.ListAllAsync();
-
-        var selectedCategory = _cachedItems.Categories.First(x => x.Url == categoryName);
-        List<int> categoryIds = new();
-        FindChildCategories(selectedCategory);
-
-        void FindChildCategories(Category category)
-        {
-            if (category.ChildCategories?.Count > 0)
-            {
-                foreach (var item in category.ChildCategories)
-                {
-                    FindChildCategories(item);
-                }
-            }
-            else
-            {
-                categoryIds.Add(category.Id);
-            }
-        }
-
-        return categoryIds;
     }
 
     public async Task<bool> UpdateProduct(Product product)
@@ -227,5 +157,60 @@ public class ProductAppService : BaseAppService
         }
 
         throw new ApiException("Problem addding photo");
+    }
+
+    protected abstract void AddCategoryFiltering();
+
+    private void CalculateMaxMinVal(ProductSpecParams productParams)
+    {
+        if (productParams.MinValue.HasValue)
+        {
+            productParams.MinValue = productParams.Currency switch
+            {
+                CurrencyCode.USD => (int)((decimal)productParams.MinValue * (int)_cachedItems.Currency.Try),
+                CurrencyCode.EUR => (int)((decimal)productParams.MinValue / (int)_cachedItems.Currency.Eur * (int)_cachedItems.Currency.Try),
+                CurrencyCode.GBP => (int)((decimal)productParams.MinValue / (int)_cachedItems.Currency.Gbp * (int)_cachedItems.Currency.Try),
+                CurrencyCode.TRY => (int)((decimal)productParams.MinValue),
+                _ => productParams.MinValue,
+            };
+        }
+
+        if (productParams.MaxValue.HasValue)
+        {
+            productParams.MaxValue = productParams.Currency switch
+            {
+                CurrencyCode.USD => (int)((decimal)productParams.MaxValue * _cachedItems.Currency.Try),
+                CurrencyCode.EUR => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Eur * _cachedItems.Currency.Try),
+                CurrencyCode.GBP => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try),
+                CurrencyCode.TRY => (int)((decimal)productParams.MaxValue),
+                _ => productParams.MaxValue,
+            };
+        }
+    }
+    private async Task<List<int>> GetCategoryIds(string categoryName)
+    {
+        if (_cachedItems.Categories.Count == 0)
+            _cachedItems.Categories = await _categoryRepo.ListAllAsync();
+
+        var selectedCategory = _cachedItems.Categories.First(x => x.Url == categoryName);
+        List<int> categoryIds = new();
+        FindChildCategories(selectedCategory);
+
+        void FindChildCategories(Category category)
+        {
+            if (category.ChildCategories?.Count > 0)
+            {
+                foreach (var item in category.ChildCategories)
+                {
+                    FindChildCategories(item);
+                }
+            }
+            else
+            {
+                categoryIds.Add(category.Id);
+            }
+        }
+
+        return categoryIds;
     }
 }

@@ -129,7 +129,10 @@
     "CountyId": 87,
     "IsActive": true,
     "ProductBrandId": 1,
-    "Currency": 1
+    "Currency": 1,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Typescript Entry Board",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
@@ -234,7 +237,10 @@
     "CountyId": 654,
     "IsActive": true,
     "ProductBrandId": 1,
-    "Currency": 1
+    "Currency": 1,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Blue Code Gloves",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
@@ -339,7 +345,10 @@
     "CountyId": 777,
     "IsActive": true,
     "ProductBrandId": 1,
-    "Currency": 1
+    "Currency": 1,
+    "ProductMachine": {
+      "IsNew": true
+    }
   }, {
     "Name": "Redis Red Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
