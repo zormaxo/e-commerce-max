@@ -1,5 +1,5 @@
-using Application.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Core.Dtos;
 
 namespace Application.Controllers
 {
@@ -14,7 +14,7 @@ namespace Application.Controllers
 
 
         [HttpGet]
-        public ActionResult<IReadOnlyList<ProductBrand>> GetCategories()
+        public ActionResult<IReadOnlyList<CategoryDto>> GetCategories()
         {
             return Ok(_productSrv.GetCategories());
         }

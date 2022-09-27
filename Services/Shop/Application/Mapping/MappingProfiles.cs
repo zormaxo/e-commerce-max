@@ -3,6 +3,7 @@ using AutoMapper;
 using Core.Dtos;
 using Core.Dtos.Member;
 using Core.Entities;
+using Shop.Core.Dtos;
 
 namespace Application.Mapping;
 
@@ -42,6 +43,7 @@ public class MappingProfiles : Profile
         CreateMap<MemberNameUpdateDto, MemberUpdateDto>();
         CreateMap<MemberPhoneUpdateDto, MemberUpdateDto>();
         CreateMap<MemberUsernameUpdateDto, MemberUpdateDto>();
+        CreateMap<Category, CategoryDto>();
     }
 
     public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

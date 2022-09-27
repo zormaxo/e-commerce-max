@@ -1,6 +1,7 @@
 using AutoMapper;
 using Core.Entities;
 using Infrastructure;
+using Shop.Core.Dtos;
 
 namespace Application;
 
@@ -13,8 +14,10 @@ public class CategoriesAppService : BaseAppService
         _cachedItems = cachedItems;
     }
 
-    public IReadOnlyList<Category> GetCategories()
+    public IReadOnlyList<CategoryDto> GetCategories()
     {
-        return _cachedItems.Categories.Where(x => x.Parent == null).ToList();
+        var categories = _cachedItems.Categories.Where(x => x.Parent == null).ToList();
+        List<CategoryDto> categoryDtos = new List<CategoryDto>();
+        return _mapper.Map(categories, categoryDtos);
     }
 }
