@@ -21,8 +21,6 @@ internal class ProductEntityTypeConfiguraiton : IEntityTypeConfiguration<Product
         productConfiguration.Property(p => p.Name).IsRequired().HasMaxLength(100);
         productConfiguration.Property(p => p.Description).IsRequired();
         productConfiguration.Property(p => p.Price).HasColumnType("decimal(18,2)");
-        productConfiguration.HasOne(p => p.ProductBrand).WithMany()
-            .HasForeignKey(p => p.ProductBrandId);
         productConfiguration.HasOne(p => p.Category).WithMany()
             .HasForeignKey(p => p.CategoryId);
     }

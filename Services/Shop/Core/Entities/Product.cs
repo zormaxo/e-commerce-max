@@ -14,10 +14,9 @@ public class Product : FullAuditableEntity, IPrice
 
     [Required]
     public decimal Price { get; set; }
+
     public Category Category { get; set; }
     public int CategoryId { get; set; }
-    public ProductBrand ProductBrand { get; set; }
-    public int ProductBrandId { get; set; }
     public AppUser User { get; set; }
     public int UserId { get; set; }
     public County County { get; set; }

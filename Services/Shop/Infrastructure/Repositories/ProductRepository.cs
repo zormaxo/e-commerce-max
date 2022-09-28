@@ -20,7 +20,6 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
         return await _context.Products
             .Include(p => p.Category)
-            .Include(p => p.ProductBrand)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
@@ -28,7 +27,6 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
         return await _context.Products
             .Include(p => p.Category)
-            .Include(p => p.ProductBrand)
             .ToListAsync();
     }
 
