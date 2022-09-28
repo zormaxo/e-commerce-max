@@ -4,10 +4,11 @@ using AutoMapper;
 using Core.Entities;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Shop.Core.Dtos.Product;
 
 namespace Application;
 
-public class ProductMaterialAppService : ProductBaseService
+public class ProductMaterialAppService : ProductBaseService<ProductToReturnDto>
 {
     public ProductMaterialAppService(IGenericRepository<Product> productsRepo,
        IGenericRepository<Category> categoryRepo,
@@ -25,4 +26,8 @@ public class ProductMaterialAppService : ProductBaseService
                .WhereIf(ProductParams.IsNew.HasValue, p => p.ProductMaterial.IsNew == ProductParams.IsNew);
     }
 
+    protected override Task<List<ProductToReturnDto>> QueryDatabase()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,23 +1,28 @@
 using Application.Interfaces;
 using Application.Services;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.Entities;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Shop.Core.Dtos;
 
 namespace Application;
 
-public class ProductAppService : ProductBaseService
+public class ProductAppService : ProductBaseService<ShowcaseDto>
 {
     public ProductAppService(IGenericRepository<Product> productsRepo,
-       IGenericRepository<Category> categoryRepo,
-       IPhotoService photoService,
        CachedItems cachedItems,
-       IMapper mapper,
-       StoreContext context) : base(productsRepo, categoryRepo, photoService, cachedItems, mapper, context)
+       IMapper mapper) : base(productsRepo, cachedItems, mapper)
     {
     }
 
     protected override void AddCategoryFiltering()
     {
+    }
+
+    protected override async Task<List<ShowcaseDto>> QueryDatabase()
+    {
+        return await PagedAndfilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider).ToListAsync();
     }
 }

@@ -1,11 +1,11 @@
 using AutoMapper;
-using Core.Dtos;
 using Core.Entities;
 using Microsoft.Extensions.Configuration;
+using Shop.Core.Dtos;
 
 namespace Application.Mapping;
 
-public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, string>
+public class ProductUrlResolver : IValueResolver<Product, ShowcaseDto, string>
 {
     private readonly IConfiguration _config;
 
@@ -14,7 +14,7 @@ public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, st
         _config = config;
     }
 
-    public string Resolve(Product source, ProductToReturnDto destination, string destMember, ResolutionContext context)
+    public string Resolve(Product source, ShowcaseDto destination, string destMember, ResolutionContext context)
     {
         var url = source.Photos.FirstOrDefault(x => x.IsMain)?.Url;
         if (!string.IsNullOrEmpty(url))

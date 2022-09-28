@@ -3,7 +3,7 @@ using Core.Dtos;
 using Core.Dtos.Member;
 using Core.HelperTypes;
 
-namespace Shop.Core.Dtos
+namespace Shop.Core.Dtos.Product
 {
     public class ProductDto : BaseDto
     {

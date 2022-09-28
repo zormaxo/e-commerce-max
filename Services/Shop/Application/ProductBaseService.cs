@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Application.Services;
 using Application.Specifications;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.Dtos;
 using Core.Entities;
 using Core.Exceptions;
@@ -12,16 +13,25 @@ using Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Service.Helpers;
+using Shop.Core.Dtos.Product;
 using System.Net;
 
 namespace Application;
 
-public abstract class ProductBaseService : BaseAppService
+public abstract class ProductBaseService<T> : BaseAppService where T : class
 {
     private readonly CachedItems _cachedItems;
     private readonly IPhotoService _photoService;
     private readonly IGenericRepository<Category> _categoryRepo;
     private readonly IGenericRepository<Product> _productsRepo;
+
+    protected ProductBaseService(IGenericRepository<Product> productsRepo,
+    CachedItems cachedItems, IMapper mapper) : base(mapper)
+    {
+        _productsRepo = productsRepo;
+        _cachedItems = cachedItems;
+    }
+
     protected ProductBaseService(IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
         IPhotoService photoService,
@@ -34,17 +44,15 @@ public abstract class ProductBaseService : BaseAppService
     }
 
     protected IQueryable<Product> FilteredProducts { get; set; }
+    protected IQueryable<Product> PagedAndfilteredProducts { get; set; }
     protected ProductSpecParams ProductParams { get; set; }
 
-    public async Task<Pagination<ProductToReturnDto>> GetProducts(ProductSpecParams productParams)
+    public async Task<Pagination<T>> GetProducts(ProductSpecParams productParams)
     {
         ProductParams = productParams;
         CalculateMaxMinVal(productParams);
 
         FilteredProducts = _productsRepo.GetAll()
-            .Include(x => x.Category)
-            .Include(x => x.Photos.Where(y => y.IsMain))
-            .Include(x => x.County).ThenInclude(x => x.City)
             .WhereIf(productParams.MaxValue.HasValue, x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try < productParams.MaxValue
                 : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productParams.MaxValue
                 : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productParams.MaxValue
@@ -69,7 +77,7 @@ public abstract class ProductBaseService : BaseAppService
                 FilteredProducts = FilteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
         }
 
-        var pagedAndfilteredProducts = FilteredProducts
+        PagedAndfilteredProducts = FilteredProducts
             .EFBigOrderBy(productParams.Sort, _cachedItems)
             .EFBigPageBy(productParams);
 
@@ -83,11 +91,9 @@ public abstract class ProductBaseService : BaseAppService
         var totalItems = catGrpCountList.Count == 0 ?
             0 : catGrpCountList.Select(x => x.Count).Aggregate((a, b) => a + b);
 
-        var products = await pagedAndfilteredProducts.ToListAsync();
+        List<T> data = await QueryDatabase();
 
-        var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
-
-        return new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
+        return new Pagination<T>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
     }
 
     public async Task<object> GetActiveInactiveProducts(ProductSpecParams productParams)
@@ -103,19 +109,32 @@ public abstract class ProductBaseService : BaseAppService
         return new { activeProducts, inactiveProducts };
     }
 
-    public async Task<ProductToReturnDto> GetProduct(int id)
+    public async Task<ProductDetailDto> GetProduct(int id)
     {
         var product = await _productsRepo.GetAll()
-            .Include(x => x.Category)
-            .Include(x => x.Photos)
-            .Include(x => x.User)
-            .Include(x => x.County).ThenInclude(x => x.City)
-            .Where(x => x.Id == id)
+            .ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync();
 
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
-        return _mapper.Map<ProductToReturnDto>(product);
+
+        switch (product.Currency)
+        {
+            case CurrencyCode.USD:
+                product.PriceText = $"{product.Price} USD";
+                break;
+            case CurrencyCode.EUR:
+                product.PriceText = $"{product.Price} EUR";
+                break;
+            case CurrencyCode.GBP:
+                product.PriceText = $"{product.Price} GBP";
+                break;
+            case CurrencyCode.TRY:
+                product.PriceText = $"{product.Price} TL";
+                break;
+        }
+
+        return product;
     }
 
     public async Task<bool> UpdateProduct(Product product)
@@ -155,6 +174,7 @@ public abstract class ProductBaseService : BaseAppService
     }
 
     protected abstract void AddCategoryFiltering();
+    protected abstract Task<List<T>> QueryDatabase();
 
     private void CalculateMaxMinVal(ProductSpecParams productParams)
     {

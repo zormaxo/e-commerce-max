@@ -1,13 +1,15 @@
 using Application.Interfaces;
 using Application.Services;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.Entities;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Shop.Core.Dtos.Product;
 
 namespace Application;
 
-public class ProductMachineAppService : ProductBaseService
+public class ProductMachineAppService : ProductBaseService<ProductDetailDto>
 {
     public ProductMachineAppService(IGenericRepository<Product> productsRepo,
        IGenericRepository<Category> categoryRepo,
@@ -21,8 +23,12 @@ public class ProductMachineAppService : ProductBaseService
 
     protected override void AddCategoryFiltering()
     {
-        FilteredProducts = FilteredProducts.Include(x => x.ProductMachine)
+        FilteredProducts = FilteredProducts
                .WhereIf(ProductParams.IsNew.HasValue, p => p.ProductMachine.IsNew == ProductParams.IsNew);
     }
 
+    protected async override Task<List<ProductDetailDto>> QueryDatabase()
+    {
+        return await PagedAndfilteredProducts.ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider).ToListAsync();
+    }
 }

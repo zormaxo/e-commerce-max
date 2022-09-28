@@ -4,6 +4,7 @@ using Core.Dtos;
 using Core.Dtos.Member;
 using Core.Entities;
 using Shop.Core.Dtos;
+using Shop.Core.Dtos.Product;
 
 namespace Application.Mapping;
 
@@ -14,9 +15,21 @@ public class MappingProfiles : Profile
         ////Expression<Func<ProductToReturnDto, string>> myExpression = d => d.PictureUrl;
         ////Func<ProductToReturnDto, string> myExpression = d => d.PictureUrl;
 
-        CreateMap<Product, ProductToReturnDto>()
-            .ForMember(d => d.PriceText, o => o.MapFrom<CurrencyResolver>())
-            .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+        CreateMap<Product, ProductToReturnDto>();
+        //.ForMember(d => d.PriceText, o => o.MapFrom<CurrencyResolver>())
+        //.ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+
+        CreateMap<Product, ShowcaseDto>()
+            .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
+
+        CreateMap<Product, ProductDetailDto>();
+
+        CreateMap<ProductDetailDto, ProductDetailDto>();
+
+        CreateMap<AppUser, ProductMemberDto>();
+
+
+
 
         CreateMap<AppUser, MemberDto>()
                  .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
@@ -46,6 +59,9 @@ public class MappingProfiles : Profile
         CreateMap<Category, CategoryDto>();
         CreateMap<County, CountyDto>();
         CreateMap<City, CityDto>();
+
+
+
     }
 
     public static void ProductTypeName(IMemberConfigurationExpression<Product, ProductToReturnDto, string> mem)

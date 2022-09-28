@@ -195,7 +195,7 @@
             style="line-height: 20px; height: 100px"
             routerLink="/product/{{ product.id }}">
             <td>
-              <img src="{{ product.pictureUrl }}" style="max-height: 100px" class="img-fluid rounded" alt="..." />
+              <img src="{{ getImageSource(product) }}" style="max-height: 100px" class="img-fluid rounded" alt="..." />
             </td>
             <td style="text-align: start">
               <small>{{ product.name }}</small>
@@ -204,10 +204,10 @@
               <small>{{ product.priceText }}</small>
             </td>
             <td>
-              <small>{{ product.created }}</small>
+              <small>{{ product.createdDate }}</small>
             </td>
             <td>
-              <small>{{ product.city }}</small> <br /><small> {{ product.county }}</small>
+              <small>{{ product.county.city.name }}</small> <br /><small> {{ product.county.name }}</small>
             </td>
           </tr>
         </tbody>

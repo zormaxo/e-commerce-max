@@ -4,6 +4,8 @@ using Core.Dtos;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service.Helpers;
+using Shop.Core.Dtos;
+using Shop.Core.Dtos.Product;
 
 namespace Application.Controllers
 {
@@ -17,14 +19,14 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
+        public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             return Ok(await _productSrv.GetProducts(productParams));
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        public async Task<ActionResult<ProductDetailDto>> GetProduct(int id)
         {
             return await _productSrv.GetProduct(id);
         }

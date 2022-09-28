@@ -1,8 +1,8 @@
 using Application.Specifications;
-using Core.Dtos;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Service.Helpers;
+using Shop.Core.Dtos.Product;
 
 namespace Application.Controllers
 {
@@ -23,7 +23,7 @@ namespace Application.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        public async Task<ActionResult<ProductDetailDto>> GetProduct(int id)
         {
             return await _productMachineSrv.GetProduct(id);
         }

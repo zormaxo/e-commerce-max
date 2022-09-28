@@ -2,7 +2,7 @@
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="accordion accordion-flush" id="accordionExample">
       <ng-container *ngFor="let category of categories; let i = index">
-        <div class="accordion-item" *ngIf="category.parent === null">
+        <div class="accordion-item" *ngIf="category.parent === null || category.parent === undefined">
           <div class="accordion-header d-flex align-items-center">
             <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
             <a class="m-1 small fw-bold" [routerLink]="['/', category.url, category.url]">{{ category.name }}</a>
