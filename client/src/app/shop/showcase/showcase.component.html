@@ -10,7 +10,7 @@
               ><span class="small text-muted">({{ category.count }})</span></small
             >
             <a
-              *ngIf="category.childCategories.length > 0"
+              *ngIf="category.childCategories"
               class="ms-auto justify-content-center rounded-pill py-1"
               style="width: 30px; box-shadow: none"
               data-bs-toggle="collapse"

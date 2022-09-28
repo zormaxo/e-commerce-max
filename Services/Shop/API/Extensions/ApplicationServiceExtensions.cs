@@ -20,7 +20,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<UserResolverService>();
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddAutoMapper(typeof(MappingProfiles));
+        services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));
 
         services.Configure<ApiBehaviorOptions>(options =>
         {
