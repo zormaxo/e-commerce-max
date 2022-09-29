@@ -1,5 +1,4 @@
 using Application.Interfaces;
-using Application.Services;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Core.Entities;
@@ -23,6 +22,8 @@ public class ProductAppService : ProductBaseService<ShowcaseDto>
 
     protected override async Task<List<ShowcaseDto>> QueryDatabase()
     {
-        return await PagedAndfilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider).ToListAsync();
+        return await PagedAndfilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

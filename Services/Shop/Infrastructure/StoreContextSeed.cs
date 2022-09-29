@@ -1,5 +1,6 @@
 using Application.Entities;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.Dtos;
 using Core.Entities;
 using Infrastructure;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
+using Shop.Core.Dtos;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -123,8 +125,8 @@ public class StoreContextSeed
             }
 
             cachedItems.Categories = await context.Categories.ToListAsync();
-            cachedItems.Cities = await context.Cities.ToListAsync();
-            cachedItems.Counties = await context.Counties.ToListAsync();
+            cachedItems.Cities = await context.Cities.ProjectTo<CityDto>(mapper.ConfigurationProvider).ToListAsync();
+            cachedItems.Counties = await context.Counties.ProjectTo<CountyDto>(mapper.ConfigurationProvider).ToListAsync();
         }
         catch (Exception ex)
         {

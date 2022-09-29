@@ -55,6 +55,7 @@ import { OnlyNumberDirective } from '../_directives/only-number.directive';
     LeftNavComponent,
     FileUploadModule,
     ModalModule,
+    SortDirective,
   ],
 })
 export class SharedModule {}

@@ -118,22 +118,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
 
-        switch (product.Currency)
-        {
-            case CurrencyCode.USD:
-                product.PriceText = $"{product.Price} USD";
-                break;
-            case CurrencyCode.EUR:
-                product.PriceText = $"{product.Price} EUR";
-                break;
-            case CurrencyCode.GBP:
-                product.PriceText = $"{product.Price} GBP";
-                break;
-            case CurrencyCode.TRY:
-                product.PriceText = $"{product.Price} TL";
-                break;
-        }
-
         return product;
     }
 
