@@ -52,9 +52,17 @@
     <div class="col d-flex justify-content-center align-items-start">
       <div class="card small shadow" style="width: 18rem">
         <div class="card-body">
-          <h5 class="card-title">{{ product.user.firstName }} {{ product.user.surname }}</h5>
+          <div class="row align-items-center mb-2 gx-2">
+            <div class="col-auto">
+              <img src="{{ product.user.photoUrl }}" alt="" style="width: 50px" />
+            </div>
+            <div class="col">
+              <span class="h6 card-title">{{ product.user.firstName }} {{ product.user.surname }}</span>
+            </div>
+          </div>
+
           <div class="card-text">
-            <p class="text-muted">Hesap açma tarihi {{ product.user.created }}</p>
+            <p class="text-muted">Hesap açma tarihi: {{ product.user.createdDate }}</p>
             <a href="" class="text-decoration-none">Tüm İlanları</a>
             <p>Cep {{ product.user.phoneNumber | mask: "(000) 000 00 00" }}</p>
           </div>

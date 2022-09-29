@@ -1,8 +1,9 @@
+using Shop.Core.Dtos;
+
 namespace Core.Dtos.Member;
 
-public class MemberDto
+public class MemberDto : BaseDto
 {
-    public int Id { get; set; }
     public string Username { get; set; }
     public string FirstName { get; set; }
     public string Surname { get; set; }

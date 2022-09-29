@@ -113,7 +113,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
     {
         var product = await _productsRepo.GetAll()
             .ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(x => x.Id == id);
 
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");

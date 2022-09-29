@@ -5,6 +5,7 @@ using Core.Dtos.Member;
 using Core.Entities;
 using Shop.Core.Dtos;
 using Shop.Core.Dtos.Product;
+using Shop.Core.Extensions;
 
 namespace Application.Mapping;
 
@@ -22,12 +23,18 @@ public class MappingProfiles : Profile
         CreateMap<Product, ShowcaseDto>()
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-        CreateMap<Product, ProductDetailDto>();
+        CreateMap<Product, ProductMachineDto>().ForMember(dest => dest.PriceText, opt => opt.MapFrom(src =>
+                     src.Price.ToString().ToPriceText(src.Currency))).ForMember(d => d.CreatedDate, o => o.MapFrom(src =>
+                     src.CreatedDate.ToString("d")));
 
-        CreateMap<ProductDetailDto, ProductDetailDto>();
+        CreateMap<Product, ProductDetailDto>().ForMember(dest => dest.PriceText, opt => opt.MapFrom(src =>
+                     src.Price.ToString().ToPriceText(src.Currency)));
 
-        CreateMap<AppUser, ProductMemberDto>();
-
+        CreateMap<AppUser, ProductMemberDto>()
+         .ForMember(d => d.PhotoUrl, o => o.MapFrom(src =>
+                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
+         .ForMember(d => d.CreatedDate, o => o.MapFrom(src =>
+                     src.CreatedDate.ToString("d")));
 
 
 

@@ -9,7 +9,7 @@ using Shop.Core.Dtos.Product;
 
 namespace Application;
 
-public class ProductMachineAppService : ProductBaseService<ProductDetailDto>
+public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
 {
     public ProductMachineAppService(IGenericRepository<Product> productsRepo,
        IGenericRepository<Category> categoryRepo,
@@ -27,8 +27,8 @@ public class ProductMachineAppService : ProductBaseService<ProductDetailDto>
                .WhereIf(ProductParams.IsNew.HasValue, p => p.ProductMachine.IsNew == ProductParams.IsNew);
     }
 
-    protected async override Task<List<ProductDetailDto>> QueryDatabase()
+    protected async override Task<List<ProductMachineDto>> QueryDatabase()
     {
-        return await PagedAndfilteredProducts.ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider).ToListAsync();
+        return await PagedAndfilteredProducts.ProjectTo<ProductMachineDto>(_mapper.ConfigurationProvider).ToListAsync();
     }
 }

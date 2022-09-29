@@ -3,8 +3,11 @@ using Core.HelperTypes;
 
 namespace Shop.Core.Dtos.Product
 {
-    public class ProductMachineDto : ShowcaseDto
+    public class ProductMachineDto : BaseDto
     {
+        private decimal price;
+
+        public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string PriceText { get; set; }
@@ -12,6 +15,6 @@ namespace Shop.Core.Dtos.Product
         public CategoryDto Category { get; set; }
         public CountyDto County { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public string CreatedDate { get; set; }
     }
 }

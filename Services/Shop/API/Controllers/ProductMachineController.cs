@@ -16,7 +16,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
+        public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             return Ok(await _productMachineSrv.GetProducts(productParams));
         }
