@@ -29,6 +29,11 @@ const routes: Routes = [
         loadChildren: () => import('./shop/categories/material/material.module').then((mod) => mod.MaterialModule),
       },
       {
+        path: 'yari-mamul',
+        loadChildren: () =>
+          import('./shop/categories/semi-finished/semi-finished.module').then((mod) => mod.SemiFinishedModule),
+      },
+      {
         path: 'uye',
         canActivate: [AuthGuard],
         loadChildren: () => import('./member-profile/member-profile.module').then((mod) => mod.MemberProfileModule),

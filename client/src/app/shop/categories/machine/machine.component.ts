@@ -129,6 +129,5 @@ export class MachineComponent implements OnInit, AfterViewInit {
 
   onSelectChange(selectedValue: number) {
     this.counties = this.cities.find((x) => x.id == selectedValue)?.counties;
-    // this.shopService.getCounties(selectedValue).subscribe((counties) => (this.counties = counties));
   }
 }

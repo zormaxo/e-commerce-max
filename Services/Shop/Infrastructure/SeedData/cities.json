@@ -241,5 +241,11 @@
   }, {
     "Id": 81,
     "Name": "Düzce"
+  }, {
+    "Id": 101,
+    "Name": "Kuyumcukent"
+  }, {
+    "Id": 102,
+    "Name": "Kapalıçarşı"
   }
 ]

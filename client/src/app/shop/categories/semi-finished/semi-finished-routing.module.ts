@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MaterialComponent } from './material.component';
+import { SemiFinishedComponent } from './semi-finished.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'malzeme', pathMatch: 'full' },
-  { path: ':subcategory', component: MaterialComponent },
+  { path: '', redirectTo: 'yari-mamul', pathMatch: 'full' },
+  { path: ':subcategory', component: SemiFinishedComponent },
 ];
 
 @NgModule({
@@ -12,4 +12,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MaterialRoutingModule {}
+export class SemiFinishedRoutingModule {}

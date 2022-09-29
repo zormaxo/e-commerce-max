@@ -7,18 +7,18 @@ import { ShopService } from '../../../_services/shop.service';
 import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
+import { ApiResponse } from 'src/app/_models/api-response/api-response';
 
 @Component({
-  selector: 'app-material',
-  templateUrl: './material.component.html',
-  styleUrls: ['./material.component.scss'],
+  selector: 'app-semi-finished',
+  templateUrl: './semi-finished.component.html',
+  styleUrls: ['./semi-finished.component.scss'],
 })
-export class MaterialComponent implements OnInit, AfterViewInit {
+export class SemiFinishedComponent implements OnInit, AfterViewInit {
   @ViewChild('search', { static: false }) searchTerm: ElementRef;
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
-  categoryGroupCount: CategoryProductCount[];
   categoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;
@@ -33,6 +33,7 @@ export class MaterialComponent implements OnInit, AfterViewInit {
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
     this.shopParams.cityId = navigation?.extras?.state?.cityId ?? 0;
     this.shopParams.countyId = navigation?.extras?.state?.countyId ?? 0;
+
     if (this.shopParams.search || this.shopParams.cityId || this.shopParams.countyId) {
       this.filterShopParams = new ShopParams();
       if (this.shopParams.search) this.filterShopParams.search = this.shopParams.search;
@@ -40,7 +41,7 @@ export class MaterialComponent implements OnInit, AfterViewInit {
       if (this.shopParams.countyId) this.filterShopParams.countyId = this.shopParams.countyId;
     }
 
-    this.shopService.getCities().subscribe((cities: any) => {
+    this.shopService.getCities().subscribe((cities: ApiResponse<IAddress[]>) => {
       this.cities = cities.result;
       if (this.shopParams.cityId) {
         this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
@@ -77,10 +78,10 @@ export class MaterialComponent implements OnInit, AfterViewInit {
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
-      this.categoryGroupCount = productResponse.categoryGroupCount;
+      const categoryGroupCount: CategoryProductCount[] = productResponse.categoryGroupCount;
 
       this.allCategories.forEach((category) => (category.count = 0));
-      this.categoryGroupCount.forEach((groupCount) => {
+      categoryGroupCount.forEach((groupCount) => {
         const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
         category.count = groupCount.count;
         this.shopService.addCountToParents(category, groupCount.count);

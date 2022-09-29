@@ -49,7 +49,7 @@ export class ShopService {
   }
 
   getCities() {
-    return this.http.get<IAddress[]>(this.baseUrl + 'shared/cities');
+    return this.http.get<ApiResponse<IAddress[]>>(this.baseUrl + 'shared/cities');
   }
 
   updateProduct(product: IProduct) {
@@ -185,6 +185,18 @@ export class ShopService {
 
     return this.http
       .get<ApiResponse<IPagination>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
+      .pipe(
+        map((response) => {
+          return response.body.result;
+        })
+      );
+  }
+
+  getSemiFinishedProducts(shopParams: ShopParams) {
+    const params: HttpParams = this.generateHttpParams(shopParams);
+
+    return this.http
+      .get<ApiResponse<IPagination>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;

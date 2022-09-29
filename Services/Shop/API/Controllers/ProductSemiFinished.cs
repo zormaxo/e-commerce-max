@@ -6,26 +6,26 @@ using Shop.Core.Dtos.Product;
 
 namespace Application.Controllers
 {
-    public class ProductsMaterialController : BaseApiController
+    public class ProductSemiFinishedController : BaseApiController
     {
-        private readonly ProductMaterialAppService _productMaterialSrv;
+        private readonly ProductMaterialAppService _productSemiFinishedSrv;
 
-        public ProductsMaterialController(ProductMaterialAppService productMaterialSrv)
+        public ProductSemiFinishedController(ProductMaterialAppService productSemiFinishedSrv)
         {
-            _productMaterialSrv = productMaterialSrv;
+            _productSemiFinishedSrv = productSemiFinishedSrv;
         }
 
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
-            return Ok(await _productMaterialSrv.GetProducts(productParams));
+            return Ok(await _productSemiFinishedSrv.GetProducts(productParams));
         }
 
         [HttpPost("update-product")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<bool> UpdateProduct(Product product)
         {
-            return await _productMaterialSrv.UpdateProduct(product);
+            return await _productSemiFinishedSrv.UpdateProduct(product);
         }
     }
 }

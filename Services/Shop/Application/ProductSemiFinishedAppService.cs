@@ -9,26 +9,24 @@ using Shop.Core.Dtos.Product;
 
 namespace Application;
 
-public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
+public class ProductSemiFinishedAppServic : ProductBaseService<ProductDto>
 {
-    public ProductMaterialAppService(IGenericRepository<Product> productsRepo,
+    public ProductSemiFinishedAppServic(IGenericRepository<Product> productsRepo,
        IGenericRepository<Category> categoryRepo,
        IPhotoService photoService,
        CachedItems cachedItems,
        IMapper mapper,
        StoreContext context) : base(productsRepo, categoryRepo, photoService, cachedItems, mapper, context)
     {
-
     }
 
     protected override void AddCategoryFiltering()
     {
-        FilteredProducts = FilteredProducts.WhereIf(ProductParams.IsNew.HasValue, p => p.ProductMaterial.IsNew == ProductParams.IsNew);
     }
 
-    protected async override Task<List<ProductMaterialDto>> QueryDatabase()
+    protected override async Task<List<ProductDto>> QueryDatabase()
     {
-        return await PagedAndfilteredProducts.ProjectTo<ProductMaterialDto>(_mapper.ConfigurationProvider)
+        return await PagedAndfilteredProducts.ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
              .AsNoTracking()
              .ToListAsync();
     }

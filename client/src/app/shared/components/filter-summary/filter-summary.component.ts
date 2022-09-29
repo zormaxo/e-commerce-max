@@ -52,7 +52,6 @@ export class FilterSummaryComponent implements OnChanges {
         break;
       default:
         this.filterShopParams = undefined;
-        this.shopService.searchTerm = '';
     }
 
     if (

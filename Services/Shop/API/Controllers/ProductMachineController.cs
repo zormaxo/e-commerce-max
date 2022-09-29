@@ -21,13 +21,6 @@ namespace Application.Controllers
             return Ok(await _productMachineSrv.GetProducts(productParams));
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<ProductDetailDto>> GetProduct(int id)
-        {
-            return await _productMachineSrv.GetProduct(id);
-        }
-
         [HttpPost("update-product")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<bool> UpdateProduct(Product product)

@@ -10,8 +10,8 @@ export class ShopParams {
   isNew: boolean;
   minValue: string;
   maxValue: string;
-  cityId: number;
-  countyId: number;
+  cityId = 0; //when reset search we need this as zero
+  countyId = 0;
   userId: number;
   currency: CurrencyType = CurrencyType.TL;
   getAllStatus: boolean;
