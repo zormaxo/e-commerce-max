@@ -26,18 +26,9 @@ public static class EFBigExtensions
         return source.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3358:Ternary operators should not be nested", Justification = "<Pending>")]
     public static IQueryable<TSource> EFBigOrderBy<TSource>(
     this IQueryable<TSource> source, string sort, CachedItems _cachedItems) where TSource : IPrice
     {
-        //return source.Currency switch
-        //{
-        //    CurrencyCode.USD => decimal.Round(source.Price * _cachedItems.Currency.Try, 2, MidpointRounding.AwayFromZero),
-        //    CurrencyCode.EUR => decimal.Round(source.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try, 2, MidpointRounding.AwayFromZero),
-        //    CurrencyCode.GBP => decimal.Round(source.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try, 2, MidpointRounding.AwayFromZero),
-        //    CurrencyCode.TRY => source.Price,
-        //    _ => source.Price,
-        //};
         if (sort == "price asc")
         {
             return source.OrderBy(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try

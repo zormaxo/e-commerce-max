@@ -76,7 +76,6 @@ public class AccountAppService : BaseAppService
             UserId = user.Id,
             FirstName = user.FirstName,
             Token = _tokenService.CreateToken(user),
-            PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
         };
 
         return userDto;

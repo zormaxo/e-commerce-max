@@ -1,5 +1,4 @@
 ﻿using Core.Dtos;
-using Core.HelperTypes;
 
 namespace Shop.Core.Dtos.Product
 {

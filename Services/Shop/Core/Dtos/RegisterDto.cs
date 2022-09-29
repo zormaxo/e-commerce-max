@@ -12,7 +12,7 @@ namespace Core.Dtos
         [StringLength(8, MinimumLength = 4)]
         public string Password { get; set; }
 
-        public string FirstName { get; set; } = "asd";
-        public string Surname { get; set; } = "asd";
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
     }
 }

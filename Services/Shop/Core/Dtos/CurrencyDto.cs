@@ -15,11 +15,6 @@
 
     public class Rates
     {
-        //public double TRY { get; set; }
-        //public string GBP { get; set; }
-        //public string EUR { get; set; }
-        //public string USD { get; set; }
-
         private double _try;
         public double TRY
         {

@@ -19,10 +19,10 @@ namespace Application.Controllers
             return Ok(_cachedItems.Cities);
         }
 
-        [HttpGet("counties/{id}")]
-        public ActionResult<IReadOnlyList<County>> Counties(string id)
-        {
-            return Ok(_cachedItems.Counties.Where(x => x.City.Name == id));
-        }
+        //[HttpGet("counties/{id}")]
+        //public ActionResult<IReadOnlyList<County>> Counties(string id)
+        //{
+        //    return Ok(_cachedItems.Counties.Where(x => x.City.Name == id));
+        //}
     }
 }

@@ -1,5 +1,4 @@
 using AutoMapper;
-using Core.Entities;
 using Infrastructure;
 using Shop.Core.Dtos;
 
@@ -17,7 +16,7 @@ public class CategoriesAppService : BaseAppService
     public IReadOnlyList<CategoryDto> GetCategories()
     {
         var categories = _cachedItems.Categories.Where(x => x.Parent == null).ToList();
-        List<CategoryDto> categoryDtos = new List<CategoryDto>();
+        List<CategoryDto> categoryDtos = new();
         return _mapper.Map(categories, categoryDtos);
     }
 }
