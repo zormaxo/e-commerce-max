@@ -6,7 +6,7 @@
 
 <div class="row">
   <ng-container *ngFor="let item of allCategories">
-    <div class="col-2" *ngIf="item.parent === null && item.count">
+    <div class="col-2" *ngIf="item.parent === undefined && item.count">
       <div class="card h-100">
         <div class="card-body text-center">
           <img src="{{ '../assets/icons/' + item.url + '.svg' }}" alt="" style="width: 50px" class="text-center" />

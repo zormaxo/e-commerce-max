@@ -44,10 +44,10 @@ export class FilterSummaryComponent implements OnChanges {
       case SearchFilter.search:
         this.filterShopParams.search = this.shopService.searchTerm = '';
         break;
-      case SearchFilter.cityId:
+      case SearchFilter.city:
         this.filterShopParams.cityId = 0;
         break;
-      case SearchFilter.countyId:
+      case SearchFilter.county:
         this.filterShopParams.countyId = 0;
         break;
       default:
@@ -56,7 +56,7 @@ export class FilterSummaryComponent implements OnChanges {
 
     if (
       this.filterShopParams &&
-      !this.filterShopParams.isNew &&
+      this.filterShopParams.isNew == undefined &&
       !this.filterShopParams.minValue &&
       !this.filterShopParams.maxValue &&
       !this.filterShopParams.search
@@ -65,7 +65,6 @@ export class FilterSummaryComponent implements OnChanges {
     }
 
     this.resetClicked.emit(this.filterShopParams ?? new ShopParams(10));
-    console.log('ömer');
   }
 
   getCityName(cityId: number) {
@@ -83,6 +82,6 @@ export enum SearchFilter {
   maxValue,
   search,
   price,
-  cityId,
-  countyId,
+  city,
+  county,
 }

@@ -41,8 +41,8 @@ export class SemiFinishedComponent implements OnInit, AfterViewInit {
       if (this.shopParams.countyId) this.filterShopParams.countyId = this.shopParams.countyId;
     }
 
-    this.shopService.getCities().subscribe((cities: ApiResponse<IAddress[]>) => {
-      this.cities = cities.result;
+    this.shopService.getCities().subscribe((cities: IAddress[]) => {
+      this.cities = cities;
       if (this.shopParams.cityId) {
         this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
       }
@@ -127,6 +127,5 @@ export class SemiFinishedComponent implements OnInit, AfterViewInit {
 
   onSelectChange(selectedValue: number) {
     this.counties = this.cities.find((x) => x.id == selectedValue)?.counties;
-    // this.shopService.getCounties(selectedValue).subscribe((counties) => (this.counties = counties));
   }
 }

@@ -4,6 +4,7 @@
     {
         public string Name { get; set; }
         public string Url { get; set; }
+        public int Count { get; set; } //If this feature is deleted, it will throw an error while counting items.
         public ICollection<CategoryDto> ChildCategories { get; set; }
     }
 }

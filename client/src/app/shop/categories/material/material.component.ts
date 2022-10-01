@@ -41,7 +41,7 @@ export class MaterialComponent implements OnInit, AfterViewInit {
     }
 
     this.shopService.getCities().subscribe((cities: any) => {
-      this.cities = cities.result;
+      this.cities = cities;
       if (this.shopParams.cityId) {
         this.counties = this.cities.find((x) => x.id == this.shopParams.cityId)?.counties;
       }

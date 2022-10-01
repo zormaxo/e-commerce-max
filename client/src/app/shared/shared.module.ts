@@ -16,6 +16,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SortDirective } from '../_directives/sort.directive';
 import { OnlyNumberDirective } from '../_directives/only-number.directive';
+import { FilterComponent } from './components/filter/filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,10 @@ import { OnlyNumberDirective } from '../_directives/only-number.directive';
     LeftNavComponent,
     SortDirective,
     OnlyNumberDirective,
+    FilterComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
     RouterModule,
     BsDropdownModule.forRoot(),
@@ -56,6 +60,7 @@ import { OnlyNumberDirective } from '../_directives/only-number.directive';
     FileUploadModule,
     ModalModule,
     SortDirective,
+    FilterComponent
   ],
 })
 export class SharedModule {}

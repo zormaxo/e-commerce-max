@@ -4,7 +4,7 @@ import { IPagination } from '../shared/models/pagination';
 import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
-import { Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
 import { IAddress } from '../shared/models/address';
 import { ApiResponse } from '../_models/api-response/api-response';
@@ -16,8 +16,11 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
 
   categories: ICategory[];
+  cities: IAddress[];
+
   private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
   categoryWithParents$ = this.categoryWithParents.asObservable();
+  searchClicked = new Subject<ShopParams>();  
   searchTerm: string; //relation between nav and productList
 
   constructor(private http: HttpClient) {}
@@ -49,7 +52,16 @@ export class ShopService {
   }
 
   getCities() {
-    return this.http.get<ApiResponse<IAddress[]>>(this.baseUrl + 'shared/cities');
+    if (!this.cities) {
+      return this.http.get<ApiResponse<IAddress[]>>(this.baseUrl + 'shared/cities').pipe(
+        map((response: ApiResponse<IAddress[]>) => {
+          this.cities = response.result;
+          return this.cities;
+        })
+      );
+    } else {
+      return of(this.cities);
+    }
   }
 
   updateProduct(product: IProduct) {
