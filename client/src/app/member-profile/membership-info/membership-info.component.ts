@@ -70,7 +70,7 @@ export class MembershipInfoComponent implements OnInit {
       file.withCredentials = false;
     };
 
-    this.uploader.onSuccessItem = (item, response, status, headers) => {
+    this.uploader.onSuccessItem = (_item, response, _status, _headers) => {
       if (response) {
         const photoResp = JSON.parse(response);
         this.member.photos.push(photoResp.result);
@@ -103,21 +103,19 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUserFirstLastName() {
     this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
-      this.toastr.success('Profile updated successfully');
+      this.toastr.success('Adınız ve soyadınız güncellendi.');
       this.memberClone.firstName = this.member.firstName;
       this.memberClone.surname = this.member.surname;
       this.nameSurnameForm.reset(this.member);
 
-      const user: User = JSON.parse(localStorage.getItem('user'));
-      user.firstName = this.member.firstName;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.accountService.setCurrentUser(user);
+      this.user.firstName = this.member.firstName;
+      this.accountService.setCurrentUser(this.user);
     });
   }
 
   updateUsername() {
     this.memberService.updateUsername(this.member).subscribe(() => {
-      this.toastr.success('Profile updated successfully');
+      this.toastr.success('Mail adresiniz güncellendi.');
       this.memberClone.username = this.member.username;
       this.emailForm.reset(this.member);
     });
@@ -125,7 +123,7 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUserPhone() {
     this.memberService.updateUserPhone(this.member).subscribe(() => {
-      this.toastr.success('Profile updated successfully');
+      this.toastr.success('Telefonunuz güncellendi.');
       this.memberClone.phoneNumber = this.member.phoneNumber;
       this.phoneForm.reset(this.member);
     });

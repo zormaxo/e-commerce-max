@@ -128,6 +128,13 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         return await _productsRepo.SaveChangesAsync();
     }
 
+    public async Task<bool> ChangeActiveStatus(ProductActivateDto productActivateDto)
+    {
+        Product productObj = await _productsRepo.GetByIdAsync(productActivateDto.Id);
+        productObj.IsActive = productActivateDto.IsActive;
+        return await _productsRepo.SaveChangesAsync();
+    }
+
     public async Task<PhotoDto> AddPhoto(IFormFile file, int productId)
     {
         var product = await _productsRepo.GetAll().FirstOrDefaultAsync(x => x.Id == productId);

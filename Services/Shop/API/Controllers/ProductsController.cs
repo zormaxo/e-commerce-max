@@ -38,6 +38,13 @@ namespace Application.Controllers
             return await _productSrv.UpdateProduct(product);
         }
 
+        [HttpPost("change-active-status")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<bool> ChangeActiveStatus(ProductActivateDto productActivateDto)
+        {
+            return await _productSrv.ChangeActiveStatus(productActivateDto);
+        }
+
         [HttpGet("product-counts")]
         public async Task<ActionResult<object>> GetProductCounts([FromQuery] ProductSpecParams productParams)
         {

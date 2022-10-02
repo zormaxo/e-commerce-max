@@ -51,7 +51,7 @@ export class AdListComponent implements OnInit {
 
   onActive(product: IProduct, activeStatus: boolean) {
     product.isActive = activeStatus;
-    this.shopService.updateProduct(product).subscribe(() => {
+    this.shopService.changeActiveStatus(product).subscribe(() => {
       this.toastr.success(`${activeStatus ? 'Aktif' : 'Pasif'} edildi`);
       this.getProducts();
     });

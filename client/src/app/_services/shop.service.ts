@@ -69,6 +69,10 @@ export class ShopService {
     return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
   }
 
+  changeActiveStatus(product: IProduct) {
+    return this.http.post<number>(this.baseUrl + 'products/change-active-status/', product);
+  }
+
   getCategories(): Observable<ICategory[]> {
     const pushChildCategories = (category: ICategory) => {
       if (category.childCategories) {
