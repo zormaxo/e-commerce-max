@@ -20,21 +20,21 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams: Params) => {
-      this.shopParams.search = queryParams['search-term'];
+      this.shopParams.search = this.shopService.searchTerm = queryParams['search-term'];
       this.getProducts();
     });
   }
 
   getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
-      this.categoryGroupCountList = productResponse.categoryGroupCount;
-      this.totalCount = productResponse.totalCount;
+    this.shopService.getCategories().subscribe((categories) => {
+      this.allCategories = categories;
+      this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+        this.totalCount = productResponse.totalCount;
+        this.categoryGroupCountList = productResponse.categoryGroupCount;
 
-      this.shopService.getCategories().subscribe((categories) => {
-        this.allCategories = categories;
-
+        this.allCategories.forEach((category) => (category.count = 0));
         this.categoryGroupCountList.forEach((groupCount) => {
-          const category = this.allCategories.find((y) => y.id == groupCount.categoryId);
+          const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
           category.count = groupCount.count;
           this.shopService.addCountToParents(category, groupCount.count);
         });

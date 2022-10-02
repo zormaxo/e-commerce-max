@@ -13,8 +13,7 @@ import { IAddress } from 'src/app/shared/models/address';
   templateUrl: './material.component.html',
   styleUrls: ['./material.component.scss'],
 })
-export class MaterialComponent implements OnInit, AfterViewInit {
-  @ViewChild('search', { static: false }) searchTerm: ElementRef;
+export class MaterialComponent implements OnInit {
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
@@ -27,6 +26,7 @@ export class MaterialComponent implements OnInit, AfterViewInit {
 
   filterShopParams: ShopParams;
   currencyType = CurrencyType;
+  mainCategoryName: string;
 
   constructor(public shopService: ShopService, private route: ActivatedRoute, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -48,14 +48,10 @@ export class MaterialComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
-  }
-
   ngOnInit(): void {
     this.route.params.subscribe(() => {
-      this.shopParams.categoryName = this.categoryName =
-        this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
+      this.shopParams.categoryName = this.categoryName = this.route.snapshot.url[0].path;
+      this.mainCategoryName = this.route.parent.snapshot.url[0].path;
       this.getCategoriesThenProducts();
     });
   }
@@ -100,32 +96,25 @@ export class MaterialComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
 
-  onSearch() {
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber = 1;
-    if (
-      (this.shopParams.search == '' || this.shopParams.search == undefined) &&
-      (this.shopParams.cityId == 0 || this.shopParams.cityId == undefined) &&
-      (this.shopParams.countyId == 0 || this.shopParams.countyId == undefined) &&
-      this.shopParams.isNew == undefined &&
-      (this.shopParams.maxValue == '' || this.shopParams.maxValue == undefined) &&
-      (this.shopParams.minValue == '' || this.shopParams.minValue == undefined)
-    ) {
-      return;
-    }
-    this.filterShopParams = structuredClone(this.shopParams);
-    this.getProducts();
-  }
+  // onSearch() {
+  //   this.shopParams.search = this.searchTerm.nativeElement.value;
+  //   this.shopParams.pageNumber = 1;
+  //   if (
+  //     (this.shopParams.search == '' || this.shopParams.search == undefined) &&
+  //     (this.shopParams.cityId == 0 || this.shopParams.cityId == undefined) &&
+  //     (this.shopParams.countyId == 0 || this.shopParams.countyId == undefined) &&
+  //     this.shopParams.isNew == undefined &&
+  //     (this.shopParams.maxValue == '' || this.shopParams.maxValue == undefined) &&
+  //     (this.shopParams.minValue == '' || this.shopParams.minValue == undefined)
+  //   ) {
+  //     return;
+  //   }
+  //   this.filterShopParams = structuredClone(this.shopParams);
+  //   this.getProducts();
+  // }
 
-  onResetClicked(event: ShopParams) {
+  onRemoveFilterClick(event: ShopParams) {
     this.shopParams = structuredClone(event);
-    this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
-    this.shopParams.categoryName = this.categoryName;
     this.getProducts();
-  }
-
-  onSelectChange(selectedValue: number) {
-    this.counties = this.cities.find((x) => x.id == selectedValue)?.counties;
-    // this.shopService.getCounties(selectedValue).subscribe((counties) => (this.counties = counties));
   }
 }

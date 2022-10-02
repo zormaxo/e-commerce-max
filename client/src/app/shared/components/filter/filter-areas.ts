@@ -16,7 +16,11 @@ export class FilterAreas {
         this.cityId = true;
         this.countyId = true;
         break;
-
+      case 'yari-mamul':
+        this.minValue = true;
+        this.maxValue = true;
+        this.cityId = true;
+        this.countyId = true;
       default:
         break;
     }

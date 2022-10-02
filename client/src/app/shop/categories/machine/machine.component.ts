@@ -8,20 +8,19 @@ import { ShopService } from '../../../_services/shop.service';
 import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-machine',
   templateUrl: './machine.component.html',
   styleUrls: ['./machine.component.scss'],
 })
-export class MachineComponent implements OnInit, AfterViewInit {
-  @ViewChild('search', { static: false }) searchTerm: ElementRef;
+export class MachineComponent implements OnInit {
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
   categoryGroupCount: CategoryProductCount[];
   categoryName: string;
+  mainCategoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;
   cities: IAddress[];
@@ -57,14 +56,10 @@ export class MachineComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
-  }
-
   ngOnInit(): void {
     this.route.params.subscribe(() => {
-      this.shopParams.categoryName = this.categoryName =
-        this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
+      this.shopParams.categoryName = this.categoryName = this.route.snapshot.url[0].path;
+      this.mainCategoryName = this.route.parent.snapshot.url[0].path;
       this.getCategoriesThenProducts();
     });
   }
@@ -109,31 +104,8 @@ export class MachineComponent implements OnInit, AfterViewInit {
     this.getProducts();
   }
 
-  onSearch() {
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber = 1;
-    if (
-      (this.shopParams.search == '' || this.shopParams.search == undefined) &&
-      (this.shopParams.cityId == 0 || this.shopParams.cityId == undefined) &&
-      (this.shopParams.countyId == 0 || this.shopParams.countyId == undefined) &&
-      this.shopParams.isNew == undefined &&
-      (this.shopParams.maxValue == '' || this.shopParams.maxValue == undefined) &&
-      (this.shopParams.minValue == '' || this.shopParams.minValue == undefined)
-    ) {
-      return;
-    }
-    this.filterShopParams = structuredClone(this.shopParams);
-    this.getProducts();
-  }
-
-  onResetClicked(event: ShopParams) {
+  onRemoveFilterClick(event: ShopParams) {
     this.shopParams = structuredClone(event);
-    this.searchTerm.nativeElement.value = this.shopParams.search != undefined ? this.shopParams.search : '';
-    this.shopParams.categoryName = this.categoryName;
     this.getProducts();
-  }
-
-  onSelectChange(selectedValue: number) {
-    this.counties = this.cities.find((x) => x.id == selectedValue)?.counties;
   }
 }

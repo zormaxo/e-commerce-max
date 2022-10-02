@@ -13,10 +13,11 @@ export class FilterSummaryComponent implements OnChanges {
   @Input() filterShopParams: ShopParams;
   @Input() totalCount: number;
   @Input() cities: IAddress[];
-  @Output() resetClicked = new EventEmitter<ShopParams>();
+  @Output() removeFilterClick = new EventEmitter<ShopParams>();
 
   searchFilter = SearchFilter;
   price: string;
+  categoryName: string;
 
   constructor(private shopService: ShopService) {}
 
@@ -31,7 +32,9 @@ export class FilterSummaryComponent implements OnChanges {
     }
   }
 
-  onResetClick(event: SearchFilter) {
+  onRemoveFilterClick(event: SearchFilter) {
+    this.categoryName = this.filterShopParams.categoryName;
+
     switch (event) {
       case SearchFilter.isNew:
         this.filterShopParams.isNew = undefined;
@@ -64,7 +67,7 @@ export class FilterSummaryComponent implements OnChanges {
       this.filterShopParams = undefined;
     }
 
-    this.resetClicked.emit(this.filterShopParams ?? new ShopParams(10));
+    this.removeFilterClick.emit(this.filterShopParams ?? new ShopParams(10, this.categoryName));
   }
 
   getCityName(cityId: number) {
