@@ -8,6 +8,7 @@ import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
 import { IAddress } from '../shared/models/address';
 import { ApiResponse } from '../_models/api-response/api-response';
+import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class ShopService {
 
   private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
   categoryWithParents$ = this.categoryWithParents.asObservable();
-  searchClicked = new Subject<ShopParams>();  
+  searchClicked = new Subject<ShopParams>();
   searchTerm: string; //relation between nav and productList
 
   constructor(private http: HttpClient) {}
@@ -94,12 +95,29 @@ export class ShopService {
     }
   }
 
+  // //Adds product counts to parent categories cumulatively
+  // addCountToParents(selectedCategory: ICategory, count: number) {
+  //   if (selectedCategory.parent) {
+  //     selectedCategory.parent.count += count;
+  //     this.addCountToParents(selectedCategory.parent, count);
+  //   }
+  // }
+
   //Adds product counts to parent categories cumulatively
-  addCountToParents(selectedCategory: ICategory, count: number) {
-    if (selectedCategory.parent) {
-      selectedCategory.parent.count += count;
-      this.addCountToParents(selectedCategory.parent, count);
-    }
+  addCountToParents(allCategories: ICategory[], categoryGroupCount: CategoryGroupCount[]) {
+    const addCount = (selectedCategory: ICategory, count: number) => {
+      if (selectedCategory.parent) {
+        selectedCategory.parent.count += count;
+        addCount(selectedCategory.parent, count);
+      }
+    };
+
+    allCategories.forEach((category) => (category.count = 0));
+    categoryGroupCount.forEach((groupCount) => {
+      const category = allCategories.find((x) => x.id == groupCount.categoryId);
+      category.count = groupCount.count;
+      addCount(category, groupCount.count);
+    });
   }
 
   generateBreadcrumb(selectedCategoryId: number): void {

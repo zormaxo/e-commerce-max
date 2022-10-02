@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ICategory } from '../shared/models/category';
-import { CategoryProductCount } from '../shared/models/categoryGroupCount';
+import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
 import { ShopParams } from '../shared/models/shopParams';
 import { ShopService } from '../_services/shop.service';
 
@@ -12,7 +12,7 @@ import { ShopService } from '../_services/shop.service';
 })
 export class SearchResultComponent implements OnInit {
   shopParams: ShopParams = new ShopParams();
-  categoryGroupCountList: CategoryProductCount[];
+  categoryGroupCountList: CategoryGroupCount[];
   allCategories: ICategory[];
   totalCount: number;
 
@@ -28,16 +28,12 @@ export class SearchResultComponent implements OnInit {
   getProducts() {
     this.shopService.getCategories().subscribe((categories) => {
       this.allCategories = categories;
+
       this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
         this.totalCount = productResponse.totalCount;
         this.categoryGroupCountList = productResponse.categoryGroupCount;
 
-        this.allCategories.forEach((category) => (category.count = 0));
-        this.categoryGroupCountList.forEach((groupCount) => {
-          const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
-          category.count = groupCount.count;
-          this.shopService.addCountToParents(category, groupCount.count);
-        });
+        this.shopService.addCountToParents(this.allCategories, this.categoryGroupCountList);
       });
     });
   }

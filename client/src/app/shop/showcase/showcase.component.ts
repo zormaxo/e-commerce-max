@@ -3,7 +3,7 @@ import { IProduct } from '../../shared/models/product';
 import { ICategory as ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../../_services/shop.service';
-import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
+import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 
 @Component({
   selector: 'app-showcase',
@@ -17,7 +17,7 @@ export class ShowcaseComponent implements OnInit {
   shopParams = new ShopParams();
   totalCount: number;
   parentCategories: ICategory[] = [];
-  categoryGroupCount: CategoryProductCount[];
+  categoryGroupCount: CategoryGroupCount[];
 
   constructor(private shopService: ShopService) {}
 
@@ -43,13 +43,7 @@ export class ShowcaseComponent implements OnInit {
     this.shopService.getCategories().subscribe({
       next: (response) => {
         this.categories = response;
-
-        this.categories.forEach((category) => (category.count = 0));
-        this.categoryGroupCount.forEach((groupCount) => {
-          const category = this.categories.find((x) => x.id == groupCount.categoryId);
-          category.count = groupCount.count;
-          this.shopService.addCountToParents(category, groupCount.count);
-        });
+        this.shopService.addCountToParents(this.categories, this.categoryGroupCount);
       },
     });
   }

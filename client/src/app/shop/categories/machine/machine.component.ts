@@ -1,11 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
 import { IPagination } from '../../../shared/models/pagination';
 import { ShopService } from '../../../_services/shop.service';
-import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
 
@@ -18,7 +17,6 @@ export class MachineComponent implements OnInit {
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
-  categoryGroupCount: CategoryProductCount[];
   categoryName: string;
   mainCategoryName: string;
   allCategories: ICategory[];
@@ -51,7 +49,7 @@ export class MachineComponent implements OnInit {
 
     this.shopService.searchClicked.subscribe((shopParams: ShopParams) => {
       this.shopParams = shopParams;
-      this.filterShopParams = structuredClone(this.shopParams);
+      this.filterShopParams = structuredClone(shopParams);
       this.getProducts();
     });
   }
@@ -81,14 +79,8 @@ export class MachineComponent implements OnInit {
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
-      this.categoryGroupCount = productResponse.categoryGroupCount;
 
-      this.allCategories.forEach((category) => (category.count = 0));
-      this.categoryGroupCount.forEach((groupCount) => {
-        const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
-        category.count = groupCount.count;
-        this.shopService.addCountToParents(category, groupCount.count);
-      });
+      this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
     });
   }
 

@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
 import { ShopService } from '../../../_services/shop.service';
-import { CategoryProductCount } from 'src/app/shared/models/categoryGroupCount';
 import { CurrencyType } from 'src/app/shared/models/currency';
 import { IAddress } from 'src/app/shared/models/address';
 
@@ -17,7 +16,6 @@ export class MaterialComponent implements OnInit {
   products: IProduct[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
-  categoryGroupCount: CategoryProductCount[];
   categoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;
@@ -73,14 +71,8 @@ export class MaterialComponent implements OnInit {
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
-      this.categoryGroupCount = productResponse.categoryGroupCount;
 
-      this.allCategories.forEach((category) => (category.count = 0));
-      this.categoryGroupCount.forEach((groupCount) => {
-        const category = this.allCategories.find((x) => x.id == groupCount.categoryId);
-        category.count = groupCount.count;
-        this.shopService.addCountToParents(category, groupCount.count);
-      });
+      this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
     });
   }
 
