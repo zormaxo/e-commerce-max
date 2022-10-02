@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { map } from 'rxjs';
 import { ShopService } from 'src/app/_services/shop.service';
 import { IAddress } from '../../models/address';
 import { CurrencyType } from '../../models/currency';
@@ -12,7 +13,6 @@ import { ShopParams } from '../../models/shopParams';
 export class FilterSummaryComponent implements OnChanges {
   @Input() filterShopParams: ShopParams;
   @Input() totalCount: number;
-  @Input() cities: IAddress[];
   @Output() removeFilterClick = new EventEmitter<ShopParams>();
 
   searchFilter = SearchFilter;
@@ -50,9 +50,6 @@ export class FilterSummaryComponent implements OnChanges {
       case SearchFilter.city:
         this.filterShopParams.cityId = 0;
         break;
-      case SearchFilter.county:
-        this.filterShopParams.countyId = 0;
-        break;
       default:
         this.filterShopParams = undefined;
     }
@@ -71,11 +68,19 @@ export class FilterSummaryComponent implements OnChanges {
   }
 
   getCityName(cityId: number) {
-    return this.cities.find((x) => x.id == cityId).name;
+    return this.shopService.getCities().pipe(
+      map((cities: IAddress[]) => {
+        return cities.find((x) => x.id == cityId).name;
+      })
+    );
   }
 
   getCountyName(cityId: number, countyId: number) {
-    return this.cities.find((x) => x.id == cityId).counties.find((x) => x.id == countyId).name;
+    return this.shopService.getCities().pipe(
+      map((cities: IAddress[]) => {
+        return cities.find((x) => x.id == cityId).counties.find((x) => x.id == countyId).name;
+      })
+    );
   }
 }
 

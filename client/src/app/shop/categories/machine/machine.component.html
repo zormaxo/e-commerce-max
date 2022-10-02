@@ -2,13 +2,12 @@
   <app-breadcrumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumbs>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <app-left-nav *ngIf="products" [selectedCategory]="selectedCategory" [allCategories]="allCategories"></app-left-nav>
-    <app-filter [categoryName]="categoryName" [shopParams]="shopParams"></app-filter>
+    <app-filter [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
   </section>
   <section class="col-sm-8 col-md-9">
     <app-filter-summary
       [filterShopParams]="filterShopParams"
       [totalCount]="totalCount"
-      [cities]="cities"
       (removeFilterClick)="onRemoveFilterClick($event)"></app-filter-summary>
     <div class="d-none d-md-block" *ngIf="totalCount > 0">
       <table
