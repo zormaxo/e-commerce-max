@@ -31,7 +31,7 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src =>
                      src.Price.ToString().ToPriceText(src.Currency)))
             .ForMember(d => d.CreatedDate, o => o.MapFrom(src =>
-                     src.CreatedDate.ToString("d")))
+                     src.CreatedDate.ToString("dd.MM.yyyy")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
         CreateMap<Product, ProductDetailDto>()
