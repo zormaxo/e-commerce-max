@@ -21,6 +21,7 @@ export class FilterAreas {
         this.maxValue = true;
         this.cityId = true;
         this.countyId = true;
+        break;
       default:
         break;
     }
