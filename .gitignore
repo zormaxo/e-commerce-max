@@ -340,7 +340,8 @@ OpenCover/
 # Azure Stream Analytics local run output
 ASALocalRun/
 
-# MSBuild Binary and Structured Log
+# MSBuild Binary and Structured 
+
 *.binlog
 
 # NVidia Nsight GPU debugger configuration file
@@ -456,3 +457,4 @@ $RECYCLE.BIN/
 appsettings.json
 *.db-shm
 *.db-wal
+[Ss]eq/

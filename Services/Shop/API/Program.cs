@@ -12,15 +12,6 @@ namespace Application
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
-
             Log.Information("Application Starting Up");
 
             using var scope = host.Services.CreateScope();
@@ -45,7 +36,7 @@ namespace Application
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog()
+                .UseSerilog((context, _, configuration) => configuration.ReadFrom.Configuration(context.Configuration))
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }

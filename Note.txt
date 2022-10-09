@@ -5,7 +5,7 @@ dotnet ef database update -p Infrastructure -s API
 
 PRAGMA foreign_keys = ON;
 
-docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -v "D:\Codes\Home\Kuyumdan\Logs:/data" -p 8081:80 datalust/seq:latest
+docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -v "D:\Codes\Home\Kuyumdan\Seq:/data" -p 8081:80 datalust/seq:latest
 
 https://www.youtube.com/watch?v=oXNslgIXIbQ
 https://www.youtube.com/watch?v=_iryZxv8Rxw
