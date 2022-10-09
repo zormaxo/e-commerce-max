@@ -1,5 +1,6 @@
 using Application.Extensions;
 using Application.Middleware;
+using Serilog;
 using System.Text.Json.Serialization;
 
 namespace Application
@@ -40,8 +41,9 @@ namespace Application
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");  //for non-exist endpoints
             app.UseHttpsRedirection();
-            app.UseRouting();
             app.UseStaticFiles();
+            app.UseSerilogRequestLogging();
+            app.UseRouting();
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
