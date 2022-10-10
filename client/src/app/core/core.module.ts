@@ -11,6 +11,6 @@ import { CoreRoutingModule } from './core-routing.module';
 @NgModule({
   declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent, TestErrorsComponent],
   imports: [FormsModule, CommonModule, CoreRoutingModule, BsDropdownModule.forRoot()],
-  exports: [NavBarComponent, NotFoundComponent, ServerErrorComponent, TestErrorsComponent],
+  exports: [NavBarComponent],
 })
 export class CoreModule {}
