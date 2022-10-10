@@ -60,7 +60,7 @@ export class SemiFinishedComponent implements OnInit {
       this.allCategories = categories;
       this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
       if (!this.selectedCategory) {
-        this.router.navigateByUrl('/notfound');
+        this.router.navigateByUrl('/error/notfound');
       }
       this.getProducts();
     });

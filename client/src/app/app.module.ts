@@ -7,11 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SharedModule } from './shared/shared.module';
-import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
-import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { ErrorInterceptor } from './_interceptors/error.interceptor';
-import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './core/_interceptors/error.interceptor';
+import { JwtInterceptor } from './core/_interceptors/jwt.interceptor';
 import { ShowcaseModule } from './shop/showcase/showcase.module';
 import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,7 +17,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { SearchResultModule } from './search-result/search-result.module';
 import { ManagementModule } from './management/management.module';
 import { MemberProfileModule } from './member-profile/member-profile.module';
-import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { LoadingInterceptor } from './core/_interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MarketModule } from './market/market.module';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -30,9 +27,6 @@ import { FileUploadModule } from 'ng2-file-upload';
     AppComponent,
     ListsComponent,
     MessagesComponent,
-    TestErrorsComponent,
-    NotFoundComponent,
-    ServerErrorComponent,
     ProductDetailsComponent,
   ],
   imports: [

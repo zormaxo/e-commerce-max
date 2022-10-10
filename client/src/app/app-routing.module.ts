@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
-import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
+import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -48,15 +46,17 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./market/market.module').then((mod) => mod.MarketModule),
       },
+      {
+        path: 'error',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),
+      },
     ],
   },
   {
     path: 'giris',
     loadChildren: () => import('./entry/entry.module').then((mod) => mod.EntryModule),
   },
-  { path: 'errors', component: TestErrorsComponent },
-  { path: 'notfound', component: NotFoundComponent },
-  { path: 'servererror', component: ServerErrorComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 
