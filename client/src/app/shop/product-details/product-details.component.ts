@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { ICategory } from 'src/app/shared/models/category';
 import { IProduct } from 'src/app/shared/models/product';
-import { ShopService } from '../../_services/shop.service';
+import { ShopService } from '../../core/services/shop.service';
 
 @Component({
   selector: 'app-product-details',

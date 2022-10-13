@@ -45,7 +45,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
     {
         return await _context.Users
             .Include(p => p.Products)
-            .SingleOrDefaultAsync(x => x.Username == username);
+            .SingleOrDefaultAsync(x => x.UserName == username);
     }
 
     public async Task<IEnumerable<AppUser>> GetUsersAsync()

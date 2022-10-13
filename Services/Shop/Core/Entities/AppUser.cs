@@ -6,13 +6,13 @@ namespace Core.Entities
     public class AppUser : FullAuditableEntity
     {
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         public string FirstName { get; set; }
 
         [Required]
-        public string Surname { get; set; }
+        public string LastName { get; set; }
         public string LogoUrl { get; set; }
         public string PhoneNumber { get; set; }
 

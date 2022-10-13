@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Member } from 'src/app/_models/member';
-import { AccountService } from 'src/app/_services/account.service';
-import { MembersService } from 'src/app/_services/members.service';
+import { AccountService } from 'src/app/core/services/account.service';
+import { MembersService } from 'src/app/core/services/members.service';
 import { take } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -105,7 +105,7 @@ export class MembershipInfoComponent implements OnInit {
     this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
       this.toastr.success('Adınız ve soyadınız güncellendi.');
       this.memberClone.firstName = this.member.firstName;
-      this.memberClone.surname = this.member.surname;
+      this.memberClone.lastName = this.member.lastName;
       this.nameSurnameForm.reset(this.member);
 
       this.user.firstName = this.member.firstName;
@@ -116,7 +116,7 @@ export class MembershipInfoComponent implements OnInit {
   updateUsername() {
     this.memberService.updateUsername(this.member).subscribe(() => {
       this.toastr.success('Mail adresiniz güncellendi.');
-      this.memberClone.username = this.member.username;
+      this.memberClone.userName = this.member.userName;
       this.emailForm.reset(this.member);
     });
   }

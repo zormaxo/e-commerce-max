@@ -3,7 +3,7 @@
     <div class="card">
       <img
         src="{{ member.photoUrl || './assets/user.png' }}"
-        alt="{{ member.username }}"
+        alt="{{ member.userName }}"
         class="card-img-top img-thumbnail" />
       <div class="card-body">
         <div>
@@ -34,7 +34,7 @@
         <h4>Name</h4>
         <p>{{ member.firstName }}</p>
         <h4>Surname</h4>
-        <p>{{ member.surname }}</p>
+        <p>{{ member.lastName }}</p>
       </tab>
       <tab heading="Interests">
         <h4>Interests</h4>

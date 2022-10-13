@@ -1,6 +1,5 @@
 using Application.Interfaces;
 using Application.Services;
-using Application.Specifications;
 using AutoMapper;
 using Core.Dtos;
 using Core.Entities;
@@ -25,21 +24,17 @@ public class AccountAppService : BaseAppService
 
     public async Task<UserDto> Register(RegisterDto registerDto)
     {
-        if (await UserExists(registerDto.Username))
+        if (await UserExists(registerDto.UserName))
             throw new ApiException(HttpStatusCode.BadRequest, "Username is taken");
+
+        var user = _mapper.Map<AppUser>(registerDto);
 
         using var hmac = new HMACSHA512();
 
-        var user = new AppUser
-        {
-            FirstName = registerDto.FirstName,
-            Surname = registerDto.Surname,
-            Username = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key
-        };
+        user.UserName = registerDto.UserName.ToLower();
+        user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+        user.PasswordSalt = hmac.Key; await _appUsersRepo.AddAsync(user);
 
-        await _appUsersRepo.AddAsync(user);
         await _appUsersRepo.SaveChangesAsync();
 
         var userDto = new UserDto
@@ -56,10 +51,10 @@ public class AccountAppService : BaseAppService
     {
         var user = await _appUsersRepo.GetAll()
                 .Include(p => p.Photos)
-                .SingleOrDefaultAsync(x => x.Username == loginDto.Username);
+                .SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
 
         if (user == null)
-            throw new ApiException(HttpStatusCode.Unauthorized, "Invalid username");
+            throw new ApiException(HttpStatusCode.Unauthorized, "There is no such a username");
 
         using var hmac = new HMACSHA512(user.PasswordSalt);
 
@@ -81,8 +76,8 @@ public class AccountAppService : BaseAppService
         return userDto;
     }
 
-    private async Task<bool> UserExists(string username)
+    private async Task<bool> UserExists(string userName)
     {
-        return await _appUsersRepo.AnyAsync(x => x.Username == username.ToLower());
+        return await _appUsersRepo.AnyAsync(x => x.UserName == userName.ToLower());
     }
 }

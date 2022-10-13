@@ -6,13 +6,13 @@ namespace Core.Dtos
     {
         [EmailAddress]
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(8, MinimumLength = 4)]
         public string Password { get; set; }
 
         public string FirstName { get; set; }
-        public string Surname { get; set; }
+        public string LastName { get; set; }
     }
 }

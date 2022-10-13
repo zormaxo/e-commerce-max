@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
-import { ShopService } from 'src/app/_services/shop.service';
+import { ShopService } from 'src/app/core/services/shop.service';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +12,7 @@ export class ProductsComponent implements OnInit {
   products: IProduct[];
   shopParams = new ShopParams();
   totalCount: number;
-  
+
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {

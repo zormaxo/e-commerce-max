@@ -2,8 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
-import { ShopService } from 'src/app/_services/shop.service';
-import { AccountService } from 'src/app/_services/account.service';
+import { ShopService } from 'src/app/core/services/shop.service';
+import { AccountService } from 'src/app/core/services/account.service';
 
 @Component({
   selector: 'app-nav-bar',

@@ -24,11 +24,11 @@
                 <input
                   type="text"
                   class="form-control form-control-sm"
-                  name="surname"
-                  #surname="ngModel"
-                  [(ngModel)]="member.surname"
+                  name="lastName"
+                  #lastName="ngModel"
+                  [(ngModel)]="member.lastName"
                   required />
-                <span class="form-text" *ngIf="!surname.valid && surname.touched">Please enter a valid surname!</span>
+                <span class="form-text" *ngIf="!lastName.valid && lastName.touched">Please enter a valid surname!</span>
               </div>
             </div>
 
@@ -51,7 +51,7 @@
           <div class="card">
             <img
               src="{{ member.photoUrl || '../../../../../assets/user.png' }}"
-              alt="{{ member.username }}"
+              alt="{{ member.userName }}"
               class="card-img-top" />
             <div class="card-footer small">
               <button class="btn btn-sm btn-outline-primary" type="button" (click)="openModal(template)">
@@ -75,8 +75,8 @@
           <input
             type="email"
             class="form-control form-control-sm"
-            name="username"
-            [(ngModel)]="member.username"
+            name="userName"
+            [(ngModel)]="member.userName"
             #email="ngModel"
             required
             email />

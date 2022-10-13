@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Member } from '../_models/member';
+import { Member } from '../../_models/member';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 

@@ -1,10 +1,10 @@
-import { Photo } from "./photo";
+import { Photo } from './photo';
 
 export interface Member {
   id: number;
-  username: string;
+  userName: string;
   firstName: string;
-  surname: string;
+  lastName: string;
   photoUrl: string;
   logoUrl: string;
   phoneNumber: string;

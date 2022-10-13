@@ -14,10 +14,13 @@ import { LeftNavComponent } from './components/left-nav/left-nav.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { SortDirective } from '../_directives/sort.directive';
-import { OnlyNumberDirective } from '../_directives/only-number.directive';
+import { SortDirective } from '../core/directives/sort.directive';
+import { OnlyNumberDirective } from '../core/directives/only-number.directive';
 import { FilterComponent } from './components/filter/filter.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DateInputComponent } from './components/date-input/date-input.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +32,12 @@ import { FormsModule } from '@angular/forms';
     SortDirective,
     OnlyNumberDirective,
     FilterComponent,
+    DateInputComponent,
+    TextInputComponent,
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule,
     BsDropdownModule.forRoot(),
@@ -44,6 +50,7 @@ import { FormsModule } from '@angular/forms';
     NgxMaskModule.forRoot(),
     FileUploadModule,
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -60,7 +67,7 @@ import { FormsModule } from '@angular/forms';
     FileUploadModule,
     ModalModule,
     SortDirective,
-    FilterComponent
+    FilterComponent,
   ],
 })
 export class SharedModule {}

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ShopService } from 'src/app/_services/shop.service';
+import { ShopService } from 'src/app/core/services/shop.service';
 
 @Component({
   selector: 'app-breadcrumb',

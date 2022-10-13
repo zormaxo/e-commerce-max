@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { map } from 'rxjs';
-import { ShopService } from 'src/app/_services/shop.service';
+import { ShopService } from 'src/app/core/services/shop.service';
 import { IAddress } from '../../models/address';
 import { CurrencyType } from '../../models/currency';
 import { ShopParams } from '../../models/shopParams';

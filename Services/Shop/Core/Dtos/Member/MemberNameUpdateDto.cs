@@ -8,5 +8,5 @@ public class MemberNameUpdateDto
     public string FirstName { get; set; }
 
     [Required]
-    public string Surname { get; set; }
+    public string LastName { get; set; }
 }

@@ -5,7 +5,7 @@ import { ICategory } from './shared/models/category';
 import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
-import { ShopService } from './_services/shop.service';
+import { ShopService } from './core/services/shop.service';
 
 import { Inject } from '@angular/core';
 
