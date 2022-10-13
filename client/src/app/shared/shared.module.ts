@@ -68,6 +68,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
     ModalModule,
     SortDirective,
     FilterComponent,
+    DateInputComponent,
+    TextInputComponent,
   ],
 })
 export class SharedModule {}

@@ -1,15 +1,26 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
-  <div class="form-floating my-3">
-    <input type="text" class="form-control" name="username" [(ngModel)]="model.userName" placeholder="Username" />
-    <label>E-Posta</label>
+<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+  <app-text-input [formControl]="registerForm.controls['userName']" [label]="'E-mail'"></app-text-input>
+  <app-text-input [formControl]="registerForm.controls['firstName']" label="First Name"></app-text-input>
+  <app-text-input [formControl]="registerForm.controls['lastName']" label="Last Name"></app-text-input>
+  <app-text-input [formControl]="registerForm.controls['password']" [label]="'Password'" [type]="'password'">
+  </app-text-input>
+  <app-text-input
+    [formControl]="registerForm.controls['confirmPassword']"
+    [label]="'Confirm Password'"
+    [type]="'password'"></app-text-input>
+
+  <div class="row" *ngIf="validationErrors.length > 0">
+    <div class="col">
+      <ul class="text-danger">
+        <li *ngFor="let error of validationErrors">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="form-floating mb-3">
-    <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password" />
-    <label>Şifre</label>
-  </div>
   <div class="form-group text-center">
-    <button class="btn btn-success me-2" type="submit">Üye Ol</button>
+    <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Üye Ol</button>
     <button class="btn btn-light" routerLink="" type="button">İptal</button>
   </div>
 </form>

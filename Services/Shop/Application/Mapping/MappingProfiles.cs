@@ -70,5 +70,7 @@ public class MappingProfiles : Profile
         CreateMap<Category, CategoryDto>();
         CreateMap<County, CountyDto>();
         CreateMap<City, CityDto>();
+
+        CreateMap<RegisterDto, AppUser>();
     }
 }
