@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Repositories;
 
+
 public class UserRepository : GenericRepository<AppUser>, IUserRepository
 {
     private readonly IMapper _mapper;

@@ -1,4 +1,5 @@
 using Infrastructure;
+using Shop.Application;
 
 namespace Application.Extensions;
 
@@ -13,7 +14,7 @@ public static class ControllerServiceExtensions
         services.AddScoped<ProductMachineAppService>();
         services.AddScoped<ProductMaterialAppService>();
         services.AddScoped<CategoriesAppService>();
-
+        services.AddScoped<BasketAppService>();
 
         return services;
     }

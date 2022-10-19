@@ -20,9 +20,7 @@ namespace Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-
-            services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
-                .ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             services.AddApplicationServices(_env, _config);
             services.AddControllerServices();
             services.AddSwaggerDocumentation();

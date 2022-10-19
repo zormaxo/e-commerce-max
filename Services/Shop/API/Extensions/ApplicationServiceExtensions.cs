@@ -7,6 +7,7 @@ using Core.Errors;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace Application.Extensions;
 
@@ -47,6 +48,11 @@ public static class ApplicationServiceExtensions
             }
         }
         services.AddDbContext<StoreContext>(optionsAction);
+        services.AddSingleton<IConnectionMultiplexer>(_ =>
+        {
+            var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);
+            return ConnectionMultiplexer.Connect(configuration);
+        });
 
         return services;
     }
