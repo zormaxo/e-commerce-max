@@ -1,13 +1,10 @@
-import { Component, Directive, Injector, OnInit } from '@angular/core';
+import { Directive, Injector, OnInit } from '@angular/core';
 import { Navigation, ActivatedRoute, Router } from '@angular/router';
-import { IAddress } from './shared/models/address';
 import { ICategory } from './shared/models/category';
-import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
 import { ShopService } from './core/services/shop.service';
 
-import { Inject } from '@angular/core';
 
 @Directive()
 export abstract class AppProductBaseComponent implements OnInit {

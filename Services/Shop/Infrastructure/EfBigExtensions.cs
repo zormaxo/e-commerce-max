@@ -14,34 +14,42 @@ public static class EFBigExtensions
         bool condition,
         Expression<Func<TSource, bool>> predicate)
     {
-        if (condition)
+        if(condition)
             return source.Where(predicate);
         else
             return source;
     }
 
-    public static IQueryable<TSource> EFBigPageBy<TSource>(
-        this IQueryable<TSource> source, IPagedResultRequest request)
-    {
-        return source.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize);
-    }
+    public static IQueryable<TSource> EFBigPageBy<TSource>(this IQueryable<TSource> source, IPagedResultRequest request)
+    { return source.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize); }
 
     public static IQueryable<TSource> EFBigOrderBy<TSource>(
-    this IQueryable<TSource> source, string sort, CachedItems _cachedItems) where TSource : IPrice
+        this IQueryable<TSource> source,
+        string sort,
+        CachedItems _cachedItems)
+        where TSource : IPrice
     {
-        if (sort == "price asc")
+        if(sort == "price asc")
         {
-            return source.OrderBy(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try
-                : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try
-                : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try : x.Price);
-        }
-        else if (sort == "price desc")
+            return source.OrderBy(
+                x => x.Currency == CurrencyCode.USD
+                    ? x.Price * _cachedItems.Currency.Try
+                    : x.Currency == CurrencyCode.EUR
+                        ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try
+                        : x.Currency == CurrencyCode.GBP
+                            ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try
+                            : x.Price);
+        } else if(sort == "price desc")
         {
-            return source.OrderByDescending(x => x.Currency == CurrencyCode.USD ? x.Price * _cachedItems.Currency.Try
-                : x.Currency == CurrencyCode.EUR ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try
-                : x.Currency == CurrencyCode.GBP ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try : x.Price);
-        }
-        else
+            return source.OrderByDescending(
+                x => x.Currency == CurrencyCode.USD
+                    ? x.Price * _cachedItems.Currency.Try
+                    : x.Currency == CurrencyCode.EUR
+                        ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try
+                        : x.Currency == CurrencyCode.GBP
+                            ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try
+                            : x.Price);
+        } else
         {
             return source.OrderBy(sort ?? "name asc");
         }

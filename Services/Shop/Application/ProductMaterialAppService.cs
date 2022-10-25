@@ -28,7 +28,7 @@ public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
 
     protected async override Task<List<ProductMaterialDto>> QueryDatabase()
     {
-        return await PagedAndfilteredProducts.ProjectTo<ProductMaterialDto>(_mapper.ConfigurationProvider)
+        return await PagedAndFilteredProducts.ProjectTo<ProductMaterialDto>(_mapper.ConfigurationProvider)
              .AsNoTracking()
              .ToListAsync();
     }

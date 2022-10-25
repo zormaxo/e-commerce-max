@@ -22,7 +22,7 @@ public class ProductAppService : ProductBaseService<ShowcaseDto>
 
     protected override async Task<List<ShowcaseDto>> QueryDatabase()
     {
-        return await PagedAndfilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider)
+        return await PagedAndFilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider)
             .AsNoTracking()
             .ToListAsync();
     }

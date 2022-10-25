@@ -26,7 +26,7 @@ public class ProductSemiFinishedAppServic : ProductBaseService<ProductDto>
 
     protected override async Task<List<ProductDto>> QueryDatabase()
     {
-        return await PagedAndfilteredProducts.ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+        return await PagedAndFilteredProducts.ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
              .AsNoTracking()
              .ToListAsync();
     }
