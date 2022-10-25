@@ -4,6 +4,8 @@ using Core.Dtos;
 using Core.Dtos.Member;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shop.API.Extensions;
+using Shop.Core.HelperTypes;
 
 namespace Application.Controllers
 {
@@ -20,9 +22,11 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            return Ok(await _userSrv.GetUsers());
+            var users = await _userSrv.GetUsers(userParams);
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+            return users;
         }
 
         [HttpGet("{userId}", Name = "GetUser")]
@@ -34,10 +38,7 @@ namespace Application.Controllers
         }
 
         [HttpPut("update-member")]
-        public async Task UpdateMember(MemberUpdateDto memberUpdateDto)
-        {
-            await UpdateUser(memberUpdateDto);
-        }
+        public async Task UpdateMember(MemberUpdateDto memberUpdateDto) { await UpdateUser(memberUpdateDto); }
 
         [HttpPut("update-user-first-last-name")]
         public async Task UpdateUserFirstLastName(MemberNameUpdateDto memberNameUpdateDto)
@@ -67,9 +68,7 @@ namespace Application.Controllers
         }
 
         private async Task UpdateUser(MemberUpdateDto memberUpdateDto)
-        {
-            await _userSrv.UpdateUser(memberUpdateDto, User.GetUserName());
-        }
+        { await _userSrv.UpdateUser(memberUpdateDto, User.GetUserName()); }
 
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)

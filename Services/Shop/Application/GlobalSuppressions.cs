@@ -5,6 +5,27 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Major Code Smell", "S3358:Ternary operators should not be nested", Justification = "<Pending>", Scope = "member", Target = "~M:Application.ProductAppService.GetProducts(Application.Specifications.ProductSpecParams)~System.Threading.Tasks.Task{Service.Helpers.Pagination{Core.Dtos.ProductToReturnDto}}")]
-[assembly: SuppressMessage("Major Code Smell", "S3358:Ternary operators should not be nested", Justification = "<Pending>", Scope = "member", Target = "~M:Application.ProductBaseService.GetProducts(Application.Specifications.ProductSpecParams)~System.Threading.Tasks.Task{Service.Helpers.Pagination{Core.Dtos.ProductToReturnDto}}")]
-[assembly: SuppressMessage("Major Code Smell", "S3358:Ternary operators should not be nested", Justification = "<Pending>", Scope = "member", Target = "~M:Application.ProductBaseService`1.GetProducts(Application.Specifications.ProductSpecParams)~System.Threading.Tasks.Task{Service.Helpers.Pagination{`0}}")]
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S3358:Ternary operators should not be nested",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Application.ProductAppService.GetProducts(Application.Specifications.ProductSpecParams)~System.Threading.Tasks.Task{Service.Helpers.Pagination{Core.Dtos.ProductToReturnDto}}")]
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S3358:Ternary operators should not be nested",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Application.ProductBaseService.GetProducts(Application.Specifications.ProductSpecParams)~System.Threading.Tasks.Task{Service.Helpers.Pagination{Core.Dtos.ProductToReturnDto}}")]
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S3358:Ternary operators should not be nested",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Application.ProductBaseService`1.GetProducts(Application.Specifications.ProductSpecParams)~System.Threading.Tasks.Task{Service.Helpers.Pagination{`0}}")]
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S3358:Ternary operators should not be nested",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Application.ProductBaseService`1.GetProducts(Shop.Core.HelperTypes.ProductParams)~System.Threading.Tasks.Task{Shop.Application.Helpers.Pagination{`0}}")]

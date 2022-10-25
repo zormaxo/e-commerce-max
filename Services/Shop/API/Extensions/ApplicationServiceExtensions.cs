@@ -7,6 +7,8 @@ using Core.Errors;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shop.Core.Interfaces;
+using Shop.Infrastructure.Repositories;
 using StackExchange.Redis;
 
 namespace Application.Extensions;

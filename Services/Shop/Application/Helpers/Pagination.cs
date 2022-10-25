@@ -1,6 +1,4 @@
-using Application.Helpers;
-
-namespace Service.Helpers
+namespace Shop.Application.Helpers
 {
     public class Pagination<T> where T : class
     {

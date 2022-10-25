@@ -1,8 +1,6 @@
 using Application.Entities;
-using Application.Helpers;
 using Application.Interfaces;
 using Application.Services;
-using Application.Specifications;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Core.Dtos;
@@ -12,8 +10,9 @@ using Core.HelperTypes;
 using Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Service.Helpers;
+using Shop.Application.Helpers;
 using Shop.Core.Dtos.Product;
+using Shop.Core.HelperTypes;
 using System.Net;
 
 namespace Application;
@@ -49,9 +48,9 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     protected IQueryable<Product> PagedAndFilteredProducts { get; set; }
 
-    protected ProductSpecParams ProductParams { get; set; }
+    protected ProductParams ProductParams { get; set; }
 
-    public async Task<Pagination<T>> GetProducts(ProductSpecParams productParams)
+    public async Task<Pagination<T>> GetProducts(ProductParams productParams)
     {
         ProductParams = productParams;
         CalculateMaxMinVal(productParams);
@@ -91,22 +90,28 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
                 FilteredProducts = FilteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
         }
 
-        PagedAndFilteredProducts = FilteredProducts
-            .EFBigOrderBy(productParams.Sort, _cachedItems)
-            .EFBigPageBy(productParams);
-
         var catGrpCountList = FilteredProducts.GroupBy(x => x.CategoryId)
             .Select(n => new CategoryGroupCount { CategoryId = n.Key, Count = n.Count() })
             .ToList();
 
         var totalItems = catGrpCountList.Count == 0 ? 0 : catGrpCountList.Select(x => x.Count).Aggregate((a, b) => a + b);
 
-        List<T> data = await QueryDatabase();
+        PagedAndFilteredProducts = FilteredProducts
+            .EFBigOrderBy(productParams.Sort, _cachedItems)
+            .EFBigPageBy(productParams);
+
+
+        List<T> data = await PagedAndFilteredProducts
+            .ProjectTo<T>(_mapper.ConfigurationProvider)
+            .AsNoTracking()
+            .ToListAsync();
+
+        //List<T> data = await QueryDatabase();
 
         return new Pagination<T>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
     }
 
-    public async Task<object> GetActiveInactiveProducts(ProductSpecParams productParams)
+    public async Task<object> GetActiveInactiveProducts(ProductParams productParams)
     {
         var activeProducts = await _productsRepo.GetAll()
             .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
@@ -177,7 +182,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     protected abstract Task<List<T>> QueryDatabase();
 
-    private void CalculateMaxMinVal(ProductSpecParams productParams)
+    private void CalculateMaxMinVal(ProductParams productParams)
     {
         if(productParams.MinValue.HasValue)
         {
