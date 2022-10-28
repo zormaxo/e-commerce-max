@@ -9,13 +9,14 @@ import { IProduct } from '../../shared/models/product';
 import { IAddress } from '../../shared/models/address';
 import { ApiResponse } from '../../_models/api-response/api-response';
 import { CategoryGroupCount } from '../../shared/models/categoryGroupCount';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/';
-
+  baseUrl = environment.apiUrl;
+  ocelotUrl = environment.ocelotUrl;
   categories: ICategory[];
   cities: IAddress[];
 
@@ -29,7 +30,7 @@ export class ShopService {
   getProducts(shopParams: ShopParams) {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
+    return this.http.get(this.ocelotUrl + 'products', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })
@@ -98,14 +99,6 @@ export class ShopService {
       return of(structuredClone(this.categories));
     }
   }
-
-  // //Adds product counts to parent categories cumulatively
-  // addCountToParents(selectedCategory: ICategory, count: number) {
-  //   if (selectedCategory.parent) {
-  //     selectedCategory.parent.count += count;
-  //     this.addCountToParents(selectedCategory.parent, count);
-  //   }
-  // }
 
   //Adds product counts to parent categories cumulatively
   addCountToParents(allCategories: ICategory[], categoryGroupCount: CategoryGroupCount[]) {

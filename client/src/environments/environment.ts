@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://localhost:5001/api/',
+  ocelotUrl: 'https://localhost:5010/',
 };
 
 /*
