@@ -1,10 +1,10 @@
 import { CategoryGroupCount } from './categoryGroupCount';
-import { IProduct } from './product';
 
-export interface IPagination {
+export interface IPagination<T> {
   pageIndex: number;
   pageSize: number;
   totalCount: number;
+  totalPages: number;
   categoryGroupCount: CategoryGroupCount[];
-  data: IProduct[];
+  data: T;
 }

@@ -22,8 +22,13 @@ public class UserAppService : BaseAppService
         _photoService = photoService;
     }
 
-    public async Task<PagedList<MemberDto>> GetUsers(UserParams userParams)
-    { return await _userRepository.GetMembersAsync(userParams); }
+    public async Task<PagedList<MemberDto>> GetUsers(UserParams userParams, string username)
+    {
+        var user = await _userRepository.GetUserByUsernameAsync(username);
+        userParams.CurrentUsername = user.UserName;
+
+        return await _userRepository.GetMembersAsync(userParams);
+    }
 
     public async Task<MemberDto> GetUser(int id) { return await _userRepository.GetMemberAsync(id); }
 

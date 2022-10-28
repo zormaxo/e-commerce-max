@@ -7,9 +7,9 @@ namespace Application.Interfaces
     {
         IQueryable<T> GetAll();
 
-        Task<T> GetByIdAsync(int id);
+        ValueTask<T> GetByIdAsync(int id);
 
-        Task<IReadOnlyList<T>> ListAllAsync();
+        Task<List<T>> ListAllAsync();
 
         Task AddAsync(T entity);
 

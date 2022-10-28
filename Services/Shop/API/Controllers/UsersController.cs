@@ -1,10 +1,10 @@
-using Application.Extensions;
 using AutoMapper;
 using Core.Dtos;
 using Core.Dtos.Member;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Extensions;
+using Shop.Application.Extensions;
 using Shop.Core.HelperTypes;
 
 namespace Application.Controllers
@@ -24,8 +24,8 @@ namespace Application.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await _userSrv.GetUsers(userParams);
-            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+            var users = await _userSrv.GetUsers(userParams, User.GetUserName());
+            Response.AddPaginationHeader(users.PageIndex, users.PageSize, users.TotalCount, users.TotalPages);
             return users;
         }
 

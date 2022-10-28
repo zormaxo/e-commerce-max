@@ -16,21 +16,19 @@
       <div class="card-body">
         <div>
           <strong>Phone Number:</strong>
-          <p>{{ member.phoneNumber | mask: "(000) 000 00 00"}}</p>
+          <p>{{ member.phoneNumber | mask: "(000) 000 00 00" }}</p>
         </div>
         <div>
           <strong>Last Active:</strong>
-          <p>{{ member.lastActive }}</p>
+          <p>{{ member.lastActive | date: "dd MMM yyy" }}</p> 
         </div>
         <div>
           <strong>Member since:</strong>
-          <p>{{ member.created }}</p>
+          <p>{{ member.created | date: "dd MMM yyy" }}</p>
         </div>
       </div>
       <div class="card-footer d-grid">
-        <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success ">
-          Save Changes
-        </button>
+        <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success">Save Changes</button>
       </div>
     </div>
   </div>

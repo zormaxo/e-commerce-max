@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DateInputComponent } from './components/date-input/date-input.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
     FileUploadModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -70,6 +72,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
     FilterComponent,
     DateInputComponent,
     TextInputComponent,
+    ButtonsModule,
   ],
 })
 export class SharedModule {}

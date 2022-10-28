@@ -30,7 +30,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
-      map((response: HttpResponse<ApiResponse<IPagination>>) => {
+      map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })
     );
@@ -206,7 +206,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
+      .get<ApiResponse<IPagination<IProduct[]>>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -218,7 +218,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
+      .get<ApiResponse<IPagination<IProduct[]>>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -230,7 +230,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
+      .get<ApiResponse<IPagination<IProduct[]>>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;

@@ -27,9 +27,16 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
     public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
     {
-        var query = _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking();
+        var query = _context.Users.Where(u => u.UserName != userParams.CurrentUsername);
+        query = userParams.OrderBy switch
+        {
+            "created" => query.OrderByDescending(u => u.CreatedDate),
+            _ => query.OrderByDescending(u => u.LastActive)
+        };
 
-        return await PagedList<MemberDto>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
+        var members = query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking();
+
+        return await PagedList<MemberDto>.CreateAsync(members, userParams.PageIndex, userParams.PageSize);
     }
 
     public async Task<AppUser> GetUserByIdAsync(int id) { return await _context.Users.FindAsync(id); }

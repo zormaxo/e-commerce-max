@@ -1,6 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { IPagination } from '../../../shared/models/pagination';
 import { AppProductBaseComponent } from 'src/app/app-product-base.component';
+import { IProduct } from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-machine',
@@ -13,7 +14,7 @@ export class MachineComponent extends AppProductBaseComponent {
   }
 
   override getProducts() {
-    this.shopService.getMachineProducts(this.shopParams).subscribe((productResponse: IPagination) => {
+    this.shopService.getMachineProducts(this.shopParams).subscribe((productResponse: IPagination<IProduct[]>) => {
       this.products = productResponse.data;
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;
