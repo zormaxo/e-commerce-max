@@ -2,7 +2,9 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
 #region Ocelot Configuration
+
 builder.Host
     .ConfigureAppConfiguration(
         (hostingContext, config) => config.AddJsonFile(
@@ -11,6 +13,7 @@ builder.Host
             true));
 
 builder.Services.AddOcelot();
+
 #endregion
 
 // Add services to the container.
@@ -23,7 +26,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
