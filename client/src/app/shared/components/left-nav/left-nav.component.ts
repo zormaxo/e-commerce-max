@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ShopService } from 'src/app/core/services/shop.service';
+import { ShopService } from 'src/app/shop/shop.service';
 import { ICategory } from '../../models/category';
 
 @Component({

@@ -3,8 +3,7 @@ import { Navigation, ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from './shared/models/category';
 import { IProduct } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
-import { ShopService } from './core/services/shop.service';
-
+import { ShopService } from './shop/shop.service';
 
 @Directive()
 export abstract class AppProductBaseComponent implements OnInit {

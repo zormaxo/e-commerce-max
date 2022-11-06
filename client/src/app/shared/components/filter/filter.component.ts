@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FilterAreas } from 'src/app/shared/components/filter/filter-areas';
-import { ShopService } from 'src/app/core/services/shop.service';
+import { ShopService } from 'src/app/shop/shop.service';
 import { IAddress } from '../../models/address';
 import { CurrencyType } from '../../models/currency';
 import { ShopParams } from '../../models/shopParams';

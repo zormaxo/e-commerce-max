@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { ICategory } from '../shared/models/category';
 import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
 import { ShopParams } from '../shared/models/shopParams';
-import { ShopService } from '../core/services/shop.service';
+import { ShopService } from '../shop/shop.service';
 
 @Component({
   selector: 'app-search-result',

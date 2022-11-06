@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPagination } from '../../shared/models/pagination';
-import { ICategory } from '../../shared/models/category';
+import { IPagination } from '../shared/models/pagination';
+import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
-import { ShopParams } from '../../shared/models/shopParams';
+import { ShopParams } from '../shared/models/shopParams';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { IProduct } from '../../shared/models/product';
-import { IAddress } from '../../shared/models/address';
-import { ApiResponse } from '../../shared/models/api-response/api-response';
-import { CategoryGroupCount } from '../../shared/models/categoryGroupCount';
+import { IProduct } from '../shared/models/product';
+import { IAddress } from '../shared/models/address';
+import { ApiResponse } from '../shared/models/api-response/api-response';
+import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
