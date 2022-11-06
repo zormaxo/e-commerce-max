@@ -1,14 +1,14 @@
 import { Component, HostListener, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { Member } from 'src/app/_models/member';
 import { AccountService } from 'src/app/core/services/account.service';
 import { MembersService } from 'src/app/core/services/members.service';
 import { take } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/_models/user';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Member } from 'src/app/shared/models/member';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-membership-info',

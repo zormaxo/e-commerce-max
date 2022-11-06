@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
-import { Member } from '../../_models/member';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { IPagination } from 'src/app/shared/models/pagination';
+import { of } from 'rxjs';
 import { PaginatedResult } from 'src/app/shared/models/pagination2';
-import { ApiResponse } from 'src/app/_models/api-response/api-response';
-import { UserParams } from 'src/app/_models/userParams';
-import { User } from 'src/app/_models/user';
 import { AccountService } from './account.service';
+import { Member } from 'src/app/shared/models/member';
+import { User } from 'src/app/shared/models/user';
+import { UserParams } from 'src/app/shared/models/userParams';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from 'src/app/_models/member';
+
 import { MembersService } from 'src/app/core/services/members.service';
+import { Member } from 'src/app/shared/models/member';
 import { Pagination2 } from 'src/app/shared/models/pagination2';
-import { UserParams } from 'src/app/_models/userParams';
-import { User } from 'src/app/_models/user';
+import { User } from 'src/app/shared/models/user';
+import { UserParams } from 'src/app/shared/models/userParams';
 
 @Component({
   selector: 'app-member-list',
@@ -11,7 +12,7 @@ import { User } from 'src/app/_models/user';
   styleUrls: ['./member-list.component.scss'],
 })
 export class MemberListComponent implements OnInit {
-   members: Member[];
+  members: Member[];
   pagination: Pagination2;
   userParams: UserParams;
   user: User;
@@ -26,10 +27,10 @@ export class MemberListComponent implements OnInit {
 
   loadMembers() {
     this.memberService.setUserParams(this.userParams);
-    this.memberService.getMembers(this.userParams).subscribe(response => {
+    this.memberService.getMembers(this.userParams).subscribe((response) => {
       this.members = response.result.result;
       this.pagination = response.pagination;
-    })
+    });
   }
 
   resetFilters() {

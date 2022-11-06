@@ -7,7 +7,7 @@ import { ShopParams } from '../../shared/models/shopParams';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { IProduct } from '../../shared/models/product';
 import { IAddress } from '../../shared/models/address';
-import { ApiResponse } from '../../_models/api-response/api-response';
+import { ApiResponse } from '../../shared/models/api-response/api-response';
 import { CategoryGroupCount } from '../../shared/models/categoryGroupCount';
 import { environment } from 'src/environments/environment';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
-import { MembershipInfoComponent } from '../member-profile/membership-info/membership-info.component';
+import { MembershipInfoComponent } from '../../member-profile/membership-info/membership-info.component';
 
 @Injectable({
   providedIn: 'root',
