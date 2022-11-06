@@ -44,7 +44,7 @@ const routes: Routes = [
       {
         path: 'market',
         canActivate: [AuthGuard],
-        loadChildren: () => import('./market/market.module').then((mod) => mod.MarketModule),
+        loadChildren: () => import('./s-project/shop/shop.module').then((mod) => mod.ShopModule),
       },
       {
         path: 'error',

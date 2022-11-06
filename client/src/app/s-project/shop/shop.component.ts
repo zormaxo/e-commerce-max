@@ -5,10 +5,10 @@ import { ShopService } from 'src/app/core/services/shop.service';
 
 @Component({
   selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss'],
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ShopComponent implements OnInit {
   products: IProduct[];
   shopParams = new ShopParams();
   totalCount: number;

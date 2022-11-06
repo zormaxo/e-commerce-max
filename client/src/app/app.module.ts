@@ -19,16 +19,11 @@ import { ManagementModule } from './management/management.module';
 import { MemberProfileModule } from './member-profile/member-profile.module';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MarketModule } from './market/market.module';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ShopModule } from './s-project/shop/shop.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ListsComponent,
-    MessagesComponent,
-    ProductDetailsComponent,
-  ],
+  declarations: [AppComponent, ListsComponent, MessagesComponent, ProductDetailsComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -43,7 +38,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     HomeModule,
     ManagementModule,
     NgxSpinnerModule,
-    MarketModule,
+    ShopModule,
     FileUploadModule,
   ],
   providers: [
