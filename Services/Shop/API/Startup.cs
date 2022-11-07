@@ -1,5 +1,6 @@
 using Application.Extensions;
 using Application.Middleware;
+using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using System.Text.Json.Serialization;
 
@@ -31,20 +32,30 @@ namespace Application
                     policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")));
             services.AddIdentityServices(_config);
             services.AddHttpContextAccessor();
+
+            services.AddHttpLogging(
+                logging =>
+                {
+                    logging.LoggingFields = HttpLoggingFields.All;
+                    logging.RequestBodyLogLimit = 4096;
+                    logging.ResponseBodyLogLimit = 4096;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             app.UseSwaggerDocumentation();
+            app.UseSerilogRequestLogging();
 
             app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
+            //app.UseMiddleware<RequestResponseMiddleware>();     //Manuel request response logging
 
-            app.UseStatusCodePagesWithReExecute("/errors/{0}");  //for non-exist endpoints
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");   //for non-exist endpoints
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSerilogRequestLogging();
+            app.UseHttpLogging();                                 //.Net core request response logging
             app.UseRouting();
             app.UseCors("CorsPolicy");
             app.UseAuthentication();

@@ -14,19 +14,26 @@ public class StoreContext : DbContext
     private readonly int _userId;
 
     public StoreContext(DbContextOptions<StoreContext> options, UserResolverService userService) : base(options)
-    {
-        _userId = userService.GetUserId();
-    }
+    { _userId = userService.GetUserId(); }
 
     public DbSet<Audit> Audits { get; set; }
+
     public DbSet<AppUser> Users { get; set; }
+
     public DbSet<Product> Products { get; set; }
+
     public DbSet<ProductMachine> ProductMachines { get; set; }
+
     public DbSet<ProductMaterial> ProductMaterials { get; set; }
+
     public DbSet<ProductBrand> ProductBrands { get; set; }
+
     public DbSet<Category> Categories { get; set; }
+
     public DbSet<City> Cities { get; set; }
+
     public DbSet<County> Counties { get; set; }
+
     public DbSet<Currency> Currency { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,9 +43,11 @@ public class StoreContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         Expression<Func<BaseAuditableEntity, bool>> filterExpr = bm => !bm.IsDeleted;
-        foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes().Where(
-        // check if current entity type is child of BaseModel
-        mutableEntityType => mutableEntityType.ClrType.IsAssignableTo(typeof(BaseAuditableEntity))))
+        foreach (var mutableEntityType in modelBuilder.Model
+            .GetEntityTypes()
+            .Where(
+                // check if current entity type is child of BaseModel
+                mutableEntityType => mutableEntityType.ClrType.IsAssignableTo(typeof(BaseAuditableEntity))))
         {
             // modify expression to handle correct child type
             var parameter = Expression.Parameter(mutableEntityType.ClrType);
@@ -69,11 +78,12 @@ public class StoreContext : DbContext
         }
         else
         {
-            var auditEntries = OnBeforeSaveChanges();
+            //// Open this to save audits
+            ////var auditEntries = OnBeforeSaveChanges();
             var saveResult = await base.SaveChangesAsync(cancellationToken);
 
-            if (auditEntries.Count > 0)
-                await OnAfterSaveChanges(auditEntries);
+            ////if (auditEntries.Count > 0)
+            ////    await OnAfterSaveChanges(auditEntries);
 
             return saveResult;
         }
@@ -83,7 +93,7 @@ public class StoreContext : DbContext
     {
         var entries = ChangeTracker
           .Entries()
-          .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
+            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
 
         var auditEntries = new List<AuditEntry>();
 
@@ -91,8 +101,6 @@ public class StoreContext : DbContext
         {
             if (entityEntry.Entity is FullAuditableEntity fullAuditableEntity)
             {
-                //var fullAuditableEntity =  (FullAuditableEntity)entityEntry.Entity;
-
                 fullAuditableEntity.ModifiedDate = DateTime.Now;
                 fullAuditableEntity.ModifiedBy = _userId;
 
