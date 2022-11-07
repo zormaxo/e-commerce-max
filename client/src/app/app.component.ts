@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BasketService } from './basket/basket.service';
 import { AccountService } from './core/services/account.service';
 import { User } from './shared/models/user';
 
@@ -10,10 +11,22 @@ import { User } from './shared/models/user';
 export class AppComponent implements OnInit {
   users: unknown;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private basketService: BasketService) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
+
+    const basketId = localStorage.getItem('basket_id');
+    if (basketId) {
+      this.basketService.getBasket(basketId).subscribe(
+        () => {
+          console.log('initialised basket');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   setCurrentUser() {

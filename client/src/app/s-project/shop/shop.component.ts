@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BasketService } from 'src/app/basket/basket.service';
+import { IBasket } from 'src/app/shared/models/basket';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
@@ -9,14 +12,16 @@ import { ShopService } from 'src/app/shop/shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  basket$: Observable<IBasket>;
   products: IProduct[];
   shopParams = new ShopParams();
   totalCount: number;
 
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService, private basketService: BasketService) {}
 
   ngOnInit(): void {
     this.getProductsThenCategories();
+    this.basket$ = this.basketService.basket$;
   }
 
   getProductsThenCategories() {

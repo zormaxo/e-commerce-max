@@ -22,6 +22,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DateInputComponent } from './components/date-input/date-input.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     FilterComponent,
     DateInputComponent,
     TextInputComponent,
+    OrderTotalsComponent,
   ],
   imports: [
     FormsModule,
@@ -73,6 +75,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     DateInputComponent,
     TextInputComponent,
     ButtonsModule,
+    OrderTotalsComponent,
   ],
 })
 export class SharedModule {}

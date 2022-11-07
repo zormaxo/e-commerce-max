@@ -10,9 +10,10 @@ namespace Application;
 
 public class ProductAppService : ProductBaseService<ShowcaseDto>
 {
-    public ProductAppService(IGenericRepository<Product> productsRepo,
-       CachedItems cachedItems,
-       IMapper mapper) : base(productsRepo, cachedItems, mapper)
+    public ProductAppService(IGenericRepository<Product> productsRepo, CachedItems cachedItems, IMapper mapper) : base(
+        productsRepo,
+        cachedItems,
+        mapper)
     {
     }
 
@@ -21,9 +22,5 @@ public class ProductAppService : ProductBaseService<ShowcaseDto>
     }
 
     protected override async Task<List<ShowcaseDto>> QueryDatabase()
-    {
-        return await PagedAndFilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider)
-            .AsNoTracking()
-            .ToListAsync();
-    }
+    { return await PagedAndFilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync(); }
 }

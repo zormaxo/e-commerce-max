@@ -83,10 +83,10 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         AddCategoryFiltering();
 
-        if(!string.IsNullOrEmpty(productParams.CategoryName))
+        if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
             List<int> categoryIds = await GetCategoryIds(productParams.CategoryName);
-            if(categoryIds.Count > 0)
+            if (categoryIds.Count > 0)
                 FilteredProducts = FilteredProducts.Where(x => categoryIds.Contains(x.CategoryId));
         }
 
@@ -132,8 +132,10 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(x => x.Id == id);
 
-        if(product == null)
+        if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
+
+        product.PictureUrl = product.Photos.FirstOrDefault(x => x.IsMain).Url;
 
         return product;
     }
@@ -158,19 +160,19 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         var result = await _photoService.AddPhotoAsync(file);
 
-        if(result.Error != null)
+        if (result.Error != null)
             throw new ApiException(result.Error.Message);
 
         var photo = new ProductPhoto { Url = result.SecureUrl.AbsoluteUri, PublicId = result.PublicId };
 
-        if(product.Photos.Count == 0)
+        if (product.Photos.Count == 0)
         {
             photo.IsMain = true;
         }
 
         product.Photos.Add(photo);
 
-        if(await _productsRepo.SaveChangesAsync())
+        if (await _productsRepo.SaveChangesAsync())
         {
             return _mapper.Map<PhotoDto>(photo);
         }
@@ -184,7 +186,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     private void CalculateMaxMinVal(ProductParams productParams)
     {
-        if(productParams.MinValue.HasValue)
+        if (productParams.MinValue.HasValue)
         {
             productParams.MinValue = productParams.Currency switch
             {
@@ -200,7 +202,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             };
         }
 
-        if(productParams.MaxValue.HasValue)
+        if (productParams.MaxValue.HasValue)
         {
             productParams.MaxValue = productParams.Currency switch
             {
@@ -215,7 +217,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     private async Task<List<int>> GetCategoryIds(string categoryName)
     {
-        if(_cachedItems.Categories.Count == 0)
+        if (_cachedItems.Categories.Count == 0)
             _cachedItems.Categories = await _categoryRepo.ListAllAsync();
 
         var selectedCategory = _cachedItems.Categories.First(x => x.Url == categoryName);
@@ -224,13 +226,14 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         void FindChildCategories(Category category)
         {
-            if(category.ChildCategories?.Count > 0)
+            if (category.ChildCategories?.Count > 0)
             {
-                foreach(var item in category.ChildCategories)
+                foreach (var item in category.ChildCategories)
                 {
                     FindChildCategories(item);
                 }
-            } else
+            }
+            else
             {
                 categoryIds.Add(category.Id);
             }

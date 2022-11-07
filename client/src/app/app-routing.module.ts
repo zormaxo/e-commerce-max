@@ -42,9 +42,19 @@ const routes: Routes = [
         loadChildren: () => import('./management/management.module').then((mod) => mod.ManagementModule),
       },
       {
-        path: 'market',
+        path: 'shop',
         canActivate: [AuthGuard],
         loadChildren: () => import('./s-project/shop/shop.module').then((mod) => mod.ShopModule),
+      },
+      {
+        path: 'basket',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./basket/basket.module').then((mod) => mod.BasketModule),
+      },
+      {
+        path: 'checkout',
+        loadChildren: () => import('./checkout/checkout.module').then((mod) => mod.CheckoutModule),
+        data: { breadcrumb: 'Checkout' },
       },
       {
         path: 'error',
