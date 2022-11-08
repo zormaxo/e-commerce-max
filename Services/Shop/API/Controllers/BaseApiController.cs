@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Shop.Application.Helpers;
+using Shop.Application.ActionFilters;
 
 namespace Application.Controllers
 {

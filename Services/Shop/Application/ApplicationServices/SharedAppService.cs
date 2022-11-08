@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public class SharedAppService : BaseAppService
 {

@@ -10,7 +10,7 @@ using Shop.Core.HelperTypes;
 using Shop.Infrastructure.Repositories;
 using System.Net;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public class UserAppService : BaseAppService
 {

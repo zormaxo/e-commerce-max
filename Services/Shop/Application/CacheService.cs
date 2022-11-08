@@ -34,7 +34,7 @@ namespace Shop.Application
                     "https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
                 var response = await client.GetAsync(new RestRequest());
 
-                var currencyDto = JsonConvert.DeserializeObject<CurrencyDto>(response.Content);
+                var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
                 var currency = mapper.Map<Currency>(currencyDto);
 
                 cachedItems.Currency = currency;

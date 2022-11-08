@@ -4,6 +4,7 @@ using Core.Dtos.Member;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Extensions;
+using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Core.HelperTypes;
 

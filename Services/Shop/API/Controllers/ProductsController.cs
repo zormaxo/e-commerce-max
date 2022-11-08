@@ -1,6 +1,7 @@
 using Core.Dtos;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Application.Helpers;
 using Shop.Core.Dtos;

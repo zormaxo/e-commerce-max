@@ -2,16 +2,13 @@ using AutoMapper;
 using Infrastructure;
 using Shop.Core.Dtos;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public class CategoriesAppService : BaseAppService
 {
     private readonly CachedItems _cachedItems;
 
-    public CategoriesAppService(CachedItems cachedItems, IMapper mapper) : base(mapper)
-    {
-        _cachedItems = cachedItems;
-    }
+    public CategoriesAppService(CachedItems cachedItems, IMapper mapper) : base(mapper) { _cachedItems = cachedItems; }
 
     public IReadOnlyList<CategoryDto> GetCategories()
     {

@@ -1,3 +1,4 @@
+using Application;
 using Application.Interfaces;
 using Application.Services;
 using AutoMapper;
@@ -7,18 +8,18 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Dtos.Product;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
 {
-    public ProductMachineAppService(IGenericRepository<Product> productsRepo,
-       IGenericRepository<Category> categoryRepo,
-       IPhotoService photoService,
-       CachedItems cachedItems,
-       IMapper mapper,
-       StoreContext context) : base(productsRepo, categoryRepo, photoService, cachedItems, mapper, context)
+    public ProductMachineAppService(
+        IGenericRepository<Product> productsRepo,
+        IGenericRepository<Category> categoryRepo,
+        IPhotoService photoService,
+        CachedItems cachedItems,
+        IMapper mapper,
+        StoreContext context) : base(productsRepo, categoryRepo, photoService, cachedItems, mapper, context)
     {
-
     }
 
     protected override void AddCategoryFiltering()

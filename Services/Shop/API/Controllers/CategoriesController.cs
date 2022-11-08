@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.ApplicationServices;
 using Shop.Core.Dtos;
 
 namespace Application.Controllers
@@ -7,16 +8,10 @@ namespace Application.Controllers
     {
         private readonly CategoriesAppService _productSrv;
 
-        public CategoriesController(CategoriesAppService categoriesSrv)
-        {
-            _productSrv = categoriesSrv;
-        }
+        public CategoriesController(CategoriesAppService categoriesSrv) { _productSrv = categoriesSrv; }
 
 
         [HttpGet]
-        public ActionResult<IReadOnlyList<CategoryDto>> GetCategories()
-        {
-            return Ok(_productSrv.GetCategories());
-        }
+        public ActionResult<IReadOnlyList<CategoryDto>> GetCategories() { return Ok(_productSrv.GetCategories()); }
     }
 }

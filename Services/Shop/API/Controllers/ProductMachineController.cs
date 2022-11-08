@@ -1,5 +1,6 @@
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.ApplicationServices;
 using Shop.Application.Helpers;
 using Shop.Core.Dtos.Product;
 using Shop.Core.HelperTypes;

@@ -7,7 +7,7 @@ using Core.Errors;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Helpers;
+using Shop.Application.ActionFilters;
 using Shop.Infrastructure.Repositories;
 using StackExchange.Redis;
 

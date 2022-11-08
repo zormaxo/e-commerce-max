@@ -6,7 +6,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Dtos;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public class ProductAppService : ProductBaseService<ShowcaseDto>
 {

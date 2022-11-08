@@ -1,3 +1,4 @@
+using Application;
 using Application.Entities;
 using Application.Interfaces;
 using Application.Services;
@@ -15,7 +16,7 @@ using Shop.Core.Dtos.Product;
 using Shop.Core.HelperTypes;
 using System.Net;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public abstract class ProductBaseService<T> : BaseAppService where T : class
 {
@@ -197,7 +198,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
                 CurrencyCode.GBP => (int)((decimal)productParams.MinValue /
                     (int)_cachedItems.Currency.Gbp *
                     (int)_cachedItems.Currency.Try),
-                CurrencyCode.TRY => (int)((decimal)productParams.MinValue),
+                CurrencyCode.TRY => (int)(decimal)productParams.MinValue,
                 _ => productParams.MinValue,
             };
         }
@@ -209,7 +210,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
                 CurrencyCode.USD => (int)((decimal)productParams.MaxValue * _cachedItems.Currency.Try),
                 CurrencyCode.EUR => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Eur * _cachedItems.Currency.Try),
                 CurrencyCode.GBP => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try),
-                CurrencyCode.TRY => (int)((decimal)productParams.MaxValue),
+                CurrencyCode.TRY => (int)(decimal)productParams.MaxValue,
                 _ => productParams.MaxValue,
             };
         }

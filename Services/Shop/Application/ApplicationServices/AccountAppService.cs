@@ -9,7 +9,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Application;
+namespace Shop.Application.ApplicationServices;
 
 public class AccountAppService : BaseAppService
 {

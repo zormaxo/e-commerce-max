@@ -1,18 +1,14 @@
 ﻿using Application.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Application;
+using Shop.Application.ApplicationServices;
 using Shop.Core.Entities;
 
 namespace Shop.API.Controllers
 {
     public class BasketController : BaseApiController
     {
-
         private readonly BasketAppService _basketAppService;
-        public BasketController(BasketAppService basketAppService)
-        {
-            _basketAppService = basketAppService;
-        }
+        public BasketController(BasketAppService basketAppService) { _basketAppService = basketAppService; }
 
         [HttpGet]
         public async Task<ActionResult<CustomerBasket>> GetBasketById(string id)
@@ -24,14 +20,9 @@ namespace Shop.API.Controllers
 
         [HttpPost]
         public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
-        {
-            return await _basketAppService.UpdateBasketAsync(basket);
-        }
+        { return await _basketAppService.UpdateBasketAsync(basket); }
 
         [HttpDelete]
-        public async Task DeleteBasketAsync(string id)
-        {
-            await _basketAppService.DeleteBasketAsync(id);
-        }
+        public async Task DeleteBasketAsync(string id) { await _basketAppService.DeleteBasketAsync(id); }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.Extensions;
 using Shop.Infrastructure.Repositories;
 
-namespace Shop.Application.Helpers;
+namespace Shop.Application.ActionFilters;
 
 public class LogUserActivity : IAsyncActionFilter
 {

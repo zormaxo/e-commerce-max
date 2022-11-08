@@ -1,5 +1,5 @@
 using Infrastructure;
-using Shop.Application;
+using Shop.Application.ApplicationServices;
 
 namespace Application.Extensions;
 
