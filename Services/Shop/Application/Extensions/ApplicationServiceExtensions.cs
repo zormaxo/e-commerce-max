@@ -1,4 +1,3 @@
-using Application.Helpers;
 using Application.Interfaces;
 using Application.Mapping;
 using Application.Repositories;
@@ -24,7 +23,6 @@ public static class ApplicationServiceExtensions
         services.AddScoped<LogUserActivity>();
         services.AddScoped<UserResolverService>();
         services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));
-        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddFluentValidationAutoValidation();
 

@@ -29,7 +29,7 @@ namespace Application
             services.AddOtherServices();
             services.AddApplicationServices(_config);
             services.AddPersistenceServices(_config, _env.IsProduction());
-            services.AddInfrastructureServices();
+            services.AddInfrastructureServices(_config);
             services.AddControllerServices();
             services.AddSwaggerDocumentation();
             services.AddCors(
