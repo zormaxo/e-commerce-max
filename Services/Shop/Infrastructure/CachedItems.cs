@@ -8,7 +8,7 @@ public class CachedItems
 
     public Currency Currency { get; set; } = new Currency();
 
-    public List<City> Cities { get; internal set; }
+    public List<CityDto> Cities { get; set; }
 
-    public List<County> Counties { get; internal set; }
+    public List<CountyDto> Counties { get; set; }
 }

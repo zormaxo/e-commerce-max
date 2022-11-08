@@ -2,12 +2,15 @@ using AutoMapper;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Shop.Application;
 
 namespace Application
 {
     public class Program
     {
-        protected Program() { }
+        protected Program()
+        {
+        }
 
         public static async Task Main(string[] args)
         {
@@ -23,7 +26,8 @@ namespace Application
                 var mapper = services.GetRequiredService<IMapper>();
                 var cahcedItems = services.GetRequiredService<CachedItems>();
                 await context.Database.MigrateAsync();
-                await StoreContextSeed.SeedAsync(context, loggerFactory, mapper, cahcedItems);
+                await StoreContextSeed.SeedAsync(context, loggerFactory);
+                await CacheService.FillCacheItems(context, loggerFactory, mapper, cahcedItems);
             }
             catch (Exception ex)
             {
@@ -34,9 +38,8 @@ namespace Application
             host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseSerilog((context, _, configuration) => configuration.ReadFrom.Configuration(context.Configuration))
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+            .UseSerilog((context, _, configuration) => configuration.ReadFrom.Configuration(context.Configuration))
+            .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }

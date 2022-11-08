@@ -1,11 +1,8 @@
 using Application.Entities;
-using AutoMapper;
 using Core.Entities;
-using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using RestSharp;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -17,11 +14,7 @@ public class StoreContextSeed
     {
     }
 
-    public static async Task SeedAsync(
-        StoreContext context,
-        ILoggerFactory loggerFactory,
-        IMapper mapper,
-        CachedItems cachedItems)
+    public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
     {
         try
         {
@@ -105,28 +98,6 @@ public class StoreContextSeed
 
                 await context.SaveChangesAsync();
             }
-
-            var currencyObj = await context.Currency.FirstOrDefaultAsync(x => x.Date.Date == DateTime.UtcNow.Date);
-            if (currencyObj == null)
-            {
-                var client = new RestClient(
-                    "https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
-                var response = await client.GetAsync(new RestRequest());
-
-                var currency = JsonConvert.DeserializeObject<Currency>(response.Content);
-
-                cachedItems.Currency = currency;
-                context.Add(currency);
-                await context.SaveChangesAsync();
-            }
-            else
-            {
-                cachedItems.Currency = currencyObj;
-            }
-
-            cachedItems.Categories = await context.Categories.ToListAsync();
-            cachedItems.Cities = await context.Cities.AsNoTracking().ToListAsync();
-            cachedItems.Counties = await context.Counties.AsNoTracking().ToListAsync();
         }
         catch (Exception ex)
         {
