@@ -10,7 +10,7 @@ namespace Application.Controllers
 
         public CategoriesController(CategoriesAppService categoriesSrv) { _productSrv = categoriesSrv; }
 
-
+        [ResponseCache(Duration = 20)]
         [HttpGet]
         public ActionResult<IReadOnlyList<CategoryDto>> GetCategories() { return Ok(_productSrv.GetCategories()); }
     }

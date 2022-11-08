@@ -1,6 +1,5 @@
 using Application.Extensions;
 using Application.Middleware;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using Shop.API.Extensions;
@@ -57,11 +56,13 @@ namespace Application
             app.UseSwaggerDocumentation();
             app.UseSerilogRequestLogging();
 
+
             app.UseMiddleware<ResponseWrapperMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
             //app.UseMiddleware<RequestResponseMiddleware>();     //Manuel request response logging
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");   //for non-exist endpoints
+            app.UseResponseCaching();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseHttpLogging();                                 //.Net core request response logging
