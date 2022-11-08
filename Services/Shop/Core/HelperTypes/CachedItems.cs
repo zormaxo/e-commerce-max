@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Shop.Core.Dtos;
 
 namespace Infrastructure;
 

@@ -23,23 +23,9 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
         //    .SingleOrDefaultAsync();
     }
 
-    //public async Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
-    //{
-    //    var query = _context.Users.Where(u => u.UserName != userParams.CurrentUsername);
-    //    query = userParams.OrderBy switch
-    //    {
-    //        "created" => query.OrderByDescending(u => u.CreatedDate),
-    //        _ => query.OrderByDescending(u => u.LastActive)
-    //    };
-
-    //    //var members = query.ProjectTo<AppUser>(_mapper.ConfigurationProvider).AsNoTracking();
-
-    //    return await PagedList<AppUser>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
-    //}
-
     public async Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
     {
-        var query = _context.Users.Where(u => u.UserName != userParams.CurrentUsername);
+        var query = _context.Users.Include(x => x.Photos).Where(u => u.UserName != userParams.CurrentUsername);
         query = userParams.OrderBy switch
         {
             "created" => query.OrderByDescending(u => u.CreatedDate),

@@ -3,6 +3,7 @@ using Application.Services;
 using AutoMapper;
 using Core.Dtos;
 using Core.Dtos.Member;
+using Core.Entities;
 using Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Shop.Core.HelperTypes;
@@ -27,8 +28,11 @@ public class UserAppService : BaseAppService
         var user = await _userRepository.GetUserByUsernameAsync(username);
         userParams.CurrentUsername = user.UserName;
 
-        var appUsers = await _userRepository.GetMembersAsync(userParams);
-        return _mapper.Map<PagedList<MemberDto>>(appUsers);
+        PagedList<AppUser> appUsers = await _userRepository.GetMembersAsync(userParams);
+
+        var omer = _mapper.Map<PagedList<MemberDto>>(appUsers);
+
+        return omer;
     }
 
     public async Task<MemberDto> GetUser(int id)
