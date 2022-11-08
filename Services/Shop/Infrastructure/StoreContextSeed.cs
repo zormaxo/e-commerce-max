@@ -124,7 +124,7 @@ public class StoreContextSeed
                 cachedItems.Currency = currencyObj;
             }
 
-            cachedItems.Categories = await context.Categories.AsNoTracking().ToListAsync();
+            cachedItems.Categories = await context.Categories.ToListAsync();
             cachedItems.Cities = await context.Cities.AsNoTracking().ToListAsync();
             cachedItems.Counties = await context.Counties.AsNoTracking().ToListAsync();
         }
