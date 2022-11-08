@@ -1,8 +1,11 @@
 using Application.Extensions;
 using Application.Middleware;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using Shop.API.Extensions;
+using Shop.Application.Extensions;
+using Shop.Infrastructure.Extensions;
 using System.Text.Json.Serialization;
 
 namespace Application
@@ -24,7 +27,9 @@ namespace Application
             services.AddHttpClient();
             services.AddControllers()
                 .AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-            services.AddApplicationServices(_env, _config);
+            services.AddOtherServices();
+            services.AddApplicationServices(_config);
+            services.AddInfrastructureServices(_config, _env.IsProduction());
             services.AddControllerServices();
             services.AddSwaggerDocumentation();
             services.AddCors(
