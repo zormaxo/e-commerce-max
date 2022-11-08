@@ -2,6 +2,7 @@ using Application.Extensions;
 using Application.Middleware;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
+using Shop.API.Extensions;
 using System.Text.Json.Serialization;
 
 namespace Application
@@ -40,11 +41,14 @@ namespace Application
                     logging.RequestBodyLogLimit = 4096;
                     logging.ResponseBodyLogLimit = 4096;
                 });
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCustomHealthCheck();
             app.UseSwaggerDocumentation();
             app.UseSerilogRequestLogging();
 
