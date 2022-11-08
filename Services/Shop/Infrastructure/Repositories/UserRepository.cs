@@ -13,9 +13,9 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
     {
     }
 
-    public async Task<AppUser> GetMemberAsync(int id)
+    public Task<AppUser> GetMemberAsync(int id)
     {
-        return await _context.Users.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync();
+        return _context.Users.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync();
 
         //return await _context.Users
         //    .Where(x => x.Id == id)
@@ -23,7 +23,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
         //    .SingleOrDefaultAsync();
     }
 
-    public async Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
+    public Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
     {
         var query = _context.Users.Include(x => x.Photos).Where(u => u.UserName != userParams.CurrentUsername);
         query = userParams.OrderBy switch
@@ -34,19 +34,18 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
         //var members = query.ProjectTo<AppUser>(_mapper.ConfigurationProvider).AsNoTracking();
         //return await query.AsNoTracking().ToListAsync();
-        return await PagedList<AppUser>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
+        return PagedList<AppUser>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
     }
 
-    public async Task<AppUser> GetUserByIdAsync(int id) { return await _context.Users.FindAsync(id); }
+    public ValueTask<AppUser> GetUserByIdAsync(int id) { return _context.Users.FindAsync(id); }
 
-    public async Task<AppUser> GetUserByIdIncludePhotoAsync(int id)
-    { return await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Id == id); }
+    public Task<AppUser> GetUserByIdIncludePhotoAsync(int id)
+    { return _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Id == id); }
 
-    public async Task<AppUser> GetUserByUsernameAsync(string username)
-    { return await _context.Users.Include(p => p.Products).SingleOrDefaultAsync(x => x.UserName == username); }
+    public Task<AppUser> GetUserByUsernameAsync(string username)
+    { return _context.Users.Include(p => p.Products).SingleOrDefaultAsync(x => x.UserName == username); }
 
-    public async Task<IEnumerable<AppUser>> GetUsersAsync()
-    { return await _context.Users.Include(p => p.Products).ToListAsync(); }
+    public Task<List<AppUser>> GetUsersAsync() { return _context.Users.Include(p => p.Products).ToListAsync(); }
 
     public async Task<bool> SaveAllAsync() { return await _context.SaveChangesAsync() > 0; }
 

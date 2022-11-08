@@ -14,7 +14,7 @@ namespace Shop.Application
 {
     public class CacheService
     {
-        public async static Task FillCacheItems(
+        public async static Task FillCacheItemsAsync(
             StoreContext context,
             ILoggerFactory loggerFactory,
             IMapper mapper,

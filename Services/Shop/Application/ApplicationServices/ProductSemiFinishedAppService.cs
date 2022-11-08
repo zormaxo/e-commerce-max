@@ -10,9 +10,9 @@ using Shop.Core.Dtos.Product;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductSemiFinishedAppServic : ProductBaseService<ProductDto>
+public class ProductSemiFinishedAppService : ProductBaseService<ProductDto>
 {
-    public ProductSemiFinishedAppServic(
+    public ProductSemiFinishedAppService(
         IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
         IPhotoService photoService,
@@ -26,6 +26,6 @@ public class ProductSemiFinishedAppServic : ProductBaseService<ProductDto>
     {
     }
 
-    protected override async Task<List<ProductDto>> QueryDatabase()
-    { return await PagedAndFilteredProducts.ProjectTo<ProductDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync(); }
+    protected override Task<List<ProductDto>> QueryDatabase()
+    { return PagedAndFilteredProducts.ProjectTo<ProductDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync(); }
 }

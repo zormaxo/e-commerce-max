@@ -27,7 +27,7 @@ namespace Application
                 var cahcedItems = services.GetRequiredService<CachedItems>();
                 await context.Database.MigrateAsync();
                 await StoreContextSeed.SeedAsync(context, loggerFactory);
-                await CacheService.FillCacheItems(context, loggerFactory, mapper, cahcedItems);
+                await CacheService.FillCacheItemsAsync(context, loggerFactory, mapper, cahcedItems);
             }
             catch (Exception ex)
             {
