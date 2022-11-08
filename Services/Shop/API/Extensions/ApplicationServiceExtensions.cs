@@ -8,7 +8,6 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Helpers;
-using Shop.Core.Interfaces;
 using Shop.Infrastructure.Repositories;
 using StackExchange.Redis;
 
@@ -21,14 +20,14 @@ public static class ApplicationServiceExtensions
         IWebHostEnvironment env,
         IConfiguration config)
     {
-        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoService, PhotoService>();
-        services.AddScoped<LogUserActivity>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<LogUserActivity>();
         services.AddScoped<UserResolverService>();
-        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));
+        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
         services.Configure<ApiBehaviorOptions>(
             options =>

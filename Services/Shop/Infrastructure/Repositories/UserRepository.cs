@@ -1,31 +1,43 @@
 using Application;
 using Application.Repositories;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Core.Dtos.Member;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.HelperTypes;
-using Shop.Core.Interfaces;
 
 namespace Shop.Infrastructure.Repositories;
 
 
 public class UserRepository : GenericRepository<AppUser>, IUserRepository
 {
-    private readonly IMapper _mapper;
-
-    public UserRepository(StoreContext context, IMapper mapper) : base(context) { _mapper = mapper; }
-
-    public async Task<MemberDto> GetMemberAsync(int id)
+    public UserRepository(StoreContext context) : base(context)
     {
-        return await _context.Users
-            .Where(x => x.Id == id)
-            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            .SingleOrDefaultAsync();
     }
 
-    public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+    public async Task<AppUser> GetMemberAsync(int id)
+    {
+        return await _context.Users.Where(x => x.Id == id).SingleOrDefaultAsync();
+
+        //return await _context.Users
+        //    .Where(x => x.Id == id)
+        //    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+        //    .SingleOrDefaultAsync();
+    }
+
+    //public async Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
+    //{
+    //    var query = _context.Users.Where(u => u.UserName != userParams.CurrentUsername);
+    //    query = userParams.OrderBy switch
+    //    {
+    //        "created" => query.OrderByDescending(u => u.CreatedDate),
+    //        _ => query.OrderByDescending(u => u.LastActive)
+    //    };
+
+    //    //var members = query.ProjectTo<AppUser>(_mapper.ConfigurationProvider).AsNoTracking();
+
+    //    return await PagedList<AppUser>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
+    //}
+
+    public async Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
     {
         var query = _context.Users.Where(u => u.UserName != userParams.CurrentUsername);
         query = userParams.OrderBy switch
@@ -34,9 +46,9 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
             _ => query.OrderByDescending(u => u.LastActive)
         };
 
-        var members = query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking();
-
-        return await PagedList<MemberDto>.CreateAsync(members, userParams.PageIndex, userParams.PageSize);
+        //var members = query.ProjectTo<AppUser>(_mapper.ConfigurationProvider).AsNoTracking();
+        //return await query.AsNoTracking().ToListAsync();
+        return await PagedList<AppUser>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
     }
 
     public async Task<AppUser> GetUserByIdAsync(int id) { return await _context.Users.FindAsync(id); }

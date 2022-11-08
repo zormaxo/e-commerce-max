@@ -1,8 +1,7 @@
-using Core.Dtos.Member;
 using Core.Entities;
 using Shop.Core.HelperTypes;
 
-namespace Shop.Core.Interfaces;
+namespace Shop.Infrastructure.Repositories;
 
 public interface IUserRepository
 {
@@ -16,9 +15,9 @@ public interface IUserRepository
 
     Task<AppUser> GetUserByUsernameAsync(string username);
 
-    Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
+    Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams);
 
-    Task<MemberDto> GetMemberAsync(int id);
+    Task<AppUser> GetMemberAsync(int id);
 
     Task<AppUser> GetUserByIdIncludePhotoAsync(int id);
 }
