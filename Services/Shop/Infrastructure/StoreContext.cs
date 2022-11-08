@@ -83,12 +83,17 @@ public class StoreContext : DbContext
             var saveResult = await base.SaveChangesAsync(cancellationToken);
 
             ////if (auditEntries.Count > 0)
-            ////    await OnAfterSaveChanges(auditEntries);
+            ////    await OnAfterSaveChangesAsync(auditEntries);
 
             return saveResult;
         }
     }
 
+
+    /// <summary>
+    /// Used for audit table
+    /// </summary>
+    /// <returns></returns>
     private List<AuditEntry> OnBeforeSaveChanges()
     {
         var entries = ChangeTracker
@@ -162,7 +167,12 @@ public class StoreContext : DbContext
         return auditEntries.Where(q => q.HasTemporaryProperties).ToList();
     }
 
-    private Task OnAfterSaveChanges(List<AuditEntry> auditEntries)
+    /// <summary>
+    /// Used for audit table
+    /// </summary>
+    /// <param name="auditEntries"></param>
+    /// <returns></returns>
+    private Task OnAfterSaveChangesAsync(List<AuditEntry> auditEntries)
     {
         foreach (var auditEntry in auditEntries)
         {

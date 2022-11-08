@@ -15,7 +15,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
     public async Task<AppUser> GetMemberAsync(int id)
     {
-        return await _context.Users.Where(x => x.Id == id).SingleOrDefaultAsync();
+        return await _context.Users.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync();
 
         //return await _context.Users
         //    .Where(x => x.Id == id)
