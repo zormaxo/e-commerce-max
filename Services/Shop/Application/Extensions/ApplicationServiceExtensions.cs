@@ -2,7 +2,6 @@ using Application.Helpers;
 using Application.Interfaces;
 using Application.Mapping;
 using Application.Repositories;
-using Application.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Services;
@@ -21,8 +20,6 @@ public static class ApplicationServiceExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<LogUserActivity>();
         services.AddScoped<UserResolverService>();

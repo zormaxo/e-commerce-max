@@ -33,25 +33,19 @@ public class AccountAppService : BaseAppService
 
         user.UserName = registerDto.UserName.ToLower();
         user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-        user.PasswordSalt = hmac.Key; await _appUsersRepo.AddAsync(user);
+        user.PasswordSalt = hmac.Key;
+        await _appUsersRepo.AddAsync(user);
 
         await _appUsersRepo.SaveChangesAsync();
 
-        var userDto = new UserDto
-        {
-            FirstName = user.FirstName,
-            UserId = user.Id,
-            Token = _tokenService.CreateToken(user)
-        };
+        var userDto = new UserDto { FirstName = user.FirstName, UserId = user.Id, Token = _tokenService.CreateToken(user) };
 
         return userDto;
     }
 
     public async Task<UserDto> Login(LoginDto loginDto)
     {
-        var user = await _appUsersRepo.GetAll()
-                .Include(p => p.Photos)
-                .SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+        var user = await _appUsersRepo.GetAll().Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
 
         if (user == null)
             throw new ApiException(HttpStatusCode.Unauthorized, "There is no such a username");
@@ -66,18 +60,11 @@ public class AccountAppService : BaseAppService
                 throw new ApiException(HttpStatusCode.Unauthorized, "Invalid password");
         }
 
-        var userDto = new UserDto
-        {
-            UserId = user.Id,
-            FirstName = user.FirstName,
-            Token = _tokenService.CreateToken(user),
-        };
+        var userDto = new UserDto { UserId = user.Id, FirstName = user.FirstName, Token = _tokenService.CreateToken(user), };
 
         return userDto;
     }
 
     private async Task<bool> UserExists(string userName)
-    {
-        return await _appUsersRepo.AnyAsync(x => x.UserName == userName.ToLower());
-    }
+    { return await _appUsersRepo.AnyAsync(x => x.UserName == userName.ToLower()); }
 }

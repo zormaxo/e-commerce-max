@@ -13,7 +13,7 @@ namespace Application.Controllers
     public class AccountController : BaseApiController
     {
         private readonly AccountAppService _accountSrv;
-        private IValidator<LoginDto> _validator;
+        private readonly IValidator<LoginDto> _validator;
 
         public AccountController(AccountAppService accountSrv, IValidator<LoginDto> validator)
         {

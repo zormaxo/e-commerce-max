@@ -26,9 +26,7 @@ public class ExceptionMiddleware
         }
         catch (ApiException ex)
         {
-            var response = _env.IsDevelopment()
-                ? new ApiErrorObject(ex.ApiMessage, ex)
-                : new ApiErrorObject(ex.ApiMessage);
+            var response = _env.IsDevelopment() ? new ApiErrorObject(ex.ApiMessage, ex) : new ApiErrorObject(ex.ApiMessage);
 
             await CreateExceptionResponse(ex, ex.HttpStatusCode, response);
         }

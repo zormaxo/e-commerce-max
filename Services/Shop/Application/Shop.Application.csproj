@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application.Shared\Shop.Application.Shared.csproj" />
-    <ProjectReference Include="..\Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Persistence\Shop.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

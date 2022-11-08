@@ -28,7 +28,8 @@ namespace Application
                 .AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
             services.AddOtherServices();
             services.AddApplicationServices(_config);
-            services.AddInfrastructureServices(_config, _env.IsProduction());
+            services.AddPersistenceServices(_config, _env.IsProduction());
+            services.AddInfrastructureServices();
             services.AddControllerServices();
             services.AddSwaggerDocumentation();
             services.AddCors(
