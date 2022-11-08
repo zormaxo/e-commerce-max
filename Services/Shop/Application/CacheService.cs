@@ -1,6 +1,5 @@
 ﻿using Application;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Core.Dtos;
 using Core.Entities;
 using Infrastructure;
@@ -8,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
-using Shop.Core.Dtos;
 
 namespace Shop.Application
 {
@@ -24,8 +22,8 @@ namespace Shop.Application
             logger.LogInformation("Caching started");
 
             cachedItems.Categories = await context.Categories.ToListAsync();
-            cachedItems.Cities = await context.Cities.ProjectTo<CityDto>(mapper.ConfigurationProvider).ToListAsync();
-            cachedItems.Counties = await context.Counties.ProjectTo<CountyDto>(mapper.ConfigurationProvider).ToListAsync();
+            cachedItems.Cities = await context.Cities.ToListAsync();
+            cachedItems.Counties = await context.Counties.ToListAsync();
 
             var currencyObj = await context.Currency.FirstOrDefaultAsync(x => x.Date.Date == DateTime.UtcNow.Date);
             if (currencyObj == null)

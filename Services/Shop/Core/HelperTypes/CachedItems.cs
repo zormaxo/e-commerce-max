@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Shop.Core.Dtos;
 
 namespace Infrastructure;
 
@@ -9,7 +8,7 @@ public class CachedItems
 
     public Currency Currency { get; set; } = new Currency();
 
-    public List<CityDto> Cities { get; set; }
+    public List<City> Cities { get; set; }
 
-    public List<CountyDto> Counties { get; set; }
+    public List<County> Counties { get; set; }
 }
