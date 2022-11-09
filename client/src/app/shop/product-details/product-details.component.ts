@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions, NgxGalleryOrder } from '@kolkov/ngx-gallery';
 import { ICategory } from 'src/app/shared/models/category';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
@@ -24,7 +24,7 @@ export class ProductDetailsComponent implements OnInit {
     this.galleryOptions = [
       {
         width: '530px',
-        height: '400px',
+        height: '700px',
         imageSize: NgxGalleryImageSize.Contain,
         imageAnimation: NgxGalleryAnimation.Slide,
         imageArrowsAutoHide: true,
@@ -33,9 +33,12 @@ export class ProductDetailsComponent implements OnInit {
         previewKeyboardNavigation: true,
         previewAnimation: false,
         thumbnailsArrowsAutoHide: true,
+        thumbnailsColumns:4,
+        thumbnailsRows:2,
         previewInfinityMove: true,
         previewBullets: true,
         thumbnailsMoveSize: 4,
+        thumbnailsOrder:NgxGalleryOrder.Page,
         thumbnailSize: NgxGalleryImageSize.Contain,
       },
     ];
