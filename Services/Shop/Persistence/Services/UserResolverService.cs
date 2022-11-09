@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace Infrastructure.Services;
+namespace Shop.Persistence.Services;
 
 public class UserResolverService
 {

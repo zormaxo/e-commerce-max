@@ -1,9 +1,10 @@
-﻿using Core.HelperTypes;
+﻿using Shop.Core.HelperTypes;
 
-namespace Core.Entities;
+namespace Shop.Core.Entities;
 
 public interface IPrice
 {
     public decimal Price { get; set; }
+
     public CurrencyCode Currency { get; set; }
 }

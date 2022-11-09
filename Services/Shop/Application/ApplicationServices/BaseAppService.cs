@@ -1,5 +1,5 @@
-using Application;
 using AutoMapper;
+using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 

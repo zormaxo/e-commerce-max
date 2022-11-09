@@ -1,19 +1,16 @@
-using Application;
-using Application.Entities;
-using Application.Interfaces;
-using Application.Services;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Core.Dtos;
-using Core.Entities;
-using Core.Exceptions;
-using Core.HelperTypes;
-using Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Helpers;
-using Shop.Core.Dtos.Product;
+using Shop.Application.Interfaces;
+using Shop.Application.Shared;
+using Shop.Application.Shared.Dtos;
+using Shop.Application.Shared.Dtos.Product;
+using Shop.Core.Entities;
+using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
+using Shop.Core.Interfaces;
+using Shop.Persistence;
 using System.Net;
 
 namespace Shop.Application.ApplicationServices;
@@ -100,7 +97,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         PagedAndFilteredProducts = FilteredProducts
             .EFBigOrderBy(productParams.Sort, _cachedItems)
             .EFBigPageBy(productParams);
-
 
         List<T> data = await PagedAndFilteredProducts
             .ProjectTo<T>(_mapper.ConfigurationProvider)

@@ -1,10 +1,9 @@
-using Application;
-using Application.Repositories;
-using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
+using Shop.Core.Interfaces;
 
-namespace Shop.Infrastructure.Repositories;
+namespace Shop.Persistence.Repositories;
 
 
 public class UserRepository : GenericRepository<AppUser>, IUserRepository

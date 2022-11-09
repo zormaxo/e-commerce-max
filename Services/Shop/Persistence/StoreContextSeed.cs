@@ -1,12 +1,11 @@
-using Application.Entities;
-using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Shop.Core.Entities;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Application;
+namespace Shop.Persistence;
 
 public class StoreContextSeed
 {

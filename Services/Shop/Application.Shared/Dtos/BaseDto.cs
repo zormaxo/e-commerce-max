@@ -1,7 +1,6 @@
-﻿namespace Shop.Core.Dtos
+﻿namespace Shop.Application.Shared.Dtos;
+
+public class BaseDto
 {
-    public class BaseDto
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

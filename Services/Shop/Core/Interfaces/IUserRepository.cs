@@ -1,7 +1,7 @@
-using Core.Entities;
+using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 
-namespace Shop.Infrastructure.Repositories;
+namespace Shop.Core.Interfaces;
 
 public interface IUserRepository
 {

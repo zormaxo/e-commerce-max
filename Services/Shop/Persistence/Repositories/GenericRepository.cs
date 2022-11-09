@@ -1,9 +1,10 @@
-using Application.Interfaces;
-using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Shop.Core.Entities;
+using Shop.Core.Interfaces;
+using Shop.Persistence;
 using System.Linq.Expressions;
 
-namespace Application.Repositories;
+namespace Shop.Persistence.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {

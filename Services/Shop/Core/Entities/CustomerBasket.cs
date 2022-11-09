@@ -1,6 +1,4 @@
-﻿using Core.Entities;
-
-namespace Shop.Core.Entities;
+﻿namespace Shop.Core.Entities;
 
 public class CustomerBasket
 {

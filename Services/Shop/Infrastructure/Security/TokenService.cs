@@ -1,11 +1,12 @@
-using Core.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Shop.Application.Interfaces;
+using Shop.Core.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Application.Services;
+namespace Shop.Infrastructure.Security;
 
 public class TokenService : ITokenService
 {

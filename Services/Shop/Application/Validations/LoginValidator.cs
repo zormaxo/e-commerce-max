@@ -1,11 +1,10 @@
-﻿using Core.Dtos;
-using FluentValidation;
+﻿using FluentValidation;
+using Shop.Application.Shared.Dtos;
 
-namespace BP.Api.Validations
+namespace Shop.Application.Validations;
+
+public class LoginValidator : AbstractValidator<LoginDto>
 {
-    public class LoginValidator : AbstractValidator<LoginDto>
-    {
-        public LoginValidator()
-        { RuleFor(x => x.Password.Length).LessThan(5).WithMessage("FluentValidation, 5 karakterden fazla olamaz."); }
-    }
+    public LoginValidator()
+    { RuleFor(x => x.Password.Length).LessThan(5).WithMessage("FluentValidation, 5 karakterden fazla olamaz."); }
 }

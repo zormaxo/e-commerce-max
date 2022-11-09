@@ -1,14 +1,13 @@
-using Application.Interfaces;
-using Application.Mapping;
-using Application.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.ActionFilters;
-using Shop.Infrastructure.Repositories;
+using Shop.Application.AutoMapperHelper;
+using Shop.Core.Interfaces;
+using Shop.Persistence.Repositories;
+using Shop.Persistence.Services;
 using StackExchange.Redis;
 using System.Reflection;
 

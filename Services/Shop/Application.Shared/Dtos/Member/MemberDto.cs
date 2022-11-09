@@ -1,6 +1,4 @@
-using Shop.Core.Dtos;
-
-namespace Core.Dtos.Member;
+namespace Shop.Application.Shared.Dtos.Member;
 
 public class MemberDto : BaseDto
 {

@@ -1,10 +1,10 @@
-using Application.Interfaces;
-using Application.Services;
 using AutoMapper;
-using Core.Dtos;
-using Core.Entities;
-using Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Shop.Application.Interfaces;
+using Shop.Application.Shared.Dtos;
+using Shop.Core.Entities;
+using Shop.Core.Exceptions;
+using Shop.Core.Interfaces;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;

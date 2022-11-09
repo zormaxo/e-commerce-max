@@ -1,13 +1,12 @@
-using Application;
-using Application.Interfaces;
-using Application.Repositories;
-using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Infrastructure.Repositories;
+using Shop.Core.Interfaces;
+using Shop.Persistence;
+using Shop.Persistence.Repositories;
+using Shop.Persistence.Services;
 
-namespace Shop.Infrastructure.Extensions;
+namespace Shop.Persistence.Extensions;
 
 public static class PersistenceServiceExtensions
 {

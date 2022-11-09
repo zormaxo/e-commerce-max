@@ -1,10 +1,8 @@
-using Shop.Core.Dtos;
+namespace Shop.Application.Shared.Dtos;
 
-namespace Core.Dtos
+public class PhotoDto : BaseDto
 {
-    public class PhotoDto : BaseDto
-    {
-        public string Url { get; set; }
-        public bool IsMain { get; set; }
-    }
+    public string Url { get; set; }
+
+    public bool IsMain { get; set; }
 }

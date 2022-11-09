@@ -1,11 +1,10 @@
-﻿using Application.Interfaces;
-using Core.Entities;
-using Core.HelperTypes;
-using Infrastructure;
+﻿using Shop.Core.Entities;
+using Shop.Core.HelperTypes;
+using Shop.Core.Interfaces;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
-namespace Application;
+namespace Shop.Persistence;
 
 public static class EFBigExtensions
 {
@@ -14,7 +13,7 @@ public static class EFBigExtensions
         bool condition,
         Expression<Func<TSource, bool>> predicate)
     {
-        if(condition)
+        if (condition)
             return source.Where(predicate);
         else
             return source;
@@ -29,7 +28,7 @@ public static class EFBigExtensions
         CachedItems _cachedItems)
         where TSource : IPrice
     {
-        if(sort == "price asc")
+        if (sort == "price asc")
         {
             return source.OrderBy(
                 x => x.Currency == CurrencyCode.USD
@@ -39,7 +38,8 @@ public static class EFBigExtensions
                         : x.Currency == CurrencyCode.GBP
                             ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try
                             : x.Price);
-        } else if(sort == "price desc")
+        }
+        else if (sort == "price desc")
         {
             return source.OrderByDescending(
                 x => x.Currency == CurrencyCode.USD
@@ -49,7 +49,8 @@ public static class EFBigExtensions
                         : x.Currency == CurrencyCode.GBP
                             ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try
                             : x.Price);
-        } else
+        }
+        else
         {
             return source.OrderBy(sort ?? "name asc");
         }

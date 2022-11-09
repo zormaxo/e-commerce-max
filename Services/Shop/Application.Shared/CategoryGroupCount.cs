@@ -1,4 +1,4 @@
-﻿namespace Shop.Application.Helpers;
+﻿namespace Shop.Application.Shared;
 
 public class CategoryGroupCount
 {

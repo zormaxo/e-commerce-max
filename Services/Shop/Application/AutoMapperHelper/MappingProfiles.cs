@@ -1,13 +1,11 @@
-using Application.Entities;
 using AutoMapper;
-using Core.Dtos;
-using Core.Dtos.Member;
-using Core.Entities;
-using Shop.Core.Dtos;
-using Shop.Core.Dtos.Product;
+using Shop.Application.Shared.Dtos;
+using Shop.Application.Shared.Dtos.Member;
+using Shop.Application.Shared.Dtos.Product;
+using Shop.Core.Entities;
 using Shop.Core.Extensions;
 
-namespace Application.Mapping;
+namespace Shop.Application.AutoMapperHelper;
 
 public class MappingProfiles : Profile
 {

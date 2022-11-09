@@ -1,5 +1,3 @@
-using Core.HelperTypes;
-
 namespace Shop.Core.HelperTypes;
 
 public class ProductParams : PageParams

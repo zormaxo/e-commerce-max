@@ -1,9 +1,8 @@
-﻿using Application.Entities;
-using Core.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Shop.Core.Entities;
 
-namespace Application.EntityConfigurations;
+namespace Shop.Persistence.EntityConfigurations;
 
 internal class ProductEntityTypeConfiguration : IEntityTypeConfiguration<Product>
 {

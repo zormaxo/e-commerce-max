@@ -1,7 +1,8 @@
-using Application.Helpers;
-using Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shop.Application.Interfaces;
+using Shop.Infrastructure.Photo;
+using Shop.Infrastructure.Security;
 
 namespace Shop.Infrastructure.Extensions;
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.Extensions;
-using Shop.Infrastructure.Repositories;
+using Shop.Core.Interfaces;
 
 namespace Shop.Application.ActionFilters;
 

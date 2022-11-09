@@ -1,10 +1,10 @@
-﻿using Application.Response;
-using Core.Errors;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Shop.API.Response;
+using Shop.Core.Response;
 using System.Net;
 
-namespace Application.Middleware;
+namespace Shop.API.Middleware;
 
 /// <summary>
 /// Response Wrapper Middleware to Request Delegate and handles Request/Response Customizations.
@@ -75,17 +75,26 @@ public class ResponseWrapperMiddleware
         }
         catch
         {
-            if (context.Response.StatusCode != (int)HttpStatusCode.Accepted && context.Response.StatusCode != (int)HttpStatusCode.OK)
+            if (context.Response.StatusCode != (int)HttpStatusCode.Accepted &&
+                context.Response.StatusCode != (int)HttpStatusCode.OK)
+            {
                 responseObj = new ApiErrorObject(responseBodyText);
+            }
             else
+            {
                 responseObj = responseBodyText;
+            }
         }
 
         // Invoking Customizations Method to handle Custom Formatted Response
         var response = ResponseWrapManager.ResponseWrapper(responseObj, context);
 
         // returing response to caller
-        await context.Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }));
+        await context.Response
+            .WriteAsync(
+                JsonConvert.SerializeObject(
+                    response,
+                    new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }));
     }
 }
 

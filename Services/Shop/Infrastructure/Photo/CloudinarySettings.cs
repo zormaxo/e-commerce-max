@@ -1,4 +1,4 @@
-namespace Application.Helpers;
+namespace Shop.Infrastructure.Photo;
 
 public class CloudinarySettings
 {

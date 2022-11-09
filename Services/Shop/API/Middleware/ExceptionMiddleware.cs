@@ -1,9 +1,9 @@
-using Core.Errors;
-using Core.Exceptions;
+using Shop.Core.Exceptions;
+using Shop.Core.Response;
 using System.Net;
 using System.Text.Json;
 
-namespace Application.Middleware;
+namespace Shop.API.Middleware;
 
 public class ExceptionMiddleware
 {

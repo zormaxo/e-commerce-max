@@ -1,11 +1,14 @@
-namespace Shop.Core.Dtos.Product
+namespace Shop.Application.Shared.Dtos.Product;
+
+public class ProductMaterialDto : BaseDto
 {
-    public class ProductMaterialDto : BaseDto
-    {
-        public string Name { get; set; }
-        public string PriceText { get; set; }
-        public CountyDto County { get; set; }
-        public string CreatedDate { get; set; }
-        public string PictureUrl { get; set; }
-    }
+    public string Name { get; set; }
+
+    public string PriceText { get; set; }
+
+    public CountyDto County { get; set; }
+
+    public string CreatedDate { get; set; }
+
+    public string PictureUrl { get; set; }
 }

@@ -1,6 +1,6 @@
 using AutoMapper;
-using Infrastructure;
-using Shop.Core.Dtos;
+using Shop.Application.Shared.Dtos;
+using Shop.Core.HelperTypes;
 
 namespace Shop.Application.ApplicationServices;
 

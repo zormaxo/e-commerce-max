@@ -1,6 +1,6 @@
-using Core.Errors;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Core.Response;
 
 namespace Shop.API.Extensions;
 

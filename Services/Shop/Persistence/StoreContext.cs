@@ -1,13 +1,11 @@
-using Application.Entities;
-using Core.Entities;
-using EntityFrameworkNet6Tre.Data;
-using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Shop.Core.Entities;
+using Shop.Persistence.Services;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Application;
+namespace Shop.Persistence;
 
 public class StoreContext : DbContext
 {

@@ -1,6 +1,6 @@
-using Core.Entities;
+using Shop.Core.Entities;
 
-namespace Application.Services;
+namespace Shop.Application.Interfaces;
 
 public interface ITokenService
 {

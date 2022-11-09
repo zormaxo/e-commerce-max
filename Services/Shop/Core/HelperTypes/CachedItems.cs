@@ -1,6 +1,6 @@
-﻿using Core.Entities;
+﻿using Shop.Core.Entities;
 
-namespace Infrastructure;
+namespace Shop.Core.HelperTypes;
 
 public class CachedItems
 {

@@ -1,7 +1,6 @@
-﻿namespace Shop.Core.Dtos.Product
+﻿namespace Shop.Application.Shared.Dtos.Product;
+
+public class ProductActivateDto : BaseDto
 {
-    public class ProductActivateDto : BaseDto
-    {
-        public bool IsActive { get; set; }
-    }
+    public bool IsActive { get; set; }
 }

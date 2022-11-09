@@ -1,10 +1,10 @@
-using Application.Helpers;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Shop.Application.Interfaces;
 
-namespace Application.Services;
+namespace Shop.Infrastructure.Photo;
 
 public class PhotoService : IPhotoService
 {
@@ -12,12 +12,7 @@ public class PhotoService : IPhotoService
 
     public PhotoService(IOptions<CloudinarySettings> config)
     {
-        var acc = new Account
-        (
-            config.Value.CloudName,
-            config.Value.ApiKey,
-            config.Value.ApiSecret
-        );
+        var acc = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
 
         _cloudinary = new Cloudinary(acc);
     }

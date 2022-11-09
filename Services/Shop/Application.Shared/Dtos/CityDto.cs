@@ -1,11 +1,10 @@
-﻿namespace Shop.Core.Dtos
+﻿namespace Shop.Application.Shared.Dtos;
+
+public class CityDto
 {
-    public class CityDto
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
-        public ICollection<CountyDto> Counties { get; set; }
-    }
+    public ICollection<CountyDto>? Counties { get; set; }
 }

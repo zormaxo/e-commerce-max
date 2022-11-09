@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace Application.Extensions;
+namespace Shop.API.Extensions;
 
 public static class HttpClientExtensions
 {

@@ -1,20 +1,19 @@
-using Core.Entities;
+using Shop.Core.Entities;
 using System.Linq.Expressions;
 
-namespace Application.Interfaces
+namespace Shop.Core.Interfaces;
+
+public interface IGenericRepository<T> where T : BaseEntity
 {
-    public interface IGenericRepository<T> where T : BaseEntity
-    {
-        IQueryable<T> GetAll();
+    IQueryable<T> GetAll();
 
-        ValueTask<T> GetByIdAsync(int id);
+    ValueTask<T> GetByIdAsync(int id);
 
-        Task<List<T>> ListAllAsync();
+    Task<List<T>> ListAllAsync();
 
-        Task AddAsync(T entity);
+    Task AddAsync(T entity);
 
-        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
+    Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
 
-        Task<bool> SaveChangesAsync();
-    }
+    Task<bool> SaveChangesAsync();
 }

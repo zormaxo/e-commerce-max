@@ -1,7 +1,7 @@
-using Infrastructure;
 using Shop.Application.ApplicationServices;
+using Shop.Core.HelperTypes;
 
-namespace Application.Extensions;
+namespace Shop.API.Extensions;
 
 public static class ControllerServiceExtensions
 {

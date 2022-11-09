@@ -1,23 +1,25 @@
-﻿using Core.Entities;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
+using Shop.Core.Entities;
 
-namespace EntityFrameworkNet6Tre.Data;
+namespace Shop.Persistence;
 
 internal class AuditEntry
 {
-    public AuditEntry(EntityEntry entityEntry)
-    {
-        EntityEntry = entityEntry;
-    }
+    public AuditEntry(EntityEntry entityEntry) { EntityEntry = entityEntry; }
 
     public EntityEntry EntityEntry { get; }
 
     public string Action { get; set; }
+
     public string TableName { get; set; }
+
     public Dictionary<string, object> KeyValues { get; set; } = new Dictionary<string, object>();
+
     public Dictionary<string, object> OldValues { get; set; } = new Dictionary<string, object>();
+
     public Dictionary<string, object> NewValues { get; set; } = new Dictionary<string, object>();
+
     public List<PropertyEntry> TemporaryProperties { get; } = new List<PropertyEntry>();
 
     public bool HasTemporaryProperties => TemporaryProperties.Any();

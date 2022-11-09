@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Core.Exceptions;
+namespace Shop.Core.Exceptions;
 
 public class ApiException : Exception
 {
@@ -9,6 +9,7 @@ public class ApiException : Exception
         HttpStatusCode = HttpStatusCode.BadRequest;
         ApiMessage = apiMessage ?? GetDefaultMessageForStatusCode(HttpStatusCode.BadRequest);
     }
+
     public ApiException(HttpStatusCode httpStatusCode, string apiMessage = null)
     {
         HttpStatusCode = httpStatusCode;
@@ -16,6 +17,7 @@ public class ApiException : Exception
     }
 
     public HttpStatusCode HttpStatusCode { get; }
+
     public string ApiMessage { get; }
 
     private static string GetDefaultMessageForStatusCode(HttpStatusCode statusCode)
