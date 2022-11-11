@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.HttpLogging;
-using Serilog;
 using Shop.API.Extensions;
 using Shop.API.Middleware;
 using Shop.Application.Extensions;
@@ -24,8 +23,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddHttpClient();
-        services.AddControllers()
-            .AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+        services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         services.AddOtherServices();
         services.AddApplicationServices(_config);
         services.AddPersistenceServices(_config, _env.IsProduction());
@@ -42,7 +40,7 @@ public class Startup
         services.AddHttpLogging(
             logging =>
             {
-                logging.LoggingFields = HttpLoggingFields.All;
+                logging.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
                 logging.RequestBodyLogLimit = 4096;
                 logging.ResponseBodyLogLimit = 4096;
             });
@@ -55,8 +53,7 @@ public class Startup
     {
         app.UseCustomHealthCheck();
         app.UseSwaggerDocumentation();
-        app.UseSerilogRequestLogging();
-
+        //app.UseSerilogRequestLogging();
 
         app.UseMiddleware<ResponseWrapperMiddleware>();
         app.UseMiddleware<ExceptionMiddleware>();

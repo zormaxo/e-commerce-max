@@ -9,3 +9,5 @@ docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -v "D:\Codes\
 
 https://www.youtube.com/watch?v=oXNslgIXIbQ
 https://www.youtube.com/watch?v=_iryZxv8Rxw
+
+docker-compose up -d
