@@ -1,4 +1,6 @@
-﻿namespace Shop.Application.Shared.Dtos.Product;
+﻿using Shop.Application.Shared.Dtos.City;
+
+namespace Shop.Application.Shared.Dtos.Product;
 
 public class ProductDetailDto : BaseDto
 {

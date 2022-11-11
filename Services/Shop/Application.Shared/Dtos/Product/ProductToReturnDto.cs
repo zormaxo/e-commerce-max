@@ -1,3 +1,4 @@
+using Shop.Application.Shared.Dtos.City;
 using Shop.Application.Shared.Dtos.Member;
 
 namespace Shop.Application.Shared.Dtos.Product;

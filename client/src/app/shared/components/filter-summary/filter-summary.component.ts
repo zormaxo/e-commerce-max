@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { map } from 'rxjs';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ShopService } from 'src/app/shop/shop.service';
 import { IAddress } from '../../models/address';
 import { CurrencyType } from '../../models/currency';
@@ -10,16 +9,22 @@ import { ShopParams } from '../../models/shopParams';
   templateUrl: './filter-summary.component.html',
   styleUrls: ['./filter-summary.component.scss'],
 })
-export class FilterSummaryComponent implements OnChanges {
+export class FilterSummaryComponent implements OnChanges, OnInit {
   @Input() filterShopParams: ShopParams;
   @Input() totalCount: number;
-  @Output() removeFilterClick = new EventEmitter<ShopParams>();
+  @Output() removeFilterClicked = new EventEmitter<ShopParams>();
 
   searchFilter = SearchFilter;
   price: string;
-  categoryName: string;
+
+  cities: IAddress[];
+  cityName: string;
+  countyName: string;
 
   constructor(private shopService: ShopService) {}
+  ngOnInit(): void {
+    this.shopService.getCities().subscribe((cities: IAddress[]) => (this.cities = cities));
+  }
 
   ngOnChanges(): void {
     if (this.filterShopParams?.minValue && this.filterShopParams?.maxValue) {
@@ -30,10 +35,19 @@ export class FilterSummaryComponent implements OnChanges {
     } else if (this.filterShopParams?.maxValue) {
       this.price = `${this.filterShopParams.maxValue} ${CurrencyType[this.filterShopParams.currency]} ve altında`;
     }
+
+    if (this.filterShopParams?.cityId && this.cities) {
+      this.cityName = this.cities.find((x) => x.id == this.filterShopParams?.cityId).name;
+    }
+    if (this.filterShopParams?.countyId && this.cities) {
+      this.countyName = this.cities
+        .find((x) => x.id == this.filterShopParams?.cityId)
+        .counties.find((x) => x.id == this.filterShopParams?.countyId).name;
+    }
   }
 
   onRemoveFilterClick(event: SearchFilter) {
-    this.categoryName = this.filterShopParams.categoryName;
+    const categoryName = this.filterShopParams.categoryName;
 
     switch (event) {
       case SearchFilter.isNew:
@@ -65,23 +79,7 @@ export class FilterSummaryComponent implements OnChanges {
       this.filterShopParams = undefined;
     }
 
-    this.removeFilterClick.emit(this.filterShopParams ?? new ShopParams(10, this.categoryName));
-  }
-
-  getCityName(cityId: number) {
-    return this.shopService.getCities().pipe(
-      map((cities: IAddress[]) => {
-        return cities.find((x) => x.id == cityId).name;
-      })
-    );
-  }
-
-  getCountyName(cityId: number, countyId: number) {
-    return this.shopService.getCities().pipe(
-      map((cities: IAddress[]) => {
-        return cities.find((x) => x.id == cityId).counties.find((x) => x.id == countyId).name;
-      })
-    );
+    this.removeFilterClicked.emit(this.filterShopParams ?? new ShopParams(10, categoryName));
   }
 }
 

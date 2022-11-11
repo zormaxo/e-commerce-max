@@ -1,3 +1,5 @@
+using Shop.Application.Shared.Dtos.City;
+
 namespace Shop.Application.Shared.Dtos.Product;
 
 public class ProductMaterialDto : BaseDto

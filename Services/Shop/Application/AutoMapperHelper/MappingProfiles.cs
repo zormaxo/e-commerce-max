@@ -1,5 +1,6 @@
 using AutoMapper;
 using Shop.Application.Shared.Dtos;
+using Shop.Application.Shared.Dtos.City;
 using Shop.Application.Shared.Dtos.Member;
 using Shop.Application.Shared.Dtos.Product;
 using Shop.Core.Entities;
@@ -57,6 +58,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Category, CategoryDto>();
         CreateMap<County, CountyDto>();
+        CreateMap<City, CityWithCountyDto>();
         CreateMap<City, CityDto>();
 
         CreateMap<RegisterDto, AppUser>();

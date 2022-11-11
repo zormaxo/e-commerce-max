@@ -1,6 +1,6 @@
-﻿namespace Shop.Application.Shared.Dtos;
+﻿namespace Shop.Application.Shared.Dtos.City;
 
-public class CityDto
+public class CityWithCountyDto
 {
     public int Id { get; set; }
 
