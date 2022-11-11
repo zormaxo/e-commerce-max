@@ -6,7 +6,7 @@ import { ShopParams } from './shared/models/shopParams';
 import { ShopService } from './shop/shop.service';
 
 @Directive()
-export abstract class AppProductBaseComponent implements OnInit {
+export abstract class AppProductBaseClass implements OnInit {
   shopParams: ShopParams = new ShopParams(10);
   filterShopParams: ShopParams; //This button has been added to add filter buttons after pressing the search button.
   products: IProduct[];
@@ -39,7 +39,7 @@ export abstract class AppProductBaseComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.shopParams.categoryName = this.categoryName = this.route.snapshot.url[0].path;
-      this.mainCategoryName = this.route.parent.snapshot.url[0].path;
+      this.mainCategoryName = this.route.parent.parent.snapshot.url[0].path;
       this.getCategoriesThenProducts();
     });
 

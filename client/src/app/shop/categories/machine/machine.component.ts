@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { IPagination } from '../../../shared/models/pagination';
-import { AppProductBaseComponent } from 'src/app/app-product-base.component';
+import { AppProductBaseClass } from 'src/app/app-product-base-class';
 import { IProduct } from 'src/app/shared/models/product';
 
 @Component({
@@ -8,7 +8,7 @@ import { IProduct } from 'src/app/shared/models/product';
   templateUrl: './machine.component.html',
   styleUrls: ['./machine.component.scss'],
 })
-export class MachineComponent extends AppProductBaseComponent {
+export class MachineComponent extends AppProductBaseClass {
   constructor(injector: Injector) {
     super(injector);
   }
@@ -21,6 +21,7 @@ export class MachineComponent extends AppProductBaseComponent {
       this.totalCount = productResponse.totalCount;
 
       this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
+      this.shopService.productAdded.next({ allCategories: this.allCategories, sCategory: this.selectedCategory });
     });
   }
 }

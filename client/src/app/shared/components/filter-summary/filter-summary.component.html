@@ -20,7 +20,6 @@
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">İl: </span>
         <button class="btn btn-outline-secondary btn-sm filter" (click)="onRemoveFilterClick(searchFilter.city)">
           {{ cityName }}
-          omer
           <span *ngIf="this.filterShopParams.countyId"> / {{ countyName }} </span>
           <em class="fa-solid fa-xmark"></em>
         </button>
