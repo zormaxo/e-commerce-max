@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from '../../shop.service';
 import { ICategory } from 'd:/Codes/Home/Kuyumdan/client/src/app/shared/models/category';
 
@@ -13,6 +14,7 @@ export class AppProductBaseComponent implements OnInit {
   mainCategoryName;
   allCategories: ICategory[];
   selectedCategory: ICategory;
+  shopParams: ShopParams;
 
   constructor(private route: ActivatedRoute, private shopService: ShopService, private router: Router) {}
 
@@ -20,6 +22,8 @@ export class AppProductBaseComponent implements OnInit {
     this.shopService.productAdded.subscribe((a) => {
       this.allCategories = a.allCategories;
       this.selectedCategory = a.sCategory;
+      this.shopParams = a.shopParams;
+      this.mainCategoryName = a.mainCategoryName;
     });
   }
 }

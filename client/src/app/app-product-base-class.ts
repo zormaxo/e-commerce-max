@@ -1,6 +1,7 @@
 import { Directive, Injector, OnInit } from '@angular/core';
 import { Navigation, ActivatedRoute, Router } from '@angular/router';
 import { ICategory } from './shared/models/category';
+import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
 import { ShopService } from './shop/shop.service';
@@ -46,7 +47,7 @@ export abstract class AppProductBaseClass implements OnInit {
     this.shopService.searchClicked.subscribe((shopParams: ShopParams) => {
       this.shopParams = shopParams;
       this.filterShopParams = structuredClone(shopParams);
-      this.getProducts();
+      this.getProducts2();
     });
   }
 
@@ -57,25 +58,43 @@ export abstract class AppProductBaseClass implements OnInit {
       if (!this.selectedCategory) {
         this.router.navigateByUrl('/notfound');
       }
-      this.getProducts();
+      this.getProducts2();
     });
   }
 
   onPageChanged(event: number) {
     if (this.shopParams.pageNumber !== event) {
       this.shopParams.pageNumber = event;
-      this.getProducts();
+      this.getProducts2();
     }
   }
 
   onHeaderClicked(sortText: string) {
     this.shopParams.sort = sortText;
-    this.getProducts();
+    this.getProducts2();
   }
 
   onRemoveFilterClick(event: ShopParams) {
     this.shopParams = structuredClone(event);
-    this.getProducts();
+    this.getProducts2();
+  }
+
+  getProducts2() {
+    this.getProducts().subscribe((productResponse: IPagination<IProduct[]>) => {
+      this.products = productResponse.data;
+      this.shopParams.pageNumber = productResponse.pageIndex;
+      this.shopParams.pageSize = productResponse.pageSize;
+      this.totalCount = productResponse.totalCount;
+
+      this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
+
+      this.shopService.productAdded.next({
+        allCategories: this.allCategories,
+        sCategory: this.selectedCategory,
+        shopParams: this.shopParams,
+        mainCategoryName : this.mainCategoryName,
+      });
+    });
   }
 
   abstract getProducts();

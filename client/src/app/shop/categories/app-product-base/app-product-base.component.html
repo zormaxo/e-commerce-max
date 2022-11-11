@@ -2,8 +2,11 @@
 <div class="row">
   <app-breadcrumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumbs>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
-    <app-left-nav  [selectedCategory]="selectedCategory" [allCategories]="allCategories"></app-left-nav>
-
+    <app-left-nav
+      *ngIf="allCategories"
+      [selectedCategory]="selectedCategory"
+      [allCategories]="allCategories"></app-left-nav>
+    <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
   </section>
 </div>
 
