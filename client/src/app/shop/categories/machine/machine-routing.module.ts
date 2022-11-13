@@ -7,7 +7,7 @@ const routes: Routes = [
   // { path: '', component: MachineComponent },
   { path: '', redirectTo: 'makine', pathMatch: 'full' },
   { path: '', component: AppProductBaseComponent, children: [
-    { path: 'makine', component: MachineComponent }] },
+    { path: ':subcategory', component: MachineComponent }] },
 ];
 
 @NgModule({

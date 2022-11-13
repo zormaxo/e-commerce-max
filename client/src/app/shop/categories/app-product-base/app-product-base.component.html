@@ -1,6 +1,5 @@
-<p>app-product-base works!</p>
 <div class="row">
-  <app-breadcrumbs *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumbs>
+  <app-breadcrumb *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumb>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <app-left-nav
       *ngIf="allCategories"
@@ -8,7 +7,7 @@
       [allCategories]="allCategories"></app-left-nav>
     <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
   </section>
+  <section class="col-sm-8 col-md-9">
+    <router-outlet></router-outlet>
+  </section>
 </div>
-
-<router-outlet></router-outlet>
-namber

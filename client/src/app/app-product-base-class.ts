@@ -40,7 +40,9 @@ export abstract class AppProductBaseClass implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.shopParams.categoryName = this.categoryName = this.route.snapshot.url[0].path;
-      this.mainCategoryName = this.route.parent.parent.snapshot.url[0].path;
+      this.mainCategoryName = this.route.parent.parent.snapshot.url[0]
+        ? this.route.parent.parent.snapshot.url[0].path
+        : this.route.parent.snapshot.url[0].path;
       this.getCategoriesThenProducts();
     });
 
@@ -92,7 +94,7 @@ export abstract class AppProductBaseClass implements OnInit {
         allCategories: this.allCategories,
         sCategory: this.selectedCategory,
         shopParams: this.shopParams,
-        mainCategoryName : this.mainCategoryName,
+        mainCategoryName: this.mainCategoryName,
       });
     });
   }
