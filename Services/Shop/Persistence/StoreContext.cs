@@ -34,6 +34,8 @@ public class StoreContext : DbContext
 
     public DbSet<Currency> Currency { get; set; }
 
+    public DbSet<Favourite> Favourites { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //e-commerce 27

@@ -1,6 +1,6 @@
 cd .\Services\Shop\
-dotnet ef migrations add Update1 -p Infrastructure -s API -o Migrations
-dotnet ef database update -p Infrastructure -s API
+dotnet ef migrations add Update1 -p Persistence -s API -o Migrations
+dotnet ef database update -p Persistence -s API
 
 
 PRAGMA foreign_keys = ON;
