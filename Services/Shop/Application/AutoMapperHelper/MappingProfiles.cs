@@ -31,7 +31,8 @@ public class MappingProfiles : Profile
 
         CreateMap<Product, ProductDetailDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
-            .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")));
+            .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")))
+            .ForMember(d => d.PictureUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));
 
         CreateMap<AppUser, ProductMemberDto>()
             .ForMember(d => d.PhotoUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
@@ -62,5 +63,6 @@ public class MappingProfiles : Profile
         CreateMap<City, CityDto>();
 
         CreateMap<RegisterDto, AppUser>();
+        CreateMap<Favourite, FavouriteDto>().ReverseMap();
     }
 }

@@ -51,7 +51,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         CalculateMaxMinVal(productParams);
 
         FilteredProducts = _productsRepo.GetAll()
-            .Include(x => x.Favourites)
             .WhereIf(
                 productParams.MaxValue.HasValue,
                 x => x.Currency == CurrencyCode.USD
@@ -79,6 +78,9 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         AddCategoryFiltering();
 
+        if (productParams.UserId.HasValue)
+            FilteredProducts = FilteredProducts.Include(x => x.Favourites);
+
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
             List<int> categoryIds = await GetCategoryIds(productParams.CategoryName);
@@ -101,12 +103,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .AsNoTracking()
             .ToListAsync();
 
-        var data2 = await PagedAndFilteredProducts
-            .AsNoTracking()
-            .ToListAsync();
-
-        //List<T> data = await QueryDatabase();
-
         return new Pagination<T>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
     }
 
@@ -125,7 +121,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         return new { activeProducts, inactiveProducts };
     }
 
-    public async Task<ProductDetailDto> GetProduct(int id)
+    public async Task<ProductDetailDto> GetProduct(int id, int? userId)
     {
         var product = await _productsRepo.GetAll()
             .ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider)
@@ -134,7 +130,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
 
-        product.PictureUrl = product.Photos.FirstOrDefault(x => x.IsMain).Url;
+        product.IsFavourite = product.Favourites.Any(x => x.UserId == userId);
 
         return product;
     }

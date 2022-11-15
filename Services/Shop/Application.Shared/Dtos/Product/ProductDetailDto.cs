@@ -24,4 +24,8 @@ public class ProductDetailDto : BaseDto
     public string PictureUrl { get; set; } = string.Empty;
 
     public decimal Price { get; set; }
+
+    public bool IsFavourite { get; set; }
+
+    public ICollection<FavouriteDto> Favourites { get; set; }
 }

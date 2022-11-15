@@ -21,7 +21,8 @@ public class ProductsController : BaseApiController
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ProductDetailDto>> GetProduct(int id) { return await _productSrv.GetProduct(id); }
+    public async Task<ActionResult<ProductDetailDto>> GetProduct(int id)
+    { return await _productSrv.GetProduct(id, User.GetUserId()); }
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]
