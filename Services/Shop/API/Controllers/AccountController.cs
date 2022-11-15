@@ -1,27 +1,39 @@
-using Core.Dtos;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Shop.Application.ApplicationServices;
+using Shop.Application.Extensions;
+using Shop.Application.Shared.Dtos;
+using Shop.Core.Exceptions;
+using System.Net;
 
-namespace Application.Controllers
+namespace Shop.API.Controllers;
+
+public class AccountController : BaseApiController
 {
-    public class AccountController : BaseApiController
+    private readonly AccountAppService _accountSrv;
+    private readonly IValidator<LoginDto> _validator;
+
+    public AccountController(AccountAppService accountSrv, IValidator<LoginDto> validator)
     {
-        private readonly AccountAppService _accountSrv;
+        _accountSrv = accountSrv;
+        _validator = validator;
+    }
 
-        public AccountController(AccountAppService accountSrv)
-        {
-            _accountSrv = accountSrv;
-        }
+    [HttpPost("register")]
+    public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto) { return await _accountSrv.Register(registerDto); }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
-        {
-            return await _accountSrv.Register(registerDto);
-        }
+    [HttpPost("login")]
+    public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+    {
+        ValidationResult result = await _validator.ValidateAsync(loginDto);
 
-        [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        if (!result.IsValid)
         {
-            return await _accountSrv.Login(loginDto);
+            result.AddToModelState(ModelState);
+            throw new ApiException(HttpStatusCode.Unauthorized, JsonConvert.SerializeObject(ModelState));
         }
+        return await _accountSrv.Login(loginDto);
     }
 }

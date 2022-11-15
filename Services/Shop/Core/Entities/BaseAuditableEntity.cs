@@ -1,7 +1,6 @@
-namespace Core.Entities
+namespace Shop.Core.Entities;
+
+public class BaseAuditableEntity : BaseEntity
 {
-    public class BaseAuditableEntity : BaseEntity
-    {
-        public bool IsDeleted { get; set; }
-    }
+    public bool IsDeleted { get; set; }
 }

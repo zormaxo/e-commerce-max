@@ -1,28 +1,26 @@
-using Core.Entities;
-using Infrastructure;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.Shared.Dtos.City;
+using Shop.Core.HelperTypes;
 
-namespace Application.Controllers
+namespace Shop.API.Controllers;
+
+public class SharedController : BaseApiController
 {
-    public class SharedController : BaseApiController
+    private readonly CachedItems _cachedItems;
+    private readonly IMapper _mapper;
+
+    public SharedController(CachedItems cachedItems, IMapper mapper)
     {
-        private readonly CachedItems _cachedItems;
-
-        public SharedController(CachedItems cachedItems)
-        {
-            _cachedItems = cachedItems;
-        }
-
-        [HttpGet("cities")]
-        public ActionResult<IReadOnlyList<City>> Cities()
-        {
-            return Ok(_cachedItems.Cities);
-        }
-
-        [HttpGet("counties/{id}")]
-        public ActionResult<IReadOnlyList<County>> Counties(string id)
-        {
-            return Ok(_cachedItems.Counties.Where(x => x.City.Name == id));
-        }
+        _cachedItems = cachedItems;
+        _mapper = mapper;
     }
+
+    [HttpGet("cities")]
+    public ActionResult<IReadOnlyList<CityWithCountyDto>> Cities()
+    { return Ok(_mapper.Map<IReadOnlyList<CityWithCountyDto>>(_cachedItems.Cities)); }
+
+    [HttpGet("counties/{id}")]
+    public ActionResult<IReadOnlyList<CountyDto>> Counties(string id)
+    { return Ok(_mapper.Map<IReadOnlyList<CityWithCountyDto>>(_cachedItems.Counties.Where(x => x.City.Name == id))); }
 }

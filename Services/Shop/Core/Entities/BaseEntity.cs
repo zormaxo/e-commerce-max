@@ -1,7 +1,6 @@
-namespace Core.Entities
+namespace Shop.Core.Entities;
+
+public class BaseEntity
 {
-    public class BaseEntity
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

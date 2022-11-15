@@ -25,6 +25,15 @@ export class ShopService {
   searchClicked = new Subject<ShopParams>();
   searchTerm: string; //relation between nav and productList
 
+  //For base
+  productAdded = new Subject<{
+    allCategories: ICategory[];
+    sCategory: ICategory;
+    shopParams: ShopParams;
+    mainCategoryName: string;
+  }>();
+  productAdded2 = new Subject<number>();
+
   constructor(private http: HttpClient) {}
 
   getProducts(shopParams: ShopParams) {

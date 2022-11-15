@@ -19,10 +19,8 @@
       <div *ngIf="this.filterShopParams.cityId" class="small me-2" style="display: inline-block">
         <span style="display: inline-block; vertical-align: middle" class="fw-bold me-1">İl: </span>
         <button class="btn btn-outline-secondary btn-sm filter" (click)="onRemoveFilterClick(searchFilter.city)">
-          {{ getCityName(this.filterShopParams.cityId) | async }}
-          <span *ngIf="this.filterShopParams.countyId">
-            / {{ getCountyName(this.filterShopParams.cityId, this.filterShopParams.countyId) | async }} </span
-          >
+          {{ cityName }}
+          <span *ngIf="this.filterShopParams.countyId"> / {{ countyName }} </span>
           <em class="fa-solid fa-xmark"></em>
         </button>
       </div>

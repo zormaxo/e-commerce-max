@@ -1,9 +1,9 @@
-using Core.Errors;
-using Core.Exceptions;
+using Shop.Core.Exceptions;
+using Shop.Core.Response;
 using System.Net;
 using System.Text.Json;
 
-namespace Application.Middleware;
+namespace Shop.API.Middleware;
 
 public class ExceptionMiddleware
 {
@@ -26,9 +26,7 @@ public class ExceptionMiddleware
         }
         catch (ApiException ex)
         {
-            var response = _env.IsDevelopment()
-                ? new ApiErrorObject(ex.ApiMessage, ex)
-                : new ApiErrorObject(ex.ApiMessage);
+            var response = _env.IsDevelopment() ? new ApiErrorObject(ex.ApiMessage, ex) : new ApiErrorObject(ex.ApiMessage);
 
             await CreateExceptionResponse(ex, ex.HttpStatusCode, response);
         }

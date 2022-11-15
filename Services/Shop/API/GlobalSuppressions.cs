@@ -5,4 +5,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Minor Code Smell", "S3400:Methods should not return constants", Justification = "<Pending>", Scope = "member", Target = "~M:Application.Controllers.BuggyController.GetSecret~Microsoft.AspNetCore.Mvc.ActionResult{System.String}")]
+[assembly: SuppressMessage(
+    "Minor Code Smell",
+    "S3400:Methods should not return constants",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Application.Controllers.BuggyController.GetSecret~Microsoft.AspNetCore.Mvc.ActionResult{System.String}")]

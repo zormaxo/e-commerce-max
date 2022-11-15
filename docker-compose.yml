@@ -1,15 +1,11 @@
-version: '3.4'
-
 services:
-  catalogdb.srv:
-    image: mongo
 
-  catalog.api.srv:
-    image: ${DOCKER_REGISTRY-}kuyumdan-catalogapi
-    build:
-      context: .
-      dockerfile: Services/Catalog/Catalog.API/Dockerfile
-
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
 volumes:
-  mongo_data:
-
+  redis-data:

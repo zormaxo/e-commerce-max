@@ -2,14 +2,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Application.Extensions
+namespace Shop.API.Extensions;
+
+public static class IdentityServiceExtensions
 {
-    public static class IdentityServiceExtensions
+    public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
     {
-        public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
-        {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(
+                options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -20,7 +21,6 @@ namespace Application.Extensions
                     };
                 });
 
-            return services;
-        }
+        return services;
     }
 }

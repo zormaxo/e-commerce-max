@@ -1,0 +1,13 @@
+<div class="row">
+  <app-breadcrumb *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumb>
+  <section class="d-none d-sm-block col-sm-4 col-md-3">
+    <app-left-nav
+      *ngIf="allCategories"
+      [selectedCategory]="selectedCategory"
+      [allCategories]="allCategories"></app-left-nav>
+    <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
+  </section>
+  <section class="col-sm-8 col-md-9">
+    <router-outlet></router-outlet>
+  </section>
+</div>
