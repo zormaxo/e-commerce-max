@@ -51,6 +51,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         CalculateMaxMinVal(productParams);
 
         FilteredProducts = _productsRepo.GetAll()
+            .Include(x => x.Favourites)
             .WhereIf(
                 productParams.MaxValue.HasValue,
                 x => x.Currency == CurrencyCode.USD
@@ -97,6 +98,10 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         List<T> data = await PagedAndFilteredProducts
             .ProjectTo<T>(_mapper.ConfigurationProvider)
+            .AsNoTracking()
+            .ToListAsync();
+
+        var data2 = await PagedAndFilteredProducts
             .AsNoTracking()
             .ToListAsync();
 

@@ -32,4 +32,6 @@ public class Product : FullAuditableEntity, IPrice
     public CurrencyCode Currency { get; set; }
 
     public ICollection<ProductPhoto> Photos { get; set; }
+
+    public ICollection<Favourite> Favourites { get; set; }
 }

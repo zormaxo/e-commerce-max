@@ -28,4 +28,6 @@ public class AppUser : FullAuditableEntity
     public ICollection<Product> Products { get; set; }
 
     public ICollection<UserPhoto> Photos { get; set; }
+
+    public ICollection<Favourite> Favourites { get; set; }
 }

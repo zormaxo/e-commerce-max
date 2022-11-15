@@ -5,7 +5,11 @@ namespace Shop.Core.Entities;
 [Table("Favourites")]
 public class Favourite : BaseEntity
 {
+    public AppUser User { get; set; }
+
     public int UserId { get; set; }
 
-    public ICollection<Product> Products { get; set; }
+    public Product LikedProduct { get; set; }
+
+    public int LikedProductId { get; set; }
 }
