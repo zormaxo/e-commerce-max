@@ -31,14 +31,11 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
     protected ProductBaseService(
         IGenericRepository<Product> productsRepo,
         IGenericRepository<Category> categoryRepo,
-        IPhotoService photoService,
         CachedItems cachedItems,
-        IMapper mapper,
-        StoreContext context) : base(mapper, context)
+        IMapper mapper) : base(mapper)
     {
         _productsRepo = productsRepo;
         _categoryRepo = categoryRepo;
-        _photoService = photoService;
         _cachedItems = cachedItems;
     }
 

@@ -2,7 +2,7 @@
 
 namespace Shop.Core.Entities;
 
-[Table("Favourite")]
+[Table("Favourites")]
 public class Favourite : BaseEntity
 {
     public int UserId { get; set; }

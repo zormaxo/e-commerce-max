@@ -1,7 +1,6 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Interfaces;
 using Shop.Application.Shared.Dtos.Product;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
@@ -12,21 +11,21 @@ namespace Shop.Application.ApplicationServices;
 
 public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
 {
+    IGenericRepository<ProductMaterial> _materialRepo;
+
     public ProductMaterialAppService(
         IGenericRepository<Product> productsRepo,
+        IGenericRepository<ProductMaterial> materialRepo,
         IGenericRepository<Category> categoryRepo,
-        IPhotoService photoService,
         CachedItems cachedItems,
-        IMapper mapper,
-        StoreContext context) : base(productsRepo, categoryRepo, photoService, cachedItems, mapper, context)
-    {
-    }
+        IMapper mapper) : base(productsRepo, categoryRepo, cachedItems, mapper)
+    { _materialRepo = materialRepo; }
 
     protected override void AddCategoryFiltering()
     {
-        FilteredProducts = FilteredProducts.WhereIf(
-            ProductParams.IsNew.HasValue,
-            p => p.ProductMaterial.IsNew == ProductParams.IsNew);
+        var categoryFilter = _materialRepo.GetAll().WhereIf(ProductParams.IsNew.HasValue, p => p.IsNew == ProductParams.IsNew);
+
+        FilteredProducts = FilteredProducts.Where(x => categoryFilter.Any(y => y.Id == x.Id));
     }
 
     protected async override Task<List<ProductMaterialDto>> QueryDatabase()
