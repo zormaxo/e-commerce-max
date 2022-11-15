@@ -15,9 +15,5 @@ public class Category : BaseEntity
 
     public string Url { get; set; }
 
-    public bool CanBeAdded { get; set; }
-
-    public bool MainCategory { get; set; }
-
     public ICollection<Category> ChildCategories { get; set; }
 }
