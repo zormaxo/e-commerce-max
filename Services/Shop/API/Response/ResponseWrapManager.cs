@@ -1,8 +1,8 @@
-﻿using Core.Errors;
-using Microsoft.AspNetCore.Http.Extensions;
+﻿using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json.Linq;
+using Shop.Core.Response;
 
-namespace Application.Response;
+namespace Shop.API.Response;
 
 /// <summary>
 /// Response Wrap Manager to handle any customizations on result and return Custom Formatted Response.

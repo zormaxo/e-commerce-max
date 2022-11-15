@@ -1,4 +1,4 @@
-namespace Application.Middleware;
+namespace Shop.API.Middleware;
 
 public class RequestResponseMiddleware
 {

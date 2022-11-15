@@ -21,9 +21,10 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ShopModule } from './s-project/shop/shop.module';
+import { AppProductBaseComponent } from './shop/categories/app-product-base/app-product-base.component';
 
 @NgModule({
-  declarations: [AppComponent, ListsComponent, MessagesComponent, ProductDetailsComponent],
+  declarations: [AppComponent, ListsComponent, MessagesComponent, ProductDetailsComponent, AppProductBaseComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

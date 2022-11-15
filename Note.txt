@@ -1,6 +1,7 @@
+from below folder
 cd .\Services\Shop\
-dotnet ef migrations add Update1 -p Infrastructure -s API -o Migrations
-dotnet ef database update -p Infrastructure -s API
+dotnet ef migrations add Update1 -p Persistence -s API -o Migrations
+dotnet ef database update -p Persistence -s API
 
 
 PRAGMA foreign_keys = ON;
@@ -9,3 +10,5 @@ docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -v "D:\Codes\
 
 https://www.youtube.com/watch?v=oXNslgIXIbQ
 https://www.youtube.com/watch?v=_iryZxv8Rxw
+
+docker-compose up -d

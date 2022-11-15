@@ -1,23 +1,23 @@
-using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Application.Helpers;
-using Shop.Core.Dtos.Product;
+using Shop.Application.ApplicationServices;
+using Shop.Application.Shared;
+using Shop.Application.Shared.Dtos.Product;
+using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 
-namespace Application.Controllers
+namespace Shop.API.Controllers;
+
+public class ProductsMachineController : BaseApiController
 {
-    public class ProductsMachineController : BaseApiController
-    {
-        private readonly ProductMachineAppService _productMachineSrv;
+    private readonly ProductMachineAppService _productMachineSrv;
 
-        public ProductsMachineController(ProductMachineAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
+    public ProductsMachineController(ProductMachineAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
 
-        [HttpGet]
-        public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductParams productParams)
-        { return Ok(await _productMachineSrv.GetProducts(productParams)); }
+    [HttpGet]
+    public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductParams productParams)
+    { return Ok(await _productMachineSrv.GetProducts(productParams)); }
 
-        [HttpPost("update-product")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<bool> UpdateProduct(Product product) { return await _productMachineSrv.UpdateProduct(product); }
-    }
+    [HttpPost("update-product")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<bool> UpdateProduct(Product product) { return await _productMachineSrv.UpdateProduct(product); }
 }

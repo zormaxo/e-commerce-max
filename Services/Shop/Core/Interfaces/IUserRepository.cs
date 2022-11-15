@@ -1,5 +1,4 @@
-using Core.Dtos.Member;
-using Core.Entities;
+using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 
 namespace Shop.Core.Interfaces;
@@ -10,15 +9,15 @@ public interface IUserRepository
 
     Task<bool> SaveAllAsync();
 
-    Task<IEnumerable<AppUser>> GetUsersAsync();
+    Task<List<AppUser>> GetUsersAsync();
 
-    Task<AppUser> GetUserByIdAsync(int id);
+    ValueTask<AppUser> GetUserByIdAsync(int id);
 
     Task<AppUser> GetUserByUsernameAsync(string username);
 
-    Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
+    Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams);
 
-    Task<MemberDto> GetMemberAsync(int id);
+    Task<AppUser> GetMemberAsync(int id);
 
     Task<AppUser> GetUserByIdIncludePhotoAsync(int id);
 }
