@@ -2,7 +2,7 @@
 
 namespace Shop.Application.Shared.Dtos.Product;
 
-public class ProductDetailDto : BaseDto
+public class ProductProjectDto : BaseDto
 {
     public string Name { get; set; } = string.Empty;
 
@@ -11,6 +11,7 @@ public class ProductDetailDto : BaseDto
     public string PriceText { get; set; } = string.Empty;
 
     //public CategoryDto Category { get; set; }
+
     public int CategoryId { get; set; }
 
     public CountyDto County { get; set; }
@@ -28,5 +29,5 @@ public class ProductDetailDto : BaseDto
 
     public bool IsFavourite { get; set; }
 
-    public int FavouriteCount { get; set; }
+    public ICollection<FavouriteDto> Favourites { get; set; }
 }

@@ -61,7 +61,7 @@ export class ProductDetailsComponent implements OnInit {
       this.product = product.result;
       this.galleryImages = this.getImages();
       this.shopService.getCategories().subscribe((categories) => {
-        this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.category.id);
+        this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.categoryId);
         this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
       });
     });

@@ -14,7 +14,8 @@ export interface IProduct {
   city: string;
   county: string;
   isActive: boolean;
-  category: ICategory;
+  // category: ICategory;
+  categoryId: number;
   photos: Photo[];
   user: Member;
 }

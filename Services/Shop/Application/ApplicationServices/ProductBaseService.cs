@@ -124,7 +124,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
     public async Task<ProductDetailDto> GetProduct(int id, int? userId)
     {
         var product = await _productsRepo.GetAll()
-            .ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<ProductProjectDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (product == null)
@@ -132,7 +132,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         product.IsFavourite = product.Favourites.Any(x => x.UserId == userId);
 
-        return product;
+        return _mapper.Map<ProductDetailDto>(product);
     }
 
     public async Task<bool> UpdateProduct(Product product)

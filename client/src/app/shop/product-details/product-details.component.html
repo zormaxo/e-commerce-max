@@ -1,5 +1,5 @@
 <ng-container *ngIf="parentCategories">
-  <app-breadcrumb [selectedCategoryId]="product.category.id"></app-breadcrumb>
+  <app-breadcrumb [selectedCategoryId]="product.categoryId"></app-breadcrumb>
   <div class="row justify-content-between">
     <div class="col-auto">
       <span class="h5">{{ product.name }}</span>
@@ -92,5 +92,5 @@
       </div>
     </div>
   </div>
-  <div class="h6 text-center mt-3">{{ product.favourites.length }} kişi favorilerine ekledi</div>
+  <div class="h6 text-center mt-3">{{ product.favouriteCount }} kişi favorilerine ekledi</div>
 </ng-container>

@@ -29,10 +29,14 @@ public class MappingProfiles : Profile
             .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("dd.MM.yyyy")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-        CreateMap<Product, ProductDetailDto>()
+        CreateMap<Product, ProductProjectDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
             .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")))
-            .ForMember(d => d.PictureUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));
+            .ForMember(d => d.PictureUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
+            .ForMember(d => d.CategoryId, o => o.MapFrom(src => src.Category.Id));
+
+        CreateMap<ProductProjectDto, ProductDetailDto>()
+            .ForMember(d => d.FavouriteCount, o => o.MapFrom(src => src.Favourites.Count));
 
         CreateMap<AppUser, ProductMemberDto>()
             .ForMember(d => d.PhotoUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
