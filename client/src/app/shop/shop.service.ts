@@ -50,7 +50,7 @@ export class ShopService {
     let params = new HttpParams();
     params = params.append('userId', userId);
 
-    return this.http.get<{ activeProducts: number; inactiveProducts: number }>(
+    return this.http.get<{ activeProducts: number; inactiveProducts: number; favourites: number }>(
       this.baseUrl + 'products/product-counts',
       {
         params: params,
@@ -148,6 +148,10 @@ export class ShopService {
     }
   }
 
+  addLike(productId: number) {
+    return this.http.post(this.baseUrl + 'products/add-favourite/' + productId, {});
+  }
+
   private generateHttpParams(shopParams: ShopParams) {
     let params = new HttpParams();
 
@@ -181,6 +185,10 @@ export class ShopService {
 
     if (shopParams.getAllStatus !== undefined) {
       params = params.append('getAllStatus', shopParams.getAllStatus);
+    }
+
+    if (shopParams.favourite !== undefined) {
+      params = params.append('favourite', shopParams.favourite);
     }
 
     if (shopParams.currency !== undefined) {

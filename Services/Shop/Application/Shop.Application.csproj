@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application.Shared\Shop.Application.Shared.csproj" />
     <ProjectReference Include="..\Persistence\Shop.Persistence.csproj" />
   </ItemGroup>
 

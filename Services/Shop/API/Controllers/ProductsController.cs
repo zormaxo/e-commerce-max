@@ -12,8 +12,13 @@ namespace Shop.API.Controllers;
 public class ProductsController : BaseApiController
 {
     private readonly ProductAppService _productSrv;
+    private readonly FavouritesAppService _favSrv;
 
-    public ProductsController(ProductAppService productSrv) { _productSrv = productSrv; }
+    public ProductsController(ProductAppService productSrv, FavouritesAppService favSrv)
+    {
+        _productSrv = productSrv;
+        _favSrv = favSrv;
+    }
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProducts([FromQuery] ProductParams productParams)
@@ -40,4 +45,7 @@ public class ProductsController : BaseApiController
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     { return await _productSrv.AddPhoto(file, User.GetUserId()); }
+
+    [HttpPost("add-favourite/{productId}")]
+    public async Task AddFavourite(int productId) { await _favSrv.AddFavourite(productId, User.GetUserId()); }
 }

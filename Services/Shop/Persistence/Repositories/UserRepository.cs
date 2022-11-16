@@ -14,7 +14,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
     public Task<AppUser> GetMemberAsync(int id)
     {
-        return _context.Users.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync();
+        return _dbSet.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync();
 
         //return await _context.Users
         //    .Where(x => x.Id == id)
@@ -24,7 +24,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
     public Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
     {
-        var query = _context.Users.Include(x => x.Photos).Where(u => u.UserName != userParams.CurrentUsername);
+        var query = _dbSet.Include(x => x.Photos).Where(u => u.UserName != userParams.CurrentUsername);
         query = userParams.OrderBy switch
         {
             "created" => query.OrderByDescending(u => u.CreatedDate),

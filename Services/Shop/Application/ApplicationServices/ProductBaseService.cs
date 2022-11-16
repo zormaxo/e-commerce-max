@@ -73,13 +73,19 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .WhereIf(productParams.CountyId.HasValue, p => p.County.Id == productParams.CountyId)
             .WhereIf(productParams.CityId.HasValue, p => p.County.CityId == productParams.CityId)
             .WhereIf(!productParams.GetAllStatus.HasValue, p => p.IsActive) //true: All, false: InActive, null: Active
-            .WhereIf(productParams.GetAllStatus.HasValue && productParams.GetAllStatus == false, p => !p.IsActive)
-            .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId);
+            .WhereIf(productParams.GetAllStatus.HasValue && productParams.GetAllStatus == false, p => !p.IsActive);
 
         AddCategoryFiltering();
 
-        if (productParams.UserId.HasValue)
-            FilteredProducts = FilteredProducts.Include(x => x.Favourites);
+        if (productParams.Favourite)
+        {
+            FilteredProducts = FilteredProducts.Include(x => x.Favourites)
+                .Where(x => x.Favourites.Any(y => y.UserId == productParams.UserId));
+        }
+        else
+        {
+            FilteredProducts = FilteredProducts.WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId);
+        }
 
         if (!string.IsNullOrEmpty(productParams.CategoryName))
         {
@@ -108,17 +114,18 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     public async Task<object> GetActiveInactiveProducts(ProductParams productParams)
     {
-        var activeProducts = await _productsRepo.GetAll()
-            .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
-            .Where(x => x.IsActive)
+        var productsByUser = await _productsRepo.GetAll()
+            .Where(p => p.UserId == productParams.UserId)
+            .Select(x => x.IsActive)
+            .ToListAsync();
+
+        var activeProducts = productsByUser.Count(x => x);
+        var inactiveProducts = productsByUser.Count(x => !x);
+        var favourites = await _productsRepo.GetAll()
+            .Where(y => y.Favourites.Any(x => x.UserId == productParams.UserId))
             .CountAsync();
 
-        var inactiveProducts = await _productsRepo.GetAll()
-            .WhereIf(productParams.UserId.HasValue, p => p.UserId == productParams.UserId)
-            .Where(x => !x.IsActive)
-            .CountAsync();
-
-        return new { activeProducts, inactiveProducts };
+        return new { activeProducts, inactiveProducts, favourites };
     }
 
     public async Task<ProductDetailDto> GetProduct(int id, int? userId)
@@ -174,6 +181,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         throw new ApiException("Problem addding photo");
     }
+
 
     protected abstract void AddCategoryFiltering();
 

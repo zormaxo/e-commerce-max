@@ -17,6 +17,10 @@ public class MappingProfiles : Profile
         //.ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
 
         CreateMap<Product, ShowcaseDto>()
+            .ForMember(d => d.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
+            .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
+
+        CreateMap<Product, ProductDto>()
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
         CreateMap<Product, ProductMachineDto>()

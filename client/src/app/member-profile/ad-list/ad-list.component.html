@@ -28,10 +28,10 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" routerLink="/uye/uyelik/ilan/duzenle">Düzenle</a></li>
-                  <li *ngIf="this.inActivePage">
+                  <li *ngIf="this.activeStatus">
                     <a class="dropdown-item" (click)="onActive(product, false)">Yayından kaldır</a>
                   </li>
-                  <li *ngIf="!this.inActivePage">
+                  <li *ngIf="!this.activeStatus">
                     <a class="dropdown-item" (click)="onActive(product, true)">Yayına al</a>
                   </li>
                 </ul>

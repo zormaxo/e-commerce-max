@@ -6,7 +6,7 @@ import { AccountService } from 'src/app/core/services/account.service';
 import { take } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 registerLocaleData(localeTr);
 
@@ -19,21 +19,35 @@ export class AdListComponent implements OnInit {
   products: IProduct[];
   shopParams = new ShopParams(10);
   totalCount: number;
-  inActivePage;
+  activeStatus: boolean;
+  page: string;
 
   constructor(
     private shopService: ShopService,
     private accountService: AccountService,
-    private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    const isInactive = this.router.url.split('?')[0].split('/').pop();
-    this.inActivePage = isInactive === 'pasif' ? false : true;
-    if (!this.inActivePage) {
-      this.shopParams.getAllStatus = false;
+    this.route.data.subscribe((data: Data) => {
+      this.page = data['page'];
+    });
+
+    switch (this.page) {
+      case 'active':
+        this.activeStatus = true;
+        break;
+      case 'inactive':
+        this.activeStatus = false;
+        this.shopParams.getAllStatus = false;
+        break;
+      case 'favourites':
+        this.shopParams.getAllStatus = true;
+        this.shopParams.favourite = true;
+        break;
     }
+
     this.getProducts();
   }
 

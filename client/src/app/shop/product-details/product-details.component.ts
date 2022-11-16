@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions, NgxGalleryOrder } from '@kolkov/ngx-gallery';
+import {
+  NgxGalleryAnimation,
+  NgxGalleryImage,
+  NgxGalleryImageSize,
+  NgxGalleryOptions,
+  NgxGalleryOrder,
+} from '@kolkov/ngx-gallery';
+import { ToastrService } from 'ngx-toastr';
 import { ICategory } from 'src/app/shared/models/category';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
@@ -16,7 +23,9 @@ export class ProductDetailsComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   selectedCategory: ICategory;
-  constructor(public shopService: ShopService, private activatedRoute: ActivatedRoute) {}
+  currentClasses: Record<string, boolean> = {};
+
+  constructor(public shopService: ShopService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadProduct();
@@ -33,12 +42,12 @@ export class ProductDetailsComponent implements OnInit {
         previewKeyboardNavigation: true,
         previewAnimation: false,
         thumbnailsArrowsAutoHide: true,
-        thumbnailsColumns:4,
-        thumbnailsRows:2,
+        thumbnailsColumns: 4,
+        thumbnailsRows: 2,
         previewInfinityMove: true,
         previewBullets: true,
         thumbnailsMoveSize: 4,
-        thumbnailsOrder:NgxGalleryOrder.Page,
+        thumbnailsOrder: NgxGalleryOrder.Page,
         thumbnailSize: NgxGalleryImageSize.Contain,
       },
     ];
@@ -64,8 +73,25 @@ export class ProductDetailsComponent implements OnInit {
         this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.categoryId);
         this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
       });
+
+      this.currentClasses = {
+        'text-warning': false,
+      };
     });
   }
 
-  onFilter() {}
+  addLike() {
+    this.shopService.addLike(this.product.id).subscribe({
+      next: (a) => {
+        this.toastr.success('Favorilere eklendi');
+        this.currentClasses = {
+          'text-warning': true,
+        };
+      },
+      error: (a) => {
+        console.log(a);
+        this.toastr.error('Favorilere eklenmedi');
+      },
+    });
+  }
 }

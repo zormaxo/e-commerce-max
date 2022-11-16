@@ -14,8 +14,9 @@ const routes: Routes = [
     children: [
       { path: 'uyelik', component: MembershipInfoComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'ozet', component: SummaryComponent },
-      { path: 'ilanlar', component: AdListComponent },
-      { path: 'ilanlar/pasif', component: AdListComponent },
+      { path: 'ilanlar', component: AdListComponent, data: { page: 'active' } },
+      { path: 'ilanlar/pasif', component: AdListComponent, data: { page: 'inactive' } },
+      { path: 'favoriler', component: AdListComponent, data: { page: 'favourites' } },
     ],
   },
 ];

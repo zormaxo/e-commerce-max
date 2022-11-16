@@ -15,6 +15,7 @@ export class ShopParams {
   userId: number;
   currency: CurrencyType = CurrencyType.TL;
   getAllStatus: boolean;
+  favourite: boolean;
 
   constructor(pageSize = 20, categoryName = undefined) {
     this.pageSize = pageSize;

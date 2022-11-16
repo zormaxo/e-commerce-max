@@ -27,4 +27,6 @@ public class ProductParams : PageParams
     public string Sort { get; set; }
 
     public int? UserId { get; set; }
+
+    public bool Favourite { get; set; }
 }

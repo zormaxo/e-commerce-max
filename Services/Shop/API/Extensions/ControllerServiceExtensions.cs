@@ -15,6 +15,7 @@ public static class ControllerServiceExtensions
         services.AddScoped<ProductMaterialAppService>();
         services.AddScoped<CategoriesAppService>();
         services.AddScoped<BasketAppService>();
+        services.AddScoped<FavouritesAppService>();
 
         return services;
     }

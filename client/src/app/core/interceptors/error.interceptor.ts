@@ -18,8 +18,10 @@ export class ErrorInterceptor implements HttpInterceptor {
               if (error.error.error.message) {
                 this.toastr.error(error.error.error.message, error.status);
                 throw error.error.error.message;
-              } else {
+              } else if (typeof error.error === 'object') {
                 this.toastr.error(error.statusText, error.status);
+              } else {
+                this.toastr.error(error.error.error, error.status);
               }
               break;
             case 401:

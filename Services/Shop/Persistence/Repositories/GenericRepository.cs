@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Entities;
 using Shop.Core.Interfaces;
-using Shop.Persistence;
 using System.Linq.Expressions;
 
 namespace Shop.Persistence.Repositories;
@@ -9,7 +8,7 @@ namespace Shop.Persistence.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
     public readonly StoreContext _context;
-    private readonly DbSet<T> _dbSet;
+    public readonly DbSet<T> _dbSet;
 
     public GenericRepository(StoreContext context)
     {
