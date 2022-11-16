@@ -3,7 +3,7 @@
 namespace Shop.Core.Entities;
 
 [Table("Favourites")]
-public class Favourite : BaseEntity
+public class Favourite
 {
     public AppUser User { get; set; }
 

@@ -18,4 +18,5 @@ export interface IProduct {
   categoryId: number;
   photos: Photo[];
   user: Member;
+  isFavourite: boolean;
 }

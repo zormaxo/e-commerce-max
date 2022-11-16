@@ -46,6 +46,6 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     { return await _productSrv.AddPhoto(file, User.GetUserId()); }
 
-    [HttpPost("add-favourite/{productId}")]
-    public async Task AddFavourite(int productId) { await _favSrv.AddFavourite(productId, User.GetUserId()); }
+    [HttpPost("add-remove-favourite/{productId}")]
+    public async Task AddRemoveFavourite(int productId) { await _favSrv.AddRemoveFavourite(productId, User.GetUserId()); }
 }

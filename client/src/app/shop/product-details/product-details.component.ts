@@ -75,22 +75,26 @@ export class ProductDetailsComponent implements OnInit {
       });
 
       this.currentClasses = {
-        'text-warning': false,
+        'text-warning': this.product.isFavourite,
       };
     });
   }
 
   addLike() {
-    this.shopService.addLike(this.product.id).subscribe({
-      next: (a) => {
-        this.toastr.success('Favorilere eklendi');
-        this.currentClasses = {
-          'text-warning': true,
-        };
-      },
-      error: (a) => {
-        console.log(a);
-        this.toastr.error('Favorilere eklenmedi');
+    this.shopService.AddOrRemoveFavourite(this.product.id).subscribe({
+      next: () => {
+        if (this.product.isFavourite) {
+          this.toastr.error('Favorilerden çıkarıldı');
+          this.currentClasses = {
+            'text-warning': false,
+          };
+        } else {
+          this.toastr.success('Favorilere eklendi');
+          this.currentClasses = {
+            'text-warning': true,
+          };
+        }
+        this.product.isFavourite = !this.product.isFavourite;
       },
     });
   }

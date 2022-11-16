@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shop.Core.Entities;
 
 namespace Shop.Persistence.EntityConfigurations;
 
-internal class FavouriteEntityTypeConfiguration
+internal class FavouriteEntityTypeConfiguration : IEntityTypeConfiguration<Favourite>
 {
     public void Configure(EntityTypeBuilder<Favourite> modelBuilder)
     {

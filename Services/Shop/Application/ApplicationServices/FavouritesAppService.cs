@@ -10,9 +10,19 @@ public class FavouritesAppService : BaseAppService
 
     public FavouritesAppService(IMapper mapper, IGenericRepository<Favourite> favRepo) : base(mapper) { _favRepo = favRepo; }
 
-    public async Task AddFavourite(int productId, int userId)
+    public async Task AddRemoveFavourite(int productId, int userId)
     {
-        await _favRepo.AddAsync(new Favourite { LikedProductId = productId, UserId = userId });
+        var fav = await _favRepo.GetAll().FindAsync(productId, userId);
+
+        if (fav == null)
+        {
+            await _favRepo.AddAsync(new Favourite { LikedProductId = productId, UserId = userId });
+        }
+        else
+        {
+            _favRepo.GetAll().Remove(fav);
+        }
+
         await _favRepo.SaveChangesAsync();
     }
 }

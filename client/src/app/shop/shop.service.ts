@@ -148,8 +148,8 @@ export class ShopService {
     }
   }
 
-  addLike(productId: number) {
-    return this.http.post(this.baseUrl + 'products/add-favourite/' + productId, {});
+  AddOrRemoveFavourite(productId: number) {
+    return this.http.post(this.baseUrl + 'products/add-remove-favourite/' + productId, {});
   }
 
   private generateHttpParams(shopParams: ShopParams) {

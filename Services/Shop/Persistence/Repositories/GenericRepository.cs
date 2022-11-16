@@ -1,11 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Shop.Core.Entities;
 using Shop.Core.Interfaces;
 using System.Linq.Expressions;
 
 namespace Shop.Persistence.Repositories;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     public readonly StoreContext _context;
     public readonly DbSet<T> _dbSet;
@@ -16,7 +15,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _dbSet = context.Set<T>();
     }
 
-    public IQueryable<T> GetAll() { return _dbSet; }
+    public DbSet<T> GetAll() { return _dbSet; }
 
     public ValueTask<T> GetByIdAsync(int id) { return _dbSet.FindAsync(id); }
 

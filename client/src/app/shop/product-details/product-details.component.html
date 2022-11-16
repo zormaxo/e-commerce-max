@@ -6,7 +6,7 @@
     </div>
     <div class="col-auto small">
       <a href="javascript:;" style="margin-right: 4rem" (click)="addLike()"
-        ><em class="fa-solid fa-star me-2" [class.text-warning]="product.isFavourite"></em>
+        ><em class="fa-solid fa-star me-2" [ngClass]="currentClasses"></em>
         <span *ngIf="product.isFavourite">Favorilerimden çıkar</span>
         <span *ngIf="!product.isFavourite">Favorilerime ekle</span>
       </a>

@@ -1,11 +1,11 @@
-using Shop.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Shop.Core.Interfaces;
 
-public interface IGenericRepository<T> where T : BaseEntity
+public interface IGenericRepository<T> where T : class
 {
-    IQueryable<T> GetAll();
+    DbSet<T> GetAll();
 
     ValueTask<T> GetByIdAsync(int id);
 
