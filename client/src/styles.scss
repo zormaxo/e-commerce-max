@@ -5,6 +5,7 @@
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import '~ngx-toastr/toastr';
 
 .tab-panel {
   border: 1px solid #ddd;
