@@ -43,7 +43,7 @@ export class ShowcaseComponent implements OnInit {
     this.shopService.getCategories().subscribe({
       next: (response) => {
         this.categories = response;
-        this.shopService.addCountToParents(this.categories, this.categoryGroupCount);
+        this.shopService.calculateProductCountsByCategory(this.categories, this.categoryGroupCount);
       },
     });
   }

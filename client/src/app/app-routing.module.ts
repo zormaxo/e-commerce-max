@@ -5,6 +5,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
+import { UserProductsComponent } from './shop/categories/user-products/user-products.component';
+import { AppProductBaseComponent } from './shop/categories/app-product-base/app-product-base.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -61,12 +63,22 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),
       },
+      {
+        path: 'urunler',
+        component: AppProductBaseComponent,
+        children: [{ path: ':id', component: UserProductsComponent }],
+      },
+      // {
+      //   path: 'urunler/:id',
+      //   component: UserProductsComponent,
+      // },
     ],
   },
   {
     path: 'giris',
     loadChildren: () => import('./entry/entry.module').then((mod) => mod.EntryModule),
   },
+
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 

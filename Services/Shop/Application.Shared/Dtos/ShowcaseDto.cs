@@ -1,4 +1,6 @@
-﻿namespace Shop.Application.Shared.Dtos;
+﻿using Shop.Application.Shared.Dtos.City;
+
+namespace Shop.Application.Shared.Dtos;
 
 public class ShowcaseDto : BaseDto
 {
@@ -7,4 +9,6 @@ public class ShowcaseDto : BaseDto
     public string PictureUrl { get; set; } = string.Empty;
 
     public string PriceText { get; set; } = string.Empty;
+
+    public CountyDto County { get; set; }
 }

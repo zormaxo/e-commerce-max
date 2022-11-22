@@ -39,10 +39,14 @@ export abstract class AppProductBaseClass implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
-      this.shopParams.categoryName = this.categoryName = this.route.snapshot.url[0].path;
-      this.mainCategoryName = this.route.parent.parent.snapshot.url[0]
-        ? this.route.parent.parent.snapshot.url[0].path
-        : this.route.parent.snapshot.url[0].path;
+      const path = this.route.snapshot.url[0].path;
+      if (isNaN(+path)) {
+        this.shopParams.categoryName = this.categoryName = this.route.snapshot.url[0].path;
+        this.mainCategoryName = this.route.parent.parent.snapshot.url[0]
+          ? this.route.parent.parent.snapshot.url[0].path
+          : this.route.parent.snapshot.url[0].path;
+      }
+
       this.getCategoriesThenProducts();
     });
 
@@ -57,9 +61,12 @@ export abstract class AppProductBaseClass implements OnInit {
     this.shopService.getCategories().subscribe((categories) => {
       this.allCategories = categories;
       this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
-      if (!this.selectedCategory) {
-        this.router.navigateByUrl('/notfound');
-      }
+      // if (!this.selectedCategory) {
+      //   this.router.navigateByUrl('/notfound');
+      // } else {
+      //   this.getProducts2();
+      // }
+
       this.getProducts2();
     });
   }
@@ -88,7 +95,7 @@ export abstract class AppProductBaseClass implements OnInit {
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
 
-      this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
+      this.shopService.calculateProductCountsByCategory(this.allCategories, productResponse.categoryGroupCount);
 
       this.shopService.productAdded.next({
         allCategories: this.allCategories,

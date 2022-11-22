@@ -109,12 +109,12 @@ export class ShopService {
     }
   }
 
-  //Adds product counts to parent categories cumulatively
-  addCountToParents(allCategories: ICategory[], categoryGroupCount: CategoryGroupCount[]) {
-    const addCount = (selectedCategory: ICategory, count: number) => {
+  //Adds product counts to parent categories cumulatively. This metod requires both product and category results.
+  calculateProductCountsByCategory(allCategories: ICategory[], categoryGroupCount: CategoryGroupCount[]) {
+    const addCountToParent = (selectedCategory: ICategory, count: number) => {
       if (selectedCategory.parent) {
         selectedCategory.parent.count += count;
-        addCount(selectedCategory.parent, count);
+        addCountToParent(selectedCategory.parent, count);
       }
     };
 
@@ -122,7 +122,7 @@ export class ShopService {
     categoryGroupCount.forEach((groupCount) => {
       const category = allCategories.find((x) => x.id == groupCount.categoryId);
       category.count = groupCount.count;
-      addCount(category, groupCount.count);
+      addCountToParent(category, groupCount.count);
     });
   }
 

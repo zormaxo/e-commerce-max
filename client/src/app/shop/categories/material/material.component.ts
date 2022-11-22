@@ -18,7 +18,7 @@ export class MaterialComponent extends AppProductBaseClass {
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
 
-      this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
+      this.shopService.calculateProductCountsByCategory(this.allCategories, productResponse.categoryGroupCount);
     });
   }
 }

@@ -33,7 +33,7 @@ export class SearchResultComponent implements OnInit {
         this.totalCount = productResponse.totalCount;
         this.categoryGroupCountList = productResponse.categoryGroupCount;
 
-        this.shopService.addCountToParents(this.allCategories, this.categoryGroupCountList);
+        this.shopService.calculateProductCountsByCategory(this.allCategories, this.categoryGroupCountList);
       });
     });
   }
