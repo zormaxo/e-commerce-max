@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AppProductBaseClass } from 'src/app/app-product-base-class';
 import { LeftNavMode } from 'src/app/shared/enums/leftNavMode';
-import { Member } from 'src/app/shared/models/member';
 
 @Component({
   selector: 'app-user-products',

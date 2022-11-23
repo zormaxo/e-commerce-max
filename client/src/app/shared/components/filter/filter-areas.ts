@@ -1,6 +1,6 @@
 export class FilterAreas {
   search = true;
-  isNew = true;
+  isNew: boolean;
   minValue = true;
   maxValue = true;
   cityId = true;

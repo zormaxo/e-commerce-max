@@ -38,6 +38,7 @@ public class UsersController : BaseApiController
         return user == null ? BadRequest("User not found") : (ActionResult<MemberDto>)user;
     }
 
+    [AllowAnonymous]
     [HttpGet("light/{userId}")]
     public async Task<ActionResult<MemberLightDto>> GetLightUser(int userId)
     {

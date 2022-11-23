@@ -29,6 +29,7 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   leftNavMode = LeftNavMode.AllProducts;
   member: Member;
   subs: Subscription;
+  subs2: Subscription;
 
   constructor(injector: Injector) {
     this.route = injector.get(ActivatedRoute);
@@ -47,6 +48,7 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    this.subs2.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -62,7 +64,7 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
       this.getCategoriesThenProducts();
     });
 
-    this.shopService.searchClicked.subscribe((shopParams: ShopParams) => {
+    this.subs2 = this.shopService.searchClicked.subscribe((shopParams: ShopParams) => {
       this.shopParams = shopParams;
       this.filterShopParams = structuredClone(shopParams);
       this.getProducts2();

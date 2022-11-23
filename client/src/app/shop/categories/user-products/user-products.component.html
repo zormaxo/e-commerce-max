@@ -36,7 +36,7 @@
             <small>{{ product.priceText }}</small>
           </td>
           <td>
-            <small>{{ product.createdDate }}</small>
+            <small>{{ product.createdDate | date: "shortDate":"":"tr-TR" }}</small>
           </td>
           <td>
             <small>{{ product.county.city.name }}</small> <br /><small> {{ product.county.name }}</small>
