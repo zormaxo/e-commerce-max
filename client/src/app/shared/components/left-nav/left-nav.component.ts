@@ -8,7 +8,7 @@ import { ICategory } from '../../models/category';
   templateUrl: './left-nav.component.html',
   styleUrls: ['./left-nav.component.scss'],
 })
-export class LeftNavComponent{
+export class LeftNavComponent {
   @Input() filteredCategories: ICategory[];
   @Input() leftNavMode: LeftNavMode;
 

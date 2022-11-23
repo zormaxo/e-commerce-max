@@ -1,6 +1,23 @@
 <div class="row">
   <app-breadcrumb *ngIf="mode === LeftNavMode.AllProducts"></app-breadcrumb>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
+    <div *ngIf="member" class="card small mb-3">
+      <div class="card-body">
+        <div class="row align-items-center mb-2 gx-2">
+          <div class="col-auto">
+            <img src="{{ member.photoUrl }}" alt="" style="width: 50px" />
+          </div>
+          <div class="col">
+            <span class="h6 card-title">{{ member.firstName }} {{ member.lastName }}</span>
+          </div>
+        </div>
+
+        <div class="card-text">
+          <p class="text-muted">Hesap açma tarihi: {{ member.createdDate | date: "dd.MM.yyyy" }}</p>
+          <p>Cep: {{ member.phoneNumber | mask: "(000) 000 00 00" }}</p>
+        </div>
+      </div>
+    </div>
     <app-left-nav *ngIf="allCategories" [filteredCategories]="filteredCategories" [leftNavMode]="mode"></app-left-nav>
     <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
   </section>

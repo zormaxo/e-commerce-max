@@ -47,7 +47,7 @@
               {{ categoryWithParents.selectedCategory.name }}</a
             >
             <span *ngIf="!categoryWithParents.selectedCategory.childCategories" class="small text-muted">
-              ({{ selectedCategory.count }})</span
+              ({{ categoryWithParents.selectedCategory.count }})</span
             >
           </li>
           <ng-container *ngFor="let child of categoryWithParents.selectedCategory.childCategories">
@@ -84,7 +84,7 @@
               {{ categoryWithParents.selectedCategory.name }}</a
             >
             <span *ngIf="!categoryWithParents.selectedCategory.childCategories" class="small text-muted">
-              ({{ selectedCategory.count }})</span
+              ({{ categoryWithParents.selectedCategory.count }})</span
             >
           </li>
           <ng-container *ngFor="let child of categoryWithParents.selectedCategory.childCategories">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LeftNavMode } from 'src/app/shared/enums/leftNavMode';
+import { Member } from 'src/app/shared/models/member';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from '../../shop.service';
 import { ICategory } from 'd:/Codes/Home/Kuyumdan/client/src/app/shared/models/category';
@@ -19,6 +20,7 @@ export class AppProductBaseComponent implements OnInit {
   mode: LeftNavMode;
   LeftNavMode = LeftNavMode;
   filteredCategories: ICategory[];
+  member: Member;
 
   constructor(private route: ActivatedRoute, private shopService: ShopService, private router: Router) {}
 
@@ -29,13 +31,10 @@ export class AppProductBaseComponent implements OnInit {
       this.shopParams = a.shopParams;
       this.mainCategoryName = a.mainCategoryName;
       this.mode = a.mode;
+      this.member = a.member;
 
       this.filteredCategories = this.allCategories.filter((x) => x.parent === undefined && x.count);
       this.shopService.fillParentCategoryList(this.selectedCategory);
     });
   }
-
-  // onCategorySelected(category:ICategory) {
-  //   this.selectedCategory = category;
-  // }
 }

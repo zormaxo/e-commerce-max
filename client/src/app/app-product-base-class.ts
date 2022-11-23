@@ -1,14 +1,17 @@
-import { Directive, Injector, OnInit } from '@angular/core';
+import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
 import { Navigation, ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { MembersService } from './core/services/members.service';
 import { LeftNavMode } from './shared/enums/leftNavMode';
 import { ICategory } from './shared/models/category';
+import { Member } from './shared/models/member';
 import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
 import { ShopService } from './shop/shop.service';
 
 @Directive()
-export abstract class AppProductBaseClass implements OnInit {
+export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   shopParams: ShopParams = new ShopParams(10);
   filterShopParams: ShopParams; //This button has been added to add filter buttons after pressing the search button.
   products: IProduct[];
@@ -22,12 +25,16 @@ export abstract class AppProductBaseClass implements OnInit {
   route: ActivatedRoute;
   router: Router;
   shopService: ShopService;
-  mode= LeftNavMode.AllProducts;
+  memberService: MembersService;
+  leftNavMode = LeftNavMode.AllProducts;
+  member: Member;
+  subs: Subscription;
 
   constructor(injector: Injector) {
     this.route = injector.get(ActivatedRoute);
     this.router = injector.get(Router);
     this.shopService = injector.get(ShopService);
+    this.memberService = injector.get(MembersService);
 
     const navigation = this.router.getCurrentNavigation();
     this.shopParams.search = navigation?.extras?.state?.searchTerm;
@@ -37,6 +44,9 @@ export abstract class AppProductBaseClass implements OnInit {
     if (this.shopParams.search || this.shopParams.cityId || this.shopParams.countyId) {
       this.filterShopParams = this.shopParams;
     }
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -58,7 +68,7 @@ export abstract class AppProductBaseClass implements OnInit {
       this.getProducts2();
     });
 
-    this.shopService.categorySelected.subscribe((category: ICategory) => {
+    this.subs = this.shopService.categorySelected.subscribe((category: ICategory) => {
       if (category) {
         this.shopParams.categoryName = category.url;
       } else {
@@ -114,7 +124,8 @@ export abstract class AppProductBaseClass implements OnInit {
         sCategory: this.selectedCategory,
         shopParams: this.shopParams,
         mainCategoryName: this.mainCategoryName,
-        mode: this.mode
+        mode: this.leftNavMode,
+        member: this.member,
       });
     });
   }

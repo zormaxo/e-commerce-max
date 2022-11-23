@@ -11,6 +11,7 @@ import { ApiResponse } from '../shared/models/api-response/api-response';
 import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
 import { environment } from 'src/environments/environment';
 import { LeftNavMode } from '../shared/enums/leftNavMode';
+import { Member } from '../shared/models/member';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class ShopService {
 
   private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
   categoryWithParents$ = this.categoryWithParents.asObservable();
+  
   searchClicked = new Subject<ShopParams>();
   searchTerm: string; //relation between nav and productList
   categorySelected = new Subject<ICategory>();
@@ -34,6 +36,7 @@ export class ShopService {
     shopParams: ShopParams;
     mainCategoryName: string;
     mode: LeftNavMode;
+    member:Member;
   }>();
   productAdded2 = new Subject<number>();
 
@@ -128,15 +131,6 @@ export class ShopService {
       addCountToParent(category, groupCount.count);
     });
   }
-
-  // generateBreadcrumb(selectedCategoryId: number): void {
-  //   let selectedCategory: ICategory;
-  //   this.getCategories().subscribe((categories) => {
-  //     selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
-  //     const parentCategories = this.fillParentCategoryList(selectedCategory);
-  //     this.categoryWithParents.next({ selectedCategory, parentCategories });
-  //   });
-  // }
 
   //Populate parent category list to use in leftNav and breadcrumb components
   fillParentCategoryList(selectedCategory: ICategory): ICategory[] {
