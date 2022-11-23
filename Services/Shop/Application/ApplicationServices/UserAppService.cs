@@ -1,12 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Shop.Application.Interfaces;
-using Shop.Application.Shared.Dtos;
-using Shop.Application.Shared.Dtos.Member;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
+using Shop.Core.Shared.Dtos;
+using Shop.Core.Shared.Dtos.Member;
 using System.Net;
 
 namespace Shop.Application.ApplicationServices;

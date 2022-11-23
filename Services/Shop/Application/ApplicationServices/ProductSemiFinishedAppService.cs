@@ -1,10 +1,10 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Shared.Dtos.Product;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
+using Shop.Core.Shared.Dtos.Product;
 
 namespace Shop.Application.ApplicationServices;
 

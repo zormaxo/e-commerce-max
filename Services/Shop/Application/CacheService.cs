@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
-using Shop.Application.Shared.Dtos;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
+using Shop.Core.Shared.Dtos;
 using Shop.Persistence;
 
 namespace Shop.Application;

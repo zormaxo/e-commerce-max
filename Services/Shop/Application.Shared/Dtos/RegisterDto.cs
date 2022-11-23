@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Application.Shared.Dtos;
+namespace Shop.Core.Shared.Dtos;
 
 public class RegisterDto
 {

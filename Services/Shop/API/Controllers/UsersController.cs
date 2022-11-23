@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.API.Extensions;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
-using Shop.Application.Shared.Dtos;
-using Shop.Application.Shared.Dtos.Member;
 using Shop.Core.HelperTypes;
+using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Member;
 
 namespace Shop.API.Controllers;

@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
-using Shop.Application.Shared.Dtos;
 using Shop.Core.Exceptions;
+using Shop.Core.Shared.Dtos;
 using System.Net;
 
 namespace Shop.API.Controllers;

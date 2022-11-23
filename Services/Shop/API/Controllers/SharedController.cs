@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Application.Shared.Dtos.City;
 using Shop.Core.HelperTypes;
+using Shop.Core.Shared.Dtos.City;
 
 namespace Shop.API.Controllers;
 

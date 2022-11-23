@@ -1,6 +1,7 @@
-using Shop.Application.Shared.Dtos.City;
+using Shop.Core.Shared.Dtos;
+using Shop.Core.Shared.Dtos.City;
 
-namespace Shop.Application.Shared.Dtos.Product;
+namespace Shop.Core.Shared.Dtos.Product;
 
 public class ProductDto : BaseDto
 {

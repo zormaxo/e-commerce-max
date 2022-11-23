@@ -1,6 +1,6 @@
-﻿using Shop.Application.Shared.Dtos.City;
+﻿using Shop.Core.Shared.Dtos.City;
 
-namespace Shop.Application.Shared.Dtos;
+namespace Shop.Core.Shared.Dtos;
 
 public class ShowcaseDto : BaseDto
 {

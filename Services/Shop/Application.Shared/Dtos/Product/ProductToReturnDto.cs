@@ -1,7 +1,7 @@
-using Shop.Application.Shared.Dtos.City;
-using Shop.Application.Shared.Dtos.Member;
+using Shop.Core.Shared.Dtos.City;
+using Shop.Core.Shared.Dtos.Member;
 
-namespace Shop.Application.Shared.Dtos.Product;
+namespace Shop.Core.Shared.Dtos.Product;
 
 public class ProductToReturnDto : ShowcaseDto
 {

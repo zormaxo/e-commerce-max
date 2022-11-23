@@ -1,7 +1,4 @@
-﻿using Shop.Application.Shared.Dtos.Member;
-using Shop.Application.Shared.Dtos.Product;
-
-namespace Shop.Application.Shared.Dtos;
+﻿namespace Shop.Core.Shared.Dtos;
 
 public class FavouriteDto
 {

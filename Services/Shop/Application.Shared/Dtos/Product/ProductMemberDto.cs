@@ -1,4 +1,4 @@
-﻿namespace Shop.Application.Shared.Dtos.Product;
+﻿namespace Shop.Core.Shared.Dtos.Product;
 
 public class ProductMemberDto : BaseDto
 {

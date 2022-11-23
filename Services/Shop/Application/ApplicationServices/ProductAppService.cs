@@ -1,10 +1,8 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-using Shop.Application.Shared.Dtos;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
+using Shop.Core.Shared.Dtos;
 
 namespace Shop.Application.ApplicationServices;
 
@@ -22,5 +20,8 @@ public class ProductAppService : ProductBaseService<ShowcaseDto>
     }
 
     protected override async Task<List<ShowcaseDto>> QueryDatabase()
-    { return await PagedAndFilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync(); }
+    {
+        return PagedAndFilteredProducts;
+        /* return await PagedAndFilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync();*/
+    }
 }

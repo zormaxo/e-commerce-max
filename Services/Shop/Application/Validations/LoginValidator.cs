@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Shop.Application.Shared.Dtos;
+using Shop.Core.Shared.Dtos;
 
 namespace Shop.Application.Validations;
 

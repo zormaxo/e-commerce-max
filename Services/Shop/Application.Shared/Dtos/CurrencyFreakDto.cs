@@ -1,4 +1,4 @@
-﻿namespace Shop.Application.Shared.Dtos;
+﻿namespace Shop.Core.Shared.Dtos;
 
 public class CurrencyFreakDto
 {

@@ -1,11 +1,10 @@
 using AutoMapper;
-using Shop.Application.Shared.Dtos;
-using Shop.Application.Shared.Dtos.City;
-using Shop.Application.Shared.Dtos.Member;
-using Shop.Application.Shared.Dtos.Product;
 using Shop.Core.Entities;
 using Shop.Core.Extensions;
+using Shop.Core.Shared.Dtos;
+using Shop.Core.Shared.Dtos.City;
 using Shop.Core.Shared.Dtos.Member;
+using Shop.Core.Shared.Dtos.Product;
 
 namespace Shop.Application.AutoMapperHelper;
 

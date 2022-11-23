@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Application.Shared.Dtos.Member;
+namespace Shop.Core.Shared.Dtos.Member;
 
 public class MemberUsernameUpdateDto
 {

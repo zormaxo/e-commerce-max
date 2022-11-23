@@ -3,13 +3,13 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Interfaces;
-using Shop.Application.Shared;
-using Shop.Application.Shared.Dtos;
-using Shop.Application.Shared.Dtos.Product;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
+using Shop.Core.Shared;
+using Shop.Core.Shared.Dtos;
+using Shop.Core.Shared.Dtos.Product;
 using Shop.Persistence;
 using System.Net;
 

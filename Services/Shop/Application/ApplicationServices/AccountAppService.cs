@@ -1,10 +1,10 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Interfaces;
-using Shop.Application.Shared.Dtos;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.Interfaces;
+using Shop.Core.Shared.Dtos;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
