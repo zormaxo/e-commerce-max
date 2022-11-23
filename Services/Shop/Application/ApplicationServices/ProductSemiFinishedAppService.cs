@@ -1,6 +1,4 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
@@ -22,7 +20,4 @@ public class ProductSemiFinishedAppService : ProductBaseService<ProductDto>
     protected override void AddCategoryFiltering()
     {
     }
-
-    protected override Task<List<ProductDto>> QueryDatabase()
-    { return PagedAndFilteredProducts.ProjectTo<ProductDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync(); }
 }

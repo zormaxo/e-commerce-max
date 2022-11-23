@@ -185,8 +185,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     protected abstract void AddCategoryFiltering();
 
-    protected abstract Task<List<T>> QueryDatabase();
-
     private void CalculateMaxMinVal(ProductParams productParams)
     {
         if (productParams.MinValue.HasValue)

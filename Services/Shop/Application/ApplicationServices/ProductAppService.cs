@@ -18,10 +18,4 @@ public class ProductAppService : ProductBaseService<ShowcaseDto>
     protected override void AddCategoryFiltering()
     {
     }
-
-    protected override async Task<List<ShowcaseDto>> QueryDatabase()
-    {
-        return PagedAndFilteredProducts;
-        /* return await PagedAndFilteredProducts.ProjectTo<ShowcaseDto>(_mapper.ConfigurationProvider).AsNoTracking().ToListAsync();*/
-    }
 }

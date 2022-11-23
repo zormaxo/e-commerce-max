@@ -1,6 +1,4 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
@@ -26,12 +24,5 @@ public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
         var categoryFilter = _machineRepo.GetAll().WhereIf(ProductParams.IsNew.HasValue, p => p.IsNew == ProductParams.IsNew);
 
         FilteredProducts = FilteredProducts.Where(x => categoryFilter.Any(y => y.Id == x.Id));
-    }
-
-    protected async override Task<List<ProductMachineDto>> QueryDatabase()
-    {
-        return await PagedAndFilteredProducts.ProjectTo<ProductMachineDto>(_mapper.ConfigurationProvider)
-            .AsNoTracking()
-            .ToListAsync();
     }
 }
