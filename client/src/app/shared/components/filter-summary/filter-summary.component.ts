@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { ShopService } from 'src/app/shop/shop.service';
 import { IAddress } from '../../models/address';
 import { CurrencyType } from '../../models/currency';
@@ -9,7 +9,7 @@ import { ShopParams } from '../../models/shopParams';
   templateUrl: './filter-summary.component.html',
   styleUrls: ['./filter-summary.component.scss'],
 })
-export class FilterSummaryComponent implements OnChanges, OnInit {
+export class FilterSummaryComponent implements OnChanges {
   @Input() filterShopParams: ShopParams;
   @Input() totalCount: number;
   @Output() removeFilterClicked = new EventEmitter<ShopParams>();
@@ -20,7 +20,6 @@ export class FilterSummaryComponent implements OnChanges, OnInit {
   countyName: string;
 
   constructor(private shopService: ShopService) {}
-  ngOnInit(): void {}
 
   ngOnChanges(): void {
     if (this.filterShopParams?.minValue && this.filterShopParams?.maxValue) {

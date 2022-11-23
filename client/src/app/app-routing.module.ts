@@ -5,8 +5,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ShowcaseComponent } from './shop/showcase/showcase.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
-import { UserProductsComponent } from './shop/categories/user-products/user-products.component';
-import { AppProductBaseComponent } from './shop/categories/app-product-base/app-product-base.component';
+import { UserProductsComponent } from './shop/user-products/user-products.component';
+import { AppProductBaseComponent } from './shop/app-product-base/app-product-base.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },

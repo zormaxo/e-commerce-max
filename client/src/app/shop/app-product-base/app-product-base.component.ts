@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LeftNavMode } from 'src/app/shared/enums/leftNavMode';
 import { Member } from 'src/app/shared/models/member';
 import { ShopParams } from 'src/app/shared/models/shopParams';
-import { ShopService } from '../../shop.service';
+import { ShopService } from '../shop.service';
 import { ICategory } from 'd:/Codes/Home/Kuyumdan/client/src/app/shared/models/category';
 
 @Component({

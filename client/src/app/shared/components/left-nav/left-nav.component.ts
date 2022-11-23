@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ShopService } from 'src/app/shop/shop.service';
 import { LeftNavMode as LeftNavMode } from '../../enums/leftNavMode';
 import { ICategory } from '../../models/category';
@@ -11,7 +11,6 @@ import { ICategory } from '../../models/category';
 export class LeftNavComponent {
   @Input() filteredCategories: ICategory[];
   @Input() leftNavMode: LeftNavMode;
-
   LeftNavMode = LeftNavMode;
 
   constructor(public shopService: ShopService) {}
