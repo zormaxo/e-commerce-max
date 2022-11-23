@@ -1,38 +1,103 @@
 <div>
   <div class="card small overflow-auto" style="height: 200px">
-    <ul class="list-group list-group-flush">
-      <ng-container *ngFor="let category of parentCategories; let i = index">
-        <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
-          <a class="link-dark" [routerLink]="['/', parentCategories[0].url, category.url]"> {{ category.name }}</a>
-        </li>
+    <a
+      class="link-dark fw-bold m-2"
+      *ngIf="leftNavMode === LeftNavMode.UserProducts"
+      (click)="selectCategory(undefined)">
+      Tüm İlanlar
+    </a>
+
+    <ng-container *ngIf="shopService.categoryWithParents$ | async as categoryWithParents">
+      <ng-container *ngIf="!categoryWithParents.selectedCategory">
+        <ul class="list-group list-group-flush">
+          <ng-container *ngFor="let parentCategory of filteredCategories; let i = index">
+            <li class="list-group-item link-dark px-2">
+              <a class="link-dark" (click)="selectCategory(parentCategory)">
+                {{ parentCategory.name }} ({{ parentCategory.count }})
+              </a>
+            </li>
+            <ng-container *ngFor="let child of parentCategory.childCategories">
+              <li class="list-group-item link-dark px-3" *ngIf="child.count">
+                <a class="link-dark" (click)="selectCategory(child)"> {{ child.name }} ({{ child.count }}) </a>
+              </li>
+            </ng-container>
+          </ng-container>
+        </ul>
       </ng-container>
-      <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 1) + 'px' }">
-        <a
-          class="link-dark"
-          [routerLink]="
-            parentCategories[0]
-              ? ['/', parentCategories[0].url, selectedCategory.url]
-              : ['/', selectedCategory.url, selectedCategory.url]
-          ">
-          {{ selectedCategory.name }}</a
-        >
-        <span *ngIf="!selectedCategory.childCategories" class="small text-muted"> ({{ selectedCategory.count }})</span>
-      </li>
-      <ng-container *ngFor="let child of selectedCategory.childCategories">
-        <li
-          class="list-group-item"
-          *ngIf="child.count"
-          [ngStyle]="{ 'padding-left': 10 * (parentCategories.length + 2) + 'px' }">
-          <a
-            class="text-dark"
-            [routerLink]="
-              parentCategories[0] ? ['/', parentCategories[0].url, child.url] : ['/', selectedCategory.url, child.url]
-            "
-            >{{ child.name }}</a
-          >
-          <span class="small text-muted"> ({{ child.count }})</span>
-        </li>
+
+      <ng-container *ngIf="categoryWithParents.selectedCategory && leftNavMode === LeftNavMode.AllProducts">
+        <ul class="list-group list-group-flush">
+          <ng-container *ngFor="let category of categoryWithParents.parentCategories; let i = index">
+            <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
+              <a class="link-dark" [routerLink]="['/', categoryWithParents.parentCategories[0].url, category.url]">
+                {{ category.name }}</a
+              >
+            </li>
+          </ng-container>
+          <li
+            class="list-group-item link-dark"
+            [ngStyle]="{ 'padding-left': 10 * (categoryWithParents.parentCategories.length + 1) + 'px' }">
+            <a
+              class="link-dark"
+              [routerLink]="
+                categoryWithParents.parentCategories.length > 0
+                  ? ['/', categoryWithParents.parentCategories[0].url, categoryWithParents.selectedCategory.url]
+                  : ['/', categoryWithParents.selectedCategory.url, categoryWithParents.selectedCategory.url]
+              ">
+              {{ categoryWithParents.selectedCategory.name }}</a
+            >
+            <span *ngIf="!categoryWithParents.selectedCategory.childCategories" class="small text-muted">
+              ({{ selectedCategory.count }})</span
+            >
+          </li>
+          <ng-container *ngFor="let child of categoryWithParents.selectedCategory.childCategories">
+            <li
+              class="list-group-item"
+              *ngIf="child.count"
+              [ngStyle]="{ 'padding-left': 10 * (categoryWithParents.parentCategories.length + 2) + 'px' }">
+              <a
+                class="text-dark"
+                [routerLink]="
+                  categoryWithParents.parentCategories.length > 0
+                    ? ['/', categoryWithParents.parentCategories[0].url, child.url]
+                    : ['/', categoryWithParents.selectedCategory.url, child.url]
+                "
+                >{{ child.name }}</a
+              >
+              <span class="small text-muted"> ({{ child.count }})</span>
+            </li>
+          </ng-container>
+        </ul>
       </ng-container>
-    </ul>
+
+      <ng-container *ngIf="categoryWithParents.selectedCategory && leftNavMode === LeftNavMode.UserProducts">
+        <ul class="list-group list-group-flush">
+          <ng-container *ngFor="let category of categoryWithParents.parentCategories; let i = index">
+            <li class="list-group-item link-dark" [ngStyle]="{ 'padding-left': 10 * (i + 1) + 'px' }">
+              <a class="link-dark" (click)="selectCategory(category)"> {{ category.name }}</a>
+            </li>
+          </ng-container>
+          <li
+            class="list-group-item link-dark"
+            [ngStyle]="{ 'padding-left': 10 * (categoryWithParents.parentCategories.length + 1) + 'px' }">
+            <a class="link-dark" (click)="selectCategory(categoryWithParents.selectedCategory)">
+              {{ categoryWithParents.selectedCategory.name }}</a
+            >
+            <span *ngIf="!categoryWithParents.selectedCategory.childCategories" class="small text-muted">
+              ({{ selectedCategory.count }})</span
+            >
+          </li>
+          <ng-container *ngFor="let child of categoryWithParents.selectedCategory.childCategories">
+            <li
+              class="list-group-item"
+              *ngIf="child.count"
+              [ngStyle]="{ 'padding-left': 10 * (categoryWithParents.parentCategories.length + 2) + 'px' }">
+              <a class="text-dark" (click)="selectCategory(child)">{{ child.name }}</a>
+              <span class="small text-muted"> ({{ child.count }})</span>
+            </li>
+          </ng-container>
+        </ul>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Directive, Injector, OnInit } from '@angular/core';
 import { Navigation, ActivatedRoute, Router } from '@angular/router';
+import { LeftNavMode } from './shared/enums/leftNavMode';
 import { ICategory } from './shared/models/category';
 import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/product';
@@ -21,6 +22,7 @@ export abstract class AppProductBaseClass implements OnInit {
   route: ActivatedRoute;
   router: Router;
   shopService: ShopService;
+  mode= LeftNavMode.AllProducts;
 
   constructor(injector: Injector) {
     this.route = injector.get(ActivatedRoute);
@@ -54,6 +56,16 @@ export abstract class AppProductBaseClass implements OnInit {
       this.shopParams = shopParams;
       this.filterShopParams = structuredClone(shopParams);
       this.getProducts2();
+    });
+
+    this.shopService.categorySelected.subscribe((category: ICategory) => {
+      if (category) {
+        this.shopParams.categoryName = category.url;
+      } else {
+        this.shopParams.categoryName = undefined;
+      }
+
+      this.getCategoriesThenProducts();
     });
   }
 
@@ -102,6 +114,7 @@ export abstract class AppProductBaseClass implements OnInit {
         sCategory: this.selectedCategory,
         shopParams: this.shopParams,
         mainCategoryName: this.mainCategoryName,
+        mode: this.mode
       });
     });
   }

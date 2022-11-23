@@ -10,6 +10,7 @@ import { IAddress } from '../shared/models/address';
 import { ApiResponse } from '../shared/models/api-response/api-response';
 import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
 import { environment } from 'src/environments/environment';
+import { LeftNavMode } from '../shared/enums/leftNavMode';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class ShopService {
   categoryWithParents$ = this.categoryWithParents.asObservable();
   searchClicked = new Subject<ShopParams>();
   searchTerm: string; //relation between nav and productList
+  categorySelected = new Subject<ICategory>();
 
   //For base
   productAdded = new Subject<{
@@ -31,6 +33,7 @@ export class ShopService {
     sCategory: ICategory;
     shopParams: ShopParams;
     mainCategoryName: string;
+    mode: LeftNavMode;
   }>();
   productAdded2 = new Subject<number>();
 
@@ -126,18 +129,23 @@ export class ShopService {
     });
   }
 
-  generateBreadcrumb(selectedCategoryId: number): void {
-    let selectedCategory: ICategory;
-    this.getCategories().subscribe((categories) => {
-      selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
-      const parentCategories = this.fillParentCategoryList(selectedCategory);
-      this.categoryWithParents.next({ selectedCategory, parentCategories });
-    });
-  }
+  // generateBreadcrumb(selectedCategoryId: number): void {
+  //   let selectedCategory: ICategory;
+  //   this.getCategories().subscribe((categories) => {
+  //     selectedCategory = categories.find((x: { id: number }) => x.id == selectedCategoryId);
+  //     const parentCategories = this.fillParentCategoryList(selectedCategory);
+  //     this.categoryWithParents.next({ selectedCategory, parentCategories });
+  //   });
+  // }
 
+  //Populate parent category list to use in leftNav and breadcrumb components
   fillParentCategoryList(selectedCategory: ICategory): ICategory[] {
     const parentCategories = [];
-    fillList(selectedCategory);
+    if (selectedCategory) {
+      fillList(selectedCategory);
+    }
+
+    this.categoryWithParents.next({ selectedCategory, parentCategories });
     return parentCategories;
 
     function fillList(selectedCategory: ICategory) {

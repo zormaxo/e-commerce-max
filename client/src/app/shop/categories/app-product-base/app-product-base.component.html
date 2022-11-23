@@ -1,10 +1,7 @@
 <div class="row">
-  <app-breadcrumb *ngIf="selectedCategory" [selectedCategoryId]="selectedCategory.id"></app-breadcrumb>
+  <app-breadcrumb *ngIf="mode === LeftNavMode.AllProducts"></app-breadcrumb>
   <section class="d-none d-sm-block col-sm-4 col-md-3">
-    <app-left-nav
-      *ngIf="allCategories && selectedCategory"
-      [selectedCategory]="selectedCategory"
-      [allCategories]="allCategories"></app-left-nav>
+    <app-left-nav *ngIf="allCategories" [filteredCategories]="filteredCategories" [leftNavMode]="mode"></app-left-nav>
     <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
   </section>
   <section class="col-sm-8 col-md-9">

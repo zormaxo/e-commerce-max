@@ -1,11 +1,11 @@
-<ng-container *ngIf="shopService.categoryWithParents$ | async as customCategory">
+<ng-container *ngIf="shopService.categoryWithParents$ | async as categoryWithParents">
   <nav style="background-color: #eaeaea; font-size: 0.8rem" class="p-1 mb-2">
     <ol class="breadcrumb small m-0">
       <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-      <li class="breadcrumb-item" *ngFor="let category of customCategory.parentCategories">
-        <a [routerLink]="['/', customCategory.parentCategories[0].url, category.url]">{{ category.name }}</a>
+      <li class="breadcrumb-item" *ngFor="let category of categoryWithParents.parentCategories">
+        <a [routerLink]="['/', categoryWithParents.parentCategories[0].url, category.url]">{{ category.name }}</a>
       </li>
-      <li class="breadcrumb-item active text-dark">{{ customCategory.selectedCategory.name }}</li>
+      <li class="breadcrumb-item active text-dark">{{ categoryWithParents.selectedCategory.name }}</li>
     </ol>
   </nav>
 </ng-container>
