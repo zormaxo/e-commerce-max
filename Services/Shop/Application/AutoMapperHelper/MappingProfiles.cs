@@ -5,6 +5,7 @@ using Shop.Application.Shared.Dtos.Member;
 using Shop.Application.Shared.Dtos.Product;
 using Shop.Core.Entities;
 using Shop.Core.Extensions;
+using Shop.Core.Shared.Dtos.Member;
 
 namespace Shop.Application.AutoMapperHelper;
 
@@ -64,6 +65,7 @@ public class MappingProfiles : Profile
         CreateMap<MemberNameUpdateDto, MemberUpdateDto>();
         CreateMap<MemberPhoneUpdateDto, MemberUpdateDto>();
         CreateMap<MemberUsernameUpdateDto, MemberUpdateDto>();
+        CreateMap<MemberDto, MemberLightDto>();
 
         CreateMap<Category, CategoryDto>();
         CreateMap<County, CountyDto>();

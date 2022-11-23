@@ -1,10 +1,10 @@
 export class FilterAreas {
   search = true;
-  isNew: boolean;
-  minValue: boolean;
-  maxValue: boolean;
-  cityId: boolean;
-  countyId: boolean;
+  isNew = true;
+  minValue = true;
+  maxValue = true;
+  cityId = true;
+  countyId = true;
 
   constructor(categoryName: string) {
     switch (categoryName) {

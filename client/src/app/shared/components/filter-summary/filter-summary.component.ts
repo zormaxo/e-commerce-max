@@ -16,15 +16,11 @@ export class FilterSummaryComponent implements OnChanges, OnInit {
 
   searchFilter = SearchFilter;
   price: string;
-
-  cities: IAddress[];
   cityName: string;
   countyName: string;
 
   constructor(private shopService: ShopService) {}
-  ngOnInit(): void {
-    this.shopService.getCities().subscribe((cities: IAddress[]) => (this.cities = cities));
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(): void {
     if (this.filterShopParams?.minValue && this.filterShopParams?.maxValue) {
@@ -36,13 +32,17 @@ export class FilterSummaryComponent implements OnChanges, OnInit {
       this.price = `${this.filterShopParams.maxValue} ${CurrencyType[this.filterShopParams.currency]} ve altında`;
     }
 
-    if (this.filterShopParams?.cityId && this.cities) {
-      this.cityName = this.cities.find((x) => x.id == this.filterShopParams?.cityId).name;
-    }
-    if (this.filterShopParams?.countyId && this.cities) {
-      this.countyName = this.cities
-        .find((x) => x.id == this.filterShopParams?.cityId)
-        .counties.find((x) => x.id == this.filterShopParams?.countyId).name;
+    if (this.filterShopParams?.cityId || this.filterShopParams?.countyId) {
+      this.shopService.getCities().subscribe((cities: IAddress[]) => {
+        if (this.filterShopParams?.cityId) {
+          this.cityName = cities.find((x) => x.id == this.filterShopParams?.cityId).name;
+        }
+        if (this.filterShopParams?.countyId) {
+          this.countyName = cities
+            .find((x) => x.id == this.filterShopParams?.cityId)
+            .counties.find((x) => x.id == this.filterShopParams?.countyId).name;
+        }
+      });
     }
   }
 

@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "ApiGateways\OcelotApiGw\OcelotApiGw.csproj", "{4FD9F753-C596-4B85-AB50-ECF5CA0A0909}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Application.Shared", "Services\Shop\Application.Shared\Shop.Application.Shared.csproj", "{82275180-7EDF-4774-9874-AE90A4C0D97E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Core.Shared", "Services\Shop\Application.Shared\Shop.Core.Shared.csproj", "{82275180-7EDF-4774-9874-AE90A4C0D97E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Persistence", "Services\Shop\Persistence\Shop.Persistence.csproj", "{87DB13A4-AF8C-41F5-B19E-A3082584F993}"
 EndProject

@@ -7,6 +7,7 @@ using Shop.Application.Extensions;
 using Shop.Application.Shared.Dtos;
 using Shop.Application.Shared.Dtos.Member;
 using Shop.Core.HelperTypes;
+using Shop.Core.Shared.Dtos.Member;
 
 namespace Shop.API.Controllers;
 
@@ -36,6 +37,15 @@ public class UsersController : BaseApiController
         var user = await _userSrv.GetUser(userId);
 
         return user == null ? BadRequest("User not found") : (ActionResult<MemberDto>)user;
+    }
+
+    [HttpGet("light/{userId}")]
+    public async Task<ActionResult<MemberLightDto>> GetLightUser(int userId)
+    {
+        var user = await _userSrv.GetUser(userId);
+        ;
+
+        return user == null ? BadRequest("User not found") : Ok(_mapper.Map<MemberLightDto>(user));
     }
 
     [HttpPut("update-member")]
