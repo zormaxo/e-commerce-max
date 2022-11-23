@@ -2,12 +2,7 @@ namespace Shop.Core.Shared;
 
 public class Pagination<T> where T : class
 {
-    public Pagination(
-        int pageIndex,
-        int pageSize,
-        List<CategoryGroupCount> categoryGroupCount,
-        int totalCount,
-        IReadOnlyList<T> data)
+    public Pagination(int pageIndex, int pageSize, List<CategoryGroupCount> categoryGroupCount, int totalCount, List<T> data)
     {
         PageIndex = pageIndex;
         PageSize = pageSize;
@@ -18,7 +13,7 @@ public class Pagination<T> where T : class
 
     public List<CategoryGroupCount> CategoryGroupCount { get; set; }
 
-    public IReadOnlyList<T> Data { get; set; }
+    public List<T> Data { get; set; }
 
     public int PageIndex { get; set; }
 

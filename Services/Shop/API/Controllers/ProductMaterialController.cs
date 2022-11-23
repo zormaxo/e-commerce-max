@@ -15,7 +15,7 @@ public class ProductsMaterialController : BaseApiController
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductParams productParams)
-    { return Ok(await _productMaterialSrv.GetProducts(productParams)); }
+    { return Ok(await _productMaterialSrv.GetProducts<ProductMaterialDto>(productParams)); }
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]

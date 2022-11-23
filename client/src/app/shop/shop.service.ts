@@ -24,7 +24,7 @@ export class ShopService {
 
   private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
   categoryWithParents$ = this.categoryWithParents.asObservable();
-  
+
   searchClicked = new Subject<ShopParams>();
   searchTerm: string; //relation between nav and productList
   categorySelected = new Subject<ICategory>();
@@ -36,7 +36,7 @@ export class ShopService {
     shopParams: ShopParams;
     mainCategoryName: string;
     mode: LeftNavMode;
-    member:Member;
+    member: Member;
   }>();
   productAdded2 = new Subject<number>();
 
@@ -46,6 +46,16 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http.get(this.ocelotUrl + 'products', { observe: 'response', params }).pipe(
+      map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
+        return response.body.result;
+      })
+    );
+  }
+
+  getProductsLight(shopParams: ShopParams) {
+    const params: HttpParams = this.generateHttpParams(shopParams);
+
+    return this.http.get(this.ocelotUrl + 'products/light', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })

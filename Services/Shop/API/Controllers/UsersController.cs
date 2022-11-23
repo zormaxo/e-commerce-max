@@ -42,8 +42,6 @@ public class UsersController : BaseApiController
     public async Task<ActionResult<MemberLightDto>> GetLightUser(int userId)
     {
         var user = await _userSrv.GetUser(userId);
-        ;
-
         return user == null ? BadRequest("User not found") : Ok(_mapper.Map<MemberLightDto>(user));
     }
 

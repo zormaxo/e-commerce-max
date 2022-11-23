@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
@@ -13,16 +14,22 @@ public class ProductsController : BaseApiController
 {
     private readonly ProductAppService _productSrv;
     private readonly FavouritesAppService _favSrv;
+    private readonly IMapper _mapper;
 
-    public ProductsController(ProductAppService productSrv, FavouritesAppService favSrv)
+    public ProductsController(ProductAppService productSrv, FavouritesAppService favSrv, IMapper mapper)
     {
         _productSrv = productSrv;
         _favSrv = favSrv;
+        _mapper = mapper;
     }
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProducts([FromQuery] ProductParams productParams)
-    { return Ok(await _productSrv.GetProducts(productParams)); }
+    { return await _productSrv.GetProducts<ShowcaseDto>(productParams); }
+
+    [HttpGet("light")]
+    public async Task<ActionResult<Pagination<ProductDto>>> GetProductsLight([FromQuery] ProductParams productParams)
+    { return Ok(await _productSrv.GetProducts<ProductDto>(productParams)); }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

@@ -45,7 +45,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     protected ProductParams ProductParams { get; set; }
 
-    public async Task<Pagination<T>> GetProducts(ProductParams productParams)
+    public async Task<Pagination<Y>> GetProducts<Y>(ProductParams productParams) where Y : class
     {
         ProductParams = productParams;
         CalculateMaxMinVal(productParams);
@@ -104,12 +104,12 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .EFBigOrderBy(productParams.Sort, _cachedItems)
             .EFBigPageBy(productParams);
 
-        List<T> data = await PagedAndFilteredProducts
-            .ProjectTo<T>(_mapper.ConfigurationProvider)
+        List<Y> data = await PagedAndFilteredProducts
+            .ProjectTo<Y>(_mapper.ConfigurationProvider)
             .AsNoTracking()
             .ToListAsync();
 
-        return new Pagination<T>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
+        return new Pagination<Y>(productParams.PageIndex, productParams.PageSize, catGrpCountList, totalItems, data);
     }
 
     public async Task<object> GetActiveInactiveProducts(ProductParams productParams)

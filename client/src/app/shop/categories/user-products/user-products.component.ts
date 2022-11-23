@@ -23,6 +23,6 @@ export class UserProductsComponent extends AppProductBaseClass implements OnInit
 
   override getProducts() {
     this.shopParams.userId = +this.route.snapshot.paramMap.get('id');
-    return this.shopService.getProducts(this.shopParams);
+    return this.shopService.getProductsLight(this.shopParams);
   }
 }
