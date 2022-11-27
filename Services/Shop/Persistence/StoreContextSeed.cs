@@ -15,10 +15,14 @@ public class StoreContextSeed
 
     public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
     {
+        var logger = loggerFactory.CreateLogger<StoreContextSeed>();
+        logger.LogInformation("Seeding starting...");
+
         try
         {
             if (!await context.Cities.AnyAsync())
             {
+                logger.LogInformation("City seeding starting...");
                 var cityData = await File.ReadAllTextAsync("../Infrastructure/SeedData/cities.json");
                 var cities = JsonConvert.DeserializeObject<List<City>>(cityData);
 
@@ -29,6 +33,7 @@ public class StoreContextSeed
 
             if (!await context.Counties.AnyAsync())
             {
+                logger.LogInformation("County seeding starting...");
                 var countyData = await File.ReadAllTextAsync("../Infrastructure/SeedData/counties.json");
                 var counties = JsonConvert.DeserializeObject<List<County>>(countyData);
 
@@ -39,6 +44,7 @@ public class StoreContextSeed
 
             if (!await context.Users.AnyAsync())
             {
+                logger.LogInformation("User seeding starting...");
                 var userData = await File.ReadAllTextAsync("../Infrastructure/SeedData/users.json");
                 var users = JsonConvert.DeserializeObject<List<AppUser>>(userData);
 
@@ -58,18 +64,9 @@ public class StoreContextSeed
                 await context.SaveChangesAsync();
             }
 
-            if (!await context.ProductBrands.AnyAsync())
-            {
-                var brandsData = await File.ReadAllTextAsync("../Infrastructure/SeedData/brands.json");
-                var brands = JsonConvert.DeserializeObject<List<ProductBrand>>(brandsData);
-
-                context.ProductBrands.AddRange(brands);
-
-                await context.SaveChangesAsync();
-            }
-
             if (!await context.Categories.AnyAsync())
             {
+                logger.LogInformation("Category seeding starting...");
                 var typesData = await File.ReadAllTextAsync("../Infrastructure/SeedData/categories.json");
                 var types = JsonConvert.DeserializeObject<List<Category>>(typesData);
 
@@ -80,6 +77,7 @@ public class StoreContextSeed
 
             if (!await context.Products.AnyAsync())
             {
+                logger.LogInformation("Product seeding starting...");
                 var productsData = await File.ReadAllTextAsync("../Infrastructure/SeedData/products.json");
                 var products = JsonConvert.DeserializeObject<List<Product>>(productsData);
 
@@ -90,6 +88,7 @@ public class StoreContextSeed
 
             if (!await context.ProductMachines.AnyAsync())
             {
+                logger.LogInformation("ProductMachine seeding starting...");
                 var machinesData = await File.ReadAllTextAsync("../Infrastructure/SeedData/productMachines.json");
                 var machines = JsonConvert.DeserializeObject<List<ProductMachine>>(machinesData);
 
@@ -97,10 +96,11 @@ public class StoreContextSeed
 
                 await context.SaveChangesAsync();
             }
+
+            logger.LogInformation("Seeding finished.");
         }
         catch (Exception ex)
         {
-            var logger = loggerFactory.CreateLogger<StoreContextSeed>();
             logger.LogError(ex.Message);
         }
     }

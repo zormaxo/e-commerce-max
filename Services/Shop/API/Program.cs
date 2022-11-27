@@ -9,10 +9,6 @@ namespace Shop.API;
 
 public class Program
 {
-    protected Program()
-    {
-    }
-
     public static async Task Main(string[] args)
     {
         var host = CreateHostBuilder(args).Build();
@@ -36,6 +32,7 @@ public class Program
             logger.LogError(ex, "An error occurred during migration");
         }
 
+        Log.Information("Application Started Up");
         host.Run();
     }
 

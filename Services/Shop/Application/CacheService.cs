@@ -19,7 +19,7 @@ public class CacheService
         CachedItems cachedItems)
     {
         var logger = loggerFactory.CreateLogger<CacheService>();
-        logger.LogInformation("Caching started");
+        logger.LogInformation("Caching starting...");
 
         cachedItems.Categories = await context.Categories.ToListAsync();
         cachedItems.Cities = await context.Cities.ToListAsync();
@@ -28,20 +28,30 @@ public class CacheService
         var currencyObj = await context.Currency.FirstOrDefaultAsync(x => x.Date.Date == DateTime.UtcNow.Date);
         if (currencyObj == null)
         {
-            var client = new RestClient(
-                "https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
-            var response = await client.GetAsync(new RestRequest());
+            logger.LogInformation($"{DateTime.UtcNow.ToShortDateString()} currency is null. Connecting to CurrencyFreak...");
+            const string uri = $"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD";
 
-            var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
-            var currency = mapper.Map<Currency>(currencyDto);
+            var client = new RestClient(uri);
 
-            cachedItems.Currency = currency;
+            try
+            {
+                var response = await client.GetAsync(new RestRequest());
+                var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
+                var currency = mapper.Map<Currency>(currencyDto);
 
-            context.Add(currency);
-            await context.SaveChangesAsync();
+                cachedItems.Currency = currency;
+
+                context.Add(currency);
+                await context.SaveChangesAsync();
+            }
+            catch
+            {
+                logger.LogError($"Could not fetch data from CurrencyFreak...");
+            }
         }
         else
         {
+            logger.LogInformation($"Currency is exits");
             cachedItems.Currency = currencyObj;
         }
 

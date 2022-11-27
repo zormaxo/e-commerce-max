@@ -23,6 +23,12 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddHttpClient();
+        services.AddHttpClient(
+            "currencyfreak",
+            config =>
+            {
+                config.BaseAddress = new Uri("https://api.currencyfreaks.com/");
+            });
         services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         services.AddOtherServices();
         services.AddApplicationServices(_config);

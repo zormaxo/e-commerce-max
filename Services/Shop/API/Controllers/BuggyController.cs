@@ -10,11 +10,13 @@ public class BuggyController : BaseApiController
 {
     private readonly StoreContext _context;
     private readonly HttpClient _client;
+    private readonly IHttpClientFactory _httpClientFactory;
 
-    public BuggyController(StoreContext context, HttpClient client)
+    public BuggyController(StoreContext context, HttpClient client, IHttpClientFactory HttpClientFactory)
     {
         _context = context;
         _client = client;
+        _httpClientFactory = HttpClientFactory;
     }
 
     [HttpGet("badrequest")]
@@ -48,9 +50,15 @@ public class BuggyController : BaseApiController
     [HttpGet("currency")]
     public async Task<ActionResult<JsonElement>> GetCurrency()
     {
-        var httpResponseMessage = await _client.GetAsync(
-            "https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
+        var uri = $"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD";
+
+        var httpResponseMessage = await _client.GetAsync(uri);
         var response = await httpResponseMessage.Content.ReadAsStringAsync();
+
+        var reponse2 = await _client.GetStringAsync(uri);
+
+        var client = _httpClientFactory.CreateClient("currencyfreak");
+        var reponse3 = await _client.GetStringAsync($"latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD");
 
         return JsonSerializer.Deserialize<JsonElement>(response);
     }
