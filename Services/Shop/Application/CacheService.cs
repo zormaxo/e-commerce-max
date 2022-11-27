@@ -10,7 +10,7 @@ using Shop.Persistence;
 
 namespace Shop.Application;
 
-public class CacheService
+public static class CacheService
 {
     public async static Task FillCacheItemsAsync(
         StoreContext context,
@@ -18,7 +18,7 @@ public class CacheService
         IMapper mapper,
         CachedItems cachedItems)
     {
-        var logger = loggerFactory.CreateLogger<CacheService>();
+        var logger = loggerFactory.CreateLogger("CacheService");
         logger.LogInformation("Caching starting...");
 
         cachedItems.Categories = await context.Categories.ToListAsync();

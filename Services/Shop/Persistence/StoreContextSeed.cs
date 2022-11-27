@@ -7,15 +7,11 @@ using System.Text;
 
 namespace Shop.Persistence;
 
-public class StoreContextSeed
+public static class StoreContextSeed
 {
-    protected StoreContextSeed()
-    {
-    }
-
     public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
     {
-        var logger = loggerFactory.CreateLogger<StoreContextSeed>();
+        var logger = loggerFactory.CreateLogger("StoreContextSeed");
         logger.LogInformation("Seeding starting...");
 
         try
