@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpLogging;
+using RestSharp;
 using Shop.API.Extensions;
 using Shop.API.Middleware;
 using Shop.Application.Extensions;
@@ -29,6 +30,9 @@ public class Startup
             {
                 config.BaseAddress = new Uri("https://api.currencyfreaks.com/");
             });
+
+        services.AddSingleton(new RestClient(new HttpClient()));
+
         services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         services.AddOtherServices();
         services.AddApplicationServices(_config);

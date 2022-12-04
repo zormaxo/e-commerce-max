@@ -16,7 +16,8 @@ public static class CacheService
         StoreContext context,
         ILoggerFactory loggerFactory,
         IMapper mapper,
-        CachedItems cachedItems)
+        CachedItems cachedItems,
+        RestClient restClient)
     {
         var logger = loggerFactory.CreateLogger("CacheService");
         logger.LogInformation("Caching starting...");
@@ -35,6 +36,11 @@ public static class CacheService
 
             try
             {
+                var response4 = restClient.GetJsonAsync<string>(uri).ConfigureAwait(false);
+
+                var response2 = await client.GetAsync<CurrencyFreakDto>(new RestRequest());
+                var response3 = await client.GetJsonAsync<CurrencyFreakDto>(string.Empty);
+
                 var response = await client.GetAsync(new RestRequest());
                 var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
                 var currency = mapper.Map<Currency>(currencyDto);
