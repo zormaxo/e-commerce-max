@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/products",
+      "DownstreamPathTemplate": "/api/ads",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,11 +9,11 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/products",
+      "UpstreamPathTemplate": "/ads",
       "UpstreamHttpMethod": [ "Get", "OPTIONS" ]
     },
     {
-      "DownstreamPathTemplate": "/api/products/light",
+      "DownstreamPathTemplate": "/api/ads/light",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -21,7 +21,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/products/light",
+      "UpstreamPathTemplate": "/ads/light",
       "UpstreamHttpMethod": [ "Get", "OPTIONS" ]
     }
   ]

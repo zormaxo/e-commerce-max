@@ -10,13 +10,13 @@ using Shop.Core.Shared.Dtos.Product;
 
 namespace Shop.API.Controllers;
 
-public class ProductsController : BaseApiController
+public class AdsController : BaseApiController
 {
     private readonly ProductAppService _productSrv;
     private readonly FavouritesAppService _favSrv;
     private readonly IMapper _mapper;
 
-    public ProductsController(ProductAppService productSrv, FavouritesAppService favSrv, IMapper mapper)
+    public AdsController(ProductAppService productSrv, FavouritesAppService favSrv, IMapper mapper)
     {
         _productSrv = productSrv;
         _favSrv = favSrv;
