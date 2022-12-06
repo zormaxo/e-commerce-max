@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using RestSharp;
 using Serilog;
 using Shop.Application;
 using Shop.Core.HelperTypes;
@@ -17,6 +18,7 @@ public class Program
         using var scope = host.Services.CreateScope();
         var services = scope.ServiceProvider;
         var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+        RestClient restClient = services.GetRequiredService<RestClient>();
         try
         {
             var context = services.GetRequiredService<StoreContext>();
@@ -24,7 +26,7 @@ public class Program
             var cahcedItems = services.GetRequiredService<CachedItems>();
             await context.Database.MigrateAsync();
             await StoreContextSeed.SeedAsync(context, loggerFactory);
-            await CacheService.FillCacheItemsAsync(context, loggerFactory, mapper, cahcedItems);
+            await CacheService.FillCacheItemsAsync(context, loggerFactory, mapper, cahcedItems, restClient);
         }
         catch (Exception ex)
         {

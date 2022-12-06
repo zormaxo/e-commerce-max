@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.Interfaces;
-using Shop.Persistence;
 using Shop.Persistence.Repositories;
 using Shop.Persistence.Services;
 
@@ -24,6 +24,13 @@ public static class PersistenceServiceExtensions
                 x.EnableSensitiveDataLogging();
                 //// x.LogTo(Console.WriteLine, LogLevel.Information);
             }
+
+            //This supress Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'Favourite'.
+            x.ConfigureWarnings(
+                builder =>
+                {
+                    builder.Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning);
+                });
         }
 
         services.AddDbContext<StoreContext>(optionsAction);

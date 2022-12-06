@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using RestSharp;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
@@ -32,18 +31,16 @@ public static class CacheService
             logger.LogInformation($"{DateTime.UtcNow.ToShortDateString()} currency is null. Connecting to CurrencyFreak...");
             const string uri = $"https://api.currencyfreaks.com/latest?apikey=931ffa032f6b426fade0f8ffd6b74396&symbols=TRY,GBP,EUR,USD";
 
-            var client = new RestClient(uri);
+            //var client = new RestClient(uri);
 
             try
             {
-                var response4 = restClient.GetJsonAsync<string>(uri).ConfigureAwait(false);
-
-                var response2 = await client.GetAsync<CurrencyFreakDto>(new RestRequest());
-                var response3 = await client.GetJsonAsync<CurrencyFreakDto>(string.Empty);
-
-                var response = await client.GetAsync(new RestRequest());
-                var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
-                var currency = mapper.Map<Currency>(currencyDto);
+                var fromDependency = await restClient.GetJsonAsync<CurrencyFreakDto>(uri);
+                //var response3 = await client.GetJsonAsync<CurrencyFreakDto>(string.Empty);
+                //var response2 = await client.GetAsync<CurrencyFreakDto>(new RestRequest());
+                //var response = await client.GetAsync(new RestRequest());
+                //var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
+                var currency = mapper.Map<Currency>(fromDependency);
 
                 cachedItems.Currency = currency;
 

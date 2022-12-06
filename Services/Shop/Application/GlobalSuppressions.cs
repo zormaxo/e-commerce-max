@@ -11,5 +11,9 @@
     Justification = "<Pending>",
     Scope = "member",
     Target = "~M:Shop.Application.ApplicationServices.ProductBaseService`1.GetProducts``1(Shop.Core.HelperTypes.ProductParams)~System.Threading.Tasks.Task{Shop.Core.Shared.Pagination{``0}}")]
-
-
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S125:Sections of code should not be commented out",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Shop.Application.CacheService.FillCacheItemsAsync(Shop.Persistence.StoreContext,Microsoft.Extensions.Logging.ILoggerFactory,AutoMapper.IMapper,Shop.Core.HelperTypes.CachedItems,RestSharp.RestClient)~System.Threading.Tasks.Task")]
