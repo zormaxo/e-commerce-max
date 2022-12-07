@@ -19,6 +19,7 @@ public static class ApplicationServiceExtensions
     {
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IMessageRepository, MessageRepository>();
         services.AddScoped<LogUserActivity>();
         services.AddScoped<UserResolverService>();
         services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));

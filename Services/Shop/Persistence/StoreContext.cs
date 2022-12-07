@@ -36,8 +36,17 @@ public class StoreContext : DbContext
 
     public DbSet<Favourite> Favourites { get; set; }
 
+    public DbSet<Message> Messages { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Message>()
+            .HasOne(u => u.Recipient)
+            .WithMany(m => m.MessagesReceived)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Message>().HasOne(u => u.Sender).WithMany(m => m.MessagesSent).OnDelete(DeleteBehavior.Restrict);
+
         //e-commerce 27
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

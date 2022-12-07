@@ -1,6 +1,6 @@
 namespace Shop.Core.HelperTypes;
 
-public class ProductParams : PageParams
+public class ProductParams : PaginationParams
 {
     private string _search;
 

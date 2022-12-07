@@ -5,6 +5,7 @@ using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.City;
 using Shop.Core.Shared.Dtos.Member;
 using Shop.Core.Shared.Dtos.Product;
+using Shop.Shared.Dtos;
 
 namespace Shop.Application.AutoMapperHelper;
 
@@ -73,5 +74,13 @@ public class MappingProfiles : Profile
 
         CreateMap<RegisterDto, AppUser>();
         CreateMap<Favourite, FavouriteDto>().ReverseMap();
+
+        CreateMap<Message, MessageDto>()
+            .ForMember(
+                dest => dest.SenderPhotoUrl,
+                opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
+            .ForMember(
+                dest => dest.RecipientPhotoUrl,
+                opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
     }
 }

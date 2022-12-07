@@ -2,7 +2,7 @@
 
 namespace Shop.Core.HelperTypes;
 
-public class PageParams : IPagedResultRequest
+public class PaginationParams : IPagedResultRequest
 {
     private const int MaxPageSize = 50;
     private int _pageSize = 10;

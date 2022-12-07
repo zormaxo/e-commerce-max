@@ -30,4 +30,8 @@ public class AppUser : FullAuditableEntity
     public ICollection<UserPhoto> Photos { get; set; }
 
     public ICollection<Favourite> Favourites { get; set; }
+
+    public ICollection<Message> MessagesSent { get; set; }
+
+    public ICollection<Message> MessagesReceived { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Shop.Core.HelperTypes;
 
-public class UserParams : PageParams
+public class UserParams : PaginationParams
 {
     public string CurrentUsername { get; set; }
 
