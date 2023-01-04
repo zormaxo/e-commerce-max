@@ -1,24 +1,22 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Interfaces;
-using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
-using Shop.Core.Interfaces;
 using Shop.Core.Shared.Dtos;
 using System.Net;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Shop.Application.ApplicationServices;
 
 public class AccountAppService : BaseAppService
 {
-    private readonly IGenericRepository<AppUser> _appUsersRepo;
     private readonly ITokenService _tokenService;
+    readonly UserManager<AppUser> _userManager;
 
-    public AccountAppService(IGenericRepository<AppUser> appUsersRepo, IMapper mapper, ITokenService tokenService) : base(mapper)
+    public AccountAppService(UserManager<AppUser> userManager, IMapper mapper, ITokenService tokenService) : base(mapper)
     {
-        _appUsersRepo = appUsersRepo;
+        _userManager = userManager;
         _tokenService = tokenService;
     }
 
@@ -29,42 +27,36 @@ public class AccountAppService : BaseAppService
 
         var user = _mapper.Map<AppUser>(registerDto);
 
-        using var hmac = new HMACSHA512();
-
         user.UserName = registerDto.UserName.ToLower();
-        user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-        user.PasswordSalt = hmac.Key;
-        await _appUsersRepo.AddAsync(user);
 
-        await _appUsersRepo.SaveChangesAsync();
+        var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-        var userDto = new UserDto { FirstName = user.FirstName, UserId = user.Id, Token = _tokenService.CreateToken(user) };
+        if (!result.Succeeded)
+            throw new ApiException(HttpStatusCode.BadRequest, result.Errors);
 
-        return userDto;
+        var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+        if (!roleResult.Succeeded)
+            throw new ApiException(HttpStatusCode.BadRequest, result.Errors);
+
+        return new UserDto { FirstName = user.FirstName, UserId = user.Id, Token = await _tokenService.CreateToken(user) };
     }
 
     public async Task<UserDto> Login(LoginDto loginDto)
     {
-        var user = await _appUsersRepo.GetAll().Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+        var user = await _userManager.Users
+            .Include(p => p.Photos)
+            .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
 
-        if (user == null)
-            throw new ApiException(HttpStatusCode.Unauthorized, "There is no such a username");
+        var result = await _userManager
+            .CheckPasswordAsync(user, loginDto.Password);
 
-        using var hmac = new HMACSHA512(user.PasswordSalt);
+        if (!result)
+            throw new ApiException(HttpStatusCode.Unauthorized);
 
-        var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
-
-        for (int i = 0; i < computedHash.Length; i++)
-        {
-            if (computedHash[i] != user.PasswordHash[i])
-                throw new ApiException(HttpStatusCode.Unauthorized, "Invalid password");
-        }
-
-        var userDto = new UserDto { UserId = user.Id, FirstName = user.FirstName, Token = _tokenService.CreateToken(user), };
-
-        return userDto;
+        return new UserDto { UserId = user.Id, FirstName = user.FirstName, Token = await _tokenService.CreateToken(user), };
     }
 
     private async Task<bool> UserExists(string userName)
-    { return await _appUsersRepo.AnyAsync(x => x.UserName == userName.ToLower()); }
+    { return await _userManager.Users.AnyAsync(x => x.UserName == userName.ToLower()); }
 }

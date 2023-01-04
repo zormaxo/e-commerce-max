@@ -1,8 +1,10 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RestSharp;
 using Serilog;
 using Shop.Application;
+using Shop.Core.Entities.Identity;
 using Shop.Core.HelperTypes;
 using Shop.Persistence;
 
@@ -24,8 +26,10 @@ public class Program
             var context = services.GetRequiredService<StoreContext>();
             var mapper = services.GetRequiredService<IMapper>();
             var cahcedItems = services.GetRequiredService<CachedItems>();
+            var userManager = services.GetRequiredService<UserManager<AppUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
             await context.Database.MigrateAsync();
-            await StoreContextSeed.SeedAsync(context, loggerFactory);
+            await StoreContextSeed.SeedAsync(context, userManager, roleManager, loggerFactory);
             await CacheService.FillCacheItemsAsync(context, loggerFactory, mapper, cahcedItems, restClient);
         }
         catch (Exception ex)

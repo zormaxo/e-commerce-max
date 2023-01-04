@@ -1,13 +1,16 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 using Shop.Persistence.Services;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Shop.Persistence;
 
-public class StoreContext : DbContext
+public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
     private readonly int _userId;
 
@@ -15,8 +18,6 @@ public class StoreContext : DbContext
     { _userId = userService.GetUserId(); }
 
     public DbSet<Audit> Audits { get; set; }
-
-    public DbSet<AppUser> Users { get; set; }
 
     public DbSet<Product> Products { get; set; }
 
@@ -38,21 +39,22 @@ public class StoreContext : DbContext
 
     public DbSet<Message> Messages { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        modelBuilder.Entity<Message>()
-            .HasOne(u => u.Recipient)
-            .WithMany(m => m.MessagesReceived)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        modelBuilder.Entity<Message>().HasOne(u => u.Sender).WithMany(m => m.MessagesSent).OnDelete(DeleteBehavior.Restrict);
-
         //e-commerce 27
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        builder.Entity<AppUser>().HasMany(ur => ur.UserRoles).WithOne(u => u.User).HasForeignKey(ur => ur.UserId).IsRequired();
+
+        builder.Entity<AppRole>().HasMany(ur => ur.UserRoles).WithOne(u => u.Role).HasForeignKey(ur => ur.RoleId).IsRequired();
+
+        builder.Entity<Message>().HasOne(u => u.Recipient).WithMany(m => m.MessagesReceived).OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<Message>().HasOne(u => u.Sender).WithMany(m => m.MessagesSent).OnDelete(DeleteBehavior.Restrict);
 
         Expression<Func<BaseAuditableEntity, bool>> filterExpr = bm => !bm.IsDeleted;
-        foreach (var mutableEntityType in modelBuilder.Model
+        foreach (var mutableEntityType in builder.Model
             .GetEntityTypes()
             .Where(
                 // check if current entity type is child of BaseModel
@@ -69,11 +71,11 @@ public class StoreContext : DbContext
         //e-commerce 62
         if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
         {
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            foreach (var entityType in builder.Model.GetEntityTypes())
             {
                 foreach (var property in entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal)))
                 {
-                    modelBuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
+                    builder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
                 }
             }
         }

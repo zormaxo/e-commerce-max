@@ -89,6 +89,8 @@ public class ResponseWrapperMiddleware
         // Invoking Customizations Method to handle Custom Formatted Response
         var response = ResponseWrapManager.ResponseWrapper(responseObj, context);
 
+        context.Response.ContentType = "application/json";
+
         // returing response to caller
         await context.Response
             .WriteAsync(

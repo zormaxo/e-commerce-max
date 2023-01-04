@@ -1,5 +1,6 @@
 using AutoMapper;
 using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 using Shop.Core.Extensions;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.City;

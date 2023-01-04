@@ -1,3 +1,4 @@
+using Shop.Core.Entities.Identity;
 using Shop.Core.HelperTypes;
 using System.ComponentModel.DataAnnotations;
 

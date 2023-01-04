@@ -1,8 +1,8 @@
-using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 
 namespace Shop.Application.Interfaces;
 
 public interface ITokenService
 {
-    string CreateToken(AppUser user);
+    Task<string> CreateToken(AppUser user);
 }

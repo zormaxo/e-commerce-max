@@ -4,7 +4,6 @@ namespace Shop.Core.Shared.Dtos;
 
 public class RegisterDto
 {
-    [EmailAddress]
     [Required]
     public string UserName { get; set; }
 

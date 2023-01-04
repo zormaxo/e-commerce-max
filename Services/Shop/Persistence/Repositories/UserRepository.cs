@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
 

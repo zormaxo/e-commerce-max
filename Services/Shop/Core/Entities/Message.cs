@@ -1,4 +1,6 @@
-﻿namespace Shop.Core.Entities;
+﻿using Shop.Core.Entities.Identity;
+
+namespace Shop.Core.Entities;
 
 public class Message
 {

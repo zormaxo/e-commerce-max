@@ -1,4 +1,4 @@
-using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 using Shop.Core.HelperTypes;
 
 namespace Shop.Core.Interfaces;

@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities;
+using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;

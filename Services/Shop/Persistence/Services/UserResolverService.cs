@@ -8,6 +8,11 @@ public class UserResolverService
     private readonly IHttpContextAccessor _context;
     public UserResolverService(IHttpContextAccessor context) { _context = context; }
 
-    public int GetUserId() { return Convert.ToInt32(_context.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value); }
-    public string GetUserName() { return _context.HttpContext.User?.Identity?.Name; }
+    public string GetUsername() { return _context.HttpContext.User?.FindFirst(ClaimTypes.Name)?.Value; }
+
+    public int GetUserId()
+    {
+        int.TryParse(_context.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int result);
+        return result;
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Shop.Core.Entities.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shop.Core.Entities;
 

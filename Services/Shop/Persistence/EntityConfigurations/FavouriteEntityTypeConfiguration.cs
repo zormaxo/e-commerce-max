@@ -12,7 +12,7 @@ internal class FavouriteEntityTypeConfiguration : IEntityTypeConfiguration<Favou
         modelBuilder.HasKey(ba => new { ba.LikedProductId, ba.UserId });
         modelBuilder
           .HasOne(b => b.User)
-            .WithMany(b => b.Favourites)
+            .WithMany(b => b.Favorites)
             .HasForeignKey(b => b.UserId);
         modelBuilder
           .HasOne(b => b.LikedProduct)

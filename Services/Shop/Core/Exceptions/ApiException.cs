@@ -10,7 +10,7 @@ public class ApiException : Exception
         ApiMessage = apiMessage ?? GetDefaultMessageForStatusCode(HttpStatusCode.BadRequest);
     }
 
-    public ApiException(HttpStatusCode httpStatusCode, string apiMessage = null)
+    public ApiException(HttpStatusCode httpStatusCode, object apiMessage = null)
     {
         HttpStatusCode = httpStatusCode;
         ApiMessage = apiMessage ?? GetDefaultMessageForStatusCode(httpStatusCode);
@@ -18,7 +18,7 @@ public class ApiException : Exception
 
     public HttpStatusCode HttpStatusCode { get; }
 
-    public string ApiMessage { get; }
+    public object ApiMessage { get; }
 
     private static string GetDefaultMessageForStatusCode(HttpStatusCode statusCode)
     {
