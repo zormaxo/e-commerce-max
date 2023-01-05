@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Dtos;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
 using Shop.Core.Entities;
 
@@ -7,7 +9,13 @@ namespace Shop.API.Controllers;
 public class BasketController : BaseApiController
 {
     private readonly BasketAppService _basketAppService;
-    public BasketController(BasketAppService basketAppService) { _basketAppService = basketAppService; }
+
+    private readonly IMapper _mapper;
+    public BasketController(BasketAppService basketAppService, IMapper mapper)
+    {
+        _basketAppService = basketAppService; 
+        _mapper = mapper;
+    }
 
     [HttpGet]
     public async Task<ActionResult<CustomerBasket>> GetBasketById(string id)
@@ -18,8 +26,12 @@ public class BasketController : BaseApiController
     }
 
     [HttpPost]
-    public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
-    { return await _basketAppService.UpdateBasketAsync(basket); }
+    public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDto basket)
+    {
+        var customerBasket = _mapper.Map<CustomerBasket>(basket);
+
+        return await _basketAppService.UpdateBasketAsync(customerBasket);
+    }
 
     [HttpDelete]
     public async Task DeleteBasketAsync(string id) { await _basketAppService.DeleteBasketAsync(id); }

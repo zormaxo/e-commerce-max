@@ -1,3 +1,4 @@
+using API.Dtos;
 using AutoMapper;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
@@ -83,5 +84,9 @@ public class MappingProfiles : Profile
             .ForMember(
                 dest => dest.RecipientPhotoUrl,
                 opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
+
+
+        CreateMap<CustomerBasketDto, CustomerBasket>();
+        CreateMap<BasketItemDto, BasketItem>();
     }
 }
