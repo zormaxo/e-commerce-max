@@ -8,7 +8,7 @@
       [(ngModel)]="model.userName"
       placeholder="E-Posta"
       [class.is-invalid]="userName.touched && userName.invalid"
-      email
+      
       required />
     <label>E-Posta</label>
     <span class="invalid-feedback" *ngIf="!userName.valid && userName.touched">Please enter a valid e-mail!</span>

@@ -20,7 +20,7 @@ namespace API.Controllers
                 .Include(r => r.UserRoles)
                 .ThenInclude(r => r.Role)
                 .OrderBy(u => u.UserName)
-                .Select(u => new { u.Id, Username = u.UserName, Roles = u.UserRoles.Select(r => r.Role.Name).ToList() })
+                .Select(u => new { UserId = u.Id, Username = u.UserName, Roles = u.UserRoles.Select(r => r.Role.Name).ToList() })
                 .ToListAsync();
 
             return Ok(users);
@@ -28,11 +28,12 @@ namespace API.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
-        public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
+        public async Task<ActionResult> EditRoles(int username, [FromQuery] string roles)
         {
             var selectedRoles = roles.Split(",").ToArray();
 
-            var user = await _userManager.FindByNameAsync(username);
+            //var user = await _userManager.FindByNameAsync(username);
+            var user = await _userManager.FindByIdAsync(username.ToString());
 
             if (user == null)
                 return NotFound("Could not find user");

@@ -40,6 +40,9 @@
             <li role="menuitem">
               <a class="dropdown-item small" routerLink="/uye/uyelik">Edit Profile</a>
             </li>
+            <li role="menuitem" *appHasRole="['Admin', 'Moderator']">
+              <a class="dropdown-item small" routerLink="/admin">Admin</a>
+            </li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Logout</a></li>
           </ul>

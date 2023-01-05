@@ -7,6 +7,8 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { UserProductsComponent } from './shop/user-products/user-products.component';
 import { AppProductBaseComponent } from './shop/app-product-base/app-product-base.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
@@ -16,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'vitrin', component: ShowcaseComponent },
       { path: 'product/:id', component: ProductDetailsComponent },
+      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       {
         path: 'search-result',
         loadChildren: () => import('./search-result/search-result.module').then((mod) => mod.SearchResultModule),

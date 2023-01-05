@@ -23,6 +23,11 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ShopModule } from './s-project/shop/shop.module';
 import { AppProductBaseComponent } from './shop/app-product-base/app-product-base.component';
 import { UserProductsComponent } from './shop/user-products/user-products.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { HasRoleDirective } from './core/directives/has-role.directive';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,11 @@ import { UserProductsComponent } from './shop/user-products/user-products.compon
     ProductDetailsComponent,
     AppProductBaseComponent,
     UserProductsComponent,
+    AdminPanelComponent,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    // HasRoleDirective,
+    RolesModalComponent,
   ],
   imports: [
     BrowserAnimationsModule,
