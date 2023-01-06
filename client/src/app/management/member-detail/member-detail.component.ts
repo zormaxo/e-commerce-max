@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
-import { MembersService } from 'src/app/core/services/members.service';
 import { ActivatedRoute } from '@angular/router';
-import { Member } from 'src/app/shared/models/member';
+import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
-import { Message } from 'src/app/shared/models/message';
+import { MembersService } from 'src/app/core/services/members.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { Member } from 'src/app/shared/models/member';
+import { Message } from 'src/app/shared/models/message';
 
 @Component({
   selector: 'app-member-detail',
@@ -13,7 +13,7 @@ import { MessageService } from 'src/app/core/services/message.service';
   styleUrls: ['./member-detail.component.scss'],
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild('memberTabs') memberTabs?: TabsetComponent;
+  @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
   member: Member = {} as Member;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
@@ -45,28 +45,23 @@ export class MemberDetailComponent implements OnInit {
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
         preview: false,
-        // thumbnailSize: NgxGalleryImageSize.Contain,
       },
     ];
+
+    this.galleryImages = this.getImages();
   }
 
-  getImages(): NgxGalleryImage[] {
+  getImages() {
+    if (!this.member) return [];
     const imageUrls = [];
     for (const photo of this.member.photos) {
       imageUrls.push({
-        small: photo?.url,
-        medium: photo?.url,
-        big: photo?.url,
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url,
       });
     }
     return imageUrls;
-  }
-
-  loadMember() {
-    this.memberService.getMember(+this.route.snapshot.paramMap.get('userId')).subscribe((member: Member) => {
-      this.member = member;
-      this.galleryImages = this.getImages();
-    });
   }
 
   selectTab(heading: string) {
@@ -78,7 +73,10 @@ export class MemberDetailComponent implements OnInit {
   loadMessages() {
     if (this.member) {
       this.messageService.getMessageThread(this.member.userName).subscribe({
-        next: (messages) => (this.messages = messages),
+        next: (response: any) => {
+          this.messages = response.result;
+          var omer = 4;
+        },
       });
     }
   }

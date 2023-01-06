@@ -1,53 +1,54 @@
-<div class="row" *ngIf="member">
-  <div class="col-3">
-    <div class="card">
-      <img
-        src="{{ member.photoUrl || './assets/user.png' }}"
-        alt="{{ member.userName }}"
-        class="card-img-top img-thumbnail" />
-      <div class="card-body">
-        <div>
-          <strong>Phone Number:</strong>
-          <p>{{ member.phoneNumber | mask : "(000) 000 00 00" }}</p>
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.firstName}}"
+                class="card-img-top img-thumbnail">
+            <div class="card-body">
+                <div>
+                    <strong>Location:</strong>
+                    <p>{{member.firstName}}, {{member.firstName}}</p>
+                </div>
+                <div>
+                    <strong>Age:</strong>
+                    <p>{{member.firstName}}</p>
+                </div>
+                <div>
+                    <strong>Last active:</strong>
+                    <p>{{member.lastActive + 'Z'}}</p>
+                </div>
+                <div>
+                    <strong>Member since:</strong>
+                    <p>{{member.created | date: 'dd MMM yyyy'}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button class="btn btn-primary">Like</button>
+                    <button (click)="selectTab('Messages')" class="btn btn-success">Messages</button>
+                </div>
+            </div>
         </div>
-        <div>
-          <strong>Last Active:</strong>
-          <p>{{ member.lastActive | date : "dd MMM yyy" }}</p>
-        </div>
-        <div>
-          <strong>Member since:</strong>
-          <p>{{ member.created | date : "dd MMM yyy" }}</p>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="btn-group d-flex">
-          <button class="btn btn-primary">Like</button>
-          <button (click)="selectTab('Messages')" class="btn btn-success">Message</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-9">
-    <tabset class="member-tabset" #memberTabs>
-      <tab heading="About {{ member.firstName }}" (selectTab)="onTabActivated($event)">
-        <h4>Name</h4>
-        <p>{{ member.firstName }}</p>
-        <h4>Surname</h4>
-        <p>{{ member.lastName }}</p>
-      </tab>
-      <tab heading="Interests" (selectTab)="onTabActivated($event)">
-        <h4>Interests</h4>
-      </tab>
-      <tab heading="Photos" (selectTab)="onTabActivated($event)">
-        <ngx-gallery
-          [options]="galleryOptions"
-          [images]="galleryImages"
-          style="display: inline-block; margin-bottom: 20px"></ngx-gallery>
-      </tab>
-      <tab heading="Messages" (selectTab)="onTabActivated($event)">
-        <p>Messages will go here</p>
-      </tab>
-    </tabset>
-  </div>
+    </div>
+
+    <div class="col-8">
+        <tabset class="member-tabset" #memberTabs>
+            <tab heading="About {{member.firstName}}" (selectTab)="onTabActivated($event)" >
+                <h4>Description</h4>
+                <p>{{member.firstName}}</p>
+                <h4>Looking for</h4>
+                <p>{{member.firstName}}</p>
+            </tab>
+            <tab heading="Interests" (selectTab)="onTabActivated($event)" >
+                <h4>Interests</h4>
+                <p>{{member.firstName}}</p>
+            </tab>
+            <tab heading="Photos" (selectTab)="onTabActivated($event)" >
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+            </tab>
+            <tab heading="Messages" (selectTab)="onTabActivated($event)" >
+                <app-member-messages [messages]="messages" [username]="member.userName"></app-member-messages>
+            </tab>
+        </tabset>
+    </div>
 </div>
