@@ -16,3 +16,5 @@ https://www.youtube.com/watch?v=oXNslgIXIbQ
 https://www.youtube.com/watch?v=_iryZxv8Rxw
 
 docker-compose up -d
+
+npm install @microsoft/signalr --legacy-peer-deps

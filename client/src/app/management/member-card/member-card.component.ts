@@ -1,15 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PresenceService } from 'src/app/core/services/presence.service';
 import { Member } from 'src/app/shared/models/member';
 
 @Component({
   selector: 'app-member-card',
   templateUrl: './member-card.component.html',
-  styleUrls: ['./member-card.component.scss'],
+  styleUrls: ['./member-card.component.css'],
 })
 export class MemberCardComponent implements OnInit {
-  @Input() member: Member;
+  @Input() member: Member | undefined;
 
-  constructor() {}
+  constructor(public presenceService: PresenceService) {}
 
   ngOnInit(): void {}
 }

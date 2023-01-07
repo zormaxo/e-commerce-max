@@ -1,7 +1,9 @@
+using API.SignalR;
 using Microsoft.AspNetCore.HttpLogging;
 using RestSharp;
 using Shop.API.Extensions;
 using Shop.API.Middleware;
+using Shop.API.SignalR;
 using Shop.Application.Extensions;
 using Shop.Infrastructure.Extensions;
 using Shop.Persistence.Extensions;
@@ -43,7 +45,7 @@ public class Startup
         services.AddCors(
             opt => opt.AddPolicy(
                 "CorsPolicy",
-                policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")));
+                policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200")));
         services.AddIdentityServices(_config);
         services.AddHttpContextAccessor();
 
@@ -78,6 +80,12 @@ public class Startup
         app.UseCors("CorsPolicy");
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseEndpoints(endpoints => endpoints.MapControllers());
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
+            });
     }
 }

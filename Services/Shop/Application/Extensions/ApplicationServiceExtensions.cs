@@ -1,3 +1,5 @@
+using System.Reflection;
+using API.SignalR;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,6 @@ using Shop.Core.Interfaces;
 using Shop.Persistence.Repositories;
 using Shop.Persistence.Services;
 using StackExchange.Redis;
-using System.Reflection;
 
 namespace Shop.Application.Extensions;
 
@@ -25,6 +26,8 @@ public static class ApplicationServiceExtensions
         services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddFluentValidationAutoValidation();
+        services.AddSignalR();
+        services.AddSingleton<PresenceTracker>();
 
         services.AddSingleton<IConnectionMultiplexer>(
             _ =>
