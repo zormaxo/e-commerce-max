@@ -29,6 +29,7 @@ public class Program
             var userManager = services.GetRequiredService<UserManager<AppUser>>();
             var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
             await context.Database.MigrateAsync();
+            await context.Connections.ExecuteDeleteAsync();
             await StoreContextSeed.SeedAsync(context, userManager, roleManager, loggerFactory);
             await CacheService.FillCacheItemsAsync(context, loggerFactory, mapper, cahcedItems, restClient);
         }

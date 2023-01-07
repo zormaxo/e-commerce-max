@@ -1,10 +1,10 @@
-using API.SignalR;
 using Microsoft.AspNetCore.HttpLogging;
 using RestSharp;
 using Shop.API.Extensions;
 using Shop.API.Middleware;
 using Shop.API.SignalR;
 using Shop.Application.Extensions;
+using Shop.Application.SignalR;
 using Shop.Infrastructure.Extensions;
 using Shop.Persistence.Extensions;
 using System.Text.Json.Serialization;
@@ -47,6 +47,7 @@ public class Startup
                 "CorsPolicy",
                 policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200")));
         services.AddIdentityServices(_config);
+        services.AddSignalR();
         services.AddHttpContextAccessor();
 
         services.AddHttpLogging(
@@ -77,7 +78,7 @@ public class Startup
         app.UseStaticFiles();
         app.UseHttpLogging();                                 //.Net core request response logging
         app.UseRouting();
-        app.UseCors("CorsPolicy");
+        app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(

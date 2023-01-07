@@ -1,4 +1,5 @@
-using System.Reflection;
+using API.Data;
+using API.Interfaces;
 using API.SignalR;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -11,6 +12,7 @@ using Shop.Core.Interfaces;
 using Shop.Persistence.Repositories;
 using Shop.Persistence.Services;
 using StackExchange.Redis;
+using System.Reflection;
 
 namespace Shop.Application.Extensions;
 

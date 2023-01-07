@@ -1,3 +1,6 @@
+using System.Linq.Expressions;
+using System.Reflection;
+using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -5,8 +8,6 @@ using Microsoft.EntityFrameworkCore.Query;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
 using Shop.Persistence.Services;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Shop.Persistence;
 
@@ -38,6 +39,9 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
     public DbSet<Favourite> Favourites { get; set; }
 
     public DbSet<Message> Messages { get; set; }
+
+    public DbSet<Group> Groups { get; set; }
+    public DbSet<Connection> Connections { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

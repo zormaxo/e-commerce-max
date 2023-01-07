@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Extensions;

@@ -23,6 +23,7 @@ import { DateInputComponent } from './components/date-input/date-input.component
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
+    TimeagoModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -76,6 +78,7 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
     TextInputComponent,
     ButtonsModule,
     OrderTotalsComponent,
+    TimeagoModule,
   ],
 })
 export class SharedModule {}

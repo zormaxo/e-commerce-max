@@ -1,15 +1,15 @@
-using API.DTOs;
 using API.Entities;
-using API.Extensions;
 using API.Interfaces;
+using API.SignalR;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using Shop.API.SignalR;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using Shop.Application.Extensions;
+using Shop.Core.Entities;
+using Shop.Core.Interfaces;
+using Shop.Shared.Dtos;
 
-namespace API.SignalR
+namespace Shop.Application.SignalR
 {
     public class MessageHub : Hub
     {
@@ -37,13 +37,13 @@ namespace API.SignalR
         {
             var httpContext = Context.GetHttpContext();
             var otherUser = httpContext.Request.Query["user"].ToString();
-            var groupName = GetGroupName(Context.User.GetUsername(), otherUser);
+            var groupName = GetGroupName(Context.User.GetUserName(), otherUser);
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             var group = await AddToGroup(groupName);
             await Clients.Group(groupName).SendAsync("UpdatedGroup", group);
 
             var messages = await _messageRepository.
-                GetMessageThread(Context.User.GetUsername(), otherUser);
+                GetMessageThread(Context.User.GetUserName(), otherUser);
 
             await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
         }
@@ -57,7 +57,7 @@ namespace API.SignalR
 
         public async Task SendMessage(CreateMessageDto createMessageDto)
         {
-            var username = Context.User.GetUsername();
+            var username = Context.User.GetUserName();
 
             if (username == createMessageDto.RecipientUsername.ToLower())
                 throw new HubException("You cannot send messages to yourself");
@@ -92,7 +92,7 @@ namespace API.SignalR
                 {
                     await _presenceHub.Clients
                         .Clients(connections)
-                        .SendAsync("NewMessageReceived", new { username = sender.UserName, knownAs = sender.KnownAs });
+                        .SendAsync("NewMessageReceived", new { username = sender.UserName, knownAs = sender.FirstName });
                 }
             }
 
@@ -107,7 +107,7 @@ namespace API.SignalR
         private async Task<Group> AddToGroup(string groupName)
         {
             var group = await _messageRepository.GetMessageGroup(groupName);
-            var connection = new Connection(Context.ConnectionId, Context.User.GetUsername());
+            var connection = new Connection(Context.ConnectionId, Context.User.GetUserName());
 
             if (group == null)
             {
