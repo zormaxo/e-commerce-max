@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Shop.API.Response;
 using Shop.Core.Response;
@@ -60,6 +61,12 @@ public class ResponseWrapperMiddleware
         // Read the body from the stream
         // Read Memory Stream data to the end
         var responseBodyText = new StreamReader(memoryStream).ReadToEnd();
+
+        if (context.Request.GetDisplayUrl().Contains("hubs"))
+        {
+            await context.Response.WriteAsync(responseBodyText);
+            return;
+        }
 
         // Deserializing Controller Response to an object
         var responseObj = new object();

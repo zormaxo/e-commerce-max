@@ -92,7 +92,7 @@ namespace Shop.Application.SignalR
                 {
                     await _presenceHub.Clients
                         .Clients(connections)
-                        .SendAsync("NewMessageReceived", new { username = sender.UserName, knownAs = sender.FirstName });
+                        .SendAsync("NewMessageReceived", new { username = sender.UserName, knownAs = sender.Id });
                 }
             }
 

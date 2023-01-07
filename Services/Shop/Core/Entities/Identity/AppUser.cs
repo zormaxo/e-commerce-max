@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Shop.Core.Entities.Identity;
 
@@ -7,9 +7,9 @@ public class AppUser : IdentityUser<int>
 {
     public bool IsDeleted { get; set; }
 
-    public DateTime ModifiedDate { get; set; } = DateTime.Now;
+    public DateTime ModifiedDate { get; set; } = DateTime.UtcNow;
 
-    public DateTime CreatedDate { get; set; } = DateTime.Now;
+    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
     public int CreatedBy { get; set; }
 

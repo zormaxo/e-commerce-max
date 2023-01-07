@@ -49,7 +49,7 @@ export class PresenceService {
       this.toastr
         .info(knownAs + ' has sent you a new message!')
         .onTap.pipe(take(1))
-        .subscribe(() => this.router.navigateByUrl('/members/' + username + '?tab=3'));
+        .subscribe(() => this.router.navigateByUrl('uyeler/' + knownAs + '?tab=Messages'));
     });
   }
 
