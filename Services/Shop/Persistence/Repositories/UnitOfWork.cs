@@ -1,36 +1,32 @@
-using System.Collections;
-using Core.Entities;
-using Core.Interfaces;
-
+using AutoMapper;
 using Shop.Core.Entities;
-using Shop.Core.Interfaces;
-using Shop.Persistence;
-using Shop.Persistence.Repositories;
 
-namespace Infrastructure.Data
+using Shop.Core.Interfaces;
+using System.Collections;
+
+namespace Shop.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly StoreContext _context;
         private Hashtable _repositories;
-        public UnitOfWork(StoreContext context)
+        private readonly IMapper _mapper;
+
+        public UnitOfWork(StoreContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
-        public async Task<int> Complete()
-        {
-            return await _context.SaveChangesAsync();
-        }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+        public async Task<int> Complete() { return await _context.SaveChangesAsync(); }
+
+        public void Dispose() { _context.Dispose(); }
 
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
         {
-            if (_repositories == null) _repositories = new Hashtable();
+            if (_repositories == null)
+                _repositories = new Hashtable();
 
             var type = typeof(TEntity).Name;
 
@@ -42,7 +38,9 @@ namespace Infrastructure.Data
                 _repositories.Add(type, repositoryInstance);
             }
 
-            return (IGenericRepository<TEntity>) _repositories[type];
+            return (IGenericRepository<TEntity>)_repositories[type];
         }
+
+        public bool HasChanges() { return _context.ChangeTracker.HasChanges(); }
     }
 }

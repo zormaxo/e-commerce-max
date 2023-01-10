@@ -1,4 +1,3 @@
-using API.Data;
 using API.Interfaces;
 using API.SignalR;
 using Core.Interfaces;

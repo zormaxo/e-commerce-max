@@ -3,6 +3,7 @@ using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Entities;
 using Shop.Core.Entities.OrderAggregate;
+using Shop.Core.Interfaces;
 
 namespace Shop.Application.ApplicationServices
 {
