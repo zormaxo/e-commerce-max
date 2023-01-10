@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using API.Entities;
+using Core.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,10 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
 
     public DbSet<Group> Groups { get; set; }
     public DbSet<Connection> Connections { get; set; }
+
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

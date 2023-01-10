@@ -1,3 +1,4 @@
+using Core.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -103,6 +104,16 @@ public static class StoreContextSeed
                 var machines = JsonConvert.DeserializeObject<List<ProductMachine>>(machinesData);
 
                 context.ProductMachines.AddRange(machines);
+
+                await context.SaveChangesAsync();
+            }
+            if (!await context.DeliveryMethods.AnyAsync())
+            {
+                logger.LogInformation("ProductMachine seeding starting...");
+                var deliveryData = File.ReadAllText("../Persistence/SeedData/delivery.json");
+                var methods = JsonConvert.DeserializeObject<List<DeliveryMethod>>(deliveryData);
+
+                context.DeliveryMethods.AddRange(methods);
 
                 await context.SaveChangesAsync();
             }

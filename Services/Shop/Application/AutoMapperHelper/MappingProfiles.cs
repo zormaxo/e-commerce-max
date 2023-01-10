@@ -1,5 +1,6 @@
 using API.Dtos;
 using AutoMapper;
+using Core.Entities.OrderAggregate;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Extensions;
@@ -90,7 +91,16 @@ public class MappingProfiles : Profile
         CreateMap<BasketItemDto, BasketItem>();
 
         CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
-        CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ?
-            DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
+        CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ? DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
+
+        CreateMap<AddressDto, Shop.Core.Entities.OrderAggregate.Address>().ReverseMap();
+        CreateMap<Order, OrderToReturnDto>()
+            .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.ShortName))
+            .ForMember(d => d.ShippingPrice, o => o.MapFrom(s => s.DeliveryMethod.Price));
+        CreateMap<OrderItem, OrderItemDto>()
+            .ForMember(d => d.ProductId, o => o.MapFrom(s => s.ItemOrdered.ProductItemId))
+            .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
+            .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl));
+        //.ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
     }
 }

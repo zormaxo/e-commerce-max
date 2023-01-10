@@ -1,12 +1,15 @@
 using API.Data;
 using API.Interfaces;
 using API.SignalR;
+using Core.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.ActionFilters;
+using Shop.Application.ApplicationServices;
 using Shop.Application.AutoMapperHelper;
 using Shop.Core.Interfaces;
 using Shop.Persistence.Repositories;
@@ -23,6 +26,9 @@ public static class ApplicationServiceExtensions
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<LogUserActivity>();
         services.AddScoped<UserResolverService>();
         services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));

@@ -1,31 +1,32 @@
-﻿using Shop.Core.Entities;
+﻿using System.Text.Json;
+using AutoMapper;
+using Core.Interfaces;
+using Shop.Core.Entities;
 using StackExchange.Redis;
-using System.Text.Json;
 
 namespace Shop.Application.ApplicationServices;
 
 public class BasketAppService
 {
-    private readonly IDatabase _database;
+    private readonly IBasketRepository _basketRepository;
+    private readonly IMapper _mapper;
+    public BasketAppService(IBasketRepository basketRepository, IMapper mapper)
+    {
+        _mapper = mapper;
+        _basketRepository = basketRepository;
+    }
 
-    public BasketAppService(IConnectionMultiplexer redis) { _database = redis.GetDatabase(); }
-
-    public async Task<bool> DeleteBasketAsync(string basketId) { return await _database.KeyDeleteAsync(basketId); }
+    public async Task<bool> DeleteBasketAsync(string basketId) { return await _basketRepository.DeleteBasketAsync(basketId); }
 
     public async Task<CustomerBasket> GetBasketAsync(string basketId)
     {
-        var data = await _database.StringGetAsync(basketId);
-
-        return data.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(data);
+        return await _basketRepository.GetBasketAsync(basketId);
     }
 
     public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
     {
-        var created = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
+        var customerBasket = _mapper.Map<CustomerBasket>(basket);
 
-        if (!created)
-            return null;
-
-        return await GetBasketAsync(basket.Id);
+        return await _basketRepository.UpdateBasketAsync(customerBasket);
     }
 }
