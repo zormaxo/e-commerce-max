@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Dtos
+namespace Shop.Shared.Dtos
 {
     public class BasketItemDto
     {
@@ -21,10 +21,10 @@ namespace API.Dtos
         [Required]
         public string PictureUrl { get; set; }
 
-        [Required]
-        public string Brand { get; set; }
 
-        [Required]
-        public string Type { get; set; }
+        public string? Brand { get; set; }
+
+
+        public string? Type { get; set; }
     }
 }

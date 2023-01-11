@@ -7,6 +7,7 @@ using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Product;
+using Shop.Shared.Dtos;
 
 namespace Shop.API.Controllers;
 
