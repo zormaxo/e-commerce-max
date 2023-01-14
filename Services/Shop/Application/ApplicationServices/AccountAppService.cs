@@ -1,7 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Shop.Application.Extensions;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities.Identity;
@@ -61,9 +60,7 @@ public class AccountAppService : BaseAppService
 
     public async Task<UserDto> Login(LoginDto loginDto)
     {
-        var user = await _userManager.Users
-            .Include(p => p.Photos)
-            .SingleOrDefaultAsync(x => x.UserName == loginDto.Email.ToLower());
+        var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
         var result = await _userManager
             .CheckPasswordAsync(user, loginDto.Password);
@@ -71,11 +68,14 @@ public class AccountAppService : BaseAppService
         if (!result)
             throw new ApiException(HttpStatusCode.Unauthorized);
 
-        return new UserDto { UserId = user.Id, FirstName = user.FirstName, Token = await _tokenService.CreateToken(user), };
+        return new UserDto
+        {
+            UserId = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            Token = await _tokenService.CreateToken(user),
+        };
     }
 
     private async Task<bool> CheckEmailExistsAsync(string email) { return await _userManager.FindByEmailAsync(email) != null; }
-
-    private async Task<bool> UserExists(string userName)
-    { return await _userManager.Users.AnyAsync(x => x.UserName == userName.ToLower()); }
 }
