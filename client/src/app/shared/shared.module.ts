@@ -24,6 +24,9 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { TimeagoModule } from 'ngx-timeago';
     DateInputComponent,
     TextInputComponent,
     OrderTotalsComponent,
+    StepperComponent,
+    BasketSummaryComponent,
   ],
   imports: [
     FormsModule,
@@ -57,6 +62,7 @@ import { TimeagoModule } from 'ngx-timeago';
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
+    CdkStepperModule,
   ],
   exports: [
     BsDropdownModule,
@@ -79,6 +85,9 @@ import { TimeagoModule } from 'ngx-timeago';
     ButtonsModule,
     OrderTotalsComponent,
     TimeagoModule,
+    CdkStepperModule,
+    StepperComponent,
+    BasketSummaryComponent,
   ],
 })
 export class SharedModule {}

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/shared/models/user';
+import { Address, User } from 'src/app/shared/models/user';
 import { PresenceService } from './presence.service';
 
 @Injectable({
@@ -42,16 +42,28 @@ export class AccountService {
     Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
-     this.presenceService.createHubConnection(user);
+    this.presenceService.createHubConnection(user);
   }
 
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-     this.presenceService.stopHubConnection();
+    this.presenceService.stopHubConnection();
   }
 
   getDecodedToken(token) {
     return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  checkEmailExists(email: string) {
+    return this.http.get<boolean>(this.baseUrl + 'account/emailExists?email=' + email);
+  }
+
+  getUserAddress() {
+    return this.http.get<Address>(this.baseUrl + 'account/address');
+  }
+
+  updateUserAddress(address: Address) {
+    return this.http.put(this.baseUrl + 'account/address', address);
   }
 }
