@@ -1,11 +1,13 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Shop.Core.Entities.Identity;
 using Shop.Persistence;
 using System.Text;
 
-namespace Shop.API.Extensions;
+namespace Shop.Application.Extensions;
 
 public static class IdentityServiceExtensions
 {

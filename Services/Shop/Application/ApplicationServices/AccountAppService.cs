@@ -6,7 +6,6 @@ using Shop.Application.Extensions;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
-using Shop.Core.Shared.Dtos;
 using Shop.Shared.Dtos;
 using System.Net;
 
@@ -32,9 +31,6 @@ public class AccountAppService : BaseAppService
 
     public async Task<UserDto> Register(RegisterDto registerDto)
     {
-        //if (await UserExists(registerDto.Email))
-        //    throw new ApiException(HttpStatusCode.BadRequest, "Username is taken");
-
         if (await CheckEmailExistsAsync(registerDto.Email))
         {
             throw new ApiException(HttpStatusCode.BadRequest, "Email address is in use");
@@ -67,7 +63,7 @@ public class AccountAppService : BaseAppService
     {
         var user = await _userManager.Users
             .Include(p => p.Photos)
-            .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            .SingleOrDefaultAsync(x => x.UserName == loginDto.Email.ToLower());
 
         var result = await _userManager
             .CheckPasswordAsync(user, loginDto.Password);

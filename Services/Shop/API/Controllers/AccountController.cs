@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Core.Exceptions;
-using Shop.Core.Shared.Dtos;
 using Shop.Shared.Dtos;
 using System.Net;
 using System.Security.Claims;
@@ -31,13 +30,12 @@ public class AccountController : BaseApiController
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        ValidationResult result = await _validator.ValidateAsync(loginDto);
-
-        if (!result.IsValid)
-        {
-            result.AddToModelState(ModelState);
-            throw new ApiException(HttpStatusCode.Unauthorized, JsonConvert.SerializeObject(ModelState));
-        }
+        ////ValidationResult result = await _validator.ValidateAsync(loginDto);
+        ////if (!result.IsValid)
+        ////{
+        ////    result.AddToModelState(ModelState);
+        ////    throw new ApiException(HttpStatusCode.Unauthorized, JsonConvert.SerializeObject(ModelState));
+        ////}
         return await _accountSrv.Login(loginDto);
     }
 

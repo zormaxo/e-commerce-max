@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Core.Shared.Dtos;
+namespace Shop.Shared.Dtos;
 
 public class LoginDto
 {
     [Required]
-    public string Username { get; set; }
+    public string Email { get; set; } = string.Empty;
 
     [Required]
-    [MaxLength(10, ErrorMessage = "Mvc, 5 karakterden uzun olamaz.")]
-    public string Password { get; set; }
+    [MinLength(4, ErrorMessage = "Password must be a minimum length of '4'")]
+    public string Password { get; set; } = string.Empty;
 }
