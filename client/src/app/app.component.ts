@@ -16,17 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.setCurrentUser();
 
-    const basketId = localStorage.getItem('basket_id');
-    if (basketId) {
-      this.basketService.getBasket(basketId).subscribe(
-        () => {
-          console.log('initialised basket');
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+
   }
 
   setCurrentUser() {

@@ -1,12 +1,16 @@
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Core.Exceptions;
 using Shop.Core.Shared.Dtos;
+using Shop.Shared.Dtos;
 using System.Net;
+using System.Security.Claims;
 
 namespace Shop.API.Controllers;
 
@@ -35,5 +39,13 @@ public class AccountController : BaseApiController
             throw new ApiException(HttpStatusCode.Unauthorized, JsonConvert.SerializeObject(ModelState));
         }
         return await _accountSrv.Login(loginDto);
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult<UserDto>> GetCurrentUser()
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email);
+        return await _accountSrv.GetCurrentUser(email);
     }
 }

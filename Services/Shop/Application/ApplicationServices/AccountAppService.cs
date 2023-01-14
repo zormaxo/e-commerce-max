@@ -1,10 +1,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shop.Application.Extensions;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
 using Shop.Core.Shared.Dtos;
+using Shop.Shared.Dtos;
 using System.Net;
 
 namespace Shop.Application.ApplicationServices;
@@ -20,14 +23,26 @@ public class AccountAppService : BaseAppService
         _tokenService = tokenService;
     }
 
+    public async Task<ActionResult<UserDto>> GetCurrentUser(string email)
+    {
+        var user = await _userManager.FindByEmailFromClaimsPrincipalAsync(email);
+
+        return new UserDto { Email = user.Email, Token = await _tokenService.CreateToken(user), FirstName = user.FirstName };
+    }
+
     public async Task<UserDto> Register(RegisterDto registerDto)
     {
-        if (await UserExists(registerDto.UserName))
-            throw new ApiException(HttpStatusCode.BadRequest, "Username is taken");
+        //if (await UserExists(registerDto.Email))
+        //    throw new ApiException(HttpStatusCode.BadRequest, "Username is taken");
+
+        if (await CheckEmailExistsAsync(registerDto.Email))
+        {
+            throw new ApiException(HttpStatusCode.BadRequest, "Email address is in use");
+        }
 
         var user = _mapper.Map<AppUser>(registerDto);
 
-        user.UserName = registerDto.UserName.ToLower();
+        user.UserName = registerDto.Email.ToLower();
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
 
@@ -39,7 +54,13 @@ public class AccountAppService : BaseAppService
         if (!roleResult.Succeeded)
             throw new ApiException(HttpStatusCode.BadRequest, result.Errors);
 
-        return new UserDto { FirstName = user.FirstName, UserId = user.Id, Token = await _tokenService.CreateToken(user) };
+        return new UserDto
+        {
+            FirstName = user.FirstName,
+            Email = user.Email,
+            UserId = user.Id,
+            Token = await _tokenService.CreateToken(user)
+        };
     }
 
     public async Task<UserDto> Login(LoginDto loginDto)
@@ -56,6 +77,8 @@ public class AccountAppService : BaseAppService
 
         return new UserDto { UserId = user.Id, FirstName = user.FirstName, Token = await _tokenService.CreateToken(user), };
     }
+
+    private async Task<bool> CheckEmailExistsAsync(string email) { return await _userManager.FindByEmailAsync(email) != null; }
 
     private async Task<bool> UserExists(string userName)
     { return await _userManager.Users.AnyAsync(x => x.UserName == userName.ToLower()); }

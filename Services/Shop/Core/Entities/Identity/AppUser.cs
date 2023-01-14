@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace Shop.Core.Entities.Identity;
@@ -35,4 +35,6 @@ public class AppUser : IdentityUser<int>
     public ICollection<Message> MessagesReceived { get; set; }
 
     public ICollection<AppUserRole> UserRoles { get; set; }
+
+    public Address Address { get; set; }
 }
