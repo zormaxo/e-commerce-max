@@ -18,7 +18,6 @@ import { Member } from '../shared/models/member';
 })
 export class ShopService {
   baseUrl = environment.apiUrl;
-  ocelotUrl = environment.ocelotUrl;
   categories: ICategory[];
   cities: IAddress[];
 
@@ -45,7 +44,7 @@ export class ShopService {
   getProducts(shopParams: ShopParams) {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.ocelotUrl + 'ads', { observe: 'response', params }).pipe(
+    return this.http.get(this.baseUrl + 'ads', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })
@@ -55,7 +54,7 @@ export class ShopService {
   getProductsLight(shopParams: ShopParams) {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.ocelotUrl + 'ads/light', { observe: 'response', params }).pipe(
+    return this.http.get(this.baseUrl + 'ads/light', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })
