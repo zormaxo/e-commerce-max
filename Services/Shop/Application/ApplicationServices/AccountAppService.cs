@@ -1,4 +1,6 @@
+using API.Dtos;
 using AutoMapper;
+using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Extensions;
@@ -19,13 +21,6 @@ public class AccountAppService : BaseAppService
     {
         _userManager = userManager;
         _tokenService = tokenService;
-    }
-
-    public async Task<ActionResult<UserDto>> GetCurrentUser(string email)
-    {
-        var user = await _userManager.FindByEmailFromClaimsPrincipalAsync(email);
-
-        return new UserDto { Email = user.Email, Token = await _tokenService.CreateToken(user), FirstName = user.FirstName };
     }
 
     public async Task<UserDto> Register(RegisterDto registerDto)
@@ -77,5 +72,33 @@ public class AccountAppService : BaseAppService
         };
     }
 
-    private async Task<bool> CheckEmailExistsAsync(string email) { return await _userManager.FindByEmailAsync(email) != null; }
+    public async Task<ActionResult<UserDto>> GetCurrentUser(string email)
+    {
+        var user = await _userManager.FindByEmailFromClaimsPrincipalAsync(email);
+
+        return new UserDto { Email = user.Email, Token = await _tokenService.CreateToken(user), FirstName = user.FirstName };
+    }
+
+    public async Task<bool> CheckEmailExistsAsync(string email) { return await _userManager.FindByEmailAsync(email) != null; }
+
+    public async Task<ActionResult<AddressDto>> GetUserAddress(string email)
+    {
+        var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(email);
+
+        return _mapper.Map<Address, AddressDto>(user.Address);
+    }
+
+    public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address, string email)
+    {
+        var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(email);
+
+        user.Address = _mapper.Map<AddressDto, Address>(address);
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
+            return _mapper.Map<AddressDto>(user.Address);
+
+        throw new ApiException(HttpStatusCode.BadRequest, "Problem updating the user");
+    }
 }

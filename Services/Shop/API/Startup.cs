@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.HttpLogging;
 using RestSharp;
 using Shop.API.Extensions;
@@ -7,7 +8,6 @@ using Shop.Application.Extensions;
 using Shop.Application.SignalR;
 using Shop.Infrastructure.Extensions;
 using Shop.Persistence.Extensions;
-using System.Text.Json.Serialization;
 
 namespace Shop.API;
 
@@ -81,12 +81,17 @@ public class Startup
         app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
         app.UseEndpoints(
             endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
     }
 }

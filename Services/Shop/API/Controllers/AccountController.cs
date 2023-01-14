@@ -1,7 +1,7 @@
+using API.Dtos;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Shop.Application.ApplicationServices;
@@ -30,12 +30,12 @@ public class AccountController : BaseApiController
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        ////ValidationResult result = await _validator.ValidateAsync(loginDto);
-        ////if (!result.IsValid)
-        ////{
-        ////    result.AddToModelState(ModelState);
-        ////    throw new ApiException(HttpStatusCode.Unauthorized, JsonConvert.SerializeObject(ModelState));
-        ////}
+        ValidationResult result = await _validator.ValidateAsync(loginDto);
+        if (!result.IsValid)
+        {
+            result.AddToModelState(ModelState);
+            throw new ApiException(HttpStatusCode.Unauthorized, JsonConvert.SerializeObject(ModelState));
+        }
         return await _accountSrv.Login(loginDto);
     }
 
@@ -45,5 +45,26 @@ public class AccountController : BaseApiController
     {
         var email = User.FindFirstValue(ClaimTypes.Email);
         return await _accountSrv.GetCurrentUser(email);
+    }
+
+    [HttpGet("emailexists")]
+    public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
+    { return await _accountSrv.CheckEmailExistsAsync(email); }
+
+    [Authorize]
+    [HttpGet("address")]
+    public async Task<ActionResult<AddressDto>> GetUserAddress()
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email);
+        return await _accountSrv.GetUserAddress(email);
+    }
+
+    [Authorize]
+    [HttpPut("address")]
+    public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email);
+
+        return await _accountSrv.UpdateUserAddress(address, email);
     }
 }
