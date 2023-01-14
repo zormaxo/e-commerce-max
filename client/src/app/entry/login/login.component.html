@@ -4,14 +4,14 @@
       type="text"
       class="form-control"
       name="username"
-      #userName="ngModel"
-      [(ngModel)]="model.userName"
+      #email="ngModel"
+      [(ngModel)]="model.email"
       placeholder="E-Posta"
-      [class.is-invalid]="userName.touched && userName.invalid"
+      [class.is-invalid]="email.touched && email.invalid"
       
       required />
     <label>E-Posta</label>
-    <span class="invalid-feedback" *ngIf="!userName.valid && userName.touched">Please enter a valid e-mail!</span>
+    <span class="invalid-feedback" *ngIf="!email.valid && email.touched">Please enter a valid e-mail!</span>
   </div>
 
   <div class="form-floating mb-3">

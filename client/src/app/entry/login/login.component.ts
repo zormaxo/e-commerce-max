@@ -10,7 +10,7 @@ import { AccountService } from '../../core/services/account.service';
 })
 export class LoginComponent {
   @Output() cancelRegister = new EventEmitter<boolean>();
-  model: { userName?: string; password?: string } = {};
+  model: { email?: string; password?: string } = {};
 
   constructor(public accountService: AccountService, private toastr: ToastrService, private router: Router) {}
 
