@@ -33,6 +33,6 @@ public static class ResponseWrapManager
 
         // NOTE: Add any further customizations if needed here
 
-        return new ApiResponse(requestUrl, responseBody, error, status, httpStatusCode);
+        return new ApiResponse("omer", responseBody, error, status, httpStatusCode);
     }
 }

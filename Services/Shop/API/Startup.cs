@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.HttpLogging;
 using RestSharp;
 using Shop.API.Extensions;
@@ -8,6 +7,7 @@ using Shop.Application.Extensions;
 using Shop.Application.SignalR;
 using Shop.Infrastructure.Extensions;
 using Shop.Persistence.Extensions;
+using System.Text.Json.Serialization;
 
 namespace Shop.API;
 
@@ -68,7 +68,7 @@ public class Startup
         app.UseSwaggerDocumentation();
         //app.UseSerilogRequestLogging();
 
-        app.UseMiddleware<ResponseWrapperMiddleware>();
+        //app.UseMiddleware<ResponseWrapperMiddleware>();
         app.UseMiddleware<ExceptionMiddleware>();
         //app.UseMiddleware<RequestResponseMiddleware>();     //Manuel request response logging
 

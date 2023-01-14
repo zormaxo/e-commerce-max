@@ -1,3 +1,4 @@
+using Shop.API.Response;
 using Shop.Application.ApplicationServices;
 using Shop.Core.HelperTypes;
 
@@ -8,6 +9,7 @@ public static class ControllerServiceExtensions
     public static IServiceCollection AddControllerServices(this IServiceCollection services)
     {
         services.AddSingleton<CachedItems>();
+        services.AddSingleton<SampleActionFilter>();
         services.AddScoped<AccountAppService>();
         services.AddScoped<UserAppService>();
         services.AddScoped<ProductAppService>();
