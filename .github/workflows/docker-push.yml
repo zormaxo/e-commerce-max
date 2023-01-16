@@ -24,7 +24,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}:Services/Shop/Api"
+          context: "{{defaultContext}}:Services/Shop/API"
           push: true
           tags: zormax/kuyumdan:latest
   deploy:
