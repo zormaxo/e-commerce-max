@@ -16,7 +16,7 @@ public static class ResponseWrapManager
     /// <param name="response">The Result</param>
     /// <param name="context">The HTTP Context</param>
     /// <returns>Sample Response Object</returns>
-    public static ApiResponse ResponseWrapper(object response, HttpContext context)
+    public static ApiResponse ResponseWrapper(object? response, HttpContext context)
     {
         var requestUrl = context.Request.GetDisplayUrl();
         var responseBody = response;
@@ -33,6 +33,6 @@ public static class ResponseWrapManager
 
         // NOTE: Add any further customizations if needed here
 
-        return new ApiResponse("omer", responseBody, error, status, httpStatusCode);
+        return new ApiResponse(requestUrl, responseBody, error, status, httpStatusCode);
     }
 }

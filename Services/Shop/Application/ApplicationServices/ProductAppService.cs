@@ -6,6 +6,7 @@ using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Persistence;
+using Shop.Shared.Dtos.Product;
 using System.Net;
 
 namespace Shop.Application.ApplicationServices;

@@ -1,6 +1,8 @@
-﻿using Shop.Core.Shared.Dtos.City;
+﻿using Shop.Core.Shared.Dtos;
+using Shop.Core.Shared.Dtos.City;
+using Shop.Core.Shared.Dtos.Product;
 
-namespace Shop.Core.Shared.Dtos.Product;
+namespace Shop.Shared.Dtos.Product;
 
 public class ProductProjectDto : BaseDto
 {
@@ -18,7 +20,7 @@ public class ProductProjectDto : BaseDto
 
     public ICollection<PhotoDto> Photos { get; set; }
 
-    public string CreatedDate { get; set; } = string.Empty;
+    public DateTime CreatedDate { get; set; }
 
     public ProductMemberDto User { get; set; }
 

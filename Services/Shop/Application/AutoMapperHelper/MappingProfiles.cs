@@ -9,6 +9,7 @@ using Shop.Core.Shared.Dtos.City;
 using Shop.Core.Shared.Dtos.Member;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Shared.Dtos;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.AutoMapperHelper;
 
@@ -39,7 +40,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Product, ProductProjectDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
-            .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")))
+            //.ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
             .ForMember(d => d.CategoryId, o => o.MapFrom(src => src.Category.Id));
 

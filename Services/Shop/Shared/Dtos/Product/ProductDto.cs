@@ -10,7 +10,5 @@ public class ProductDto : BaseDto
 
     public string PriceText { get; set; } = string.Empty;
 
-    public CountyDto County { get; set; } = null!;
-
-    public string CreatedDate { get; set; } = string.Empty;
+    public DateTime CreatedDate { get; set; }
 }

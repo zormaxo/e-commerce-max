@@ -7,6 +7,7 @@ using Shop.Core.Shared;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Shared.Dtos;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.API.Controllers;
 
