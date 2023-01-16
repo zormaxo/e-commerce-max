@@ -18,8 +18,8 @@ public class ProductsController : BaseApiController
     public ProductsController(ProductAppService productSrv) { _productSrv = productSrv; }
 
     [HttpGet("showcase")]
-    public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProductsForShowcase([FromQuery] ProductSpecParams productParams)
-    { return await _productSrv.GetProducts<ShowcaseDto>(productParams); }
+    public Task<Pagination<ShowcaseDto>> GetProductsForShowcase([FromQuery] ProductSpecParams productParams)
+    { return _productSrv.GetProducts<ShowcaseDto>(productParams); }
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
@@ -27,25 +27,23 @@ public class ProductsController : BaseApiController
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ProductDetailDto>> GetProduct(int id)
-    { return await _productSrv.GetProduct(id, User.GetUserId()); }
+    public Task<ProductDetailDto> GetProduct(int id) { return _productSrv.GetProduct(id, User.GetUserId()); }
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<int> UpdateProduct(Product product) { return await _productSrv.UpdateProduct(product); }
+    public Task<int> UpdateProduct(Product product) { return _productSrv.UpdateProduct(product); }
 
     [HttpPost("change-active-status")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<int> ChangeActiveStatus(ProductActivateDto productActivateDto)
-    { return await _productSrv.ChangeActiveStatus(productActivateDto); }
+    public Task<int> ChangeActiveStatus(ProductActivateDto productActivateDto)
+    { return _productSrv.ChangeActiveStatus(productActivateDto); }
 
     [HttpGet("product-counts")]
     public async Task<ActionResult<object>> GetProductCounts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productSrv.GetActiveInactiveProducts(productParams)); }
 
     [HttpPost("add-photo")]
-    public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
-    { return await _productSrv.AddPhoto(file, User.GetUserId().Value); }
+    public Task<PhotoDto> AddPhoto(IFormFile file) { return _productSrv.AddPhoto(file, User.GetUserId().Value); }
 
     [HttpPost("add-remove-favourite/{productId}")]
     public async Task AddRemoveFavourite(int productId) { await _productSrv.AddRemoveFavourite(productId, User.GetUserId()); }

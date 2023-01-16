@@ -1,25 +1,25 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Dtos
+namespace Shop.Shared.Dtos
 {
     public class AddressDto
     {
         [Required]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required]
-        public string Street { get; set; }
+        public string Street { get; set; } = string.Empty;
 
         [Required]
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
         [Required]
-        public string State { get; set; }
+        public string State { get; set; } = string.Empty;
 
         [Required]
-        public string ZipCode { get; set; }
+        public string ZipCode { get; set; } = string.Empty;
     }
 }

@@ -27,7 +27,7 @@ public static class StoreContextSeed
             if (!await context.Cities.AnyAsync())
             {
                 logger.LogInformation("City seeding starting...");
-                var cityData = await File.ReadAllTextAsync(path + @"/SeedData/cities.json");
+                var cityData = await File.ReadAllTextAsync(path + "/SeedData/cities.json");
                 var cities = JsonConvert.DeserializeObject<List<City>>(cityData);
 
                 context.Cities.AddRange(cities);
@@ -38,7 +38,7 @@ public static class StoreContextSeed
             if (!await context.Counties.AnyAsync())
             {
                 logger.LogInformation("County seeding starting...");
-                var countyData = await File.ReadAllTextAsync(path + @"/SeedData/counties.json");
+                var countyData = await File.ReadAllTextAsync(path + "/SeedData/counties.json");
                 var counties = JsonConvert.DeserializeObject<List<County>>(countyData);
 
                 context.Counties.AddRange(counties);
@@ -48,7 +48,7 @@ public static class StoreContextSeed
 
             if (!await userManager.Users.AnyAsync())
             {
-                var userData = await File.ReadAllTextAsync(path + @"/SeedData/users.json");
+                var userData = await File.ReadAllTextAsync(path + "/SeedData/users.json");
                 var users = JsonConvert.DeserializeObject<List<AppUser>>(userData);
                 if (users == null)
                     return;
@@ -81,7 +81,7 @@ public static class StoreContextSeed
             if (!await context.Categories.AnyAsync())
             {
                 logger.LogInformation("Category seeding starting...");
-                var typesData = await File.ReadAllTextAsync(path + @"/SeedData/categories.json");
+                var typesData = await File.ReadAllTextAsync(path + "/SeedData/categories.json");
                 var types = JsonConvert.DeserializeObject<List<Category>>(typesData);
 
                 context.Categories.AddRange(types);
@@ -92,7 +92,7 @@ public static class StoreContextSeed
             if (!await context.Products.AnyAsync())
             {
                 logger.LogInformation("Product seeding starting...");
-                var productsData = await File.ReadAllTextAsync(path + @"/SeedData/products.json");
+                var productsData = await File.ReadAllTextAsync(path + "/SeedData/products.json");
                 var products = JsonConvert.DeserializeObject<List<Product>>(productsData);
 
                 foreach (var product in products)
@@ -106,7 +106,7 @@ public static class StoreContextSeed
             if (!await context.ProductMachines.AnyAsync())
             {
                 logger.LogInformation("ProductMachine seeding starting...");
-                var machinesData = await File.ReadAllTextAsync(path + @"/SeedData/productMachines.json");
+                var machinesData = await File.ReadAllTextAsync(path + "/SeedData/productMachines.json");
                 var machines = JsonConvert.DeserializeObject<List<ProductMachine>>(machinesData);
 
                 foreach (var machine in machines)
@@ -119,7 +119,7 @@ public static class StoreContextSeed
             if (!await context.DeliveryMethods.AnyAsync())
             {
                 logger.LogInformation("ProductMachine seeding starting...");
-                var deliveryData = File.ReadAllText(path + @"/SeedData/delivery.json");
+                var deliveryData = File.ReadAllText(path + "/SeedData/delivery.json");
                 var methods = JsonConvert.DeserializeObject<List<DeliveryMethod>>(deliveryData);
 
                 context.DeliveryMethods.AddRange(methods);

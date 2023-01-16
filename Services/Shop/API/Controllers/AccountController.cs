@@ -1,4 +1,3 @@
-using API.Dtos;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;

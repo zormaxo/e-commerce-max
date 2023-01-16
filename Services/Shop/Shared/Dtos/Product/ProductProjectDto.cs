@@ -12,24 +12,20 @@ public class ProductProjectDto : BaseDto
 
     public string PriceText { get; set; } = string.Empty;
 
-    //public CategoryDto Category { get; set; }
-
     public int CategoryId { get; set; }
 
-    public CountyDto County { get; set; }
+    public CountyDto County { get; set; } = null!;
 
-    public ICollection<PhotoDto> Photos { get; set; }
+    public ICollection<PhotoDto>? Photos { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
-    public ProductMemberDto User { get; set; }
+    public ProductMemberDto User { get; set; } = null!;
 
     //For shopping
     public string PictureUrl { get; set; } = string.Empty;
 
-    //public decimal Price { get; set; }
-
     public bool IsFavourite { get; set; }
 
-    public ICollection<FavouriteDto> Favourites { get; set; }
+    public ICollection<FavouriteDto>? Favourites { get; set; }
 }
