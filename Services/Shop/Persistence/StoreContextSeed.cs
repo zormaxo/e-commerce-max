@@ -109,9 +109,6 @@ public static class StoreContextSeed
                 var machinesData = await File.ReadAllTextAsync(path + "/SeedData/productMachines.json");
                 var machines = JsonConvert.DeserializeObject<List<ProductMachine>>(machinesData);
 
-                foreach (var machine in machines)
-                    machine.Product.CreatedDate = GetRandomDate(DateTime.Now, DateTime.Now.AddDays(-365));
-
                 context.ProductMachines.AddRange(machines);
 
                 await context.SaveChangesAsync();
@@ -143,6 +140,6 @@ public static class StoreContextSeed
 
         var randTimeSpan = new TimeSpan((long)(rnd.NextDouble() * range.Ticks));
 
-        return from + randTimeSpan;
+        return DateTime.SpecifyKind(from + randTimeSpan, DateTimeKind.Utc);
     }
 }
