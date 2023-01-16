@@ -20,5 +20,5 @@ public class ProductSemiFinishedController : BaseApiController
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<bool> UpdateProduct(Product product) { return await _productSemiFinishedSrv.UpdateProduct(product); }
+    public async Task<int> UpdateProduct(Product product) { return await _productSemiFinishedSrv.UpdateProduct(product); }
 }

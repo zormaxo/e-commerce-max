@@ -30,7 +30,7 @@ public class UserAppService : BaseAppService
 
         PagedList<AppUser> appUsers = await _userRepository.GetMembersAsync(userParams);
 
-        var omer = _mapper.Map<PagedList<MemberDto>>(appUsers);
+        var omer = Mapper.Map<PagedList<MemberDto>>(appUsers);
 
         return omer;
     }
@@ -38,13 +38,13 @@ public class UserAppService : BaseAppService
     public async Task<MemberDto> GetUser(int id)
     {
         var user = await _userRepository.GetMemberAsync(id);
-        return _mapper.Map<MemberDto>(user);
+        return Mapper.Map<MemberDto>(user);
     }
 
     public async Task UpdateUser(MemberUpdateDto memberUpdateDto, string username)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
-        _mapper.Map(memberUpdateDto, user);
+        Mapper.Map(memberUpdateDto, user);
         await _userRepository.SaveAllAsync();
     }
 
@@ -63,7 +63,7 @@ public class UserAppService : BaseAppService
 
         if (await _userRepository.SaveAllAsync())
         {
-            return _mapper.Map<PhotoDto>(photo);
+            return Mapper.Map<PhotoDto>(photo);
         }
 
         throw new ApiException("Problem addding photo");
@@ -107,7 +107,7 @@ public class UserAppService : BaseAppService
 
         if (await _userRepository.SaveAllAsync())
         {
-            return _mapper.Map<PhotoDto>(photo);
+            return Mapper.Map<PhotoDto>(photo);
         }
 
         throw new ApiException("Problem addding photo");

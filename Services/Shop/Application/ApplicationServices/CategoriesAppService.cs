@@ -14,6 +14,6 @@ public class CategoriesAppService : BaseAppService
     {
         var categories = _cachedItems.Categories.Where(x => x.Parent == null).ToList();
         List<CategoryDto> categoryDtos = new();
-        return _mapper.Map(categories, categoryDtos);
+        return Mapper.Map(categories, categoryDtos);
     }
 }

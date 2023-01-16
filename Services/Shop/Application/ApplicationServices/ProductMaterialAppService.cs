@@ -15,7 +15,7 @@ public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
         IGenericRepository<ProductMaterial> materialRepo,
         CachedItems cachedItems,
         IMapper mapper,
-        StoreContext storeContext) : base(cachedItems, mapper, storeContext)
+        StoreContext storeContext) : base(mapper, storeContext, cachedItems)
     { _materialRepo = materialRepo; }
 
     protected override void AddCategoryFiltering()

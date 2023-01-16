@@ -15,7 +15,7 @@ public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
         IGenericRepository<ProductMachine> machineRepo,
         CachedItems cachedItems,
         IMapper mapper,
-        StoreContext storeContext) : base(cachedItems, mapper, storeContext)
+        StoreContext storeContext) : base(mapper, storeContext, cachedItems)
     { _machineRepo = machineRepo; }
 
     protected override void AddCategoryFiltering()

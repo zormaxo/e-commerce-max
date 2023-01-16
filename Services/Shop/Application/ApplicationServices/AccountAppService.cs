@@ -30,7 +30,7 @@ public class AccountAppService : BaseAppService
             throw new ApiException(HttpStatusCode.BadRequest, "Email address is in use");
         }
 
-        var user = _mapper.Map<AppUser>(registerDto);
+        var user = Mapper.Map<AppUser>(registerDto);
 
         user.UserName = registerDto.Email.ToLower();
 
@@ -84,19 +84,19 @@ public class AccountAppService : BaseAppService
     {
         var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(email);
 
-        return _mapper.Map<Address, AddressDto>(user.Address);
+        return Mapper.Map<Address, AddressDto>(user.Address);
     }
 
     public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address, string email)
     {
         var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(email);
 
-        user.Address = _mapper.Map<AddressDto, Address>(address);
+        user.Address = Mapper.Map<AddressDto, Address>(address);
 
         var result = await _userManager.UpdateAsync(user);
 
         if (result.Succeeded)
-            return _mapper.Map<AddressDto>(user.Address);
+            return Mapper.Map<AddressDto>(user.Address);
 
         throw new ApiException(HttpStatusCode.BadRequest, "Problem updating the user");
     }

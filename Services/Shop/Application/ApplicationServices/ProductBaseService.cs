@@ -8,22 +8,19 @@ using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
 using Shop.Core.Shared.Dtos;
-using Shop.Core.Shared.Dtos.Product;
 using Shop.Persistence;
-using System.Net;
 
 namespace Shop.Application.ApplicationServices;
 
 public abstract class ProductBaseService<T> : BaseAppService where T : class
 {
-    private readonly CachedItems _cachedItems;
     private readonly IPhotoService _photoService;
-    private readonly StoreContext _storeContext;
 
-    protected ProductBaseService(CachedItems cachedItems, IMapper mapper, StoreContext storeContext) : base(mapper)
+    protected ProductBaseService(IMapper mapper, StoreContext storeContext, CachedItems cachedItems) : base(
+        mapper,
+        storeContext,
+        cachedItems)
     {
-        _cachedItems = cachedItems;
-        _storeContext = storeContext;
     }
 
     protected IQueryable<Product> FilteredProducts { get; set; }
@@ -37,24 +34,24 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         ProductSpecParams = productSpecParams;
         CalculateMaxMinVal(productSpecParams);
 
-        FilteredProducts = _storeContext.Products
+        FilteredProducts = StoreContext.Products
             .WhereIf(
                 productSpecParams.MaxValue.HasValue,
                 x => x.Currency == CurrencyCode.USD
-                    ? x.Price * _cachedItems.Currency.Try < productSpecParams.MaxValue
+                    ? x.Price * CachedItems.Currency.Try < productSpecParams.MaxValue
                     : x.Currency == CurrencyCode.EUR
-                        ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try < productSpecParams.MaxValue
+                        ? x.Price / CachedItems.Currency.Eur * CachedItems.Currency.Try < productSpecParams.MaxValue
                         : x.Currency == CurrencyCode.GBP
-                            ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try < productSpecParams.MaxValue
+                            ? x.Price / CachedItems.Currency.Gbp * CachedItems.Currency.Try < productSpecParams.MaxValue
                             : x.Price < productSpecParams.MaxValue)
             .WhereIf(
                 productSpecParams.MinValue.HasValue,
                 x => x.Currency == CurrencyCode.USD
-                    ? x.Price * _cachedItems.Currency.Try > productSpecParams.MinValue
+                    ? x.Price * CachedItems.Currency.Try > productSpecParams.MinValue
                     : x.Currency == CurrencyCode.EUR
-                        ? x.Price / _cachedItems.Currency.Eur * _cachedItems.Currency.Try > productSpecParams.MinValue
+                        ? x.Price / CachedItems.Currency.Eur * CachedItems.Currency.Try > productSpecParams.MinValue
                         : x.Currency == CurrencyCode.GBP
-                            ? x.Price / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try > productSpecParams.MinValue
+                            ? x.Price / CachedItems.Currency.Gbp * CachedItems.Currency.Try > productSpecParams.MinValue
                             : x.Price > productSpecParams.MinValue)
             .WhereIf(!string.IsNullOrEmpty(productSpecParams.Search), p => p.Name.ToLower().Contains(productSpecParams.Search))
             .WhereIf(productSpecParams.CountyId.HasValue, p => p.County.Id == productSpecParams.CountyId)
@@ -77,69 +74,33 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         var catGrpCountList = FilteredProducts.GroupBy(x => x.CategoryId)
             .Select(n => new CategoryGroupCount { CategoryId = n.Key, Count = n.Count() })
+            .AsNoTracking()
             .ToList();
 
         var totalItems = catGrpCountList.Count == 0 ? 0 : catGrpCountList.Select(x => x.Count).Aggregate((a, b) => a + b);
 
         PagedAndFilteredProducts = FilteredProducts
-            .EFBigOrderBy(productSpecParams.Sort, _cachedItems)
+            .EFBigOrderBy(productSpecParams.Sort, CachedItems)
             .EFBigPageBy(productSpecParams);
 
         List<Y> data = await PagedAndFilteredProducts
-            .ProjectTo<Y>(_mapper.ConfigurationProvider)
+            .ProjectTo<Y>(Mapper.ConfigurationProvider)
             .AsNoTracking()
             .ToListAsync();
 
         return new Pagination<Y>(productSpecParams.PageIndex, productSpecParams.PageSize, catGrpCountList, totalItems, data);
     }
 
-    public async Task<ProductDetailDto> GetProduct(int id, int? userId)
+    public async Task<int> UpdateProduct(Product product)
     {
-        var product = await _storeContext.Products
-            .ProjectTo<ProductProjectDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(x => x.Id == id);
-
-        if (product == null)
-            throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
-
-        product.IsFavourite = product.Favourites.Any(x => x.UserId == userId);
-
-        return _mapper.Map<ProductDetailDto>(product);
-    }
-
-    public async Task<object> GetActiveInactiveProducts(ProductSpecParams productParams)
-    {
-        var productsByUser = await _storeContext.Products
-            .Where(p => p.UserId == productParams.UserId)
-            .Select(x => x.IsActive)
-            .ToListAsync();
-
-        var activeProducts = productsByUser.Count(x => x);
-        var inactiveProducts = productsByUser.Count(x => !x);
-        var favourites = await _storeContext.Products
-            .Where(y => y.Favourites.Any(x => x.UserId == productParams.UserId))
-            .CountAsync();
-
-        return new { activeProducts, inactiveProducts, favourites };
-    }
-
-    public async Task<bool> UpdateProduct(Product product)
-    {
-        Product productObj = await _storeContext.Products.FindAsync(product.Id);
-        _mapper.Map(product, productObj);
-        return await _storeContext.SaveChangesAsync() > 0;
-    }
-
-    public async Task<bool> ChangeActiveStatus(ProductActivateDto productActivateDto)
-    {
-        Product productObj = await _storeContext.Products.FindAsync(productActivateDto.Id);
-        productObj.IsActive = productActivateDto.IsActive;
-        return await _storeContext.SaveChangesAsync() > 0;
+        Product productObj = await StoreContext.Products.FindAsync(product.Id);
+        Mapper.Map(product, productObj);
+        return await StoreContext.SaveChangesAsync();
     }
 
     public async Task<PhotoDto> AddPhoto(IFormFile file, int productId)
     {
-        var product = await _storeContext.Products.FirstOrDefaultAsync(x => x.Id == productId);
+        var product = await StoreContext.Products.FirstOrDefaultAsync(x => x.Id == productId);
 
         var result = await _photoService.AddPhotoAsync(file);
 
@@ -155,9 +116,9 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         product.Photos.Add(photo);
 
-        if (await _storeContext.SaveChangesAsync() > 0)
+        if (await StoreContext.SaveChangesAsync() > 0)
         {
-            return _mapper.Map<PhotoDto>(photo);
+            return Mapper.Map<PhotoDto>(photo);
         }
 
         throw new ApiException("Problem addding photo");
@@ -171,9 +132,9 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         {
             productParams.MinValue = productParams.Currency switch
             {
-                CurrencyCode.USD => (int)((decimal)productParams.MinValue * (int)_cachedItems.Currency.Try),
-                CurrencyCode.EUR => (int)((decimal)productParams.MinValue / _cachedItems.Currency.Eur * _cachedItems.Currency.Try),
-                CurrencyCode.GBP => (int)((decimal)productParams.MinValue / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try),
+                CurrencyCode.USD => (int)((decimal)productParams.MinValue * (int)CachedItems.Currency.Try),
+                CurrencyCode.EUR => (int)((decimal)productParams.MinValue / CachedItems.Currency.Eur * CachedItems.Currency.Try),
+                CurrencyCode.GBP => (int)((decimal)productParams.MinValue / CachedItems.Currency.Gbp * CachedItems.Currency.Try),
                 CurrencyCode.TRY => (int)(decimal)productParams.MinValue,
                 _ => productParams.MinValue,
             };
@@ -183,9 +144,9 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         {
             productParams.MaxValue = productParams.Currency switch
             {
-                CurrencyCode.USD => (int)((decimal)productParams.MaxValue * _cachedItems.Currency.Try),
-                CurrencyCode.EUR => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Eur * _cachedItems.Currency.Try),
-                CurrencyCode.GBP => (int)((decimal)productParams.MaxValue / _cachedItems.Currency.Gbp * _cachedItems.Currency.Try),
+                CurrencyCode.USD => (int)((decimal)productParams.MaxValue * CachedItems.Currency.Try),
+                CurrencyCode.EUR => (int)((decimal)productParams.MaxValue / CachedItems.Currency.Eur * CachedItems.Currency.Try),
+                CurrencyCode.GBP => (int)((decimal)productParams.MaxValue / CachedItems.Currency.Gbp * CachedItems.Currency.Try),
                 CurrencyCode.TRY => (int)(decimal)productParams.MaxValue,
                 _ => productParams.MaxValue,
             };
@@ -194,10 +155,10 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     private async Task<List<int>> GetCategoryIds(string categoryName)
     {
-        if (_cachedItems.Categories.Count == 0)
-            _cachedItems.Categories = await _storeContext.Categories.ToListAsync();
+        if (CachedItems.Categories.Count == 0)
+            CachedItems.Categories = await StoreContext.Categories.ToListAsync();
 
-        var selectedCategory = _cachedItems.Categories.First(x => x.Url == categoryName);
+        var selectedCategory = CachedItems.Categories.First(x => x.Url == categoryName);
         List<int> categoryIds = new();
         FindChildCategories(selectedCategory);
 

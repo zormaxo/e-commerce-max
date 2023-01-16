@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
@@ -14,15 +13,8 @@ namespace Shop.API.Controllers;
 public class ProductsController : BaseApiController
 {
     private readonly ProductAppService _productSrv;
-    private readonly FavouritesAppService _favSrv;
-    private readonly IMapper _mapper;
 
-    public ProductsController(ProductAppService productSrv, FavouritesAppService favSrv, IMapper mapper)
-    {
-        _productSrv = productSrv;
-        _favSrv = favSrv;
-        _mapper = mapper;
-    }
+    public ProductsController(ProductAppService productSrv) { _productSrv = productSrv; }
 
     [HttpGet("showcase")]
     public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProductsForShowcase([FromQuery] ProductSpecParams productParams)
@@ -39,11 +31,11 @@ public class ProductsController : BaseApiController
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<bool> UpdateProduct(Product product) { return await _productSrv.UpdateProduct(product); }
+    public async Task<int> UpdateProduct(Product product) { return await _productSrv.UpdateProduct(product); }
 
     [HttpPost("change-active-status")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<bool> ChangeActiveStatus(ProductActivateDto productActivateDto)
+    public async Task<int> ChangeActiveStatus(ProductActivateDto productActivateDto)
     { return await _productSrv.ChangeActiveStatus(productActivateDto); }
 
     [HttpGet("product-counts")]
@@ -52,8 +44,8 @@ public class ProductsController : BaseApiController
 
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
-    { return await _productSrv.AddPhoto(file, User.GetUserId()); }
+    { return await _productSrv.AddPhoto(file, User.GetUserId().Value); }
 
     [HttpPost("add-remove-favourite/{productId}")]
-    public async Task AddRemoveFavourite(int productId) { await _favSrv.AddRemoveFavourite(productId, User.GetUserId()); }
+    public async Task AddRemoveFavourite(int productId) { await _productSrv.AddRemoveFavourite(productId, User.GetUserId()); }
 }

@@ -11,7 +11,7 @@ public class ProductSemiFinishedAppService : ProductBaseService<ProductDto>
 
         CachedItems cachedItems,
         IMapper mapper,
-        StoreContext storeContext) : base(cachedItems, mapper, storeContext)
+        StoreContext storeContext) : base(mapper, storeContext, cachedItems)
     {
     }
 

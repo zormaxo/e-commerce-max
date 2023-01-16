@@ -1,13 +1,20 @@
 using AutoMapper;
+using Shop.Core.HelperTypes;
 using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
 public class BaseAppService
 {
-    protected readonly IMapper _mapper;
-    protected readonly StoreContext _context;
-    public BaseAppService(IMapper mapper) { _mapper = mapper; }
+    protected IMapper Mapper { get; }
 
-    public BaseAppService(IMapper mapper, StoreContext context) : this(mapper) { _context = context; }
+    protected StoreContext StoreContext { get; }
+
+    protected CachedItems CachedItems { get; }
+
+    public BaseAppService(IMapper mapper) { Mapper = mapper; }
+
+    public BaseAppService(IMapper mapper, StoreContext context) : this(mapper) { StoreContext = context; }
+    public BaseAppService(IMapper mapper, StoreContext context, CachedItems cachedItems) : this(mapper, context)
+    { CachedItems = cachedItems; }
 }
