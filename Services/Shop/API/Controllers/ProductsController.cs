@@ -11,25 +11,25 @@ using Shop.Shared.Dtos;
 
 namespace Shop.API.Controllers;
 
-public class AdsController : BaseApiController
+public class ProductsController : BaseApiController
 {
     private readonly ProductAppService _productSrv;
     private readonly FavouritesAppService _favSrv;
     private readonly IMapper _mapper;
 
-    public AdsController(ProductAppService productSrv, FavouritesAppService favSrv, IMapper mapper)
+    public ProductsController(ProductAppService productSrv, FavouritesAppService favSrv, IMapper mapper)
     {
         _productSrv = productSrv;
         _favSrv = favSrv;
         _mapper = mapper;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProducts([FromQuery] ProductParams productParams)
+    [HttpGet("showcase")]
+    public async Task<ActionResult<Pagination<ShowcaseDto>>> GetProductsForShowcase([FromQuery] ProductSpecParams productParams)
     { return await _productSrv.GetProducts<ShowcaseDto>(productParams); }
 
-    [HttpGet("light")]
-    public async Task<ActionResult<Pagination<ProductDto>>> GetProductsLight([FromQuery] ProductParams productParams)
+    [HttpGet]
+    public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productSrv.GetProducts<ProductDto>(productParams)); }
 
     [HttpGet("{id}")]
@@ -47,7 +47,7 @@ public class AdsController : BaseApiController
     { return await _productSrv.ChangeActiveStatus(productActivateDto); }
 
     [HttpGet("product-counts")]
-    public async Task<ActionResult<object>> GetProductCounts([FromQuery] ProductParams productParams)
+    public async Task<ActionResult<object>> GetProductCounts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productSrv.GetActiveInactiveProducts(productParams)); }
 
     [HttpPost("add-photo")]

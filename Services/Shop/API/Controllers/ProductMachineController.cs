@@ -14,7 +14,7 @@ public class ProductsMachineController : BaseApiController
     public ProductsMachineController(ProductMachineAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
 
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductParams productParams)
+    public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productMachineSrv.GetProducts<ProductMachineDto>(productParams)); }
 
     [HttpPost("update-product")]

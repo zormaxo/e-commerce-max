@@ -44,7 +44,7 @@ export class ShopService {
   getProducts(shopParams: ShopParams) {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'ads', { observe: 'response', params }).pipe(
+    return this.http.get(this.baseUrl + 'products/showcase', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })
@@ -54,7 +54,7 @@ export class ShopService {
   getProductsLight(shopParams: ShopParams) {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'ads/light', { observe: 'response', params }).pipe(
+    return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
       map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
         return response.body.result;
       })

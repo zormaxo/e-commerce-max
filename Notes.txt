@@ -45,14 +45,13 @@ flyctl auth token
 
 Postgres cluster ecommercemax-db created
   Username:    postgres
-  Password:    gbB4rVvIhwSV1Me
+  Password:    3V0BBzq9wCO0XyG
   Hostname:    ecommercemax-db.internal
   Proxy port:  5432
   Postgres port:  5433
-  Connection string: postgres://postgres:gbB4rVvIhwSV1Me@ecommercemax-db.internal:5432
+  Connection string: postgres://postgres:3V0BBzq9wCO0XyG@ecommercemax-db.internal:5432
 
-DATABASE_URL=postgres://ecommercemax:BwTIxsvUJasrgDH@top2.nearest.of.ecommercemax-db.internal:5432/ecommercemax?sslmode=disable
-
+DATABASE_URL=postgres://ecommercemax:VJjo5vBYoNLR7g3@top2.nearest.of.ecommercemax-db.internal:5432/ecommercemax?sslmode=disable
 
 
 Your Upstash Redis database ecommerce-max-redis is ready.

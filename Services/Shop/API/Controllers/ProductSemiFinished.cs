@@ -15,7 +15,7 @@ public class ProductSemiFinishedController : BaseApiController
     { _productSemiFinishedSrv = productSemiFinishedSrv; }
 
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductParams productParams)
+    public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productSemiFinishedSrv.GetProducts<ProductMaterialDto>(productParams)); }
 
     [HttpPost("update-product")]

@@ -12,16 +12,16 @@ public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
     readonly IGenericRepository<ProductMaterial> _materialRepo;
 
     public ProductMaterialAppService(
-        IGenericRepository<Product> productsRepo,
         IGenericRepository<ProductMaterial> materialRepo,
-        IGenericRepository<Category> categoryRepo,
         CachedItems cachedItems,
-        IMapper mapper) : base(productsRepo, categoryRepo, cachedItems, mapper)
+        IMapper mapper,
+        StoreContext storeContext) : base(cachedItems, mapper, storeContext)
     { _materialRepo = materialRepo; }
 
     protected override void AddCategoryFiltering()
     {
-        var categoryFilter = _materialRepo.GetAll().WhereIf(ProductParams.IsNew.HasValue, p => p.IsNew == ProductParams.IsNew);
+        var categoryFilter = _materialRepo.GetAll()
+            .WhereIf(ProductSpecParams.IsNew.HasValue, p => p.IsNew == ProductSpecParams.IsNew);
 
         FilteredProducts = FilteredProducts.Where(x => categoryFilter.Any(y => y.Id == x.Id));
     }

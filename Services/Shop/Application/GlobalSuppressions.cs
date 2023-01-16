@@ -17,3 +17,9 @@
     Justification = "<Pending>",
     Scope = "member",
     Target = "~M:Shop.Application.CacheService.FillCacheItemsAsync(Shop.Persistence.StoreContext,Microsoft.Extensions.Logging.ILoggerFactory,AutoMapper.IMapper,Shop.Core.HelperTypes.CachedItems,RestSharp.RestClient)~System.Threading.Tasks.Task")]
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S3358:Ternary operators should not be nested",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Shop.Application.ApplicationServices.ProductBaseService`1.GetProducts``1(Shop.Core.HelperTypes.ProductSpecParams)~System.Threading.Tasks.Task{Shop.Core.Shared.Pagination{``0}}")]

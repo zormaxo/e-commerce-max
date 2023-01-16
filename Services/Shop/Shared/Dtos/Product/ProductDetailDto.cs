@@ -10,21 +10,18 @@ public class ProductDetailDto : BaseDto
 
     public string PriceText { get; set; } = string.Empty;
 
-    //public CategoryDto Category { get; set; }
     public int CategoryId { get; set; }
 
-    public CountyDto County { get; set; }
+    public CountyDto County { get; set; } = null!;
 
-    public ICollection<PhotoDto> Photos { get; set; }
+    public ICollection<PhotoDto>? Photos { get; set; }
 
     public string CreatedDate { get; set; } = string.Empty;
 
-    public ProductMemberDto User { get; set; }
+    public ProductMemberDto User { get; set; } = null!;
 
     //For shopping
     public string PictureUrl { get; set; } = string.Empty;
-
-    //public decimal Price { get; set; }
 
     public bool IsFavourite { get; set; }
 

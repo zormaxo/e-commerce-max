@@ -9,19 +9,19 @@ namespace Shop.Application.ApplicationServices;
 
 public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
 {
-    IGenericRepository<ProductMachine> _machineRepo;
+    readonly IGenericRepository<ProductMachine> _machineRepo;
 
     public ProductMachineAppService(
-        IGenericRepository<Product> productsRepo,
         IGenericRepository<ProductMachine> machineRepo,
-        IGenericRepository<Category> categoryRepo,
         CachedItems cachedItems,
-        IMapper mapper) : base(productsRepo, categoryRepo, cachedItems, mapper)
+        IMapper mapper,
+        StoreContext storeContext) : base(cachedItems, mapper, storeContext)
     { _machineRepo = machineRepo; }
 
     protected override void AddCategoryFiltering()
     {
-        var categoryFilter = _machineRepo.GetAll().WhereIf(ProductParams.IsNew.HasValue, p => p.IsNew == ProductParams.IsNew);
+        var categoryFilter = _machineRepo.GetAll()
+            .WhereIf(ProductSpecParams.IsNew.HasValue, p => p.IsNew == ProductSpecParams.IsNew);
 
         FilteredProducts = FilteredProducts.Where(x => categoryFilter.Any(y => y.Id == x.Id));
     }

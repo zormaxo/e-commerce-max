@@ -1,19 +1,17 @@
 using AutoMapper;
-using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
-using Shop.Core.Interfaces;
 using Shop.Core.Shared.Dtos.Product;
+using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
 public class ProductSemiFinishedAppService : ProductBaseService<ProductDto>
 {
     public ProductSemiFinishedAppService(
-        IGenericRepository<Product> productsRepo,
-        IGenericRepository<ProductMaterial> materialRepo,
-        IGenericRepository<Category> categoryRepo,
+
         CachedItems cachedItems,
-        IMapper mapper) : base(productsRepo, categoryRepo, cachedItems, mapper)
+        IMapper mapper,
+        StoreContext storeContext) : base(cachedItems, mapper, storeContext)
     {
     }
 

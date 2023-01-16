@@ -1,12 +1,12 @@
 namespace Shop.Core.HelperTypes;
 
-public class ProductParams : PaginationParams
+public class ProductSpecParams : PaginationParams
 {
-    private string _search;
+    private string? _search;
 
     public int? BrandId { get; set; }
 
-    public string CategoryName { get; set; }
+    public string? CategoryName { get; set; }
 
     public int? CityId { get; set; }
 
@@ -22,11 +22,11 @@ public class ProductParams : PaginationParams
 
     public int? MinValue { get; set; }
 
-    public string Search { get => _search; set => _search = value.ToLower(); }
+    public string? Search { get => _search; set => _search = value.ToLower(); }
 
-    public string Sort { get; set; }
+    public string? Sort { get; set; }
 
     public int? UserId { get; set; }
 
-    public bool Favourite { get; set; }
+    public bool? Favourite { get; set; }
 }

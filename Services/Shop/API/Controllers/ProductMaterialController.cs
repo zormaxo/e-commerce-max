@@ -14,7 +14,7 @@ public class ProductsMaterialController : BaseApiController
     public ProductsMaterialController(ProductMaterialAppService productMaterialSrv) { _productMaterialSrv = productMaterialSrv; }
 
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductParams productParams)
+    public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productMaterialSrv.GetProducts<ProductMaterialDto>(productParams)); }
 
     [HttpPost("update-product")]
