@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using RestSharp;
 using Shop.API.Extensions;
 using Shop.API.Middleware;
@@ -6,6 +8,7 @@ using Shop.API.SignalR;
 using Shop.Application.Extensions;
 using Shop.Application.SignalR;
 using Shop.Infrastructure.Extensions;
+using Shop.Persistence;
 using Shop.Persistence.Extensions;
 using System.Text.Json.Serialization;
 
@@ -25,6 +28,33 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        var connString = string.Empty;
+        if (_env.IsDevelopment())
+            connString = _config.GetConnectionString("DefaultConnection");
+        else
+        {
+            // Use connection string provided at runtime by FlyIO.
+            var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+            // Parse connection URL to connection string for Npgsql
+            connUrl = connUrl.Replace("postgres://", string.Empty);
+            var pgUserPass = connUrl.Split("@")[0];
+            var pgHostPortDb = connUrl.Split("@")[1];
+            var pgHostPort = pgHostPortDb.Split("/")[0];
+            var pgDb = pgHostPortDb.Split("/")[1];
+            var pgUser = pgUserPass.Split(":")[0];
+            var pgPass = pgUserPass.Split(":")[1];
+            var pgHost = pgHostPort.Split(":")[0];
+            var pgPort = pgHostPort.Split(":")[1];
+
+            connString = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+        }
+        services.AddDbContext<StoreContext>(
+            opt =>
+            {
+                opt.UseNpgsql(connString);
+            });
+
         services.AddHttpClient();
         services.AddHttpClient(
             "currencyfreak",
@@ -73,9 +103,19 @@ public class Startup
         //app.UseMiddleware<RequestResponseMiddleware>();     //Manuel request response logging
 
         app.UseStatusCodePagesWithReExecute("/errors/{0}");   //for non-exist endpoints
-        app.UseResponseCaching();
+        //app.UseResponseCaching();
         app.UseHttpsRedirection();
+
+
         app.UseStaticFiles();
+        app.UseStaticFiles(
+            new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+                RequestPath = "/Content"
+            });
+
+
         app.UseHttpLogging();                                 //.Net core request response logging
         app.UseRouting();
         app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));

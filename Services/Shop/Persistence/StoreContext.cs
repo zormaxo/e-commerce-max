@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-using System.Reflection;
 using API.Entities;
 using Core.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +7,8 @@ using Microsoft.EntityFrameworkCore.Query;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
 using Shop.Persistence.Services;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Shop.Persistence;
 
@@ -42,10 +42,13 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
     public DbSet<Message> Messages { get; set; }
 
     public DbSet<Group> Groups { get; set; }
+
     public DbSet<Connection> Connections { get; set; }
 
     public DbSet<Order> Orders { get; set; }
+
     public DbSet<OrderItem> OrderItems { get; set; }
+
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -126,12 +129,12 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
         {
             if (entityEntry.Entity is FullAuditableEntity fullAuditableEntity)
             {
-                fullAuditableEntity.ModifiedDate = DateTime.Now;
+                fullAuditableEntity.ModifiedDate = DateTime.UtcNow;
                 fullAuditableEntity.ModifiedBy = _userId;
 
                 if (entityEntry.State == EntityState.Added)
                 {
-                    fullAuditableEntity.CreatedDate = DateTime.Now;
+                    fullAuditableEntity.CreatedDate = DateTime.UtcNow;
                     fullAuditableEntity.ModifiedBy = _userId;
                 }
             }

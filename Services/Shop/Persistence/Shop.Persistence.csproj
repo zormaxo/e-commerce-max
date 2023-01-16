@@ -12,17 +12,19 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.70" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.22" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+	<Content Include="SeedData\**" CopyToOutputDirectory="PreserveNewest" />
+    <ProjectReference Include="..\Core\Shop.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Shop.Core.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <PropertyGroup>

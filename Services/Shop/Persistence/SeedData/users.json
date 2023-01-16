@@ -2,6 +2,7 @@
     "FirstName": "Omer",
     "Surname": "Kocadere",
     "Username": "okocadere@gmail.com",
+	"Email": "okocadere@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/men/90.jpg",
         "IsMain": true
@@ -12,6 +13,7 @@
     "FirstName": "Ekrem",
     "Surname": "Kocadere",
     "Username": "ekrem@gmail.com",
+	"Email": "ekrem@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/men/87.jpg",
         "IsMain": true
@@ -22,6 +24,7 @@
     "FirstName": "Emre",
     "Surname": "Kocadere",
     "Username": "emre@gmail.com",
+	"Email": "emre@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/men/57.jpg",
         "IsMain": true
@@ -32,6 +35,7 @@
     "FirstName": "Şükrü Ahmet",
     "Surname": "Kocadere",
     "Username": "akocadere@gmail.com",
+	"Email": "akocadere@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/men/11.jpg",
         "IsMain": true
@@ -42,6 +46,7 @@
     "FirstName": "Müberra",
     "Surname": "Kocadere",
     "Username": "muberra@gmail.com",
+	"Email": "muberra@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/women/84.jpg"
       }, {
@@ -56,6 +61,7 @@
     "FirstName": "Aslı",
     "Surname": "Kocadere",
     "Username": "asli@gmail.com",
+	"Email": "asli@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/women/50.jpg",
         "IsMain": true
@@ -66,6 +72,7 @@
     "FirstName": "Salih",
     "Surname": "Kocadere",
     "Username": "salih@gmail.com",
+	"Email": "salih@gmail.com",
     "Photos": [{
         "Url": "https://randomuser.me/api/portraits/men/93.jpg",
         "IsMain": true

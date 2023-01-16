@@ -2,7 +2,7 @@ from below folder
 cd .\Services\Shop\
 dotnet ef migrations add Update1 -p Persistence -s API -o Migrations
 dotnet ef database update -p Persistence -s API
-dotnet ef database drop
+dotnet ef database drop -p Persistence -s API
 dotnet ef migrations remove -p Persistence -s API
 dotnet ef migrations list -p Persistence -s API
 dotnet ef database update 20221206155444_Update612 -p Persistence -s API
@@ -18,3 +18,47 @@ https://www.youtube.com/watch?v=_iryZxv8Rxw
 docker-compose up -d
 
 npm install @microsoft/signalr --legacy-peer-deps
+
+
+from kuyumdan root folder
+docker build -t zormax/kuyumdan -f .\Services\Shop\API\Dockerfile .
+docker run --rm -it --name kuyumdan -p 8085:80 zormax/kuyumdan:latest
+docker push zormax/kuyumdan:latest
+
+dotnet publish -c Release -o publish kuyumdan.sln
+docker exec -it kuyumdan /bin/bash
+
+iwr https://fly.io/install.ps1 -useb | iex
+flyctl auth signup
+flyctl auth login
+flyctl
+flyctl launch --image zormax/datingapp:latest 
+flyctl secrets list
+flyctl secrets set CloudinarySettings__ApiSecret=cJkUciUd-KMfUKYpGsRQt-6LzB4
+flyctl secrets set TokenKey=UJSpK2G6oimnfzS3LfRzv4okmHaQCzMG
+flyctl deploy
+flyctl proxy 6543:5432 -a datingappmax-db
+flyctl help
+flyctl logs -a datingappmax
+flyctl auth token
+
+
+Postgres cluster ecommercemax-db created
+  Username:    postgres
+  Password:    gbB4rVvIhwSV1Me
+  Hostname:    ecommercemax-db.internal
+  Proxy port:  5432
+  Postgres port:  5433
+  Connection string: postgres://postgres:gbB4rVvIhwSV1Me@ecommercemax-db.internal:5432
+
+DATABASE_URL=postgres://ecommercemax:BwTIxsvUJasrgDH@top2.nearest.of.ecommercemax-db.internal:5432/ecommercemax?sslmode=disable
+
+
+
+Your Upstash Redis database ecommerce-max-redis is ready.
+Apps in the personal org can connect to at redis://default:6a62991f167545a396a6a06d924113ab@fly-ecommerce-max-redis.upstash.io
+If you have redis-cli installed, use fly redis connect to connect to your database.
+
+Redis database ecommerce-max-redis is set on ecommerce-max as the REDIS_URL environment variable
+
+

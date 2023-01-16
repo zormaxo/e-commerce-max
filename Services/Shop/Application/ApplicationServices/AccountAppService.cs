@@ -57,8 +57,7 @@ public class AccountAppService : BaseAppService
     {
         var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-        var result = await _userManager
-            .CheckPasswordAsync(user, loginDto.Password);
+        var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
         if (!result)
             throw new ApiException(HttpStatusCode.Unauthorized);

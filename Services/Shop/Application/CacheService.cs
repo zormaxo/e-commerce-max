@@ -42,6 +42,7 @@ public static class CacheService
                 //var currencyDto = JsonConvert.DeserializeObject<CurrencyFreakDto>(response.Content);
                 var currency = mapper.Map<Currency>(fromDependency);
 
+                currency.Date = DateTime.UtcNow;
                 cachedItems.Currency = currency;
 
                 context.Add(currency);

@@ -28,7 +28,7 @@ internal class AuditEntry
     {
         var audit = new Audit
         {
-            DateTime = DateTime.Now,
+            DateTime = DateTime.UtcNow,
             TableName = TableName,
             KeyValues = JsonConvert.SerializeObject(KeyValues),
             OldValues = OldValues.Count == 0 ? null : JsonConvert.SerializeObject(OldValues, Formatting.Indented),
