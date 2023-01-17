@@ -21,7 +21,7 @@ public class AppUser : IdentityUser<int>
 
     public string LogoUrl { get; set; } = string.Empty;
 
-    public DateTime LastActive { get; set; }
+    public DateTime? LastActive { get; set; }
 
     public ICollection<Product> Products { get; set; }
 
