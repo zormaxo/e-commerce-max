@@ -48,10 +48,6 @@
     "Username": "muberra@gmail.com",
 	"Email": "muberra@gmail.com",
     "Photos": [{
-        "Url": "https://randomuser.me/api/portraits/women/84.jpg"
-      }, {
-        "Url": "https://randomuser.me/api/portraits/women/11.jpg"
-      }, {
         "Url": "https://randomuser.me/api/portraits/women/54.jpg",
         "IsMain": true
       }
