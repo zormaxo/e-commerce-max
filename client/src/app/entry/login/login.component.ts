@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../core/services/account.service';
 
 @Component({
@@ -10,15 +10,20 @@ import { AccountService } from '../../core/services/account.service';
 })
 export class LoginComponent {
   @Output() cancelRegister = new EventEmitter<boolean>();
-  model: { email?: string; password?: string } = {};
 
-  constructor(public accountService: AccountService, private toastr: ToastrService, private router: Router) {}
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
+  });
+  returnUrl: string;
 
-  login() {
-    this.accountService.login(this.model).subscribe({
-      next: () => {
-        this.router.navigateByUrl('');
-      },
+  constructor(private accountService: AccountService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  onSubmit() {
+    this.accountService.login(this.loginForm.value).subscribe({
+      next: () => this.router.navigateByUrl(this.returnUrl),
     });
   }
 }

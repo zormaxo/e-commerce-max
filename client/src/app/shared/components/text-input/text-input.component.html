@@ -1,20 +1,23 @@
-
-
-<div class="form-floating my-3">
+<div class="form-floating mb-3">
   <input
-    [class.is-invalid]="ngControl.touched && ngControl.invalid"
+    [ngClass]="control.touched ? (control.invalid ? 'is-invalid' : 'is-valid') : null"
     type="{{ type }}"
     class="form-control"
-    [formControl]="ngControl.control"
+    [formControl]="control"
     placeholder="{{ label }}" />
-  <label>{{ label }}</label>
-  <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Please enter a {{ label | lowercase }}</div>
-  <div *ngIf="ngControl.control.errors?.email" class="invalid-feedback">Please enter a valid {{ label | lowercase}}</div>
-  <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">
-    {{ label }} must be at least {{ ngControl.control.errors.minlength["requiredLength"] }}
+  <label for="floatingInput">{{ label }}</label>
+
+  <div *ngIf="control.status === 'PENDING'" class="fa fa-spinner fa-spin loader"></div>
+
+  <div *ngIf="control.errors?.required" class="invalid-feedback">Please enter your {{ label | lowercase }}</div>
+  <div *ngIf="control.errors?.email" class="invalid-feedback">Invalid email address</div>
+  <div *ngIf="control.errors?.minlength" class="invalid-feedback">
+    {{ label }} must be at least {{ control.errors.minlength["requiredLength"] }}
   </div>
-  <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">
-    {{ label }} must be at most {{ ngControl.control.errors.maxlength["requiredLength"] }}
+  <div *ngIf="control.errors?.maxlength" class="invalid-feedback">
+    {{ label }} must be at most {{ control.errors.maxlength["requiredLength"] }}
   </div>
-  <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">Passwords do not match</div>
+  <div *ngIf="control.errors?.isMatching" class="invalid-feedback">Passwords do not match</div>
+  <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback">Email address is taken</div>
+  <div *ngIf="control.errors?.['notMatching']" class="invalid-feedback">Passwords do not match</div>
 </div>

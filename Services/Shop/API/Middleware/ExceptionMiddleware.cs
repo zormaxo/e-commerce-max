@@ -1,5 +1,7 @@
+using Shop.API.Response;
 using Shop.Core.Exceptions;
 using Shop.Core.Response;
+using Shop.Shared.Response;
 using System.Net;
 using System.Text.Json;
 
@@ -26,7 +28,9 @@ public class ExceptionMiddleware
         }
         catch (ApiException ex)
         {
-            var response = _env.IsDevelopment() ? new ApiErrorObject(ex.ApiMessage, ex) : new ApiErrorObject(ex.ApiMessage);
+            var response = _env.IsDevelopment()
+                ? new ApiErrorObject(ex.ApiMessage, ex, (int)ex.HttpStatusCode)
+                : new ApiErrorObject(ex.ApiMessage);
 
             await CreateExceptionResponse(ex, ex.HttpStatusCode, response);
         }
@@ -46,7 +50,10 @@ public class ExceptionMiddleware
             context.Response.StatusCode = (int)httpStatusCode;
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var json = JsonSerializer.Serialize(response, options);
+
+            var apiResponse = ResponseWrapManager.ResponseWrapper(response, context);
+
+            var json = JsonSerializer.Serialize(apiResponse, options);
             await context.Response.WriteAsync(json);
         }
     }
