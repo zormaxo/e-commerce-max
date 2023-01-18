@@ -59,7 +59,7 @@ public class AccountAppService : BaseAppService
         var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
         if (!result)
-            throw new ApiException(HttpStatusCode.Unauthorized);
+            throw new ApiException(HttpStatusCode.Unauthorized, "Wrong email or password");
 
         return new UserDto
         {
