@@ -1,7 +1,11 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mt-3">
-  <app-text-input [formControl]="registerForm.controls['email']" [label]="'Email Address'"></app-text-input>
   <app-text-input [formControl]="registerForm.controls['firstName']" label="First Name"></app-text-input>
   <app-text-input [formControl]="registerForm.controls['lastName']" label="Last Name"></app-text-input>
+  <app-text-input
+    [formControl]="registerForm.controls['email']"
+    [label]="'Email Address'"
+    autocomplete="username"></app-text-input>
+
   <app-text-input [formControl]="registerForm.controls['password']" [label]="'Password'" [type]="'password'">
   </app-text-input>
   <app-text-input
