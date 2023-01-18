@@ -75,7 +75,7 @@ public class Startup
         services.AddCors(
             opt => opt.AddPolicy(
                 "CorsPolicy",
-                policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200")));
+                policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201")));
         services.AddIdentityServices(_config);
         services.AddSignalR();
         services.AddHttpContextAccessor();
@@ -118,7 +118,7 @@ public class Startup
 
         app.UseHttpLogging();                                 //.Net core request response logging
         app.UseRouting();
-        app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
+        app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201"));
         app.UseAuthentication();
         app.UseAuthorization();
 
