@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Shop.API.Response;
 using Shop.Core.Response;
 
 namespace Shop.API.Extensions;
@@ -20,8 +21,8 @@ public static class OtherExtensions
                         .ToArray();
 
                     var errorResponse = new ApiErrorObject(errors);
-
-                    return new BadRequestObjectResult(errorResponse);
+                    var apiResponse = ResponseWrapManager.ResponseWrapper(errorResponse, 404);
+                    return new BadRequestObjectResult(apiResponse);
                 };
             });
 

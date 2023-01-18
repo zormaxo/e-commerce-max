@@ -35,4 +35,23 @@ public static class ResponseWrapManager
 
         return new ApiResponse(requestUrl, responseBody, error, status, httpStatusCode);
     }
+
+    public static ApiResponse ResponseWrapper(object? response, int statusCode)
+    {
+        var responseBody = response;
+        ApiErrorObject error = null;
+        var status = true;
+        var httpStatusCode = statusCode;
+
+        if (statusCode >= 400)
+        {
+            status = false;
+            responseBody = null;
+            error = response is ApiErrorObject @object ? @object : ((JObject)response).ToObject<ApiErrorObject>();
+        }
+
+        // NOTE: Add any further customizations if needed here
+
+        return new ApiResponse(string.Empty, responseBody, error, status, httpStatusCode);
+    }
 }
