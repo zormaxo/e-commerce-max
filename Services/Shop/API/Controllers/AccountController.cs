@@ -63,7 +63,6 @@ public class AccountController : BaseApiController
     public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
     {
         var email = User.FindFirstValue(ClaimTypes.Email);
-
         return await _accountSrv.UpdateUserAddress(address, email);
     }
 }

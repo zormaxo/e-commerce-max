@@ -9,7 +9,7 @@ import { User } from './shared/models/user';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  users: unknown;
+  title = 'e-commerce-max';
 
   constructor(private accountService: AccountService, private basketService: BasketService) {}
 
