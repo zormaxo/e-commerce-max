@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AccountService } from '../core/services/account.service';
-
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-checkout',

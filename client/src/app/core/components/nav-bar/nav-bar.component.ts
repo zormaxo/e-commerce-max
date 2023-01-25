@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
-import { AccountService } from 'src/app/core/services/account.service';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-nav-bar',

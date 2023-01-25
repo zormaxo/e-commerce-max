@@ -79,7 +79,7 @@ const routes: Routes = [
   },
   {
     path: 'giris',
-    loadChildren: () => import('./entry/entry.module').then((mod) => mod.EntryModule),
+    loadChildren: () => import('./account/account.module').then((mod) => mod.AccountModule),
   },
 
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },

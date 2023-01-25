@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { AccountService } from './account.service';
+import { AccountService } from '../../account/account.service';
 import { Member } from 'src/app/shared/models/member';
 import { User } from 'src/app/shared/models/user';
 import { UserParams } from 'src/app/shared/models/userParams';
@@ -118,5 +118,4 @@ export class MembersService {
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
-
 }

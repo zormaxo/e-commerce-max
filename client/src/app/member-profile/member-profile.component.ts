@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AccountService } from 'src/app/core/services/account.service';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-member-profile',

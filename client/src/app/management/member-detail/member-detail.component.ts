@@ -3,13 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { take } from 'rxjs';
-import { AccountService } from 'src/app/core/services/account.service';
+import { AccountService } from 'src/app/account/account.service';
 import { MessageService } from 'src/app/core/services/message.service';
 import { PresenceService } from 'src/app/core/services/presence.service';
 import { Member } from 'src/app/shared/models/member';
 import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
-
 
 @Component({
   selector: 'app-member-detail',

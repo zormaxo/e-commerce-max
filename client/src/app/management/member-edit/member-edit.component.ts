@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 
-import { AccountService } from 'src/app/core/services/account.service';
+import { AccountService } from 'src/app/account/account.service';
 import { MembersService } from 'src/app/core/services/members.service';
 import { take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';

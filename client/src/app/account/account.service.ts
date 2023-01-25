@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Address, User } from 'src/app/shared/models/user';
-import { PresenceService } from './presence.service';
+import { PresenceService } from '../core/services/presence.service';
 import { ApiResponse } from 'src/app/shared/models/api-response/api-response';
 
 @Injectable({

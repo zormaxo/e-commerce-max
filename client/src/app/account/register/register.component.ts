@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, take, switchMap, map, finalize } from 'rxjs';
-import { AccountService } from '../../core/services/account.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-register',

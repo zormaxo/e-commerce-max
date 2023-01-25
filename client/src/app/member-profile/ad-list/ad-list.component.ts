@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
-import { AccountService } from 'src/app/core/services/account.service';
+import { AccountService } from 'src/app/account/account.service';
 import { take } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
