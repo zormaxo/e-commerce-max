@@ -17,7 +17,7 @@ export class ShopComponent implements OnInit {
   shopParams = new ShopParams();
   totalCount: number;
 
-  constructor(private shopService: ShopService, private basketService: BasketService) {}
+  constructor(private shopService: ShopService, public basketService: BasketService) {}
 
   ngOnInit(): void {
     this.getProductsThenCategories();

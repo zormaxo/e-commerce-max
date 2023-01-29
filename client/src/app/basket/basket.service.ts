@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../shared/models/api-response/api-response';
 import { Basket, BasketItem, BasketTotals } from '../shared/models/basket';
 import { DeliveryMethod } from '../shared/models/deliveryMethod';
 import { IProduct } from '../shared/models/product';
@@ -26,18 +27,18 @@ export class BasketService {
   }
 
   getBasket(id: string) {
-    return this.http.get<Basket>(this.baseUrl + 'basket?id=' + id).subscribe({
+    return this.http.get<ApiResponse<Basket>>(this.baseUrl + 'basket?id=' + id).subscribe({
       next: (basket) => {
-        this.basketSource.next(basket);
+        this.basketSource.next(basket.result);
         this.calculateTotals();
       },
     });
   }
 
   setBasket(basket: Basket) {
-    return this.http.post<Basket>(this.baseUrl + 'basket', basket).subscribe({
+    return this.http.post<ApiResponse<Basket>>(this.baseUrl + 'basket', basket).subscribe({
       next: (basket) => {
-        this.basketSource.next(basket);
+        this.basketSource.next(basket.result);
         this.calculateTotals();
       },
     });

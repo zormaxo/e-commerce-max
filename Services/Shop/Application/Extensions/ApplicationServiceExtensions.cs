@@ -25,7 +25,8 @@ public static class ApplicationServiceExtensions
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
-        services.AddScoped<IBasketRepository, BasketRepository>();
+        //services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<IBasketRepository, BasketMemRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<LogUserActivity>();

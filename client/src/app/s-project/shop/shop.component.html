@@ -1,8 +1,11 @@
 <div class="container">
+  omer
   <div class="mb-4 border-bottom">
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <li>
-
+        <a routerLink="/basket" class="nav-link px-2 link-secondary"
+          >Basket <span *ngIf="(basketService.basketSource$ | async) as basket">({{ basket.items.length }})</span></a
+        >
       </li>
     </ul>
   </div>

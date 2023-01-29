@@ -8,6 +8,7 @@ public static class ControllerServiceExtensions
 {
     public static IServiceCollection AddControllerServices(this IServiceCollection services)
     {
+        services.AddMemoryCache();
         services.AddSingleton<CachedItems>();
         services.AddSingleton<SampleActionFilter>();
         services.AddScoped<AccountAppService>();
