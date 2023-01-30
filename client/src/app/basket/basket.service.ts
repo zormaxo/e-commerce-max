@@ -131,6 +131,6 @@ export class BasketService {
   }
 
   private isProduct(item: Product | BasketItem): item is Product {
-    return (item as Product).productBrand !== undefined;
+    return (item as Product).name !== undefined;
   }
 }
