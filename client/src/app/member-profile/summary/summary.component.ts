@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/account/account.service';
@@ -11,7 +11,7 @@ import { take } from 'rxjs';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  products: IProduct[];
+  products: Product[];
   shopParams = new ShopParams(10);
   totalCount: number;
   counts: Counts;

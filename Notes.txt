@@ -59,3 +59,9 @@ If you have redis-cli installed, use fly redis connect to connect to your databa
 Redis database ecommerce-max-redis is set on ecommerce-max as the REDIS_URL environment variable
 
 
+ curl -L https://fly.io/install.sh | sh
+ /home/zormax/.fly/bin/flyctl auth login
+ /home/zormax/.fly/bin/flyctl redis list
+ /home/zormax/.fly/bin/flyctl redis connect ecommerce-max-redis
+
+

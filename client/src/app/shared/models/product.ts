@@ -2,7 +2,7 @@ import { ICategory } from './category';
 import { Member } from './member';
 import { Photo } from './photo';
 
-export interface IProduct {
+export interface Product {
   id: number;
   name: string;
   description: string;
@@ -19,4 +19,5 @@ export interface IProduct {
   photos: Photo[];
   user: Member;
   isFavourite: boolean;
+  productBrand?: string;
 }

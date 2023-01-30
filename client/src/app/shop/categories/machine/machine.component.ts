@@ -1,7 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { IPagination } from '../../../shared/models/pagination';
 import { AppProductBaseClass } from 'src/app/app-product-base-class';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-machine',

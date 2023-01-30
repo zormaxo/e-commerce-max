@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BasketService } from 'src/app/basket/basket.service';
-
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 
@@ -12,19 +9,19 @@ import { ShopService } from 'src/app/shop/shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-
-  products: IProduct[];
+  products: Product[];
   shopParams = new ShopParams();
   totalCount: number;
 
-  constructor(private shopService: ShopService, public basketService: BasketService) {}
-
-  ngOnInit(): void {
-    this.getProductsThenCategories();
-
+  constructor(private shopService: ShopService) {
+    this.shopParams = shopService.getShopParams();
   }
 
-  getProductsThenCategories() {
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts() {
     this.shopService.getProducts(this.shopParams).subscribe({
       next: (response) => {
         this.products = response.data;

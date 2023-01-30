@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/account/account.service';
@@ -16,7 +16,7 @@ registerLocaleData(localeTr);
   styleUrls: ['./ad-list.component.scss'],
 })
 export class AdListComponent implements OnInit {
-  products: IProduct[];
+  products: Product[];
   shopParams = new ShopParams(10);
   totalCount: number;
   activeStatus: boolean;
@@ -63,7 +63,7 @@ export class AdListComponent implements OnInit {
     });
   }
 
-  onActive(product: IProduct, activeStatus: boolean) {
+  onActive(product: Product, activeStatus: boolean) {
     product.isActive = activeStatus;
     this.shopService.changeActiveStatus(product).subscribe(() => {
       this.toastr.success(`${activeStatus ? 'Aktif' : 'Pasif'} edildi`);

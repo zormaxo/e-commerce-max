@@ -5,7 +5,7 @@ import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { IProduct } from '../shared/models/product';
+import { Product } from '../shared/models/product';
 import { IAddress } from '../shared/models/address';
 import { ApiResponse } from '../shared/models/api-response/api-response';
 import { CategoryGroupCount } from '../shared/models/categoryGroupCount';
@@ -45,7 +45,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http.get(this.baseUrl + 'products/showcase', { observe: 'response', params }).pipe(
-      map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
+      map((response: HttpResponse<ApiResponse<IPagination<Product[]>>>) => {
         return response.body.result;
       })
     );
@@ -55,7 +55,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
-      map((response: HttpResponse<ApiResponse<IPagination<IProduct[]>>>) => {
+      map((response: HttpResponse<ApiResponse<IPagination<Product[]>>>) => {
         return response.body.result;
       })
     );
@@ -74,7 +74,7 @@ export class ShopService {
   }
 
   getProduct(id: number) {
-    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
   }
 
   getCities() {
@@ -90,11 +90,11 @@ export class ShopService {
     }
   }
 
-  updateProduct(product: IProduct) {
+  updateProduct(product: Product) {
     return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
   }
 
-  changeActiveStatus(product: IProduct) {
+  changeActiveStatus(product: Product) {
     return this.http.post<number>(this.baseUrl + 'products/change-active-status/', product);
   }
 
@@ -227,7 +227,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination<IProduct[]>>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
+      .get<ApiResponse<IPagination<Product[]>>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -239,7 +239,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination<IProduct[]>>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
+      .get<ApiResponse<IPagination<Product[]>>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -251,7 +251,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination<IProduct[]>>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
+      .get<ApiResponse<IPagination<Product[]>>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;

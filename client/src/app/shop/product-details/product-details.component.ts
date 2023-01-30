@@ -9,7 +9,7 @@ import {
 } from '@kolkov/ngx-gallery';
 import { ToastrService } from 'ngx-toastr';
 import { ICategory } from 'src/app/shared/models/category';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -18,7 +18,7 @@ import { ShopService } from '../shop.service';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  product: IProduct;
+  product: Product;
   parentCategories: ICategory[];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];

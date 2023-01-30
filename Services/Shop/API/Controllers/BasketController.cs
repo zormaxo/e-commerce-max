@@ -1,8 +1,8 @@
-﻿using API.Dtos;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
 using Shop.Core.Entities;
+using Shop.Shared.Dtos.Basket;
 
 namespace Shop.API.Controllers;
 
@@ -11,9 +11,10 @@ public class BasketController : BaseApiController
     private readonly BasketAppService _basketAppService;
 
     private readonly IMapper _mapper;
+
     public BasketController(BasketAppService basketAppService, IMapper mapper)
     {
-        _basketAppService = basketAppService; 
+        _basketAppService = basketAppService;
         _mapper = mapper;
     }
 

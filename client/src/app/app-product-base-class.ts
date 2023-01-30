@@ -6,7 +6,7 @@ import { LeftNavMode } from './shared/enums/leftNavMode';
 import { ICategory } from './shared/models/category';
 import { Member } from './shared/models/member';
 import { IPagination } from './shared/models/pagination';
-import { IProduct } from './shared/models/product';
+import { Product } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
 import { ShopService } from './shop/shop.service';
 
@@ -14,7 +14,7 @@ import { ShopService } from './shop/shop.service';
 export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   shopParams: ShopParams = new ShopParams(10);
   filterShopParams: ShopParams; //This button has been added to add filter buttons after pressing the search button.
-  products: IProduct[];
+  products: Product[];
   totalCount: number;
   allCategories: ICategory[];
   categoryName: string;
@@ -113,7 +113,7 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   }
 
   getProducts2() {
-    this.getProducts().subscribe((productResponse: IPagination<IProduct[]>) => {
+    this.getProducts().subscribe((productResponse: IPagination<Product[]>) => {
       this.products = productResponse.data;
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Shared.Dtos
+namespace Shop.Shared.Dtos.Basket
 {
     public class BasketItemDto
     {
@@ -8,7 +8,7 @@ namespace Shop.Shared.Dtos
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string ProductName { get; set; } = string.Empty;
 
         [Required]
         [Range(0.1, double.MaxValue, ErrorMessage = "Price must be greater than zero")]
@@ -19,12 +19,10 @@ namespace Shop.Shared.Dtos
         public int Quantity { get; set; }
 
         [Required]
-        public string PictureUrl { get; set; }
+        public string PictureUrl { get; set; } = string.Empty;
 
+        public string Brand { get; set; } = string.Empty;
 
-        public string? Brand { get; set; }
-
-
-        public string? Type { get; set; }
+        public string Type { get; set; } = string.Empty;
     }
 }

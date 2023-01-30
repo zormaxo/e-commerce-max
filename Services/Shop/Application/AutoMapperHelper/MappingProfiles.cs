@@ -9,6 +9,7 @@ using Shop.Core.Shared.Dtos.City;
 using Shop.Core.Shared.Dtos.Member;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Shared.Dtos;
+using Shop.Shared.Dtos.Basket;
 using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.AutoMapperHelper;

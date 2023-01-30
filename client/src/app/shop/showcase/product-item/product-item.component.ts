@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-product-item',
@@ -7,7 +7,7 @@ import { IProduct } from 'src/app/shared/models/product';
   styleUrls: ['./product-item.component.scss'],
 })
 export class ProductItemComponent implements OnInit {
-  @Input() product: IProduct;
+  @Input() product: Product;
 
   imageSource: string;
 

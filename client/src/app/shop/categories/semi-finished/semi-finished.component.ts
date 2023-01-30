@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProduct } from '../../../shared/models/product';
+import { Product } from '../../../shared/models/product';
 import { ICategory } from '../../../shared/models/category';
 import { ShopParams } from '../../../shared/models/shopParams';
 import { ShopService } from '../../shop.service';
@@ -13,7 +13,7 @@ import { IAddress } from 'src/app/shared/models/address';
   styleUrls: ['./semi-finished.component.scss'],
 })
 export class SemiFinishedComponent implements OnInit {
-  products: IProduct[];
+  products: Product[];
   shopParams: ShopParams = new ShopParams(10);
   totalCount: number;
   categoryName: string;

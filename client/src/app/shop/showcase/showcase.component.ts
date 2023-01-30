@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IProduct } from '../../shared/models/product';
+import { Product } from '../../shared/models/product';
 import { ICategory as ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../shop.service';
@@ -12,7 +12,7 @@ import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 })
 export class ShowcaseComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
-  products: IProduct[];
+  products: Product[];
   categories: ICategory[];
   shopParams = new ShopParams();
   totalCount: number;

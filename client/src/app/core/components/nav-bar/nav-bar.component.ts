@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/account/account.service';
@@ -13,7 +13,7 @@ import { AccountService } from 'src/app/account/account.service';
 export class NavBarComponent {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
   shopParams = new ShopParams();
-  products: IProduct[];
+  products: Product[];
   totalCount: number;
 
   constructor(public accountService: AccountService, public shopService: ShopService, private router: Router) {}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BasketService } from 'src/app/basket/basket.service';
-import { IProduct } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { ShopService } from 'src/app/shop/shop.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ShopService } from 'src/app/shop/shop.service';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  product: IProduct;
+  product: Product;
   quantity = 1;
 
   constructor(
