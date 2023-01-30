@@ -1,7 +1,7 @@
 using AutoMapper;
 using Shop.Core.HelperTypes;
-using Shop.Core.Shared.Dtos.Product;
 using Shop.Persistence;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.ApplicationServices;
 

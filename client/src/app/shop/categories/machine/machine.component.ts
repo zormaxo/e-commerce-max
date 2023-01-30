@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { IPagination } from '../../../shared/models/pagination';
+import { Pagination } from '../../../shared/models/pagination';
 import { AppProductBaseClass } from 'src/app/app-product-base-class';
 import { Product } from 'src/app/shared/models/product';
 

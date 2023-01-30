@@ -29,7 +29,7 @@ export class SearchResultComponent implements OnInit {
     this.shopService.getCategories().subscribe((categories) => {
       this.allCategories = categories;
 
-      this.shopService.getProducts(this.shopParams).subscribe((productResponse) => {
+      this.shopService.getProducts().subscribe((productResponse) => {
         this.totalCount = productResponse.totalCount;
         this.categoryGroupCountList = productResponse.categoryGroupCount;
 

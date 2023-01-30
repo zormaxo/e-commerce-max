@@ -1,6 +1,6 @@
 import { CategoryGroupCount } from './categoryGroupCount';
 
-export interface IPagination<T> {
+export interface Pagination<T> {
   pageIndex: number;
   pageSize: number;
   totalCount: number;

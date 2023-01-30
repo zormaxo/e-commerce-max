@@ -5,7 +5,7 @@ import { MembersService } from './core/services/members.service';
 import { LeftNavMode } from './shared/enums/leftNavMode';
 import { ICategory } from './shared/models/category';
 import { Member } from './shared/models/member';
-import { IPagination } from './shared/models/pagination';
+import { Pagination } from './shared/models/pagination';
 import { Product } from './shared/models/product';
 import { ShopParams } from './shared/models/shopParams';
 import { ShopService } from './shop/shop.service';
@@ -113,7 +113,7 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   }
 
   getProducts2() {
-    this.getProducts().subscribe((productResponse: IPagination<Product[]>) => {
+    this.getProducts().subscribe((productResponse: Pagination<Product[]>) => {
       this.products = productResponse.data;
       this.shopParams.pageNumber = productResponse.pageIndex;
       this.shopParams.pageSize = productResponse.pageSize;

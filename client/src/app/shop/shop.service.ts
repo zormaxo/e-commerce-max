@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPagination } from '../shared/models/pagination';
+import { Pagination } from '../shared/models/pagination';
 import { ICategory } from '../shared/models/category';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
@@ -18,8 +18,12 @@ import { Member } from '../shared/models/member';
 })
 export class ShopService {
   baseUrl = environment.apiUrl;
-  categories: ICategory[];
+  products: Product[] = [];
+  categories: ICategory[] = [];
   cities: IAddress[];
+  pagination?: Pagination<Product[]>;
+  shopParams = new ShopParams();
+  productCache = new Map<string, Pagination<Product[]>>();
 
   private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
   categoryWithParents$ = this.categoryWithParents.asObservable();
@@ -41,24 +45,67 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(shopParams: ShopParams) {
-    const params: HttpParams = this.generateHttpParams(shopParams);
+  // getProducts2(shopParams: ShopParams) {
+  //   const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'products/showcase', { observe: 'response', params }).pipe(
-      map((response: HttpResponse<ApiResponse<IPagination<Product[]>>>) => {
-        return response.body.result;
+  //   return this.http.get(this.baseUrl + 'products/showcase', { observe: 'response', params }).pipe(
+  //     map((response: HttpResponse<ApiResponse<Pagination<Product[]>>>) => {
+  //       return response.body.result;
+  //     })
+  //   );
+  // }
+
+  getProducts(useCache = true): Observable<Pagination<Product[]>> {
+    if (!useCache) this.productCache = new Map();
+
+    if (this.productCache.size > 0 && useCache) {
+      if (this.productCache.has(Object.values(this.shopParams).join('-'))) {
+        this.pagination = this.productCache.get(Object.values(this.shopParams).join('-'));
+        if (this.pagination) return of(this.pagination);
+      }
+    }
+
+    const params: HttpParams = this.generateHttpParams(this.shopParams);
+
+    return this.http.get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'products', { params }).pipe(
+      map((response) => {
+        this.productCache.set(Object.values(this.shopParams).join('-'), response.result);
+        this.pagination = response.result;
+        return response.result;
       })
     );
   }
 
-  getProductsLight(shopParams: ShopParams) {
-    const params: HttpParams = this.generateHttpParams(shopParams);
+  // getProductsLight(shopParams: ShopParams) {
+  //   const params: HttpParams = this.generateHttpParams(shopParams);
 
-    return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
-      map((response: HttpResponse<ApiResponse<IPagination<Product[]>>>) => {
-        return response.body.result;
+  //   return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
+  //     map((response: HttpResponse<ApiResponse<Pagination<Product[]>>>) => {
+  //       return response.body.result;
+  //     })
+  //   );
+  // }
+
+  getProduct(id: number) {
+    const product = [...this.productCache.values()].reduce((acc, paginatedResult) => {
+      return { ...acc, ...paginatedResult.data.find((x) => x.id === id) };
+    }, {} as Product);
+
+    if (Object.keys(product).length !== 0) return of(product);
+
+    return this.http.get<ApiResponse<Product>>(this.baseUrl + 'products/' + id).pipe(
+      map((response) => {
+        return response.result;
       })
     );
+  }
+
+  setShopParams(params: ShopParams) {
+    this.shopParams = params;
+  }
+
+  getShopParams() {
+    return this.shopParams;
   }
 
   getProductCounts(userId: number) {
@@ -71,10 +118,6 @@ export class ShopService {
         params: params,
       }
     );
-  }
-
-  getProduct(id: number) {
-    return this.http.get<Product>(this.baseUrl + 'products/' + id);
   }
 
   getCities() {
@@ -227,7 +270,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination<Product[]>>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
+      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -239,7 +282,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination<Product[]>>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
+      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -251,7 +294,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<IPagination<Product[]>>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
+      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
