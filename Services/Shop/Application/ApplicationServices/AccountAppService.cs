@@ -1,4 +1,3 @@
-using AutoMapper;
 using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +5,7 @@ using Shop.Application.Extensions;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
-using Shop.Shared.Dtos;
+using Shop.Shared.Dtos.Account;
 using System.Net;
 
 namespace Shop.Application.ApplicationServices;
@@ -16,7 +15,8 @@ public class AccountAppService : BaseAppService
     private readonly ITokenService _tokenService;
     readonly UserManager<AppUser> _userManager;
 
-    public AccountAppService(UserManager<AppUser> userManager, IMapper mapper, ITokenService tokenService) : base(mapper)
+    public AccountAppService(UserManager<AppUser> userManager, ITokenService tokenService, IServiceProvider serviceProvider) : base(
+        serviceProvider)
     {
         _userManager = userManager;
         _tokenService = tokenService;

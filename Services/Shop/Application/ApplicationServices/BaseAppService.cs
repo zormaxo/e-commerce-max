@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using Shop.Core.HelperTypes;
 using Shop.Persistence;
 
@@ -12,9 +13,10 @@ public class BaseAppService
 
     protected CachedItems CachedItems { get; }
 
-    public BaseAppService(IMapper mapper) { Mapper = mapper; }
-
-    public BaseAppService(IMapper mapper, StoreContext context) : this(mapper) { StoreContext = context; }
-    public BaseAppService(IMapper mapper, StoreContext context, CachedItems cachedItems) : this(mapper, context)
-    { CachedItems = cachedItems; }
+    public BaseAppService(IServiceProvider serviceProvider)
+    {
+        StoreContext = serviceProvider.GetService<StoreContext>();
+        Mapper = serviceProvider.GetService<IMapper>();
+        CachedItems = serviceProvider.GetService<CachedItems>();
+    }
 }

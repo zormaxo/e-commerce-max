@@ -1,4 +1,3 @@
-using AutoMapper;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
@@ -11,11 +10,8 @@ public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
 {
     readonly IGenericRepository<ProductMaterial> _materialRepo;
 
-    public ProductMaterialAppService(
-        IGenericRepository<ProductMaterial> materialRepo,
-        CachedItems cachedItems,
-        IMapper mapper,
-        StoreContext storeContext) : base(mapper, storeContext, cachedItems)
+    public ProductMaterialAppService(IGenericRepository<ProductMaterial> materialRepo, IServiceProvider serviceProvider) : base(
+        serviceProvider)
     { _materialRepo = materialRepo; }
 
     protected override void AddCategoryFiltering()

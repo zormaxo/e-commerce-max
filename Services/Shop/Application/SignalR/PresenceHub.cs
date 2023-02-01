@@ -3,32 +3,31 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Shop.Application.Extensions;
 
-namespace Shop.API.SignalR
+namespace Shop.API.SignalR;
+
+[Authorize]
+public class PresenceHub : Hub
 {
-    [Authorize]
-    public class PresenceHub : Hub
+    private readonly PresenceTracker _tracker;
+    public PresenceHub(PresenceTracker tracker) { _tracker = tracker; }
+
+    public override async Task OnConnectedAsync()
     {
-        private readonly PresenceTracker _tracker;
-        public PresenceHub(PresenceTracker tracker) { _tracker = tracker; }
+        var isOnline = await _tracker.UserConnected(Context.User.GetUserName(), Context.ConnectionId);
+        if (isOnline)
+            await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUserName());
 
-        public override async Task OnConnectedAsync()
-        {
-            var isOnline = await _tracker.UserConnected(Context.User.GetUserName(), Context.ConnectionId);
-            if (isOnline)
-                await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUserName());
+        var currentUsers = await _tracker.GetOnlineUsers();
+        await Clients.Caller.SendAsync("GetOnlineUsers", currentUsers);
+    }
 
-            var currentUsers = await _tracker.GetOnlineUsers();
-            await Clients.Caller.SendAsync("GetOnlineUsers", currentUsers);
-        }
+    public override async Task OnDisconnectedAsync(Exception exception)
+    {
+        var isOffline = await _tracker.UserDisconnected(Context.User.GetUserName(), Context.ConnectionId);
 
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            var isOffline = await _tracker.UserDisconnected(Context.User.GetUserName(), Context.ConnectionId);
+        if (isOffline)
+            await Clients.Others.SendAsync("UserIsOffline", Context.User.GetUserName());
 
-            if (isOffline)
-                await Clients.Others.SendAsync("UserIsOffline", Context.User.GetUserName());
-
-            await base.OnDisconnectedAsync(exception);
-        }
+        await base.OnDisconnectedAsync(exception);
     }
 }

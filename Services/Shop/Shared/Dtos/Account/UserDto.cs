@@ -1,4 +1,4 @@
-namespace Shop.Shared.Dtos;
+namespace Shop.Shared.Dtos.Account;
 
 public class UserDto
 {

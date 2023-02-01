@@ -1,4 +1,3 @@
-using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +15,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 {
     private readonly IPhotoService _photoService;
 
-    protected ProductBaseService(IMapper mapper, StoreContext storeContext, CachedItems cachedItems) : base(
-        mapper,
-        storeContext,
-        cachedItems)
+    protected ProductBaseService(IServiceProvider serviceProvider) : base(serviceProvider)
     {
     }
 

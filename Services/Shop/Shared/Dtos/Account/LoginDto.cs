@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Shared.Dtos;
+namespace Shop.Shared.Dtos.Account;
 
 public class LoginDto
 {

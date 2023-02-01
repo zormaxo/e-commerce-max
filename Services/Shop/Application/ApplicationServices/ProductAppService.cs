@@ -1,4 +1,3 @@
-using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Entities;
@@ -13,10 +12,7 @@ namespace Shop.Application.ApplicationServices;
 
 public class ProductAppService : ProductBaseService<ProductDto>
 {
-    public ProductAppService(StoreContext storeContext, CachedItems cachedItems, IMapper mapper) : base(
-        mapper,
-        storeContext,
-        cachedItems)
+    public ProductAppService(IServiceProvider serviceProvider) : base(serviceProvider)
     {
     }
 

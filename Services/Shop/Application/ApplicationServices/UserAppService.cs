@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities;
@@ -17,7 +16,8 @@ public class UserAppService : BaseAppService
     private readonly IUserRepository _userRepository;
     private readonly IPhotoService _photoService;
 
-    public UserAppService(IUserRepository userRepository, IMapper mapper, IPhotoService photoService) : base(mapper)
+    public UserAppService(IUserRepository userRepository, IPhotoService photoService, IServiceProvider serviceProvider) : base(
+        serviceProvider)
     {
         _userRepository = userRepository;
         _photoService = photoService;

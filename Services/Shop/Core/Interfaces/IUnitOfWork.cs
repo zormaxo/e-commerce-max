@@ -1,11 +1,10 @@
 using Shop.Core.Entities;
 
-namespace Shop.Core.Interfaces
-{
-    public interface IUnitOfWork : IDisposable
-    {
-        IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
+namespace Shop.Core.Interfaces;
 
-        Task<int> Complete();
-    }
+public interface IUnitOfWork : IDisposable
+{
+    IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
+
+    Task<int> Complete();
 }

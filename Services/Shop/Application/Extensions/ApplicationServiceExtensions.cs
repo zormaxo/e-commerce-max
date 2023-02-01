@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.ActionFilters;
 using Shop.Application.ApplicationServices;
 using Shop.Application.AutoMapperHelper;
+using Shop.Application.Common.Interfaces;
 using Shop.Core.Interfaces;
 using Shop.Persistence.Repositories;
 using Shop.Persistence.Services;

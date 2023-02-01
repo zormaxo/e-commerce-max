@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Core.Exceptions;
-using Shop.Shared.Dtos;
+using Shop.Shared.Dtos.Account;
 using System.Net;
 using System.Security.Claims;
 
