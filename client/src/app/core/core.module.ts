@@ -8,9 +8,10 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
 
 @NgModule({
-  declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent, TestErrorsComponent, HasRoleDirective],
+  declarations: [NavBarComponent, NotFoundComponent, ServerErrorComponent, TestErrorsComponent, HasRoleDirective, MainMenuComponent],
   imports: [FormsModule, CommonModule, CoreRoutingModule, BsDropdownModule.forRoot()],
   exports: [NavBarComponent, HasRoleDirective],
 })

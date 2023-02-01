@@ -77,34 +77,53 @@
   </nav>
 </header>
 
-<nav class="navbar navbar-expand navbar-light bg-light fixed-bottom d-sm-none" aria-label="footer nav">
+<footer class="navbar navbar-expand navbar-light bg-dark fixed-bottom d-sm-none" aria-label="footer nav">
   <div class="container-fluid">
     <ul class="navbar-nav flex-grow-1 justify-content-around">
       <li class="nav-item">
-        <a class="btn btn-outline-dark py-0 border-0" type="button">
+        <a class="btn btn-outline-warning py-0 border-0" routerLink="/" type="button">
           <em class="fa-solid fa-house"></em>
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-dark py-0 border-0" type="button">
+        <a
+          class="btn btn-outline-warning py-0 border-0"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          type="button">
           <em class="fa-solid fa-border-all"></em>
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-dark py-0 border-0" type="button">
+        <a class="btn btn-outline-warning py-0 border-0" type="button">
           <em class="fa-solid fa-star"></em>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="btn btn-outline-dark py-0 border-0" type="button">
+        <a class="btn btn-outline-warning py-0 border-0" type="button">
           <em class="fa-solid fa-user"></em>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="btn btn-outline-dark py-0 border-0" type="button">
+        <a class="btn btn-outline-warning py-0 border-0" type="button">
           <em class="fa-solid fa-circle-plus"></em>
         </a>
       </li>
     </ul>
   </div>
-</nav>
+</footer>
+
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+  #omer>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <app-main-menu></app-main-menu>
+  </div>
+</div>

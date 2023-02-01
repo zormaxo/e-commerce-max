@@ -4,6 +4,8 @@ import { Product } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/account/account.service';
+import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
+import { ICategory } from 'src/app/shared/models/category';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,6 +17,9 @@ export class NavBarComponent {
   shopParams = new ShopParams();
   products: Product[];
   totalCount: number;
+
+  categoryGroupCount: CategoryGroupCount[];
+  categories: ICategory[] = [];
 
   constructor(public accountService: AccountService, public shopService: ShopService, private router: Router) {}
 

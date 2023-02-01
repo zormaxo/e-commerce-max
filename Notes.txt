@@ -42,7 +42,7 @@ flyctl help
 flyctl logs -a datingappmax
 flyctl auth token
 
-
+WB7L8xPSI1095mJ
 Postgres cluster ecommercemax-db created
   Username:    postgres
   Password:    Y5Qfb0a7BqrkM4q

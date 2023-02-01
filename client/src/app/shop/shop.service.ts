@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination } from '../shared/models/pagination';
 import { ICategory } from '../shared/models/category';
@@ -20,7 +20,7 @@ export class ShopService {
   baseUrl = environment.apiUrl;
   products: Product[] = [];
   categories: ICategory[] = [];
-  cities: IAddress[];
+  cities: IAddress[] = [];
   pagination?: Pagination<Product[]>;
   shopParams = new ShopParams();
   productCache = new Map<string, Pagination<Product[]>>();
@@ -28,9 +28,12 @@ export class ShopService {
   private categoryWithParents = new ReplaySubject<{ selectedCategory: ICategory; parentCategories: ICategory[] }>(1);
   categoryWithParents$ = this.categoryWithParents.asObservable();
 
+  private categoryWithCounts = new ReplaySubject<ICategory[]>(1);
+  categoryWithCounts$ = this.categoryWithCounts.asObservable();
+
+  categorySelected = new Subject<ICategory>();
   searchClicked = new Subject<ShopParams>();
   searchTerm: string; //relation between nav and productList
-  categorySelected = new Subject<ICategory>();
 
   //For base
   productAdded = new Subject<{
@@ -41,19 +44,8 @@ export class ShopService {
     mode: LeftNavMode;
     member: Member;
   }>();
-  productAdded2 = new Subject<number>();
 
   constructor(private http: HttpClient) {}
-
-  // getProducts2(shopParams: ShopParams) {
-  //   const params: HttpParams = this.generateHttpParams(shopParams);
-
-  //   return this.http.get(this.baseUrl + 'products/showcase', { observe: 'response', params }).pipe(
-  //     map((response: HttpResponse<ApiResponse<Pagination<Product[]>>>) => {
-  //       return response.body.result;
-  //     })
-  //   );
-  // }
 
   getProducts(useCache = true): Observable<Pagination<Product[]>> {
     if (!useCache) this.productCache = new Map();
@@ -76,16 +68,6 @@ export class ShopService {
     );
   }
 
-  // getProductsLight(shopParams: ShopParams) {
-  //   const params: HttpParams = this.generateHttpParams(shopParams);
-
-  //   return this.http.get(this.baseUrl + 'products', { observe: 'response', params }).pipe(
-  //     map((response: HttpResponse<ApiResponse<Pagination<Product[]>>>) => {
-  //       return response.body.result;
-  //     })
-  //   );
-  // }
-
   getProduct(id: number) {
     const product = [...this.productCache.values()].reduce((acc, paginatedResult) => {
       return { ...acc, ...paginatedResult.data.find((x) => x.id === id) };
@@ -98,6 +80,18 @@ export class ShopService {
         return response.result;
       })
     );
+  }
+
+  // updateProduct(product: Product) {
+  //   return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
+  // }
+
+  AddOrRemoveFavourite(productId: number) {
+    return this.http.post(this.baseUrl + 'products/add-remove-favourite/' + productId, {});
+  }
+
+  changeActiveStatus(product: Product) {
+    return this.http.post<number>(this.baseUrl + 'products/change-active-status/', product);
   }
 
   setShopParams(params: ShopParams) {
@@ -121,7 +115,7 @@ export class ShopService {
   }
 
   getCities() {
-    if (!this.cities) {
+    if (this.cities.length === 0) {
       return this.http.get<ApiResponse<IAddress[]>>(this.baseUrl + 'shared/cities').pipe(
         map((response: ApiResponse<IAddress[]>) => {
           this.cities = response.result;
@@ -131,14 +125,6 @@ export class ShopService {
     } else {
       return of(this.cities);
     }
-  }
-
-  updateProduct(product: Product) {
-    return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
-  }
-
-  changeActiveStatus(product: Product) {
-    return this.http.post<number>(this.baseUrl + 'products/change-active-status/', product);
   }
 
   getCategories(): Observable<ICategory[]> {
@@ -152,7 +138,7 @@ export class ShopService {
       }
     };
 
-    if (this.categories === undefined) {
+    if (this.categories.length === 0) {
       return this.http.get(this.baseUrl + 'categories').pipe(
         map((response: ApiResponse<ICategory[]>) => {
           this.categories = response.result.filter((x) => x.parent == null);
@@ -168,7 +154,11 @@ export class ShopService {
   }
 
   //Adds product counts to parent categories cumulatively. This metod requires both product and category results.
-  calculateProductCountsByCategory(allCategories: ICategory[], categoryGroupCount: CategoryGroupCount[]) {
+  calculateProductCountsByCategory(
+    allCategories: ICategory[],
+    categoryGroupCount: CategoryGroupCount[],
+    isOverWrite = false
+  ) {
     const addCountToParent = (selectedCategory: ICategory, count: number) => {
       if (selectedCategory.parent) {
         selectedCategory.parent.count += count;
@@ -182,6 +172,9 @@ export class ShopService {
       category.count = groupCount.count;
       addCountToParent(category, groupCount.count);
     });
+    if (isOverWrite) {
+      this.categoryWithCounts.next(allCategories);
+    }
   }
 
   //Populate parent category list to use in leftNav and breadcrumb components
@@ -200,10 +193,6 @@ export class ShopService {
         fillList(selectedCategory.parent);
       }
     }
-  }
-
-  AddOrRemoveFavourite(productId: number) {
-    return this.http.post(this.baseUrl + 'products/add-remove-favourite/' + productId, {});
   }
 
   private generateHttpParams(shopParams: ShopParams) {

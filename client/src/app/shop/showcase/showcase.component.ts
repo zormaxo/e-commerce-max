@@ -4,6 +4,7 @@ import { ICategory as ICategory } from '../../shared/models/category';
 import { ShopParams } from '../../shared/models/shopParams';
 import { ShopService } from '../shop.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
+import { mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-showcase',
@@ -12,51 +13,51 @@ import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 })
 export class ShowcaseComponent implements OnInit {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
-  products: Product[];
-  categories: ICategory[];
-  shopParams = new ShopParams();
-  totalCount: number;
+  products: Product[] = [];
+  shopParams: ShopParams;
+  totalCount = 0;
+  categories: ICategory[] = [];
   parentCategories: ICategory[] = [];
   categoryGroupCount: CategoryGroupCount[];
 
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService) {
+    this.shopParams = shopService.getShopParams();
+  }
 
   ngOnInit(): void {
-    this.getProductsThenCategories();
+    this.getProductsAndCategories();
   }
 
-  getProductsThenCategories() {
-    this.shopService.getProducts().subscribe({
-      next: (response) => {
-        this.products = response.data;
-        this.shopParams.pageNumber = response.pageIndex;
-        this.shopParams.pageSize = response.pageSize;
-        this.totalCount = response.totalCount;
-        this.categoryGroupCount = response.categoryGroupCount;
-
-        this.getCategories();
-      },
-    });
-  }
-
-  getCategories() {
-    this.shopService.getCategories().subscribe({
-      next: (response) => {
-        this.categories = response;
-        this.shopService.calculateProductCountsByCategory(this.categories, this.categoryGroupCount);
-      },
-    });
+  getProductsAndCategories() {
+    this.shopService
+      .getProducts()
+      .pipe(
+        mergeMap((response) => {
+          this.products = response.data;
+          this.shopParams.pageNumber = response.pageIndex;
+          this.shopParams.pageSize = response.pageSize;
+          this.totalCount = response.totalCount;
+          this.categoryGroupCount = response.categoryGroupCount;
+          return this.shopService.getCategories();
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.categories = response;
+          this.shopService.calculateProductCountsByCategory(this.categories, this.categoryGroupCount, true);
+        },
+      });
   }
 
   onSearch() {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopParams.pageNumber = 1;
-    this.getProductsThenCategories();
+    this.getProductsAndCategories();
   }
 
   onReset() {
     this.searchTerm.nativeElement.value = '';
     this.shopParams = new ShopParams();
-    this.getProductsThenCategories();
+    this.getProductsAndCategories();
   }
 }
