@@ -1,12 +1,12 @@
-using Shop.Core.Entities;
+//using Shop.Core.Entities;
 
-namespace Shop.Application.Common.Interfaces;
+//namespace Shop.Application.Common.Interfaces;
 
-public interface IBasketRepository
-{
-    Task<CustomerBasket> GetBasketAsync(string basketId);
+//public interface IBasketRepository
+//{
+//    Task<CustomerBasket> GetBasketAsync(string basketId);
 
-    Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
+//    Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
 
-    Task<bool> DeleteBasketAsync(string basketId);
-}
+//    Task<bool> DeleteBasketAsync(string basketId);
+//}

@@ -1,7 +1,6 @@
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Common.Interfaces;
 using Shop.Core.Entities;
 using Shop.Core.Entities.OrderAggregate;
 using Shop.Core.Interfaces;

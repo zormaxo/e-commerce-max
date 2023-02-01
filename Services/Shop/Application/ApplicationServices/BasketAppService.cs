@@ -1,5 +1,5 @@
-﻿using Shop.Application.Common.Interfaces;
-using Shop.Core.Entities;
+﻿using Shop.Core.Entities;
+using Shop.Core.Interfaces;
 
 namespace Shop.Application.ApplicationServices;
 
