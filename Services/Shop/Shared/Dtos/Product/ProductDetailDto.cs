@@ -24,4 +24,9 @@ public class ProductDetailDto : BaseProductDto
 
     //For shopping
     public string PictureUrl { get; set; } = string.Empty;
+
+    //For e-commerce
+    public decimal Price { get; set; }
+
+    public int Currency { get; set; }
 }

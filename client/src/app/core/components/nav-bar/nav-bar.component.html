@@ -61,8 +61,18 @@
           <a class="btn btn-outline-dark p-1 me-1 border-0" type="button">
             <em class="fa-solid fa-bell fa-lg"></em>
           </a>
-          <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" routerLink="/lists" routerLinkActive="active">
+          <!-- <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" routerLink="/lists" routerLinkActive="active">
             <em class="fa-solid fa-star fa-lg"></em>
+          </a> -->
+          <a
+            class="btn btn-outline-dark p-1 me-1 border-0 position-relative"
+            type="button"
+            routerLink="/basket"
+            routerLinkActive="active">
+            <em class="fa-solid fa-shopping-cart fa-lg"></em>
+            <div *ngIf="basketService.basketSource$ | async as basket" class="cart-no">
+              {{ getCount(basket.items) }}
+            </div>
           </a>
           <a class="btn btn-outline-dark p-1 me-1 border-0 d-none d-sm-block d-md-none" type="button">
             <em class="fa-solid fa-circle-plus fa-lg"></em>
@@ -86,7 +96,7 @@
 </header>
 
 <footer class="navbar navbar-expand navbar-light bg-dark fixed-bottom d-sm-none" aria-label="footer nav">
-<div class="container-fluid">
+  <div class="container-fluid">
     <ul class="navbar-nav flex-grow-1 justify-content-around">
       <li class="nav-item">
         <a class="btn btn-outline-warning py-0 border-0" routerLink="/" type="button">

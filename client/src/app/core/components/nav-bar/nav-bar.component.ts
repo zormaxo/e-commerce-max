@@ -6,6 +6,8 @@ import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/account/account.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
 import { ICategory } from 'src/app/shared/models/category';
+import { BasketItem } from 'src/app/shared/models/basket';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,7 +23,12 @@ export class NavBarComponent {
   categoryGroupCount: CategoryGroupCount[];
   categories: ICategory[] = [];
 
-  constructor(public accountService: AccountService, public shopService: ShopService, private router: Router) {}
+  constructor(
+    public accountService: AccountService,
+    public shopService: ShopService,
+    public basketService: BasketService,
+    private router: Router
+  ) {}
 
   logout() {
     this.accountService.logout();
@@ -36,7 +43,7 @@ export class NavBarComponent {
     this.shopService.searchTerm = '';
   }
 
-  onClear() {
-    this.shopService.searchTerm = '';
+  getCount(items: BasketItem[]) {
+    return items.reduce((sum, item) => sum + item.quantity, 0);
   }
 }

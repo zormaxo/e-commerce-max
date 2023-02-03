@@ -11,7 +11,7 @@
         <span *ngIf="!product.isFavourite">Add to My Favorites</span>
       </a>
     </div>
-    <hr />
+    <hr class="mt-2" />
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center mb-5 mb-md-0">
@@ -59,6 +59,30 @@
             </tr>
           </tbody>
         </table>
+
+        <p class="text-primary mb-3" *ngIf="quantityInBasket > 0">
+          You have {{ quantityInBasket }} of this item in your basket
+        </p>
+
+        <div class="d-flex justify-content-start align-items-center">
+          <i
+            (click)="decrementQuantity()"
+            class="fa fa-minus-circle text-warning me-2"
+            style="cursor: pointer; font-size: 2em"></i>
+          <span class="font-weight-bold" style="font-size: 1.5em">
+            {{ quantity }}
+          </span>
+          <i
+            (click)="incrementQuantity()"
+            class="fa fa-plus-circle text-warning ms-2"
+            style="cursor: pointer; font-size: 2em"></i>
+          <button
+            class="btn btn-outline-primary ms-4"
+            (click)="updateBasket()"
+            [disabled]="quantity === quantityInBasket">
+            {{ buttonText }}
+          </button>
+        </div>
       </div>
     </div>
     <div class="col d-flex justify-content-center align-items-start">
@@ -95,5 +119,10 @@
       </div>
     </div>
   </div>
-  <div class="h6 text-center mt-3">{{ product.favouriteCount }} kişi favorilerine ekledi</div>
+  <div *ngIf="product.favouriteCount > 1" class="h6 text-center mt-3">
+    {{ product.favouriteCount }} people added to their favorites.
+  </div>
+  <div *ngIf="product.favouriteCount < 2" class="h6 text-center mt-3">
+    {{ product.favouriteCount }} person added to their favorites.
+  </div>
 </ng-container>
