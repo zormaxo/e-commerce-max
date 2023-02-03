@@ -67,8 +67,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   loadProduct() {
-    this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product: any) => {
-      this.product = product.result;
+    this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe((product: Product) => {
+      this.product = product;
       this.galleryImages = this.getImages();
       this.shopService.getCategories().subscribe((categories) => {
         this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.categoryId);

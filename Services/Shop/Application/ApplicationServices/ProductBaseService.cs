@@ -1,20 +1,14 @@
 using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Interfaces;
 using Shop.Core.Entities;
-using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
-using Shop.Core.Shared.Dtos;
 using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
 public abstract class ProductBaseService<T> : BaseAppService where T : class
 {
-    private readonly IPhotoService _photoService;
-
     protected ProductBaseService(IServiceProvider serviceProvider) : base(serviceProvider)
     {
     }
@@ -94,31 +88,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         return await StoreContext.SaveChangesAsync();
     }
 
-    public async Task<PhotoDto> AddPhoto(IFormFile file, int productId)
-    {
-        var product = await StoreContext.Products.FirstOrDefaultAsync(x => x.Id == productId);
-
-        var result = await _photoService.AddPhotoAsync(file);
-
-        if (result.Error != null)
-            throw new ApiException(result.Error.Message);
-
-        var photo = new ProductPhoto { Url = result.SecureUrl.AbsoluteUri, PublicId = result.PublicId };
-
-        if (product.Photos.Count == 0)
-        {
-            photo.IsMain = true;
-        }
-
-        product.Photos.Add(photo);
-
-        if (await StoreContext.SaveChangesAsync() > 0)
-        {
-            return Mapper.Map<PhotoDto>(photo);
-        }
-
-        throw new ApiException("Problem addding photo");
-    }
 
     protected abstract void AddCategoryFiltering();
 

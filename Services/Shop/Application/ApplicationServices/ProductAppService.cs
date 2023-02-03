@@ -1,8 +1,11 @@
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Shop.Application.Interfaces;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
+using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Persistence;
 using Shop.Shared.Dtos.Product;
@@ -12,9 +15,9 @@ namespace Shop.Application.ApplicationServices;
 
 public class ProductAppService : ProductBaseService<ProductDto>
 {
-    public ProductAppService(IServiceProvider serviceProvider) : base(serviceProvider)
-    {
-    }
+    private readonly IPhotoService _photoService;
+    public ProductAppService(IServiceProvider serviceProvider, IPhotoService photoService) : base(serviceProvider)
+    { _photoService = photoService; }
 
     public async Task<ProductDetailDto> GetProduct(int id, int? userId)
     {
@@ -63,7 +66,7 @@ public class ProductAppService : ProductBaseService<ProductDto>
 
         if (fav == null)
         {
-            await StoreContext.Favourites.AddAsync(new Favourite { LikedProductId = productId, UserId = userId.Value });
+            StoreContext.Favourites.Add(new Favourite { LikedProductId = productId, UserId = userId.Value });
         }
         else
         {
@@ -71,6 +74,32 @@ public class ProductAppService : ProductBaseService<ProductDto>
         }
 
         await StoreContext.SaveChangesAsync();
+    }
+
+    public async Task<PhotoDto> AddPhoto(IFormFile file, int productId)
+    {
+        var product = await StoreContext.Products.FirstOrDefaultAsync(x => x.Id == productId);
+
+        var result = await _photoService.AddPhotoAsync(file);
+
+        if (result.Error != null)
+            throw new ApiException(result.Error.Message);
+
+        var photo = new ProductPhoto { Url = result.SecureUrl.AbsoluteUri, PublicId = result.PublicId };
+
+        if (product.Photos.Count == 0)
+        {
+            photo.IsMain = true;
+        }
+
+        product.Photos.Add(photo);
+
+        if (await StoreContext.SaveChangesAsync() > 0)
+        {
+            return Mapper.Map<PhotoDto>(photo);
+        }
+
+        throw new ApiException("Problem addding photo");
     }
 
     protected override void AddCategoryFiltering()

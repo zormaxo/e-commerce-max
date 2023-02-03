@@ -20,8 +20,6 @@ public class BuggyController : BaseApiController
         _httpClientFactory = HttpClientFactory;
     }
 
-    [HttpGet("badrequest")]
-    public ActionResult GetBadRequest() { return BadRequest("This message is from controller"); }
 
     [Authorize]
     [HttpGet("auth")]
@@ -47,6 +45,9 @@ public class BuggyController : BaseApiController
 
         return Ok(thingToReturn);
     }
+
+    [HttpGet("badrequest")]
+    public ActionResult GetBadRequest() { return BadRequest("This message is from controller"); }
 
     [HttpGet("currency")]
     public async Task<ActionResult<JsonElement>> GetCurrency()

@@ -6,7 +6,6 @@ using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Product;
-using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Product;
 
 namespace Shop.API.Controllers;
@@ -17,13 +16,9 @@ public class ProductsController : BaseApiController
 
     public ProductsController(ProductAppService productSrv) { _productSrv = productSrv; }
 
-    [HttpGet("showcase")]
-    public Task<Pagination<ShowcaseDto>> GetProductsForShowcase([FromQuery] ProductSpecParams productParams)
-    { return _productSrv.GetProducts<ShowcaseDto>(productParams); }
-
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
-    { return Ok(await _productSrv.GetProducts<ProductDto>(productParams)); }
+    public async Task<ActionResult<Pagination<ProductDetailDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
+    { return Ok(await _productSrv.GetProducts<ProductDetailDto>(productParams)); }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

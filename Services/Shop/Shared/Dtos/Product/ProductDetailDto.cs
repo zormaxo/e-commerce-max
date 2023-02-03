@@ -27,5 +27,7 @@ public class ProductDetailDto : BaseDto
 
     public bool IsFavourite { get; set; }
 
-    public int FavouriteCount { get; set; }
+    public int FavouriteCount => Favourites?.Count ?? 0;
+
+    public ICollection<FavouriteDto>? Favourites { get; set; }
 }
