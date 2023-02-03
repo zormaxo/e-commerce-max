@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { AdminService } from 'src/app/core/services/admin.service';
+import { AdminService } from 'src/app/admin/admin.service';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { User } from 'src/app/shared/models/user';
 
@@ -23,7 +23,7 @@ export class UserManagementComponent implements OnInit {
 
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe({
-      next: (response:any) => (this.users = response.result),
+      next: (users) => (this.users = users.result),
     });
   }
 
@@ -31,7 +31,7 @@ export class UserManagementComponent implements OnInit {
     const config = {
       class: 'modal-dialog-centered',
       initialState: {
-        username: user.firstName,
+        username: user.userName,
         availableRoles: this.availableRoles,
         selectedRoles: [...user.roles],
       },
@@ -40,9 +40,9 @@ export class UserManagementComponent implements OnInit {
     this.bsModalRef.onHide?.subscribe({
       next: () => {
         const selectedRoles = this.bsModalRef.content?.selectedRoles;
-        if (!this.arrayEqual(selectedRoles!, user.roles)) {
-          this.adminService.updateUserRoles(user.userId, selectedRoles!).subscribe({
-            next: (response:any) => (user.roles = response.result),
+        if (!this.arrayEqual(selectedRoles, user.roles)) {
+          this.adminService.updateUserRoles(user.userId, selectedRoles).subscribe({
+            next: (roles) => (user.roles = roles.result),
           });
         }
       },

@@ -6,7 +6,6 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Application.ActionFilters;
 using Shop.Application.ApplicationServices;
 using Shop.Application.AutoMapperHelper;
 using Shop.Core.Interfaces;
@@ -28,7 +27,7 @@ public static class ApplicationServiceExtensions
         //services.AddScoped<IBasketRepository, BasketMemRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<LogUserActivity>();
+
         services.AddScoped<UserResolverService>();
         services.AddAutoMapper(cfg => cfg.AllowNullCollections = true, typeof(MappingProfiles));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

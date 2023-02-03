@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop.API.Controllers;
 using Shop.Core.Entities.Identity;
 
-namespace API.Controllers;
+namespace Shop.API.Controllers;
 
 public class AdminController : BaseApiController
 {
@@ -27,13 +26,15 @@ public class AdminController : BaseApiController
     }
 
     [Authorize(Policy = "RequireAdminRole")]
-    [HttpPost("edit-roles/{username}")]
-    public async Task<ActionResult> EditRoles(int username, [FromQuery] string roles)
+    [HttpPost("edit-roles/{userId}")]
+    public async Task<ActionResult> EditRoles(int userId, [FromQuery] string roles)
     {
+        if (string.IsNullOrEmpty(roles))
+            return BadRequest("You must select at least one role");
+
         var selectedRoles = roles.Split(",").ToArray();
 
-        //var user = await _userManager.FindByNameAsync(username);
-        var user = await _userManager.FindByIdAsync(username.ToString());
+        var user = await _userManager.FindByIdAsync(userId.ToString());
 
         if (user == null)
             return NotFound("Could not find user");

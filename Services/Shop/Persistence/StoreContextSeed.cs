@@ -30,7 +30,7 @@ public static class StoreContextSeed
                 var cityData = await File.ReadAllTextAsync(path + "/SeedData/cities.json");
                 var cities = JsonConvert.DeserializeObject<List<City>>(cityData);
 
-                context.Cities.AddRange(cities);
+                context.Cities.AddRange(cities!);
 
                 await context.SaveChangesAsync();
             }
@@ -41,14 +41,14 @@ public static class StoreContextSeed
                 var countyData = await File.ReadAllTextAsync(path + "/SeedData/counties.json");
                 var counties = JsonConvert.DeserializeObject<List<County>>(countyData);
 
-                context.Counties.AddRange(counties);
+                context.Counties.AddRange(counties!);
 
                 await context.SaveChangesAsync();
             }
 
             if (!await userManager.Users.AnyAsync())
             {
-                var userData = await File.ReadAllTextAsync(path + "/SeedData/users.json");
+                string userData = await File.ReadAllTextAsync(path + "/SeedData/users.json");
                 var users = JsonConvert.DeserializeObject<List<AppUser>>(userData);
                 if (users == null)
                     return;
@@ -67,14 +67,14 @@ public static class StoreContextSeed
 
                 foreach (var user in users)
                 {
-                    user.UserName = user.UserName.ToLower();
+                    user.UserName = user.UserName!.ToLower();
                     await userManager.CreateAsync(user, "1234");
                     await userManager.AddToRoleAsync(user, "Member");
                 }
 
-                var admin = new AppUser { UserName = "admin" };
+                var admin = new AppUser { UserName = "admin@admin.com", Email = "admin@admin.com" };
 
-                await userManager.CreateAsync(admin, "Pa$$w0rd");
+                await userManager.CreateAsync(admin, "1234");
                 await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
             }
 
@@ -84,7 +84,7 @@ public static class StoreContextSeed
                 var typesData = await File.ReadAllTextAsync(path + "/SeedData/categories.json");
                 var types = JsonConvert.DeserializeObject<List<Category>>(typesData);
 
-                context.Categories.AddRange(types);
+                context.Categories.AddRange(types!);
 
                 await context.SaveChangesAsync();
             }
@@ -95,7 +95,7 @@ public static class StoreContextSeed
                 var productsData = await File.ReadAllTextAsync(path + "/SeedData/products.json");
                 var products = JsonConvert.DeserializeObject<List<Product>>(productsData);
 
-                foreach (var product in products)
+                foreach (var product in products!)
                     product.CreatedDate = GetRandomDate(DateTime.Now, DateTime.Now.AddDays(-365));
 
                 context.Products.AddRange(products);
@@ -109,7 +109,7 @@ public static class StoreContextSeed
                 var machinesData = await File.ReadAllTextAsync(path + "/SeedData/productMachines.json");
                 var machines = JsonConvert.DeserializeObject<List<ProductMachine>>(machinesData);
 
-                context.ProductMachines.AddRange(machines);
+                context.ProductMachines.AddRange(machines!);
 
                 await context.SaveChangesAsync();
             }
@@ -119,7 +119,7 @@ public static class StoreContextSeed
                 var deliveryData = File.ReadAllText(path + "/SeedData/delivery.json");
                 var methods = JsonConvert.DeserializeObject<List<DeliveryMethod>>(deliveryData);
 
-                context.DeliveryMethods.AddRange(methods);
+                context.DeliveryMethods.AddRange(methods!);
 
                 await context.SaveChangesAsync();
             }

@@ -4,7 +4,6 @@ import { ApiResponse } from 'src/app/shared/models/api-response/api-response';
 import { User } from 'src/app/shared/models/user';
 import { environment } from 'src/environments/environment';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -14,10 +13,10 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   getUsersWithRoles() {
-    return this.http.get(this.baseUrl + 'admin/users-with-roles');
+    return this.http.get<ApiResponse<User[]>>(this.baseUrl + 'admin/users-with-roles');
   }
 
   updateUserRoles(userId: number, roles: string[]) {
-    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' + userId + '?roles=' + roles, {});
+    return this.http.post<ApiResponse<string[]>>(this.baseUrl + 'admin/edit-roles/' + userId + '?roles=' + roles, {});
   }
 }

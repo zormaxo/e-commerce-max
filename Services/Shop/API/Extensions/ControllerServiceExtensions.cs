@@ -1,4 +1,4 @@
-using Shop.API.Response;
+using Shop.API.Filters;
 using Shop.Application.ApplicationServices;
 using Shop.Core.HelperTypes;
 
@@ -10,7 +10,7 @@ public static class ControllerServiceExtensions
     {
         services.AddMemoryCache();
         services.AddSingleton<CachedItems>();
-        services.AddSingleton<SampleActionFilter>();
+        services.AddSingleton<ResponseFilterAttribute>();
         services.AddScoped<AccountAppService>();
         services.AddScoped<UserAppService>();
         services.AddScoped<ProductAppService>();
@@ -18,7 +18,7 @@ public static class ControllerServiceExtensions
         services.AddScoped<ProductMaterialAppService>();
         services.AddScoped<CategoriesAppService>();
         services.AddScoped<BasketAppService>();
-
+        services.AddScoped<LogUserActivityAttribute>();
 
         return services;
     }

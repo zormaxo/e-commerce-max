@@ -29,7 +29,6 @@ public class AppUser : IdentityUser<int>
 
     public ICollection<Favourite> Favorites { get; set; }
 
-
     public ICollection<Message> MessagesSent { get; set; }
 
     public ICollection<Message> MessagesReceived { get; set; }
