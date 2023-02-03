@@ -16,7 +16,6 @@ import { BasketService } from 'src/app/basket/basket.service';
 })
 export class NavBarComponent {
   @ViewChild('search', { static: true }) searchTerm: ElementRef;
-  shopParams = new ShopParams();
   products: Product[];
   totalCount: number;
 
@@ -35,15 +34,20 @@ export class NavBarComponent {
     this.router.navigateByUrl('');
   }
 
-  onSearch() {
-    this.router.navigate(['search-result'], { queryParams: { 'search-term': this.shopService.searchTerm } });
-  }
-
-  onReset() {
-    this.shopService.searchTerm = '';
+  onSearch(event?: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.value) {
+      this.router.navigate(['search-result'], {
+        queryParams: { 'search-term': input.value },
+      });
+    } else {
+      this.shopService.shopParams.search = '';
+    }
   }
 
   getCount(items: BasketItem[]) {
     return items.reduce((sum, item) => sum + item.quantity, 0);
   }
 }
+
+// (keyup.enter)="onSearch()" removed from code but can be used later.

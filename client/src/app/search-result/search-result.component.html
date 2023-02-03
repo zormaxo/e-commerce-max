@@ -1,17 +1,17 @@
 <div class="h5">
-  <span class="fw-bold">{{ shopParams.search }}</span> aramanız için
+  <span class="fw-bold">{{ searcText }}</span> aramanız için
   <span style="color: brown" class="fw-bold">{{ totalCount }}</span> ilan bulundu.
 </div>
 <hr />
 
 <div class="row">
   <ng-container *ngFor="let item of allCategories">
-    <div class="col-2" *ngIf="item.parent === undefined && item.count">
+    <div class="col-4 col-md-2" *ngIf="item.parent === undefined && item.count">
       <div class="card h-100">
         <div class="card-body text-center">
           <img src="{{ '../assets/icons/' + item.url + '.svg' }}" alt="" style="width: 50px" class="text-center" />
           <div class="card-text">
-            <a class="small link-dark" [routerLink]="['/', item.url]" [state]="{ searchTerm: shopParams.search }">
+            <a class="small link-dark" [routerLink]="['/', item.url]" [state]="{ searchTerm: shopService.shopParams.search }">
               {{ item.name }}
               <div>
                 <span class="h5">{{ item.count }}</span> ilan
@@ -23,7 +23,7 @@
                 class="small link-dark"
                 *ngIf="child.count"
                 [routerLink]="['/', item.url, child.url]"
-                [state]="{ searchTerm: shopParams.search }">
+                [state]="{ searchTerm: shopService.shopParams.search }">
                 {{ child.name }} ({{ child.count }})
               </a>
             </div>

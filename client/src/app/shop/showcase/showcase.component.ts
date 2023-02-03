@@ -19,6 +19,7 @@ export class ShowcaseComponent implements OnInit {
   categoryGroupCount: CategoryGroupCount[];
 
   constructor(private shopService: ShopService) {
+    this.shopService.resetShopParams();
   }
 
   ngOnInit(): void {

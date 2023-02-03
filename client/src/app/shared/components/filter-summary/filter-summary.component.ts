@@ -58,14 +58,14 @@ export class FilterSummaryComponent implements OnChanges {
         this.price = undefined;
         break;
       case SearchFilter.search:
-        this.filterShopParams.search = this.shopService.searchTerm = '';
+        this.filterShopParams.search = this.shopService.shopParams.search = '';
         break;
       case SearchFilter.city:
         this.filterShopParams.cityId = 0;
         break;
       default:
         this.filterShopParams = undefined;
-        this.shopService.searchTerm = ''; //for sync with navbar
+        this.shopService.shopParams.search = ''; //for sync with navbar
     }
 
     if (

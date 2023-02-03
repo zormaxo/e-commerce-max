@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
+import { mergeMap, take } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { Product } from 'src/app/shared/models/product';
 import { ShopService } from 'src/app/shop/shop.service';
@@ -28,21 +28,24 @@ export class ProductDetailsComponent implements OnInit {
   loadProduct() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id)
-      this.shopService.getProduct(+id).subscribe({
-        next: (product) => {
-          this.product = product;
-          this.basketService.basketSource$.pipe(take(1)).subscribe({
-            next: (basket) => {
-              const item = basket?.items.find((x) => x.id === +id);
-              if (item) {
-                this.quantity = item.quantity;
-                this.quantityInBasket = item.quantity;
-              }
-            },
-          });
-        },
-        error: (error) => console.log(error),
-      });
+      this.shopService
+        .getProduct(+id)
+        .pipe(
+          mergeMap((response) => {
+            this.product = response;
+            return this.basketService.basketSource$;
+          })
+        )
+        .pipe(take(1))
+        .subscribe({
+          next: (basket) => {
+            const item = basket?.items.find((x) => x.id === +id);
+            if (item) {
+              this.quantity = item.quantity;
+              this.quantityInBasket = item.quantity;
+            }
+          },
+        });
   }
 
   getPictureUrl() {

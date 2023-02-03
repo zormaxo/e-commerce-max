@@ -12,7 +12,7 @@ import { ShopService } from './shop/shop.service';
 
 @Directive()
 export abstract class AppProductBaseClass implements OnInit, OnDestroy {
-  shopParams: ShopParams = new ShopParams(10);
+ shopParams: ShopParams;
   filterShopParams: ShopParams; //This button has been added to add filter buttons after pressing the search button.
   products: Product[];
   totalCount: number;
@@ -37,10 +37,12 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
     this.shopService = injector.get(ShopService);
     this.memberService = injector.get(MembersService);
 
-    const navigation = this.router.getCurrentNavigation();
-    this.shopParams.search = navigation?.extras?.state?.searchTerm;
-    this.shopParams.cityId = navigation?.extras?.state?.cityId ?? 0;
-    this.shopParams.countyId = navigation?.extras?.state?.countyId ?? 0;
+    this.shopParams = this.shopService.getShopParams();
+    
+    // const navigation = this.router.getCurrentNavigation();
+    // this.shopParams.search = navigation?.extras?.state?.searchTerm;
+    // this.shopParams.cityId = navigation?.extras?.state?.cityId ?? 0;
+    // this.shopParams.countyId = navigation?.extras?.state?.countyId ?? 0;
 
     if (this.shopParams.search || this.shopParams.cityId || this.shopParams.countyId) {
       this.filterShopParams = this.shopParams;

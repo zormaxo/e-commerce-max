@@ -33,7 +33,7 @@ export class ShopService {
 
   categorySelected = new Subject<ICategory>();
   searchClicked = new Subject<ShopParams>();
-  searchTerm: string; //relation between nav and productList
+  // searchTerm: string; //relation between nav and productList
 
   //For base
   productAdded = new Subject<{
@@ -100,6 +100,10 @@ export class ShopService {
 
   getShopParams() {
     return this.shopParams;
+  }
+
+  resetShopParams() {
+    this.shopParams = new ShopParams();
   }
 
   getProductCounts(userId: number) {
