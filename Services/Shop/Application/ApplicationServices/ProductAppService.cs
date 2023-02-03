@@ -22,7 +22,7 @@ public class ProductAppService : ProductBaseService<ProductDto>
     public async Task<ProductDetailDto> GetProduct(int id, int? userId)
     {
         var product = await StoreContext.Products
-            .ProjectTo<ProductProjectDto>(Mapper.ConfigurationProvider)
+            .ProjectTo<ProductDetailDto>(Mapper.ConfigurationProvider)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id);
 

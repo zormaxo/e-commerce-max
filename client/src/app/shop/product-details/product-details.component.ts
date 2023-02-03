@@ -32,8 +32,8 @@ export class ProductDetailsComponent implements OnInit {
 
     this.galleryOptions = [
       {
-        width: '530px',
-        height: '700px',
+        width: '502px',
+        height: '550px',
         imageSize: NgxGalleryImageSize.Contain,
         imageAnimation: NgxGalleryAnimation.Slide,
         imageArrowsAutoHide: false,

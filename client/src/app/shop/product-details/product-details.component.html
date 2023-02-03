@@ -7,56 +7,59 @@
     <div class="col-auto small">
       <a href="javascript:;" style="margin-right: 4rem" (click)="addLike()"
         ><em class="fa-solid fa-star me-2" [ngClass]="currentClasses"></em>
-        <span *ngIf="product.isFavourite">Favorilerimden çıkar</span>
-        <span *ngIf="!product.isFavourite">Favorilerime ekle</span>
+        <span *ngIf="product.isFavourite">Remove from Favorites</span>
+        <span *ngIf="!product.isFavourite">Add to My Favorites</span>
       </a>
     </div>
     <hr />
   </div>
   <div class="row">
-    <div class="col-auto ">
+    <div class="col d-flex justify-content-center mb-5 mb-md-0">
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style="display: inline-block"></ngx-gallery>
     </div>
-    <div class="col-3">
-      <p class="text-primary fw-bold">{{ product.priceText }}</p>
-      <div class="text-primary fw-bold small">
-        <a
-          [routerLink]="
-            parentCategories[0]
-              ? ['/', parentCategories[0].url, selectedCategory.url]
-              : ['/', selectedCategory.url, selectedCategory.url]
-          "
-          [state]="{ cityId: product.county.city.id }"
-          >{{ product.county.city.name }}</a
-        >
-        /
-        <a
-          [routerLink]="
-            parentCategories[0]
-              ? ['/', parentCategories[0].url, selectedCategory.url]
-              : ['/', selectedCategory.url, selectedCategory.url]
-          "
-          [state]="{ cityId: product.county.city.id, countyId: product.county.id }"
-          >{{ product.county.name }}</a
-        >
+    <div class="col d-flex justify-content-center">
+      <div class="div" style="width: 18rem">
+        <p class="text-primary fw-bold">{{ product.priceText }}</p>
+        <div class="text-primary fw-bold small">
+          <a
+            [routerLink]="
+              parentCategories[0]
+                ? ['/', parentCategories[0].url, selectedCategory.url]
+                : ['/', selectedCategory.url, selectedCategory.url]
+            "
+            [state]="{ cityId: product.county.city.id }"
+            >{{ product.county.city.name }}</a
+          >
+          /
+          <a
+            [routerLink]="
+              parentCategories[0]
+                ? ['/', parentCategories[0].url, selectedCategory.url]
+                : ['/', selectedCategory.url, selectedCategory.url]
+            "
+            [state]="{ cityId: product.county.city.id, countyId: product.county.id }"
+            >{{ product.county.name }}</a
+          >
+        </div>
+
+        <hr />
+        <table class="table table-sm small">
+          <tbody>
+            <tr>
+              <td>Ad No</td>
+              <td>#{{ product.id }}</td>
+            </tr>
+            <tr>
+              <td>Ad Date</td>
+              <td>{{ product.createdDate | date : "dd.MM.yyy" }}</td>
+            </tr>
+            <tr>
+              <td>Condition</td>
+              <td>{{ product.isNew ? "New" : "Secondhand" }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <hr />
-      <table class="table table-sm small">
-        <tbody>
-          <tr>
-            <td>İlan no</td>
-            <td>#{{ product.id }}</td>
-          </tr>
-          <tr>
-            <td>İlan tarihi</td>
-            <td>{{ product.createdDate | date: "dd.MM.yyy"}}</td>
-          </tr>
-          <tr>
-            <td>Durumu</td>
-            <td>{{ product.isNew ? "Sıfır" : "İkinci El" }}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
     <div class="col d-flex justify-content-center align-items-start">
       <div class="card small shadow" style="width: 18rem">
@@ -71,11 +74,11 @@
           </div>
 
           <div class="card-text">
-            <p class="text-muted">Hesap açma tarihi: {{ product.user.createdDate}}</p>
-            <a  routerLink="/urunler/{{ product.user.id }}" class="text-decoration-none">Tüm İlanları</a>
-            <p>Cep {{ product.user.phoneNumber | mask: "(000) 000 00 00" }}</p>
+            <p class="text-muted">Account opening date: {{ product.user.createdDate }}</p>
+            <a routerLink="/urunler/{{ product.user.id }}" class="text-decoration-none">Other Ads</a>
+            <p>Phone: {{ product.user.phoneNumber | mask : "(000) 000 00 00" }}</p>
           </div>
-          <a href="#" class="btn btn-primary btn-sm">Mesaj Gönder</a>
+          <a href="#" class="btn btn-primary btn-sm">Send message</a>
         </div>
       </div>
     </div>
@@ -83,7 +86,7 @@
   <div class="row mt-5">
     <div class="col-12">
       <div class="card shadow-sm">
-        <span class="card-header h6">Açıklama</span>
+        <span class="card-header h6">Description</span>
         <div class="card-body">
           <div class="card-text">
             <p>{{ product.description }}</p>
