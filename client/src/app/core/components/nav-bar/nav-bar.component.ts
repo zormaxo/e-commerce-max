@@ -35,4 +35,8 @@ export class NavBarComponent {
   onReset() {
     this.shopService.searchTerm = '';
   }
+
+  onClear() {
+    this.shopService.searchTerm = '';
+  }
 }

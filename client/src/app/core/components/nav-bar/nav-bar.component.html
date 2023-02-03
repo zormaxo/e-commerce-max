@@ -11,14 +11,13 @@
             [(ngModel)]="shopService.searchTerm"
             type="search"
             class="form-control border-0"
-            placeholder="Ürün veya marka ara" />
+            placeholder="Ürün veya marka ara"
+            (search)="onReset()" />
           <div class="btn-group" role="group" aria-label="Basic example">
             <button class="btn btn-outline-dark border-0" type="button" (click)="onSearch()">
               <em class="fa-solid fa-magnifying-glass"></em>
             </button>
-            <button class="btn btn-outline-dark border-0" type="button" (click)="onReset()">
-              <em class="fa-solid fa-xmark"></em>
-            </button>
+
           </div>
         </div>
       </div>
@@ -34,7 +33,7 @@
         class="navbar-nav justify-content-around align-items-center d-none d-sm-flex">
         <div class="btn-group" dropdown>
           <a dropdownToggle type="button" class="nav-link dropdown-toggle small py-0" aria-controls="dropdown-basic">
-            {{ user.firstName | titlecase }} <span class="caret"></span>
+            {{ user.firstName | titlecase }}<span class="caret"> </span>
           </a>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu small" role="menu" aria-labelledby="button-basic">
             <li role="menuitem">
