@@ -5,7 +5,7 @@
       <span class="h5">{{ product.name }}</span>
     </div>
     <div class="col-auto small">
-      <a href="javascript:;" style="margin-right: 4rem" (click)="addLike()"
+      <a [routerLink]="" style="margin-right: 4rem" (click)="addLike()"
         ><em class="fa-solid fa-star me-2" [ngClass]="currentClasses"></em>
         <span *ngIf="product.isFavourite">Remove from Favorites</span>
         <span *ngIf="!product.isFavourite">Add to My Favorites</span>

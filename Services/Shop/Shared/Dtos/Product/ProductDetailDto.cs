@@ -4,7 +4,7 @@ using Shop.Core.Shared.Dtos.Product;
 
 namespace Shop.Shared.Dtos.Product;
 
-public class ProductDetailDto : BaseDto
+public class ProductDetailDto : BaseProductDto
 {
     public string Name { get; set; } = string.Empty;
 
@@ -24,10 +24,4 @@ public class ProductDetailDto : BaseDto
 
     //For shopping
     public string PictureUrl { get; set; } = string.Empty;
-
-    public bool IsFavourite { get; set; }
-
-    public int FavouriteCount => Favourites?.Count ?? 0;
-
-    public ICollection<FavouriteDto>? Favourites { get; set; }
 }

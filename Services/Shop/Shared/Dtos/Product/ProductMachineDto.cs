@@ -1,9 +1,10 @@
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.City;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.Core.Shared.Dtos.Product;
 
-public class ProductMachineDto : BaseDto
+public class ProductMachineDto : BaseProductDto
 {
     public string Name { get; set; }
 

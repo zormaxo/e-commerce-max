@@ -2,7 +2,6 @@ using Shop.Core.Shared.Dtos;
 
 namespace Shop.Shared.Dtos.Product;
 
-//not used after angular shop.service.ts cache implemented
 public class ProductDto : BaseDto
 {
     public string Name { get; set; } = string.Empty;

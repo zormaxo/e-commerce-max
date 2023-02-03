@@ -11,12 +11,12 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'vitrin', pathMatch: 'full' },
+  { path: '', redirectTo: 'showcase', pathMatch: 'full' },
   {
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'vitrin', component: ShowcaseComponent },
+      { path: 'showcase', component: ShowcaseComponent },
       { path: 'product/:id', component: ProductDetailsComponent },
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
       {

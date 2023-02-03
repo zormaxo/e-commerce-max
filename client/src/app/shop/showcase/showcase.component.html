@@ -40,9 +40,60 @@
     <div>Vitrin</div>
     <hr class="m-2" />
     <div class="row justify-content-center">
-      <div class="col-auto g-2" *ngFor="let product of products">
+      <div class="col-3 g-4" *ngFor="let product of products">
         <app-product-item [product]="product"></app-product-item>
       </div>
     </div>
   </section>
 </div>
+
+
+<!-- <div class="row">
+  <section class="d-none d-sm-block col-sm-4 col-md-3">
+    <div class="accordion accordion-flush" id="accordionExample">
+      <ng-container *ngFor="let category of categories; let i = index">
+        <div class="accordion-item" *ngIf="category.parent === null || category.parent === undefined">
+          <div class="accordion-header d-flex align-items-center">
+            <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
+            <a class="m-1 small fw-bold" [routerLink]="['/', category.url, category.url]">{{ category.name }}</a>
+            <small
+              ><span class="small text-muted">({{ category.count }})</span></small
+            >
+            <a
+              *ngIf="category.childCategories"
+              class="ms-auto justify-content-center rounded-pill py-1"
+              style="width: 30px; box-shadow: none"
+              data-bs-toggle="collapse"
+              [class.accordion-button]="category.childCategories"
+              [attr.data-bs-target]="'#collapse' + i">
+            </a>
+          </div>
+          <div
+            *ngIf="category.childCategories"
+            id="collapse{{ i }}"
+            class="ms-4 accordion-collapse collapse show"
+            aria-labelledby="headingOne">
+            <div class="accordion-body p-0 pb-1">
+              <div *ngFor="let child of category.childCategories">
+                <a class="small link-dark" [routerLink]="['/', category.url, child.url]">{{ child.name }} </a>
+                <small
+                  ><span class="small text-muted">({{ child.count }})</span></small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+  <section class="col-sm-8 col-md-9">
+    <div>Vitrin</div>
+    <hr class="m-2" />
+    <div class="row justify-content-center">
+      <div class="col-auto g-2" *ngFor="let product of products">
+        <app-product-item [product]="product"></app-product-item>
+      </div>
+    </div>
+  </section>
+</div> -->
+

@@ -85,12 +85,12 @@ export class ProductDetailsComponent implements OnInit {
     this.shopService.AddOrRemoveFavourite(this.product.id).subscribe({
       next: () => {
         if (this.product.isFavourite) {
-          this.toastr.error('Favorilerden çıkarıldı');
+          this.toastr.error('Removed from favorites');
           this.currentClasses = {
             'text-warning': false,
           };
         } else {
-          this.toastr.success('Favorilere eklendi');
+          this.toastr.success('Added to favorites');
           this.currentClasses = {
             'text-warning': true,
           };

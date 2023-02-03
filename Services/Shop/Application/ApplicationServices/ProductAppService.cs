@@ -13,7 +13,7 @@ using System.Net;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductAppService : ProductBaseService<ProductDto>
+public class ProductAppService : ProductBaseService<ProductDetailDto>
 {
     private readonly IPhotoService _photoService;
     public ProductAppService(IServiceProvider serviceProvider, IPhotoService photoService) : base(serviceProvider)

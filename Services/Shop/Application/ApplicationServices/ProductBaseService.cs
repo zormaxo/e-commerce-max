@@ -4,6 +4,7 @@ using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
 using Shop.Persistence;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.ApplicationServices;
 
@@ -19,7 +20,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
     protected ProductSpecParams ProductSpecParams { get; set; }
 
-    public async Task<Pagination<Y>> GetProducts<Y>(ProductSpecParams productSpecParams) where Y : class
+    public async Task<Pagination<Y>> GetProducts<Y>(ProductSpecParams productSpecParams) where Y : BaseProductDto
     {
         ProductSpecParams = productSpecParams;
         CalculateMaxMinVal(productSpecParams);
@@ -77,6 +78,8 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .ProjectTo<Y>(Mapper.ConfigurationProvider)
             .AsNoTracking()
             .ToListAsync();
+
+        data.ForEach(x => x.IsFavourite = x.Favourites.Any(y => y.UserId == UserId));
 
         return new Pagination<Y>(productSpecParams.PageIndex, productSpecParams.PageSize, catGrpCountList, totalItems, data);
     }
