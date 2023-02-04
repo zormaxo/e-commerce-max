@@ -1,17 +1,21 @@
-<div class="h5">
-  <span class="fw-bold">{{ searcText }}</span> aramanız için
-  <span style="color: brown" class="fw-bold">{{ totalCount }}</span> ilan bulundu.
+<div class="h5" *ngIf="totalCount">
+  <span style="color: brown" class="fw-bold">{{ totalCount }}</span>
+  result are found by searching
+  <span class="fw-bold" style="color: brown">{{ searcText }}</span>
 </div>
-<hr />
 
 <div class="row">
+  <hr />
   <ng-container *ngFor="let item of allCategories">
     <div class="col-4 col-md-2" *ngIf="item.parent === undefined && item.count">
       <div class="card h-100">
         <div class="card-body text-center">
           <img src="{{ '../assets/icons/' + item.url + '.svg' }}" alt="" style="width: 50px" class="text-center" />
           <div class="card-text">
-            <a class="small link-dark" [routerLink]="['/', item.url]" [state]="{ searchTerm: shopService.shopParams.search }">
+            <a
+              class="small link-dark"
+              [routerLink]="['/', item.url]"
+              [state]="{ searchTerm: shopService.shopParams.search }">
               {{ item.name }}
               <div>
                 <span class="h5">{{ item.count }}</span> ilan
@@ -32,6 +36,7 @@
       </div>
     </div>
   </ng-container>
+
 </div>
-<hr />
-<div *ngIf="!totalCount">Ürün bulunamadı</div>
+
+<div *ngIf="!totalCount">No ad found that matches the search.</div>

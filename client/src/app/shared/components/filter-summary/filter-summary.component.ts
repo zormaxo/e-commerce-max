@@ -44,7 +44,7 @@ export class FilterSummaryComponent implements OnChanges {
       });
     }
 
-    if (this.filterShopParams.search == '') {
+    if (this.filterShopParams?.search == '') {
       this.onRemoveFilterClick(SearchFilter.search);
     }
   }
@@ -77,6 +77,7 @@ export class FilterSummaryComponent implements OnChanges {
       this.filterShopParams.isNew == undefined &&
       !this.filterShopParams.minValue &&
       !this.filterShopParams.maxValue &&
+      !this.filterShopParams.cityId &&
       !this.filterShopParams.search
     ) {
       this.filterShopParams = undefined;

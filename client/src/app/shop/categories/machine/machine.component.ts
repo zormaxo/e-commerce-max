@@ -1,7 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { Pagination } from '../../../shared/models/pagination';
 import { AppProductBaseClass } from 'src/app/app-product-base-class';
-import { Product } from 'src/app/shared/models/product';
 
 @Component({
   selector: 'app-machine',
@@ -14,17 +12,6 @@ export class MachineComponent extends AppProductBaseClass {
   }
 
   override getProducts() {
-    // this.shopService.getMachineProducts(this.shopParams).subscribe((productResponse: IPagination<IProduct[]>) => {
-    //   this.products = productResponse.data;
-    //   this.shopParams.pageNumber = productResponse.pageIndex;
-    //   this.shopParams.pageSize = productResponse.pageSize;
-    //   this.totalCount = productResponse.totalCount;
-
-    //   this.shopService.addCountToParents(this.allCategories, productResponse.categoryGroupCount);
-    //   // this.shopService.productAdded.next({ allCategories: this.allCategories, sCategory: this.selectedCategory });
-    //   this.shopService.productAdded2.next(3);
-    // });
-
     return this.shopService.getMachineProducts(this.shopParams);
   }
 }

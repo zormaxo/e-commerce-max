@@ -5,7 +5,7 @@
         <div class="accordion-item" *ngIf="category.parent === null || category.parent === undefined">
           <div class="accordion-header d-flex align-items-center">
             <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
-            <a class="m-1  fw-bold" [routerLink]="['/', category.url, category.url]">{{ category.name }}</a>
+            <a class="m-1 fw-bold" [routerLink]="['/', category.url, category.url]">{{ category.name }}</a>
             <em
               ><span class="small text-muted">({{ category.count }})</span></em
             >
@@ -25,7 +25,7 @@
             aria-labelledby="headingOne">
             <div class="accordion-body p-0 pb-1">
               <div *ngFor="let child of category.childCategories">
-                <a class=" link-dark" [routerLink]="['/', category.url, child.url]">{{ child.name }} </a>
+                <a class="link-dark" [routerLink]="['/', category.url, child.url]">{{ child.name }} </a>
                 <em
                   ><span class="small text-muted">({{ child.count }})</span></em
                 >
@@ -37,7 +37,7 @@
     </div>
   </section>
   <section class="col-sm-8 col-md-9">
-    <div>Vitrin</div>
+    <div>Showcase</div>
     <hr class="m-2" />
     <div class="row justify-content-center">
       <div class="col-3 g-4" *ngFor="let product of products">
@@ -86,7 +86,7 @@
     </div>
   </section>
   <section class="col-sm-8 col-md-9">
-    <div>Vitrin</div>
+    <div>Showcase</div>
     <hr class="m-2" />
     <div class="row justify-content-center">
       <div class="col-auto g-2" *ngFor="let product of products">

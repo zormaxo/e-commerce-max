@@ -15,7 +15,7 @@ export class MainMenuComponent {
   categories: ICategory[] = [];
 
   constructor(public shopService: ShopService, public router: Router) {
-    if (this.router.url.indexOf('vitrin') === -1) {
+    if (this.router.url.indexOf('showcase') === -1) {
       this.getProductsAndCategories();
     }
   }
