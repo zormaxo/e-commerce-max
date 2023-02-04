@@ -115,7 +115,7 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUsername() {
     this.memberService.updateUsername(this.member).subscribe(() => {
-      this.toastr.success('Mail adresiniz güncellendi.');
+      this.toastr.success('Mail addressiniz güncellendi.');
       this.memberClone.userName = this.member.userName;
       this.emailForm.reset(this.member);
     });

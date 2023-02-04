@@ -4,7 +4,7 @@
       class="link-dark fw-bold m-2"
       *ngIf="leftNavMode === LeftNavMode.UserProducts"
       (click)="selectCategory(undefined)">
-      Tüm İlanlar
+      All Ads
     </a>
 
     <ng-container *ngIf="shopService.categoryWithParents$ | async as categoryWithParents">

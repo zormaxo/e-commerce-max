@@ -99,7 +99,7 @@
 
           <div class="card-text">
             <p class="text-muted">Account opening date: {{ product.user.createdDate }}</p>
-            <a routerLink="/urunler/{{ product.user.id }}" class="text-decoration-none">Other Ads</a>
+            <a routerLink="/urunler/{{ product.user.id }}" >Other Ads</a>
             <p>Phone: {{ product.user.phoneNumber | mask : "(000) 000 00 00" }}</p>
           </div>
           <a href="#" class="btn btn-primary btn-sm">Send message</a>

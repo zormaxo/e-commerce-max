@@ -7,7 +7,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#panelsStayOpen-collapseOne">
-          Durumu
+          Condition
         </button>
       </h2>
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
@@ -20,7 +20,7 @@
               id="rdNew"
               [value]="true"
               [(ngModel)]="shopParams.isNew" />
-            <label class="form-check-label" for="rdNew"> Sıfır </label>
+            <label class="form-check-label" for="rdNew"> New </label>
           </div>
           <div class="form-check">
             <input
@@ -30,7 +30,7 @@
               id="rdSecond"
               [value]="false"
               [(ngModel)]="shopParams.isNew" />
-            <label class="form-check-label" for="rdSecond"> İkinci El </label>
+            <label class="form-check-label" for="rdSecond"> Secondhand </label>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#panelsStayOpen-collapseTwo">
-          Fiyat
+          Price
         </button>
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
@@ -116,7 +116,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#address">
-          Adres
+          Address
         </button>
       </h2>
       <div id="address" class="accordion-collapse collapse">
@@ -127,13 +127,13 @@
             [(ngModel)]="shopParams.cityId"
             name="citySelect"
             (change)="onSelectChange($event.target.value)">
-            <option value="0">İl Seçin</option>
-            <option value="101">Kuyumcukent</option>
-            <option value="102">Kapalıçarşı</option>
+            <option value="0">City</option>
+            <!-- <option value="101">Kuyumcukent</option>
+            <option value="102">Kapalıçarşı</option> -->
             <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
           </select>
           <select class="form-select form-select-sm" [(ngModel)]="shopParams.countyId" name="countySelect">
-            <option selected value="0">İlçe Seçin</option>
+            <option selected value="0">Town</option>
             <option *ngFor="let county of counties" [value]="county.id">{{ county.name }}</option>
           </select>
         </div>
@@ -146,7 +146,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapseThree">
-          Kelime ile filtrele
+          Filter by keyword
         </button>
       </h2>
       <div id="collapseThree" class="accordion-collapse collapse">
@@ -156,7 +156,7 @@
             type="text"
             class="form-control mr-2"
             #search
-            placeholder="Ara"
+            placeholder="Search"
             name="search"
             [ngModel]="shopParams.search" />
         </div>
@@ -164,6 +164,6 @@
     </div>
   </div>
   <div class="text-end">
-    <button class="btn btn-primary mt-3 px-5">Ara</button>
+    <button class="btn btn-primary mt-3 px-5">Search</button>
   </div>
 </form>
