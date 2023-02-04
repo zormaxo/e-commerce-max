@@ -5,9 +5,9 @@
         <div class="accordion-item" *ngIf="category.parent === null || category.parent === undefined">
           <div class="accordion-header d-flex align-items-center">
             <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
-            <a class="m-1 small fw-bold" [routerLink]="['/', category.url, category.url]">{{ category.name }}</a>
-            <small
-              ><span class="small text-muted">({{ category.count }})</span></small
+            <a class="m-1  fw-bold" [routerLink]="['/', category.url, category.url]">{{ category.name }}</a>
+            <em
+              ><span class="small text-muted">({{ category.count }})</span></em
             >
             <a
               *ngIf="category.childCategories"
@@ -25,9 +25,9 @@
             aria-labelledby="headingOne">
             <div class="accordion-body p-0 pb-1">
               <div *ngFor="let child of category.childCategories">
-                <a class="small link-dark" [routerLink]="['/', category.url, child.url]">{{ child.name }} </a>
-                <small
-                  ><span class="small text-muted">({{ child.count }})</span></small
+                <a class=" link-dark" [routerLink]="['/', category.url, child.url]">{{ child.name }} </a>
+                <em
+                  ><span class="small text-muted">({{ child.count }})</span></em
                 >
               </div>
             </div>
@@ -46,7 +46,6 @@
     </div>
   </section>
 </div>
-
 
 <!-- <div class="row">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
@@ -96,4 +95,3 @@
     </div>
   </section>
 </div> -->
-
