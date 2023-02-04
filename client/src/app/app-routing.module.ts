@@ -24,15 +24,15 @@ const routes: Routes = [
         loadChildren: () => import('./search-result/search-result.module').then((mod) => mod.SearchResultModule),
       },
       {
-        path: 'makine',
+        path: 'vehicle',
         loadChildren: () => import('./shop/categories/machine/machine.module').then((mod) => mod.MachineModule),
       },
       {
-        path: 'malzeme',
+        path: 'computer',
         loadChildren: () => import('./shop/categories/material/material.module').then((mod) => mod.MaterialModule),
       },
       {
-        path: 'yari-mamul',
+        path: 'cell-phone',
         loadChildren: () =>
           import('./shop/categories/semi-finished/semi-finished.module').then((mod) => mod.SemiFinishedModule),
       },

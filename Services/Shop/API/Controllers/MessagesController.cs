@@ -3,12 +3,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Extensions;
-using Shop.Application.Extensions;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
 using Shop.Shared.Dtos;
-
+using Shop.Application.Extensions;
 
 namespace Shop.API.Controllers;
 

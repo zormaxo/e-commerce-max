@@ -21,7 +21,7 @@ public static class CacheService
         var logger = loggerFactory.CreateLogger("CacheService");
         logger.LogInformation("Caching starting...");
 
-        cachedItems.Categories = await context.Categories.ToListAsync();
+        cachedItems.Categories = await context.Categories.OrderBy(x => x.Id).ToListAsync();
         cachedItems.Cities = await context.Cities.ToListAsync();
         cachedItems.Counties = await context.Counties.ToListAsync();
 

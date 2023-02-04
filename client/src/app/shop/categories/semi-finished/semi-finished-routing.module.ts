@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SemiFinishedComponent } from './semi-finished.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'yari-mamul', pathMatch: 'full' },
+  { path: '', redirectTo: 'cell-phone', pathMatch: 'full' },
   { path: ':subcategory', component: SemiFinishedComponent },
 ];
 

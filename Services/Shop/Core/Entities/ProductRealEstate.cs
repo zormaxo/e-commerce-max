@@ -1,6 +1,6 @@
 namespace Shop.Core.Entities;
 
-public class ProductMaterial : BaseAuditableEntity
+public class ProductRealEstate : BaseAuditableEntity
 {
     public bool IsNew { get; set; }
 

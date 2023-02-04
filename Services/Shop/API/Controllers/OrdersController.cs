@@ -1,16 +1,14 @@
 using API.Dtos;
-using API.Extensions;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Shop.API.Controllers;
+using Shop.Application.Extensions;
 using Shop.Core.Entities.OrderAggregate;
 using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Account;
-using Shop.Shared.Response;
 
-namespace API.Controllers;
+namespace Shop.API.Controllers;
 
 public class OrdersController : BaseApiController
 {

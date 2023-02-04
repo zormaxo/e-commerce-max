@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppProductBaseComponent } from '../../app-product-base/app-product-base.component';
 
 const routes: Routes = [
-  // { path: '', component: MachineComponent },
   { path: '', redirectTo: 'makine', pathMatch: 'full' },
   { path: '', component: AppProductBaseComponent, children: [{ path: ':subcategory', component: MachineComponent }] },
 ];

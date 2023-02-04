@@ -8,9 +8,9 @@ namespace Shop.Application.ApplicationServices;
 
 public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
 {
-    readonly IGenericRepository<ProductMaterial> _materialRepo;
+    readonly IGenericRepository<ProductComputer> _materialRepo;
 
-    public ProductMaterialAppService(IGenericRepository<ProductMaterial> materialRepo, IServiceProvider serviceProvider) : base(
+    public ProductMaterialAppService(IGenericRepository<ProductComputer> materialRepo, IServiceProvider serviceProvider) : base(
         serviceProvider)
     { _materialRepo = materialRepo; }
 

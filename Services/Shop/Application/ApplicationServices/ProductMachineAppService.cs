@@ -8,9 +8,9 @@ namespace Shop.Application.ApplicationServices;
 
 public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
 {
-    readonly IGenericRepository<ProductMachine> _machineRepo;
+    readonly IGenericRepository<ProductVehicle> _machineRepo;
 
-    public ProductMachineAppService(IGenericRepository<ProductMachine> machineRepo, IServiceProvider serviceProvider) : base(
+    public ProductMachineAppService(IGenericRepository<ProductVehicle> machineRepo, IServiceProvider serviceProvider) : base(
         serviceProvider)
     { _machineRepo = machineRepo; }
 
@@ -18,6 +18,11 @@ public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
     {
         var categoryFilter = _machineRepo.GetAll()
             .WhereIf(ProductSpecParams.IsNew.HasValue, p => p.IsNew == ProductSpecParams.IsNew);
+
+        //FilteredProducts = from products in FilteredProducts
+        //            join cat in categoryFilter on products.Id equals cat.Id
+        //    select new ProductMachine { Id = cat.Id, IsDeleted = cat.IsDeleted, IsNew = cat.IsNew, Product = products };
+
 
         FilteredProducts = FilteredProducts.Where(x => categoryFilter.Any(y => y.Id == x.Id));
     }

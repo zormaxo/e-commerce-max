@@ -11,14 +11,7 @@ export class MaterialComponent extends AppProductBaseClass {
     super(injector);
   }
 
-  getProducts() {
-    this.shopService.getMaterialProducts(this.shopParams).subscribe((productResponse) => {
-      this.products = productResponse.data;
-      this.shopParams.pageNumber = productResponse.pageIndex;
-      this.shopParams.pageSize = productResponse.pageSize;
-      this.totalCount = productResponse.totalCount;
-
-      this.shopService.calculateProductCountsByCategory(this.allCategories, productResponse.categoryGroupCount);
-    });
+  override getProducts() {
+    return this.shopService.getMaterialProducts(this.shopParams);
   }
 }

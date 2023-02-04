@@ -23,9 +23,9 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
 
     public DbSet<Product> Products { get; set; }
 
-    public DbSet<ProductMachine> ProductMachines { get; set; }
+    public DbSet<ProductVehicle> ProductMachines { get; set; }
 
-    public DbSet<ProductMaterial> ProductMaterials { get; set; }
+    public DbSet<ProductComputer> ProductMaterials { get; set; }
 
     public DbSet<ProductBrand> ProductBrands { get; set; }
 

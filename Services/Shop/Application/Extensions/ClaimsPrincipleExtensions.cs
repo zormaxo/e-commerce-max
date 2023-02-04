@@ -4,14 +4,14 @@ namespace Shop.Application.Extensions;
 
 public static class ClaimsPrincipleExtensions
 {
-    public static string GetUserName(this ClaimsPrincipal user) { return user.FindFirst(ClaimTypes.Name)?.Value; }
+    public static string GetUserName(this ClaimsPrincipal user) { return user.FindFirstValue(ClaimTypes.Name) ?? string.Empty; }
 
-    public static int? GetUserId(this ClaimsPrincipal user)
+    public static int GetUserId(this ClaimsPrincipal user)
     {
         var userId = user.FindFirst(ClaimTypes.NameIdentifier);
-        if (userId is null)
-            return null;
-
-        return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        return userId is null ? 0 : int.Parse(userId.Value);
     }
+
+    public static string RetrieveEmailFromPrincipal(this ClaimsPrincipal user)
+    { return user.FindFirstValue(ClaimTypes.Email) ?? string.Empty; }
 }

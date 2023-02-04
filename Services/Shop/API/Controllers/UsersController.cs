@@ -82,28 +82,28 @@ public class UsersController : BaseApiController
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     {
-        var photoDto = await _userSrv.AddPhoto(file, User.GetUserId().Value);
-        return CreatedAtRoute("GetUser", new { userId = User.GetUserId().Value }, photoDto);
+        var photoDto = await _userSrv.AddPhoto(file, User.GetUserId());
+        return CreatedAtRoute("GetUser", new { userId = User.GetUserId() }, photoDto);
     }
 
     [HttpPut("set-main-photo/{photoId}")]
     public async Task<ActionResult> SetMainPhoto(int photoId)
     {
-        await _userSrv.SetMainPhoto(photoId, User.GetUserId().Value);
+        await _userSrv.SetMainPhoto(photoId, User.GetUserId());
         return NoContent();
     }
 
     [HttpPost("add-photo-and-set-main")]
     public async Task<ActionResult> AddPhotoAndSetMain(IFormFile file)
     {
-        var photoDto = await _userSrv.AddPhotoAndSetMain(file, User.GetUserId().Value);
+        var photoDto = await _userSrv.AddPhotoAndSetMain(file, User.GetUserId());
         return CreatedAtRoute("GetUser", new { userId = User.GetUserId() }, photoDto);
     }
 
     [HttpDelete("delete-photo/{photoId}")]
     public async Task<ActionResult> DeletePhoto(int photoId)
     {
-        await _userSrv.DeletePhoto(photoId, User.GetUserId().Value);
+        await _userSrv.DeletePhoto(photoId, User.GetUserId());
         return Ok();
     }
 }

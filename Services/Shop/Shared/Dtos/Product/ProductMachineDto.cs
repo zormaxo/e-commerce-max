@@ -6,6 +6,8 @@ namespace Shop.Core.Shared.Dtos.Product;
 
 public class ProductMachineDto : BaseProductDto
 {
+    public bool IsNew { get; set; }
+
     public string Name { get; set; }
 
     public string PriceText { get; set; }

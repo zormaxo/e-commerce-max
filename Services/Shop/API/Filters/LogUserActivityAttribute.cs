@@ -25,10 +25,10 @@ public class LogUserActivityAttribute : IAsyncActionFilter
 
         var userId = resultContext.HttpContext.User.GetUserId();
 
-        if (userId is not null)
+        if (userId is not 0)
         {
             var repo = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
-            var user = await repo!.GetUserByIdAsync(userId.Value);
+            var user = await repo!.GetUserByIdAsync(userId);
             user.LastActive = DateTime.UtcNow;
             await repo.SaveAllAsync();
         }

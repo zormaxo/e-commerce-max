@@ -1,81 +1,81 @@
 [{
     "Id": 1,
-    "Name": "Makine",
+    "Name": "Vehicles",
     "Count": 6,
-	"Url": "makine"
+	"Url": "vehicle"
   }, {
     "Id": 2,
-    "Name": "Malzeme",
+    "Name": "Computers",
     "Count": 3,
-	"Url": "malzeme"
+	"Url": "computer"
   }, {
     "Id": 3,
-    "Name": "Yarımamül",
+    "Name": "Cell Phones",
     "Count": 5,
-	"Url": "yarimamul"
+	"Url": "cell-phone"
   }, {
     "Id": 4,
-    "Name": "Eleman",
+    "Name": "Watches",
     "Count": 4,
-	"Url": "eleman"
+	"Url": "watch"
   }, {
     "Id": 5,
-    "Name": "İşyeri",
+    "Name": "Real Estate",
     "Count": 0,
-	"Url": "isyeri"
+	"Url": "real-estate"
   }, {
     "Id": 6,
-    "Name": "Satılık",
+    "Name": "For Sale",
 	"ParentId":5,
     "Count": 0,
-	"Url": "satilik"
+	"Url": "real-estate-for-sale"
   }, {
     "Id": 7,
-    "Name": "Kiralık",
+    "Name": "For Rent",
 	"ParentId":5,
     "Count": 0,
-	"Url": "kiralik"
+	"Url": "real-estate-for-rent"
   }, {
     "Id": 8,
-    "Name": "3D Yazıcı",
+    "Name": "Car",
 	"ParentId":1,
     "Count": 0,
-	"Url": "3d-yazici"
+	"Url": "vehicle-car"
   }, {
     "Id": 9,	  
-    "Name": "Döküm",
+    "Name": "Motorcycle",
 	"ParentId":1,
     "Count": 0,
-	"Url": "dokum"
+	"Url": "vehicle-motorcycle"
   }, {
     "Id": 10,
-    "Name": "Zincir",
+    "Name": "Boats",
 	"ParentId":1,
     "Count": 0,
-	"Url": "zincir"
+	"Url": "vehicle-boat"
   }, {
     "Id": 11,	  
-    "Name": "Lda",
+    "Name": "Audi",
 	"ParentId":8,
     "Count": 0,
-	"Url": "3d-yazici-lda"
+	"Url": "vehicle-car-audi"
   }, {
     "Id": 12,	  
-    "Name": "Lda-10",
+    "Name": "A4",
 	"ParentId":11,
     "Count": 0,
-	"Url": "3d-yazici-lda-10"
+	"Url": "vehicle-car-audi-a3"
    }, {
     "Id": 13,	  
-    "Name": "Lda-20",
+    "Name": "A5",
 	"ParentId":11,
     "Count": 0,
-	"Url": "3d-yazici-lda-20"
+	"Url": "vehicle-car-audi-a5"
     }, {
     "Id": 14,	  
-    "Name": "Lda-30",
+    "Name": "A6",
 	"ParentId":11,
     "Count": 0,
-	"Url": "3d-yazici-lda-30"
+	"Url": "vehicle-car-audi-a6"
   }
 ]

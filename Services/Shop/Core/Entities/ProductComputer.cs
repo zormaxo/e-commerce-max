@@ -1,6 +1,6 @@
 namespace Shop.Core.Entities;
 
-public class ProductMachine : BaseAuditableEntity
+public class ProductComputer : BaseAuditableEntity
 {
     public bool IsNew { get; set; }
 

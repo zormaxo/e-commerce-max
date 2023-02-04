@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
-using Shop.Application.Extensions;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Shared.Dtos.Product;
+using Shop.Application.Extensions;
 
 namespace Shop.API.Controllers;
 
@@ -38,8 +38,8 @@ public class ProductsController : BaseApiController
     { return Ok(await _productSrv.GetActiveInactiveProducts(productParams)); }
 
     [HttpPost("add-photo")]
-    public Task<PhotoDto> AddPhoto(IFormFile file) { return _productSrv.AddPhoto(file, User.GetUserId().Value); }
+    public Task<PhotoDto> AddPhoto(IFormFile file) { return _productSrv.AddPhoto(file, User.GetUserId()); }
 
     [HttpPost("add-remove-favourite/{productId}")]
-    public async Task AddRemoveFavourite(int productId) { await _productSrv.AddRemoveFavourite(productId, User.GetUserId()); }
+    public async Task AddRemoveFavorite(int productId) { await _productSrv.AddRemoveFavourite(productId, User.GetUserId()); }
 }

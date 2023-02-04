@@ -91,7 +91,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
         return await StoreContext.SaveChangesAsync();
     }
 
-
     protected abstract void AddCategoryFiltering();
 
     private void CalculateMaxMinVal(ProductSpecParams productParams)
