@@ -7,16 +7,16 @@ using Shop.Core.Shared.Dtos.Product;
 
 namespace Shop.API.Controllers;
 
-public class ProductSemiFinishedController : BaseApiController
+public class ProductRealEstateController : BaseApiController
 {
     private readonly ProductRealEstateAppService _productSemiFinishedSrv;
 
-    public ProductSemiFinishedController(ProductRealEstateAppService productSemiFinishedSrv)
+    public ProductRealEstateController(ProductRealEstateAppService productSemiFinishedSrv)
     { _productSemiFinishedSrv = productSemiFinishedSrv; }
 
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
-    { return Ok(await _productSemiFinishedSrv.GetProducts<ProductMaterialDto>(productParams)); }
+    public async Task<ActionResult<Pagination<ProductComputerDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
+    { return Ok(await _productSemiFinishedSrv.GetProducts<ProductComputerDto>(productParams)); }
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]

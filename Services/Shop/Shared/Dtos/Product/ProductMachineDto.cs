@@ -4,7 +4,7 @@ using Shop.Shared.Dtos.Product;
 
 namespace Shop.Core.Shared.Dtos.Product;
 
-public class ProductMachineDto : BaseProductDto
+public class ProductVehicleDto : BaseProductDto
 {
     public bool IsNew { get; set; }
 

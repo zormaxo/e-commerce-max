@@ -6,7 +6,7 @@ using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductComputerAppService : ProductBaseService<ProductMaterialDto>
+public class ProductComputerAppService : ProductBaseService<ProductComputerDto>
 {
     readonly IGenericRepository<ProductComputer> _materialRepo;
 

@@ -6,7 +6,7 @@ using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductVehicleAppService : ProductBaseService<ProductMachineDto>
+public class ProductVehicleAppService : ProductBaseService<ProductVehicleDto>
 {
     readonly IGenericRepository<ProductVehicle> _machineRepo;
 

@@ -7,15 +7,15 @@ using Shop.Core.Shared.Dtos.Product;
 
 namespace Shop.API.Controllers;
 
-public class ProductsMachineController : BaseApiController
+public class ProductsVehicleController : BaseApiController
 {
     private readonly ProductVehicleAppService _productMachineSrv;
 
-    public ProductsMachineController(ProductVehicleAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
+    public ProductsVehicleController(ProductVehicleAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
 
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
-    { return Ok(await _productMachineSrv.GetProducts<ProductMachineDto>(productParams)); }
+    public async Task<ActionResult<Pagination<ProductVehicleDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
+    { return Ok(await _productMachineSrv.GetProducts<ProductVehicleDto>(productParams)); }
 
     [HttpPost("update-product")]
     [ProducesResponseType(StatusCodes.Status200OK)]

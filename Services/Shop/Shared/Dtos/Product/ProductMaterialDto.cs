@@ -3,7 +3,7 @@ using Shop.Shared.Dtos.Product;
 
 namespace Shop.Core.Shared.Dtos.Product;
 
-public class ProductMaterialDto : BaseProductDto
+public class ProductComputerDto : BaseProductDto
 {
     public string Name { get; set; }
 

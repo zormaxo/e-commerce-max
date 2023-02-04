@@ -265,7 +265,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productsmachine', { observe: 'response', params })
+      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productsvehicle', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -277,7 +277,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productsmaterial', { observe: 'response', params })
+      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productscomputer', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;
@@ -289,7 +289,7 @@ export class ShopService {
     const params: HttpParams = this.generateHttpParams(shopParams);
 
     return this.http
-      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productssemifinished', { observe: 'response', params })
+      .get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'productsrealestate', { observe: 'response', params })
       .pipe(
         map((response) => {
           return response.body.result;

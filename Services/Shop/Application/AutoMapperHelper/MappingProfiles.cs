@@ -30,18 +30,18 @@ public class MappingProfiles : Profile
             .ForMember(d => d.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-        CreateMap<Product, ProductMachineDto>()
+        CreateMap<Product, ProductVehicleDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
             .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("dd.MM.yyyy")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-        CreateMap<Product, ProductMaterialDto>()
+        CreateMap<Product, ProductComputerDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
             .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("dd.MM.yyyy")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
 
-        CreateMap<ProductVehicle, ProductMachineDto>();
+        CreateMap<ProductVehicle, ProductVehicleDto>();
         //CreateMap<Product, ProductProjectDto>()
         //    .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
         //    //.ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")))
