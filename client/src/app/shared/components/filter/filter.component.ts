@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FilterAreas } from 'src/app/shared/components/filter/filter-areas';
 import { ShopService } from 'src/app/shop/shop.service';
 import { IAddress } from '../../models/address';
@@ -11,6 +11,7 @@ import { ShopParams } from '../../models/shopParams';
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
+  @ViewChild('search', { static: false }) searchTerm: ElementRef;
   @Input() categoryName: string;
   @Input() shopParams: ShopParams;
 
@@ -33,6 +34,7 @@ export class FilterComponent implements OnInit {
   }
 
   onSearch() {
+    this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopService.searchClicked.next(this.shopParams);
   }
 

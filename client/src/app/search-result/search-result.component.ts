@@ -30,7 +30,7 @@ export class SearchResultComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService
+  this.shopService
       .getCategories()
       .pipe(
         mergeMap((categories) => {
@@ -41,7 +41,6 @@ export class SearchResultComponent implements OnInit {
       .subscribe((productResponse) => {
         this.totalCount = productResponse.totalCount;
         this.categoryGroupCountList = productResponse.categoryGroupCount;
-
         this.shopService.calculateProductCountsByCategory(this.allCategories, this.categoryGroupCountList);
       });
   }

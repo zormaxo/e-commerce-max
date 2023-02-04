@@ -48,20 +48,22 @@ export class ShopService {
   constructor(private http: HttpClient) {}
 
   getProducts(useCache = true): Observable<Pagination<Product[]>> {
+    const shopParamsConst = structuredClone(this.shopParams);
+
     if (!useCache) this.productCache = new Map();
 
     if (this.productCache.size > 0 && useCache) {
-      if (this.productCache.has(Object.values(this.shopParams).join('-'))) {
-        this.pagination = this.productCache.get(Object.values(this.shopParams).join('-'));
+      if (this.productCache.has(Object.values(shopParamsConst).join('-'))) {
+        this.pagination = this.productCache.get(Object.values(shopParamsConst).join('-'));
         if (this.pagination) return of(this.pagination);
       }
     }
 
-    const params: HttpParams = this.generateHttpParams(this.shopParams);
+    const params: HttpParams = this.generateHttpParams(shopParamsConst);
 
     return this.http.get<ApiResponse<Pagination<Product[]>>>(this.baseUrl + 'products', { params }).pipe(
       map((response) => {
-        this.productCache.set(Object.values(this.shopParams).join('-'), response.result);
+        this.productCache.set(Object.values(shopParamsConst).join('-'), response.result);
         this.pagination = response.result;
         return response.result;
       })

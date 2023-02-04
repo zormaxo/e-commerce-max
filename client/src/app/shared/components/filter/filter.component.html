@@ -152,13 +152,13 @@
       <div id="collapseThree" class="accordion-collapse collapse">
         <div class="accordion-body px-3 py-2">
           <input
-            (keyup.enter)="onSearch()"
+            (keyup.enter)="onSearch(search.value)"
             type="text"
             class="form-control mr-2"
             #search
             placeholder="Ara"
             name="search"
-            [(ngModel)]="shopParams.search" />
+            [ngModel]="shopParams.search" />
         </div>
       </div>
     </div>

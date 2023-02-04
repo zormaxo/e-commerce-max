@@ -7,7 +7,7 @@ export class ShopParams {
   sort = 'name';
   pageNumber = 1;
   pageSize: number;
-  _search: string;
+  search: string;
   isNew: boolean;
   minValue: string;
   maxValue: string;
@@ -21,16 +21,5 @@ export class ShopParams {
   constructor(pageSize = 20, categoryName = undefined) {
     this.pageSize = pageSize;
     this.categoryName = categoryName;
-  }
-
-  public get search() {
-    return this._search;
-  }
-
-  public set search(omer) {
-
-    console.log('deneme  ' + omer);
-    // console.trace();
-    this._search = omer;
   }
 }

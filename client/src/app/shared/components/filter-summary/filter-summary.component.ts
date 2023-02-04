@@ -43,6 +43,10 @@ export class FilterSummaryComponent implements OnChanges {
         }
       });
     }
+
+    if (this.filterShopParams.search == '') {
+      this.onRemoveFilterClick(SearchFilter.search);
+    }
   }
 
   onRemoveFilterClick(event: SearchFilter) {
