@@ -12,15 +12,8 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
     {
     }
 
-    public Task<AppUser> GetMemberAsync(int id)
-    {
-        return _dbSet.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync();
-
-        //return await _context.Users
-        //    .Where(x => x.Id == id)
-        //    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-        //    .SingleOrDefaultAsync();
-    }
+    public Task<AppUser?> GetMemberAsync(int id)
+    { return _dbSet.Include(x => x.Photos).Where(x => x.Id == id).SingleOrDefaultAsync(); }
 
     public Task<PagedList<AppUser>> GetMembersAsync(UserParams userParams)
     {

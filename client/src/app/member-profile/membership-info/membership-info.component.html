@@ -3,13 +3,13 @@
     <div class="card-body">
       <div class="row">
         <div class="col-10">
-          <div class="alert alert-info small" *ngIf="nameSurnameForm.dirty">
-            Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
+          <div class="alert alert-info py-0" *ngIf="nameSurnameForm.dirty">
+            <strong>Information: </strong>You have made changes. Any unsaved changes will be lost
           </div>
           <form #nameSurnameForm="ngForm" id="nameSurnameForm" (ngSubmit)="updateUserFirstLastName()">
             <div class="row row-cols-2 mb-3">
               <div class="col">
-                <label class="form-label small">İsim</label>
+                <label class="form-label small">First Name</label>
                 <input
                   type="text"
                   class="form-control form-control-sm"
@@ -20,7 +20,7 @@
                 <span class="form-text" *ngIf="!firstName.valid && firstName.touched">Please enter a valid name!</span>
               </div>
               <div class="col">
-                <label class="form-label small">Soyisim</label>
+                <label class="form-label small">Last Name</label>
                 <input
                   type="text"
                   class="form-control form-control-sm"
@@ -36,14 +36,14 @@
               [disabled]="!nameSurnameForm.dirty || !nameSurnameForm.valid"
               type="submit"
               class="btn btn-sm btn-primary">
-              Güncelle
+              Update
             </button>
             <button
               [disabled]="!nameSurnameForm.dirty"
               class="btn btn-sm btn-danger ms-2"
               type="button"
               (click)="onReset(nameSurnameForm)">
-              İptal
+              Cancel
             </button>
           </form>
         </div>
@@ -55,7 +55,7 @@
               class="card-img-top" />
             <div class="card-footer small">
               <button class="btn btn-sm btn-outline-primary" type="button" (click)="openModal(template)">
-                <span class="small">Fotoğraf Yükle</span>
+                <span class="small">Upload Photo</span>
               </button>
             </div>
           </div>
@@ -226,7 +226,7 @@
                 <td>
                   {{ item?.file?.name }}
                 </td>
-                <td *ngIf="uploader.options.isHTML5">{{ item?.file?.size / 1024 / 1024 | number: ".2" }} MB</td>
+                <td *ngIf="uploader.options.isHTML5">{{ item?.file?.size / 1024 / 1024 | number : ".2" }} MB</td>
               </tr>
             </tbody>
           </table>

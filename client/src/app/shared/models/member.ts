@@ -11,4 +11,6 @@ export interface Member {
   created: Date;
   lastActive: Date;
   photos: Photo[];
+
+  email: string;
 }

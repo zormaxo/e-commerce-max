@@ -19,18 +19,18 @@ export class MembershipInfoComponent implements OnInit {
   @ViewChild('nameSurnameForm') nameSurnameForm: NgForm;
   @ViewChild('emailForm') emailForm: NgForm;
   @ViewChild('phoneForm') phoneForm: NgForm;
-  member: Member;
-  memberClone: Member;
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.nameSurnameForm.dirty || this.emailForm.dirty || this.phoneForm.dirty) {
       $event.returnValue = true;
     }
   }
 
+  member: Member | undefined;
+  user: User | null = null;
+  memberClone: Member;
   uploader: FileUploader;
   hasBaseDropzoneOver = false;
   baseUrl = environment.apiUrl;
-  user: User;
   modalRef?: BsModalRef;
 
   constructor(

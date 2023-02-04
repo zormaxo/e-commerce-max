@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Shop.Application.Interfaces;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
@@ -6,7 +7,6 @@ using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
 using Shop.Core.Shared.Dtos;
-using Shop.Core.Shared.Dtos.Member;
 using Shop.Shared.Dtos.Member;
 using System.Net;
 
@@ -14,14 +14,19 @@ namespace Shop.Application.ApplicationServices;
 
 public class UserAppService : BaseAppService
 {
+    private readonly UserManager<AppUser> _userManager;
     private readonly IUserRepository _userRepository;
     private readonly IPhotoService _photoService;
 
-    public UserAppService(IUserRepository userRepository, IPhotoService photoService, IServiceProvider serviceProvider) : base(
-        serviceProvider)
+    public UserAppService(
+        IUserRepository userRepository,
+        IPhotoService photoService,
+        IServiceProvider serviceProvider,
+        UserManager<AppUser> userManager) : base(serviceProvider)
     {
         _userRepository = userRepository;
         _photoService = photoService;
+        _userManager = userManager;
     }
 
     public async Task<PagedList<MemberDto>> GetUsers(UserParams userParams, string username)
@@ -31,9 +36,7 @@ public class UserAppService : BaseAppService
 
         PagedList<AppUser> appUsers = await _userRepository.GetMembersAsync(userParams);
 
-        var omer = Mapper.Map<PagedList<MemberDto>>(appUsers);
-
-        return omer;
+        return Mapper.Map<PagedList<MemberDto>>(appUsers);
     }
 
     public async Task<MemberDto> GetUser(int id)
@@ -45,8 +48,14 @@ public class UserAppService : BaseAppService
     public async Task UpdateUser(MemberUpdateDto memberUpdateDto, string username)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
+
+        if (user == null)
+            throw new ApiException("User not found");
+
         Mapper.Map(memberUpdateDto, user);
-        await _userRepository.SaveAllAsync();
+        user.UserName = user.Email;
+
+        await _userManager.UpdateAsync(user);
     }
 
     public async Task<PhotoDto> AddPhoto(IFormFile file, int userId)
