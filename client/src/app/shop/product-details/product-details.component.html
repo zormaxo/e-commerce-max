@@ -5,7 +5,7 @@
       <span class="h5">{{ product.name }}</span>
     </div>
     <div class="col-auto small">
-      <a [routerLink]="" style="margin-right: 4rem" (click)="addLike()"
+      <a #favorite [routerLink]="" style="margin-right: 4rem" 
         ><em class="fa-solid fa-star me-2" [ngClass]="currentClasses"></em>
         <span *ngIf="product.isFavourite">Remove from Favorites</span>
         <span *ngIf="!product.isFavourite">Add to My Favorites</span>
@@ -14,7 +14,7 @@
     <hr class="mt-2" />
   </div>
   <div class="row">
-    <div class="col d-flex justify-content-center mb-5 mb-md-0">
+    <div class="col d-flex justify-content-center mb-3 mb-md-0">
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style="display: inline-block"></ngx-gallery>
     </div>
     <div class="col d-flex justify-content-center">
@@ -64,7 +64,7 @@
           You have {{ quantityInBasket }} of this item in your basket
         </p>
 
-        <div class="d-flex justify-content-start align-items-center">
+        <div class="d-flex justify-content-start align-items-center mb-4">
           <i
             (click)="decrementQuantity()"
             class="fa fa-minus-circle text-warning me-2"

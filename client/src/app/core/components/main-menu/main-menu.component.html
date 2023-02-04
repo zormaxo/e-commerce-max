@@ -10,8 +10,8 @@
           data-bs-target="#offcanvasExample"
           >{{ category.name }}</a
         >
-        <small
-          ><span class="small text-muted">({{ category.count }})</span></small
+        <em
+          ><span class="text-muted">({{ category.count }})</span></em
         >
         <a
           *ngIf="category.childCategories"
@@ -30,14 +30,14 @@
         <div class="accordion-body p-0 pb-1">
           <div *ngFor="let child of category.childCategories">
             <a
-              class="small link-dark"
+              class=" link-dark"
               [routerLink]="['/', category.url, child.url]"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"
               >{{ child.name }}
             </a>
-            <small
-              ><span class="small text-muted">({{ child.count }})</span></small
+            <em
+              ><span class="small text-muted">({{ child.count }})</span></em
             >
           </div>
         </div>

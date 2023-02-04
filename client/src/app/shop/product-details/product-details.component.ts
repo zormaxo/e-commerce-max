@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   NgxGalleryAnimation,
@@ -8,7 +18,7 @@ import {
   NgxGalleryOrder,
 } from '@kolkov/ngx-gallery';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs';
+import { fromEvent, mergeMap, Subscription, take, tap, throttleTime } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { ICategory } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
@@ -19,7 +29,10 @@ import { ShopService } from '../shop.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('favorite') favorite: ElementRef;
+  @ViewChildren('favorite') domReference: QueryList<NgModel>;
+
   product?: Product;
   parentCategories: ICategory[];
   galleryOptions: NgxGalleryOptions[];
@@ -29,6 +42,8 @@ export class ProductDetailsComponent implements OnInit {
 
   quantity = 1;
   quantityInBasket = 0;
+  domSubscription: Subscription;
+  eventSubscription: Subscription;
 
   constructor(
     public shopService: ShopService,
@@ -36,6 +51,31 @@ export class ProductDetailsComponent implements OnInit {
     private basketService: BasketService,
     private toastr: ToastrService
   ) {}
+
+  ngAfterViewInit(): void {
+    let favorite: HTMLElement;
+
+    const subscribeToEvent = () => {
+      this.eventSubscription = fromEvent(favorite, 'click')
+        .pipe(
+          throttleTime(1000),
+          tap(() => {
+            this.addLike();
+          })
+        )
+        .subscribe();
+    };
+
+    if (this.favorite) {
+      favorite = this.favorite.nativeElement;
+      subscribeToEvent();
+    } else {
+      this.domSubscription = this.domReference.changes.subscribe((comps) => {
+        favorite = comps.first.nativeElement;
+        subscribeToEvent();
+      });
+    }
+  }
 
   ngOnInit(): void {
     this.loadProduct();
@@ -79,29 +119,32 @@ export class ProductDetailsComponent implements OnInit {
   loadProduct() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id)
-      this.shopService.getProduct(+id).subscribe({
-        next: (product) => {
-          this.product = product;
-          this.galleryImages = this.getImages();
-          this.basketService.basketSource$.pipe(take(1)).subscribe({
-            next: (basket) => {
-              const item = basket?.items.find((x) => x.id === +id);
-              if (item) {
-                this.quantity = item.quantity;
-                this.quantityInBasket = item.quantity;
-              }
-              this.shopService.getCategories().subscribe((categories) => {
-                this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.categoryId);
-                this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
-              });
-            },
-          });
-          this.currentClasses = {
-            'text-warning': this.product.isFavourite,
-          };
-        },
-        error: (error) => console.log(error),
-      });
+      this.shopService
+        .getProduct(+id)
+        .pipe(
+          mergeMap((product) => {
+            this.product = product;
+            this.galleryImages = this.getImages();
+            this.currentClasses = {
+              'text-warning': this.product.isFavourite,
+            };
+            return this.basketService.basketSource$.pipe(take(1));
+          })
+        )
+        .subscribe({
+          next: (basket) => {
+            const item = basket?.items.find((x) => x.id === +id);
+            if (item) {
+              this.quantity = item.quantity;
+              this.quantityInBasket = item.quantity;
+            }
+            this.shopService.getCategories().subscribe((categories) => {
+              this.selectedCategory = categories.find((x: { id: number }) => x.id == this.product.categoryId);
+              this.parentCategories = this.shopService.fillParentCategoryList(this.selectedCategory);
+            });
+          },
+          error: (error) => console.log(error),
+        });
   }
 
   incrementQuantity() {
@@ -147,5 +190,14 @@ export class ProductDetailsComponent implements OnInit {
         this.product.isFavourite = !this.product.isFavourite;
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.domSubscription) {
+      this.domSubscription.unsubscribe();
+    }
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
   }
 }
