@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { MachineComponent } from './machine.component';
+import { VehicleComponent } from './vehicle.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AppProductBaseComponent } from '../../app-product-base/app-product-base.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'makine', pathMatch: 'full' },
-  { path: '', component: AppProductBaseComponent, children: [{ path: ':subcategory', component: MachineComponent }] },
+  { path: '', component: AppProductBaseComponent, children: [{ path: ':subcategory', component: VehicleComponent }] },
 ];
 
 @NgModule({
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MachineRoutingModule {}
+export class VehicleRoutingModule {}

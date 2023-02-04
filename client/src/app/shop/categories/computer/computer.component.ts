@@ -2,11 +2,11 @@ import { Component, Injector } from '@angular/core';
 import { AppProductBaseClass } from 'src/app/app-product-base-class';
 
 @Component({
-  selector: 'app-material',
-  templateUrl: './material.component.html',
-  styleUrls: ['./material.component.scss'],
+  selector: 'app-computer',
+  templateUrl: './computer.component.html',
+  styleUrls: ['./computer.component.scss'],
 })
-export class MaterialComponent extends AppProductBaseClass {
+export class ComputerComponent extends AppProductBaseClass {
   constructor(injector: Injector) {
     super(injector);
   }

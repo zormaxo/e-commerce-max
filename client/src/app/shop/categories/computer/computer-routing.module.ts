@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppProductBaseComponent } from '../../app-product-base/app-product-base.component';
-import { SemiFinishedComponent } from './semi-finished.component';
+import { ComputerComponent } from './computer.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'real-estate', pathMatch: 'full' },
-  {
-    path: '',
-    component: AppProductBaseComponent,
-    children: [{ path: ':subcategory', component: SemiFinishedComponent }],
-  },
+  { path: '', redirectTo: 'makine', pathMatch: 'full' },
+  { path: '', component: AppProductBaseComponent, children: [{ path: ':subcategory', component: ComputerComponent }] },
 ];
 
 @NgModule({
@@ -17,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SemiFinishedRoutingModule {}
+export class ComputerRoutingModule {}

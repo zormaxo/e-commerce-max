@@ -9,11 +9,11 @@ import { IAddress } from 'src/app/shared/models/address';
 import { AppProductBaseClass } from 'src/app/app-product-base-class';
 
 @Component({
-  selector: 'app-semi-finished',
-  templateUrl: './semi-finished.component.html',
-  styleUrls: ['./semi-finished.component.scss'],
+  selector: 'app-real-estate',
+  templateUrl: './real-estate.component.html',
+  styleUrls: ['./real-estate.component.scss'],
 })
-export class SemiFinishedComponent extends AppProductBaseClass {
+export class RealEstateComponent extends AppProductBaseClass {
   constructor(injector: Injector) {
     super(injector);
   }

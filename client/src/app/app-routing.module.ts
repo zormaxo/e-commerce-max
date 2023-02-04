@@ -27,16 +27,16 @@ const routes: Routes = [
 
       {
         path: 'vehicle',
-        loadChildren: () => import('./shop/categories/machine/machine.module').then((mod) => mod.MachineModule),
+        loadChildren: () => import('./shop/categories/vehicle/vehicle.module').then((mod) => mod.MachineModule),
       },
       {
         path: 'computer',
-        loadChildren: () => import('./shop/categories/material/material.module').then((mod) => mod.MaterialModule),
+        loadChildren: () => import('./shop/categories/computer/computer.module').then((mod) => mod.ComputerModule),
       },
       {
         path: 'real-estate',
         loadChildren: () =>
-          import('./shop/categories/semi-finished/semi-finished.module').then((mod) => mod.SemiFinishedModule),
+          import('./shop/categories/real-estate/real-estate.module').then((mod) => mod.RealEstateModule),
       },
 
       { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
