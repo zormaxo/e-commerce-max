@@ -66,31 +66,32 @@
 
   <div class="card mb-3 shadow">
     <div class="card-body">
-      <div class="alert alert-info small" *ngIf="emailForm.dirty">
-        Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
+      <div class="alert alert-info py-0" *ngIf="emailForm.dirty">
+        <strong>Information: </strong>You have made changes. Any unsaved changes will be lost. After updating your mail,
+        you need to log in again.
       </div>
       <form #emailForm="ngForm" id="emailForm" (ngSubmit)="updateUsername()">
         <div class="mb-3">
-          <label class="form-label small">E-Posta</label>
+          <label class="form-label small">E-Mail</label>
           <input
             type="email"
             class="form-control form-control-sm"
-            name="userName"
-            [(ngModel)]="member.userName"
+            name="email"
+            [(ngModel)]="member.email"
             #email="ngModel"
             required
             email />
           <span class="form-text" *ngIf="!email.valid && email.touched">Please enter a valid mail!</span>
         </div>
         <button [disabled]="!emailForm.dirty || !emailForm.valid" type="submit" class="btn btn-sm btn-primary">
-          Güncelle
+          Update
         </button>
         <button
           [disabled]="!emailForm.dirty"
           class="btn btn-sm btn-danger ms-2"
           type="button"
           (click)="onReset(emailForm)">
-          İptal
+          Cancel
         </button>
       </form>
     </div>
@@ -98,12 +99,12 @@
 
   <div class="card mb-3 shadow">
     <div class="card-body">
-      <div class="alert alert-info small" *ngIf="phoneForm.dirty">
-        Değişiklik yaptınız. Güncellemeden çıkarsanız değişiklikleriniz kaybolur.
+      <div class="alert alert-info py-0" *ngIf="phoneForm.dirty">
+        <strong>Information: </strong>You have made changes. Any unsaved changes will be lost
       </div>
       <form #phoneForm="ngForm" id="phoneForm" (ngSubmit)="updateUserPhone()">
         <div class="p-grid p-fluid mb-3">
-          <label class="form-label small">Telefon Numarası</label>
+          <label class="form-label small">Phone number</label>
           <input
             [(ngModel)]="member.phoneNumber"
             name="phoneNumber"
@@ -115,14 +116,14 @@
           <span class="form-text" *ngIf="!phone.valid && phone.touched">Please enter a valid phone!</span>
         </div>
         <button [disabled]="!phoneForm.dirty || !phoneForm.valid" type="submit" class="btn btn-sm btn-primary">
-          Güncelle
+          Update
         </button>
         <button
           [disabled]="!phoneForm.dirty"
           class="btn btn-sm btn-danger ms-2"
           type="button"
           (click)="onReset(phoneForm)">
-          İptal
+          Cancel
         </button>
       </form>
     </div>

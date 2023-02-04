@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Member } from 'src/app/shared/models/member';
 import { User } from 'src/app/shared/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-membership-info',
@@ -37,7 +38,8 @@ export class MembershipInfoComponent implements OnInit {
     private memberService: MembersService,
     private accountService: AccountService,
     private toastr: ToastrService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private router: Router
   ) {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => (this.user = user));
   }
@@ -103,7 +105,7 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUserFirstLastName() {
     this.memberService.updateUserFirstLastName(this.member).subscribe(() => {
-      this.toastr.success('Adınız ve soyadınız güncellendi.');
+      this.toastr.success('First and last name updated.');
       this.memberClone.firstName = this.member.firstName;
       this.memberClone.lastName = this.member.lastName;
       this.nameSurnameForm.reset(this.member);
@@ -115,15 +117,16 @@ export class MembershipInfoComponent implements OnInit {
 
   updateUsername() {
     this.memberService.updateUsername(this.member).subscribe(() => {
-      this.toastr.success('Mail addressiniz güncellendi.');
-      this.memberClone.userName = this.member.userName;
+      this.toastr.success('Email updated.');
+      this.memberClone.email = this.member.email;
       this.emailForm.reset(this.member);
+      this.logout();
     });
   }
 
   updateUserPhone() {
     this.memberService.updateUserPhone(this.member).subscribe(() => {
-      this.toastr.success('Telefonunuz güncellendi.');
+      this.toastr.success('Phone number updated.');
       this.memberClone.phoneNumber = this.member.phoneNumber;
       this.phoneForm.reset(this.member);
     });
@@ -131,5 +134,10 @@ export class MembershipInfoComponent implements OnInit {
 
   onReset(form: NgForm) {
     form.reset(this.memberClone);
+  }
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl('/signin');
   }
 }
