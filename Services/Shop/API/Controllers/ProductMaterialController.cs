@@ -9,9 +9,9 @@ namespace Shop.API.Controllers;
 
 public class ProductsMaterialController : BaseApiController
 {
-    private readonly ProductMaterialAppService _productMaterialSrv;
+    private readonly ProductComputerAppService _productMaterialSrv;
 
-    public ProductsMaterialController(ProductMaterialAppService productMaterialSrv) { _productMaterialSrv = productMaterialSrv; }
+    public ProductsMaterialController(ProductComputerAppService productMaterialSrv) { _productMaterialSrv = productMaterialSrv; }
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductMaterialDto>>> GetProducts([FromQuery] ProductSpecParams productParams)

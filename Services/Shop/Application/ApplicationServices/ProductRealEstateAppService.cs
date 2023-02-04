@@ -5,10 +5,10 @@ using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductSemiFinishedAppService : ProductBaseService<ProductDto>
+public class ProductRealEstateAppService : ProductBaseService<ProductDto>
 {
     readonly IGenericRepository<ProductRealEstate> _semiFinishedRepo;
-    public ProductSemiFinishedAppService(IGenericRepository<ProductRealEstate> semiFinishedRepo, IServiceProvider serviceProvider) : base(
+    public ProductRealEstateAppService(IGenericRepository<ProductRealEstate> semiFinishedRepo, IServiceProvider serviceProvider) : base(
         serviceProvider)
     { _semiFinishedRepo = semiFinishedRepo; }
 

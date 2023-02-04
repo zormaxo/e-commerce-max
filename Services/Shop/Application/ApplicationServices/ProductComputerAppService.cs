@@ -6,11 +6,11 @@ using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductMaterialAppService : ProductBaseService<ProductMaterialDto>
+public class ProductComputerAppService : ProductBaseService<ProductMaterialDto>
 {
     readonly IGenericRepository<ProductComputer> _materialRepo;
 
-    public ProductMaterialAppService(IGenericRepository<ProductComputer> materialRepo, IServiceProvider serviceProvider) : base(
+    public ProductComputerAppService(IGenericRepository<ProductComputer> materialRepo, IServiceProvider serviceProvider) : base(
         serviceProvider)
     { _materialRepo = materialRepo; }
 

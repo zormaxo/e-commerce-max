@@ -9,9 +9,9 @@ namespace Shop.API.Controllers;
 
 public class ProductsMachineController : BaseApiController
 {
-    private readonly ProductMachineAppService _productMachineSrv;
+    private readonly ProductVehicleAppService _productMachineSrv;
 
-    public ProductsMachineController(ProductMachineAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
+    public ProductsMachineController(ProductVehicleAppService productMachineSrv) { _productMachineSrv = productMachineSrv; }
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductMachineDto>>> GetProducts([FromQuery] ProductSpecParams productParams)

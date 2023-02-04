@@ -102,20 +102,39 @@ public static class StoreContextSeed
 
                 await context.SaveChangesAsync();
             }
-
-            if (!await context.ProductMachines.AnyAsync())
+            if (!await context.ProductVehicle.AnyAsync())
             {
-                logger.LogInformation("ProductMachine seeding starting...");
-                var machinesData = await File.ReadAllTextAsync(path + "/SeedData/productMachines.json");
-                var machines = JsonConvert.DeserializeObject<List<ProductMachine>>(machinesData);
+                logger.LogInformation("ProductVehicle seeding starting...");
+                var machinesData = await File.ReadAllTextAsync(path + "/SeedData/productVehicle.json");
+                var machines = JsonConvert.DeserializeObject<List<ProductVehicle>>(machinesData);
 
-                context.ProductMachines.AddRange(machines!);
+                context.ProductVehicle.AddRange(machines!);
+
+                await context.SaveChangesAsync();
+            }
+            if (!await context.ProductComputer.AnyAsync())
+            {
+                logger.LogInformation("ProductComputer seeding starting...");
+                var computerData = await File.ReadAllTextAsync(path + "/SeedData/productComputer.json");
+                var computers = JsonConvert.DeserializeObject<List<ProductComputer>>(computerData);
+
+                context.ProductComputer.AddRange(computers!);
+
+                await context.SaveChangesAsync();
+            }
+            if (!await context.ProductRealEstate.AnyAsync())
+            {
+                logger.LogInformation("ProductRealEstate seeding starting...");
+                var realEstateDate = await File.ReadAllTextAsync(path + "/SeedData/productRealEstate.json");
+                var realEstates = JsonConvert.DeserializeObject<List<ProductRealEstate>>(realEstateDate);
+
+                context.ProductRealEstate.AddRange(realEstates!);
 
                 await context.SaveChangesAsync();
             }
             if (!await context.DeliveryMethods.AnyAsync())
             {
-                logger.LogInformation("ProductMachine seeding starting...");
+                logger.LogInformation("DeliveryMethod seeding starting...");
                 var deliveryData = File.ReadAllText(path + "/SeedData/delivery.json");
                 var methods = JsonConvert.DeserializeObject<List<DeliveryMethod>>(deliveryData);
 

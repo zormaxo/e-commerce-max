@@ -14,8 +14,8 @@ public static class ControllerServiceExtensions
         services.AddScoped<AccountAppService>();
         services.AddScoped<UserAppService>();
         services.AddScoped<ProductAppService>();
-        services.AddScoped<ProductMachineAppService>();
-        services.AddScoped<ProductMaterialAppService>();
+        services.AddScoped<ProductVehicleAppService>();
+        services.AddScoped<ProductComputerAppService>();
         services.AddScoped<CategoriesAppService>();
         services.AddScoped<BasketAppService>();
         services.AddScoped<LogUserActivityAttribute>();

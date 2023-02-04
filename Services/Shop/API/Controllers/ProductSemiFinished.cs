@@ -9,9 +9,9 @@ namespace Shop.API.Controllers;
 
 public class ProductSemiFinishedController : BaseApiController
 {
-    private readonly ProductMaterialAppService _productSemiFinishedSrv;
+    private readonly ProductRealEstateAppService _productSemiFinishedSrv;
 
-    public ProductSemiFinishedController(ProductMaterialAppService productSemiFinishedSrv)
+    public ProductSemiFinishedController(ProductRealEstateAppService productSemiFinishedSrv)
     { _productSemiFinishedSrv = productSemiFinishedSrv; }
 
     [HttpGet]

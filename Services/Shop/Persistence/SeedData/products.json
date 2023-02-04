@@ -22,7 +22,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -33,7 +33,7 @@
         "Url": "https://picsum.photos/500/365"
       }, {
         "Url": "https://picsum.photos/500/370",
-		"IsMain": true
+        "IsMain": true
       }, {
         "Url": "https://picsum.photos/500/375"
       }, {
@@ -49,7 +49,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -76,7 +76,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -103,7 +103,7 @@
     "IsActive": false,
     "ProductBrandId": 1,
     "Currency": 4,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -130,7 +130,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -157,7 +157,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -168,7 +168,7 @@
         "Url": "https://picsum.photos/504/365"
       }, {
         "Url": "https://picsum.photos/504/370",
-		"IsMain": true
+        "IsMain": true
       }, {
         "Url": "https://picsum.photos/504/375"
       }, {
@@ -184,7 +184,7 @@
     "IsActive": false,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -211,7 +211,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 4,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -238,7 +238,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -265,7 +265,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -292,7 +292,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -303,7 +303,7 @@
         "Url": "https://picsum.photos/508/365"
       }, {
         "Url": "https://picsum.photos/508/370",
-		"IsMain": true
+        "IsMain": true
       }, {
         "Url": "https://picsum.photos/508/375"
       }, {
@@ -319,7 +319,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 4,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -346,7 +346,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -373,7 +373,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -400,7 +400,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": true
     }
   }, {
@@ -427,7 +427,7 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 4,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
   }, {
@@ -438,7 +438,7 @@
         "Url": "https://picsum.photos/510/365"
       }, {
         "Url": "https://picsum.photos/510/370",
-		"IsMain": true
+        "IsMain": true
       }, {
         "Url": "https://picsum.photos/510/375"
       }, {
@@ -453,7 +453,10 @@
     "CountyId": 784,
     "IsActive": true,
     "ProductBrandId": 1,
-    "Currency": 1
+    "Currency": 1,
+    "ProductVehicle": {
+      "IsNew": false
+    }
   }, {
     "Name": "Angular Blue Boots",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
@@ -478,11 +481,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductMachine": {
+    "ProductVehicle": {
       "IsNew": false
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "Suspendisse",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 156,
     "Photos": [{
@@ -505,11 +508,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductComputer": {
       "IsNew": false
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "dui purus",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 88,
     "Photos": [{
@@ -532,11 +535,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductComputer": {
       "IsNew": true
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "scelerisque",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 74,
     "Photos": [{
@@ -559,11 +562,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductComputer": {
       "IsNew": false
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "vulputate vitae",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 96,
     "Photos": [{
@@ -579,18 +582,18 @@
         "Url": "https://picsum.photos/510/385"
       }
     ],
-    "CategoryId": 3,
+    "CategoryId": 2,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 803,
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 4,
-    "ProductMachine": {
+    "ProductComputer": {
       "IsNew": true
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "pretium mattis",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 45,
     "Photos": [{
@@ -606,18 +609,18 @@
         "Url": "https://picsum.photos/510/385"
       }
     ],
-    "CategoryId": 3,
+    "CategoryId": 14,
     "UserId": 6,
     "Showcase": true,
     "CountyId": 803,
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 1,
-    "ProductMachine": {
+    "ProductComputer": {
       "IsNew": false
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "nunc",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 68,
     "Photos": [{
@@ -640,11 +643,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductMachine": {
+    "ProductRealEstate": {
       "IsNew": true
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "at, vulputate vita",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 99,
     "Photos": [{
@@ -660,18 +663,18 @@
         "Url": "https://picsum.photos/510/385"
       }
     ],
-    "CategoryId": 3,
+    "CategoryId": 13,
     "UserId": 8,
     "Showcase": true,
     "CountyId": 803,
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductRealEstate": {
       "IsNew": false
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "dui purus, scelerisque",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 73,
     "Photos": [{
@@ -694,11 +697,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 4,
-    "ProductMachine": {
+    "ProductRealEstate": {
       "IsNew": true
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "scelerisque at, vulputate vitae",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 42,
     "Photos": [{
@@ -721,11 +724,11 @@
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 3,
-    "ProductMachine": {
+    "ProductRealEstate": {
       "IsNew": false
     }
-  },{
-    "Name": "Angular Blue Boots",
+  }, {
+    "Name": "uspendisse dui purus",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 55,
     "Photos": [{
@@ -741,14 +744,122 @@
         "Url": "https://picsum.photos/510/385"
       }
     ],
-    "CategoryId": 3,
+    "CategoryId": 7,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 569,
     "IsActive": true,
     "ProductBrandId": 1,
     "Currency": 2,
-    "ProductSemiFinished": {
+    "ProductRealEstate": {
+      "IsNew": true
+    }
+  }, {
+    "Name": "venenatis eleifend. Ut ",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 78,
+    "Photos": [{
+        "Url": "https://picsum.photos/510/365"
+      }, {
+        "Url": "https://picsum.photos/510/370"
+      }, {
+        "Url": "https://picsum.photos/511/384",
+        "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/510/380"
+      }, {
+        "Url": "https://picsum.photos/510/385"
+      }
+    ],
+    "CategoryId": 7,
+    "UserId": 5,
+    "Showcase": true,
+    "CountyId": 569,
+    "IsActive": true,
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductRealEstate": {
+      "IsNew": true
+    }
+  }, {
+    "Name": " mattis, nunc. Mauris",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 55,
+    "Photos": [{
+        "Url": "https://picsum.photos/510/365"
+      }, {
+        "Url": "https://picsum.photos/510/370"
+      }, {
+        "Url": "https://picsum.photos/512/384",
+        "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/510/380"
+      }, {
+        "Url": "https://picsum.photos/510/385"
+      }
+    ],
+    "CategoryId": 2,
+    "UserId": 5,
+    "Showcase": true,
+    "CountyId": 569,
+    "IsActive": true,
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductComputer": {
+      "IsNew": true
+    }
+  }, {
+    "Name": "uspendisse dui purus",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 75,
+    "Photos": [{
+        "Url": "https://picsum.photos/510/365"
+      }, {
+        "Url": "https://picsum.photos/510/370"
+      }, {
+        "Url": "https://picsum.photos/512/384",
+        "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/510/380"
+      }, {
+        "Url": "https://picsum.photos/510/385"
+      }
+    ],
+    "CategoryId": 6,
+    "UserId": 5,
+    "Showcase": true,
+    "CountyId": 569,
+    "IsActive": true,
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductRealEstate": {
+      "IsNew": true
+    }
+  }, {
+    "Name": "uspendisse dui purus",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 55,
+    "Photos": [{
+        "Url": "https://picsum.photos/510/365"
+      }, {
+        "Url": "https://picsum.photos/510/370"
+      }, {
+        "Url": "https://picsum.photos/513/384",
+        "IsMain": true
+      }, {
+        "Url": "https://picsum.photos/510/380"
+      }, {
+        "Url": "https://picsum.photos/510/385"
+      }
+    ],
+    "CategoryId": 6,
+    "UserId": 5,
+    "Showcase": true,
+    "CountyId": 569,
+    "IsActive": true,
+    "ProductBrandId": 1,
+    "Currency": 2,
+    "ProductRealEstate": {
       "IsNew": true
     }
   }

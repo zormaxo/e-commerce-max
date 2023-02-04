@@ -6,11 +6,11 @@ using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
-public class ProductMachineAppService : ProductBaseService<ProductMachineDto>
+public class ProductVehicleAppService : ProductBaseService<ProductMachineDto>
 {
     readonly IGenericRepository<ProductVehicle> _machineRepo;
 
-    public ProductMachineAppService(IGenericRepository<ProductVehicle> machineRepo, IServiceProvider serviceProvider) : base(
+    public ProductVehicleAppService(IGenericRepository<ProductVehicle> machineRepo, IServiceProvider serviceProvider) : base(
         serviceProvider)
     { _machineRepo = machineRepo; }
 
