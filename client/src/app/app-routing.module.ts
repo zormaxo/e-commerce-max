@@ -18,11 +18,13 @@ const routes: Routes = [
     children: [
       { path: 'showcase', component: ShowcaseComponent },
       { path: 'product/:id', component: ProductDetailsComponent },
-      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
+      { path: 'ads', redirectTo: 'showcase', pathMatch: 'full' },
       {
-        path: 'search-result',
-        loadChildren: () => import('./search-result/search-result.module').then((mod) => mod.SearchResultModule),
+        path: 'ads',
+        component: AppProductBaseComponent,
+        children: [{ path: ':id', component: UserProductsComponent }],
       },
+
       {
         path: 'vehicle',
         loadChildren: () => import('./shop/categories/machine/machine.module').then((mod) => mod.MachineModule),
@@ -32,10 +34,17 @@ const routes: Routes = [
         loadChildren: () => import('./shop/categories/material/material.module').then((mod) => mod.MaterialModule),
       },
       {
-        path: 'cell-phone',
+        path: 'real-estate',
         loadChildren: () =>
           import('./shop/categories/semi-finished/semi-finished.module').then((mod) => mod.SemiFinishedModule),
       },
+
+      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
+      {
+        path: 'search-result',
+        loadChildren: () => import('./search-result/search-result.module').then((mod) => mod.SearchResultModule),
+      },
+
       {
         path: 'uye',
         canActivate: [AuthGuard],
@@ -66,13 +75,9 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),
       },
-      {
-        path: 'urunler',
-        component: AppProductBaseComponent,
-        children: [{ path: ':id', component: UserProductsComponent }],
-      },
+
       // {
-      //   path: 'urunler/:id',
+      //   path: 'ads/:id',
       //   component: UserProductsComponent,
       // },
     ],

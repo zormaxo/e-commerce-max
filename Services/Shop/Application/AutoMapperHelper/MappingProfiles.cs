@@ -7,7 +7,6 @@ using Shop.Core.Extensions;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.City;
 using Shop.Core.Shared.Dtos.Member;
-using Shop.Core.Shared.Dtos.Product;
 using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Account;
 using Shop.Shared.Dtos.Basket;
@@ -19,37 +18,21 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<Product, ProductToReturnDto>();
-        //.ForMember(d => d.PriceText, o => o.MapFrom<CurrencyResolver>())
-        //.ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
-
-        CreateMap<Product, ShowcaseDto>()
-            .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
-
         CreateMap<Product, ProductDetailDto>()
             .ForMember(d => d.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
         CreateMap<Product, ProductVehicleDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
-            .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("dd.MM.yyyy")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
         CreateMap<Product, ProductComputerDto>()
             .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
-            .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("dd.MM.yyyy")))
             .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
-
-        CreateMap<ProductVehicle, ProductVehicleDto>();
-        //CreateMap<Product, ProductProjectDto>()
-        //    .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
-        //    //.ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")))
-        //    .ForMember(d => d.PictureUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
-        //    .ForMember(d => d.CategoryId, o => o.MapFrom(src => src.Category.Id));
-
-        //CreateMap<ProductProjectDto, ProductDetailDto>()
-        //    .ForMember(d => d.FavouriteCount, o => o.MapFrom(src => src.Favourites.Count));
+        CreateMap<Product, ProductRealEstateDto>()
+            .ForMember(dest => dest.PriceText, opt => opt.MapFrom(src => src.Price.ToString().ToPriceText(src.Currency)))
+            .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain).Url));
 
         CreateMap<AppUser, ProductMemberDto>()
             .ForMember(d => d.PhotoUrl, o => o.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
@@ -90,7 +73,6 @@ public class MappingProfiles : Profile
             .ForMember(
                 dest => dest.RecipientPhotoUrl,
                 opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
-
 
         CreateMap<CustomerBasketDto, CustomerBasket>();
         CreateMap<BasketItemDto, BasketItem>();

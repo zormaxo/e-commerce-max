@@ -3,7 +3,7 @@ using Shop.Application.ApplicationServices;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
-using Shop.Core.Shared.Dtos.Product;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.API.Controllers;
 
