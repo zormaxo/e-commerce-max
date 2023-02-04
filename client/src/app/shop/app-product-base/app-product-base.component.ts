@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { LeftNavMode } from 'src/app/shared/enums/leftNavMode';
 import { Member } from 'src/app/shared/models/member';
 import { ShopParams } from 'src/app/shared/models/shopParams';
@@ -12,8 +11,8 @@ import { ICategory } from 'd:/Codes/Home/Kuyumdan/client/src/app/shared/models/c
   styleUrls: ['./app-product-base.component.scss'],
 })
 export class AppProductBaseComponent implements OnInit {
-  categoryName;
-  mainCategoryName;
+  categoryName: string;
+  mainCategoryName: string;
   allCategories: ICategory[];
   selectedCategory: ICategory;
   shopParams: ShopParams;
@@ -22,16 +21,16 @@ export class AppProductBaseComponent implements OnInit {
   filteredCategories: ICategory[];
   member: Member;
 
-  constructor(private route: ActivatedRoute, private shopService: ShopService, private router: Router) {}
+  constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
-    this.shopService.productAdded.subscribe((a) => {
-      this.allCategories = a.allCategories;
-      this.selectedCategory = a.sCategory;
-      this.shopParams = a.shopParams;
-      this.mainCategoryName = a.mainCategoryName;
-      this.mode = a.mode;
-      this.member = a.member;
+    this.shopService.productsFetched.subscribe((props) => {
+      this.allCategories = props.allCategories;
+      this.selectedCategory = props.selectedCategory;
+      this.shopParams = props.shopParams;
+      this.mainCategoryName = props.mainCategoryName;
+      this.mode = props.leftNavMode;
+      this.member = props.member;
 
       this.filteredCategories = this.allCategories.filter((x) => x.parent === undefined && x.count);
       this.shopService.fillParentCategoryList(this.selectedCategory);

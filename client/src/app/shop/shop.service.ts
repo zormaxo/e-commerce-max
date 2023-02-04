@@ -36,12 +36,12 @@ export class ShopService {
   // searchTerm: string; //relation between nav and productList
 
   //For base
-  productAdded = new Subject<{
+  productsFetched = new Subject<{
     allCategories: ICategory[];
-    sCategory: ICategory;
+    selectedCategory: ICategory;
     shopParams: ShopParams;
     mainCategoryName: string;
-    mode: LeftNavMode;
+    leftNavMode: LeftNavMode;
     member: Member;
   }>();
 

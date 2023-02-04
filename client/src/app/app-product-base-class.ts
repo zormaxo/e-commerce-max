@@ -1,5 +1,5 @@
 import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
-import { Navigation, ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MembersService } from './core/services/members.service';
 import { LeftNavMode } from './shared/enums/leftNavMode';
@@ -12,7 +12,7 @@ import { ShopService } from './shop/shop.service';
 
 @Directive()
 export abstract class AppProductBaseClass implements OnInit, OnDestroy {
- shopParams: ShopParams;
+  shopParams: ShopParams;
   filterShopParams: ShopParams; //This button has been added to add filter buttons after pressing the search button.
   products: Product[];
   totalCount: number;
@@ -20,25 +20,25 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   categoryName: string;
   mainCategoryName: string;
   selectedCategory: ICategory;
-  navigation: Navigation;
+  // navigation: Navigation;
 
   route: ActivatedRoute;
   router: Router;
   shopService: ShopService;
-  memberService: MembersService;
+  membersService: MembersService;
   leftNavMode = LeftNavMode.AllProducts;
   member: Member;
-  subs: Subscription;
-  subs2: Subscription;
+  categorySelectedSubs: Subscription;
+  searchClickedSubs: Subscription;
 
   constructor(injector: Injector) {
     this.route = injector.get(ActivatedRoute);
     this.router = injector.get(Router);
     this.shopService = injector.get(ShopService);
-    this.memberService = injector.get(MembersService);
+    this.membersService = injector.get(MembersService);
 
     this.shopParams = this.shopService.getShopParams();
-    
+
     // const navigation = this.router.getCurrentNavigation();
     // this.shopParams.search = navigation?.extras?.state?.searchTerm;
     // this.shopParams.cityId = navigation?.extras?.state?.cityId ?? 0;
@@ -47,10 +47,6 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
     if (this.shopParams.search || this.shopParams.cityId || this.shopParams.countyId) {
       this.filterShopParams = this.shopParams;
     }
-  }
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-    this.subs2.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -66,13 +62,13 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
       this.getCategoriesThenProducts();
     });
 
-    this.subs2 = this.shopService.searchClicked.subscribe((shopParams: ShopParams) => {
+    this.searchClickedSubs = this.shopService.searchClicked.subscribe((shopParams: ShopParams) => {
       this.shopParams = shopParams;
       this.filterShopParams = structuredClone(shopParams);
-      this.getProducts2();
+      this.getProductsFromInherited();
     });
 
-    this.subs = this.shopService.categorySelected.subscribe((category: ICategory) => {
+    this.categorySelectedSubs = this.shopService.categorySelected.subscribe((category: ICategory) => {
       if (category) {
         this.shopParams.categoryName = category.url;
       } else {
@@ -87,34 +83,28 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
     this.shopService.getCategories().subscribe((categories) => {
       this.allCategories = categories;
       this.selectedCategory = this.allCategories.find((x) => x.url == this.shopParams.categoryName);
-      // if (!this.selectedCategory) {
-      //   this.router.navigateByUrl('/notfound');
-      // } else {
-      //   this.getProducts2();
-      // }
-
-      this.getProducts2();
+      this.getProductsFromInherited();
     });
   }
 
   onPageChanged(event: number) {
     if (this.shopParams.pageNumber !== event) {
       this.shopParams.pageNumber = event;
-      this.getProducts2();
+      this.getProductsFromInherited();
     }
   }
 
   onHeaderClicked(sortText: string) {
     this.shopParams.sort = sortText;
-    this.getProducts2();
+    this.getProductsFromInherited();
   }
 
   onRemoveFilterClick(event: ShopParams) {
     this.shopParams = structuredClone(event);
-    this.getProducts2();
+    this.getProductsFromInherited();
   }
 
-  getProducts2() {
+  getProductsFromInherited() {
     this.getProducts().subscribe((productResponse: Pagination<Product[]>) => {
       this.products = productResponse.data;
       this.shopParams.pageNumber = productResponse.pageIndex;
@@ -123,15 +113,20 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
 
       this.shopService.calculateProductCountsByCategory(this.allCategories, productResponse.categoryGroupCount);
 
-      this.shopService.productAdded.next({
+      this.shopService.productsFetched.next({
         allCategories: this.allCategories,
-        sCategory: this.selectedCategory,
+        selectedCategory: this.selectedCategory,
         shopParams: this.shopParams,
         mainCategoryName: this.mainCategoryName,
-        mode: this.leftNavMode,
+        leftNavMode: this.leftNavMode,
         member: this.member,
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.categorySelectedSubs.unsubscribe();
+    this.searchClickedSubs.unsubscribe();
   }
 
   abstract getProducts();
