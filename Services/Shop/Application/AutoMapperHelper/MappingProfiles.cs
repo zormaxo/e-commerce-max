@@ -10,6 +10,7 @@ using Shop.Core.Shared.Dtos.Member;
 using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Account;
 using Shop.Shared.Dtos.Basket;
+using Shop.Shared.Dtos.Member;
 using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.AutoMapperHelper;
@@ -55,7 +56,7 @@ public class MappingProfiles : Profile
             .ForAllMembers(opts => opts.Condition((_, __, srcMember) => srcMember != null));
         CreateMap<MemberNameUpdateDto, MemberUpdateDto>();
         CreateMap<MemberPhoneUpdateDto, MemberUpdateDto>();
-        CreateMap<MemberUsernameUpdateDto, MemberUpdateDto>();
+        CreateMap<MemberEmailUpdateDto, MemberUpdateDto>();
         CreateMap<MemberDto, MemberLightDto>();
 
         CreateMap<Category, CategoryDto>();

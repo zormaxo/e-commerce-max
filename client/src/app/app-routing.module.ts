@@ -13,6 +13,11 @@ import { AdminGuard } from './core/guards/admin.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'showcase', pathMatch: 'full' },
   {
+    path: 'signin',
+    loadChildren: () => import('./account/account.module').then((mod) => mod.AccountModule),
+  },
+
+  {
     path: '',
     component: HomeComponent,
     children: [
@@ -81,10 +86,6 @@ const routes: Routes = [
       //   component: UserProductsComponent,
       // },
     ],
-  },
-  {
-    path: 'giris',
-    loadChildren: () => import('./account/account.module').then((mod) => mod.AccountModule),
   },
 
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },

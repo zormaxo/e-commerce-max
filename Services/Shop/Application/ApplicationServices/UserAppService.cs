@@ -7,6 +7,7 @@ using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Member;
+using Shop.Shared.Dtos.Member;
 using System.Net;
 
 namespace Shop.Application.ApplicationServices;
@@ -75,7 +76,7 @@ public class UserAppService : BaseAppService
 
         var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 
-        if (photo.IsMain)
+        if (photo is null || photo.IsMain)
             throw new ApiException("This is already your main photo");
 
         var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);

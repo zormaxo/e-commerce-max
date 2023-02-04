@@ -72,7 +72,13 @@ public static class StoreContextSeed
                     await userManager.AddToRoleAsync(user, "Member");
                 }
 
-                var admin = new AppUser { UserName = "admin@admin.com", Email = "admin@admin.com" };
+                var admin = new AppUser
+                {
+                    UserName = "admin@admin.com",
+                    Email = "admin@admin.com",
+                    FirstName = "Admin",
+                    LastName = "Admin"
+                };
 
                 await userManager.CreateAsync(admin, "1234");
                 await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });

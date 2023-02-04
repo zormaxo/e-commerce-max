@@ -7,6 +7,7 @@ using Shop.Application.Extensions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Member;
+using Shop.Shared.Dtos.Member;
 
 namespace Shop.API.Controllers;
 
@@ -59,7 +60,7 @@ public class UsersController : BaseApiController
     }
 
     [HttpPut("update-username")]
-    public async Task UpdateUsername(MemberUsernameUpdateDto memberUsernameUpdateDto)
+    public async Task UpdateUsername(MemberEmailUpdateDto memberUsernameUpdateDto)
     {
         var memberUpdateDto = new MemberUpdateDto();
         _mapper.Map(memberUsernameUpdateDto, memberUpdateDto);
