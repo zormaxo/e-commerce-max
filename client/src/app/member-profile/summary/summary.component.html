@@ -1,45 +1,47 @@
+<h5>{{ "summary" | titlecase }}</h5>
+<hr />
 <div class="row" *ngIf="counts">
-  <div class="col-4">
+  <div class="col-12 col-md-4">
     <div class="card mb-3">
       <div class="card-body align-items-center">
         <div class="row">
           <div class="col-9">
-            <p class="card-text">Yayında olan ilan sayısı</p>
+            <p class="card-text">Number of ads on air</p>
           </div>
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.activeProducts }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['ilanlar']" routerLinkActive="active"></a>
+          <a class="stretched-link" [routerLink]="['ads']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-12 col-md-4">
     <div class="card mb-3">
       <div class="card-body align-items-center">
         <div class="row">
           <div class="col-9">
-            <p class="card-text">Toplam ilan sayısı</p>
+            <p class="card-text">Total number of ads</p>
           </div>
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.activeProducts + counts.inactiveProducts }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['ilanlar/pasif']" routerLinkActive="active"></a>
+          <a class="stretched-link" [routerLink]="['ads/inactive']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-12 col-md-4">
     <div class="card mb-3">
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col-9">
-            <p class="card-text">Favori ilan sayısı</p>
+            <p class="card-text">Number of favorite ads</p>
           </div>
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.favourites }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['ilanlar/favoriler']" routerLinkActive="active"></a>
+          <a class="stretched-link" [routerLink]="['ads/favorites']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>

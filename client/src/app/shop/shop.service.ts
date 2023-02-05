@@ -17,6 +17,7 @@ import { Member } from '../shared/models/member';
   providedIn: 'root',
 })
 export class ShopService {
+  innerWidth: number;
   baseUrl = environment.apiUrl;
   products: Product[] = [];
   categories: ICategory[] = [];

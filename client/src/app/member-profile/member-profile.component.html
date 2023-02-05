@@ -3,32 +3,29 @@
     <div class="card">
       <div class="card-header h6">User Information</div>
       <ul class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action small" routerLink="/uye/uyelik" routerLinkActive="active">
+        <a class="list-group-item list-group-item-action small" routerLink="/member/membership" routerLinkActive="active">
           Membership Info
         </a>
       </ul>
       <div class="card-header h6">My Ads</div>
       <ul class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action small" routerLink="/uye/ozet" routerLinkActive="active">
+        <a class="list-group-item list-group-item-action small" routerLink="/member/summary" routerLinkActive="active">
           Summary
         </a>
         <a
           class="list-group-item list-group-item-action small"
-          routerLink="/uye/ilanlar"
+          routerLink="/member/ads"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
           On Air
         </a>
         <a
           class="list-group-item list-group-item-action small"
-          routerLink="/uye/ilanlar/pasif"
+          routerLink="/member/ads/inactive"
           routerLinkActive="active">
           Not on Air
         </a>
-        <a
-          class="list-group-item list-group-item-action small"
-          routerLink="/uye/favoriler"
-          routerLinkActive="active">
+        <a class="list-group-item list-group-item-action small" routerLink="/member/favorites" routerLinkActive="active">
           Favorites
         </a>
       </ul>

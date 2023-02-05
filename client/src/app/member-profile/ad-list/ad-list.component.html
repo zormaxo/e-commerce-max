@@ -1,9 +1,14 @@
+<h5>{{ page | titlecase }}</h5>
+<hr />
+
 <ng-container *ngFor="let product of products; let i = index">
   <div class="card mb-3 shadow" style="background-color: #00000008; height: 180px">
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <p class="card-title h6">{{ product.name }}</p>
+          <a [class.stretched-link]="page === 'favorites'" [routerLink]="['/product', product.id]">
+            <p class="card-title h6">{{ product.name }}</p></a
+          >
         </div>
         <div class="col-auto">
           <p style="color: brown" class="h6">{{ product.priceText }}</p>
@@ -20,13 +25,13 @@
         <div class="col">
           <div class="row">
             <p class="card-text small">{{ product.name }}</p>
-            <div class="text-end">
+            <div class="text-end" *ngIf="!this.shopParams.favourite">
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
                   Actions
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/uye/uyelik/ilan/duzenle">Edit</a></li>
+                  <li><a class="dropdown-item" routerLink="/member/membership/ilan/duzenle">Edit</a></li>
                   <li *ngIf="this.activeStatus">
                     <a class="dropdown-item" (click)="onActive(product, false)">Unpublish</a>
                   </li>

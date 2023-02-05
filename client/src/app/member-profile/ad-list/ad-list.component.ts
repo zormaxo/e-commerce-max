@@ -36,17 +36,17 @@ export class AdListComponent implements OnInit {
     });
 
     switch (this.page) {
-      case 'active':
+      case 'active ads':
         this.activeStatus = true;
         this.shopParams.getAllStatus = undefined;
         this.shopParams.favourite = false;
         break;
-      case 'inactive':
+      case 'inactive ads':
         this.activeStatus = false;
         this.shopParams.getAllStatus = false;
         this.shopParams.favourite = false;
         break;
-      case 'favourites':
+      case 'favorites':
         this.activeStatus = true;
         this.shopParams.getAllStatus = true;
         this.shopParams.favourite = true;
@@ -71,7 +71,7 @@ export class AdListComponent implements OnInit {
   onActive(product: Product, activeStatus: boolean) {
     product.isActive = activeStatus;
     this.shopService.changeActiveStatus(product).subscribe(() => {
-      this.toastr.success(`${activeStatus ? 'Aktif' : 'Pasif'} edildi`);
+      this.toastr.success(`${activeStatus ? 'Aktif' : 'Inactive'} edildi`);
       this.getProducts();
     });
   }

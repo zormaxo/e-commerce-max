@@ -51,7 +51,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'uye',
+        path: 'member',
         canActivate: [AuthGuard],
         loadChildren: () => import('./member-profile/member-profile.module').then((mod) => mod.MemberProfileModule),
       },

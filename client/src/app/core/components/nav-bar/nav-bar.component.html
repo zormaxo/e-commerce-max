@@ -41,7 +41,7 @@
               role="menu"
               aria-labelledby="button-basic">
               <li role="menuitem">
-                <a class="dropdown-item small" routerLink="/uye/uyelik">My Profile</a>
+                <a class="dropdown-item small" routerLink="/member/membership">My Profile</a>
               </li>
               <li role="menuitem" *appHasRole="['Admin', 'Moderator']">
                 <a class="dropdown-item small" routerLink="/admin">Admin</a>
@@ -112,12 +112,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-warning py-0 border-0" type="button">
+        <a class="btn btn-outline-warning py-0 border-0"  routerLink="/member/favorites" type="button">
           <em class="fa-solid fa-star"></em>
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="btn btn-outline-warning py-0 border-0" type="button">
+        <a class="btn btn-outline-warning py-0 border-0" routerLink="/member/mobile" type="button">
           <em class="fa-solid fa-user"></em>
         </a>
       </li>
