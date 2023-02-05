@@ -36,4 +36,9 @@ export class MainMenuComponent {
         },
       });
   }
+
+  navigate(segment1, segment2) {
+    this.shopService.resetShopParams();
+    this.router.navigateByUrl(`/${segment1}/${segment2}`);
+  }
 }

@@ -5,7 +5,8 @@
         <img src="{{ '../../assets/icons/' + category.url + '.svg' }}" alt="" style="width: 20px" />
         <a
           class="m-1 fw-bold text-dark"
-          [routerLink]="['/', category.url, category.url]"
+          (click)="navigate(category.url, category.url)"
+          [routerLink]=""
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasExample"
           >{{ category.name }}</a
@@ -30,8 +31,9 @@
         <div class="accordion-body p-0 pb-1">
           <div *ngFor="let child of category.childCategories">
             <a
-              class=" link-dark"
-              [routerLink]="['/', category.url, child.url]"
+              (click)="navigate(category.url, child.url)"
+              class="link-dark"
+              [routerLink]=""
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasExample"
               >{{ child.name }}
