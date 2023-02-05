@@ -54,7 +54,6 @@ public class MappingProfiles : Profile
         CreateMap<MemberNameUpdateDto, MemberUpdateDto>();
         CreateMap<MemberPhoneUpdateDto, MemberUpdateDto>();
         CreateMap<MemberEmailUpdateDto, MemberUpdateDto>();
-        CreateMap<MemberDto, MemberLightDto>();
 
         CreateMap<Category, CategoryDto>();
         CreateMap<County, CountyDto>();

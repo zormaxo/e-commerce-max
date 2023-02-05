@@ -9,9 +9,19 @@ import { SummaryComponent } from './summary/summary.component';
 import { AdListComponent } from './ad-list/ad-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { MemberProfileNavComponent } from './member-profile-nav/member-profile-nav.component';
+import { MemberMessagesComponent } from './member-messages/member-messages.component';
+import { MessagesOutlookComponent } from './messages-outlook/messages-outlook.component';
 
 @NgModule({
-  declarations: [MemberProfileComponent, MembershipInfoComponent, SummaryComponent, AdListComponent, MemberProfileNavComponent],
+  declarations: [
+    MemberProfileComponent,
+    MembershipInfoComponent,
+    SummaryComponent,
+    AdListComponent,
+    MemberProfileNavComponent,
+    MemberMessagesComponent,
+    MessagesOutlookComponent,
+  ],
   imports: [CommonModule, FormsModule, MemberProfileRoutingModule, InputMaskModule, SharedModule],
   exports: [],
 })
