@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PreventUnsavedChangesGuard } from '../core/guards/prevent-unsaved-changes.guard';
+import { MemberGetDetailResolver } from './member-getdetailed.resolver';
 import { AdListComponent } from './ad-list/ad-list.component';
 import { MemberMessagesComponent } from './member-messages/member-messages.component';
 import { MemberProfileNavComponent } from './member-profile-nav/member-profile-nav.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'ads/inactive', component: AdListComponent, data: { page: 'inactive ads' } },
       { path: 'favorites', component: AdListComponent, data: { page: 'favorites' } },
       { path: 'messages', component: MessagesOutlookComponent },
+      { path: 'messages/:userId', component: MemberMessagesComponent, resolve: { member: MemberGetDetailResolver } },
     ],
   },
 ];

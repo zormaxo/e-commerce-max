@@ -37,7 +37,8 @@ public class MappingProfiles : Profile
             .ForMember(d => d.CreatedDate, o => o.MapFrom(src => src.CreatedDate.ToString("d")));
 
         CreateMap<AppUser, MemberDto>()
-            .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));
+            .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
 
         CreateMap<ProductPhoto, PhotoDto>().ForMember(d => d.Url, o => o.MapFrom<PhotoUrlResolver>());
 

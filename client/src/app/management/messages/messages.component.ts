@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../core/services/message.service';
-import { Message } from '../shared/models/message';
-import { Pagination2 } from '../shared/models/pagination2';
+import { MessageService } from '../../core/services/message.service';
+import { Message } from '../../shared/models/message';
+import { Pagination2 } from '../../shared/models/pagination2';
 
 @Component({
   selector: 'app-messages',
@@ -25,7 +25,7 @@ export class MessagesComponent implements OnInit {
   loadMessages() {
     this.loading = true;
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container).subscribe({
-      next: (response : any) => {
+      next: (response: any) => {
         this.messages = response.result.result;
         this.pagination = response.pagination;
         this.loading = false;

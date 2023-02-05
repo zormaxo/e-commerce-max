@@ -4,7 +4,7 @@ import { AppProductBaseComponent } from '../../app-product-base/app-product-base
 import { ComputerComponent } from './computer.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'makine', pathMatch: 'full' },
+  { path: '', redirectTo: 'computer', pathMatch: 'full' },
   { path: '', component: AppProductBaseComponent, children: [{ path: ':subcategory', component: ComputerComponent }] },
 ];
 

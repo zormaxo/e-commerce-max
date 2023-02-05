@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MessagesComponent } from '../messages/messages.component';
+import { MessagesComponent } from './messages/messages.component';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberDetailedResolver } from './member-detailed.resolver';
 import { MemberEditComponent } from './member-edit/member-edit.component';

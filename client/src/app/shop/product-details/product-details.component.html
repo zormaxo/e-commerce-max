@@ -102,7 +102,7 @@
             <a routerLink="/ads/{{ product.user.id }}">Other Ads</a>
             <p>Phone: {{ product.user.phoneNumber | mask : "(000) 000 00 00" }}</p>
           </div>
-          <a href="#" class="btn btn-primary btn-sm">Send message</a>
+          <a routerLink="/member/messages/{{ product.user.id }}" class="btn btn-primary btn-sm">Send message</a>
         </div>
       </div>
     </div>

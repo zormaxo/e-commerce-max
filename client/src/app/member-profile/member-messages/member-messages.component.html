@@ -1,3 +1,7 @@
+<div>
+   <strong> {{ member.firstName }} - {{ member.email }}</strong>
+</div>
+<hr />
 <div class="card">
   <div class="card-body" #scrollMe style="overflow: scroll; height: 535px" [scrollTop]="scrollMe.scrollHeight">
     <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
@@ -13,7 +17,7 @@
           <div class="chat-body">
             <div class="header">
               <small class="text-muted">
-                <span class="fa fa-clock-o">{{ message.messageSent | timeago }}</span>
+                <span><i class="fa-solid fa-clock"></i> {{ message.messageSent | timeago }} </span>
                 <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username"
                   >(unread)</span
                 >
@@ -22,7 +26,7 @@
                 >
               </small>
             </div>
-            <p>{{ message.content }}</p>
+            <div>{{ message.content }}</div>
           </div>
         </div>
       </li>

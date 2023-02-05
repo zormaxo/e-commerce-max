@@ -26,8 +26,8 @@ export class MessagesOutlookComponent implements OnInit {
   loadMessages() {
     this.loading = true;
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container).subscribe({
-      next: (response) => {
-        this.messages = response.result;
+      next: (response: any) => {
+        this.messages = response.result.result;
         this.pagination = response.pagination;
         this.loading = false;
       },

@@ -35,9 +35,10 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
     { return _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Id == id); }
 
     public Task<AppUser> GetUserByUsernameAsync(string username)
-    { return _context.Users.Include(p => p.Products).SingleOrDefaultAsync(x => x.UserName == username); }
+    { return _context.Users.Include(p => p.Products).Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == username); }
 
-    public Task<List<AppUser>> GetUsersAsync() { return _context.Users.Include(p => p.Products).ToListAsync(); }
+    public Task<List<AppUser>> GetUsersAsync()
+    { return _context.Users.Include(p => p.Products).Include(p => p.Photos).ToListAsync(); }
 
     public async Task<bool> SaveAllAsync() { return await _context.SaveChangesAsync() > 0; }
 

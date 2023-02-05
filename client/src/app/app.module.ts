@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
+import { MessagesComponent } from './management/messages/messages.component';
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
