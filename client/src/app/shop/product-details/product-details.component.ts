@@ -174,7 +174,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   addLike() {
-    this.shopService.AddOrRemoveFavourite(this.product.id).subscribe({
+    this.shopService.addOrRemoveFavourite(this.product.id).subscribe({
       next: () => {
         if (this.product.isFavourite) {
           this.toastr.error('Removed from favorites');

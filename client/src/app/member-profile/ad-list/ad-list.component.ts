@@ -40,31 +40,20 @@ export class AdListComponent implements OnInit {
         this.activeStatus = true;
         this.shopParams.getAllStatus = undefined;
         this.shopParams.favourite = false;
-        this.getProducts();
         break;
       case 'inactive':
         this.activeStatus = false;
         this.shopParams.getAllStatus = false;
         this.shopParams.favourite = false;
-        this.getProducts();
         break;
       case 'favourites':
         this.activeStatus = true;
         this.shopParams.getAllStatus = true;
         this.shopParams.favourite = true;
-           this.getProducts();
-        // this.getFavorites();
         break;
     }
-  }
 
-  getFavorites() {
-    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.shopParams.userId = user.userId;
-      this.shopService.getFavorites().subscribe((response) => {
-        this.products = response
-      });
-    });
+    this.getProducts();
   }
 
   getProducts() {

@@ -33,9 +33,8 @@ export class ShopService {
 
   categorySelected = new Subject<ICategory>();
   searchClicked = new Subject<ShopParams>();
-  // searchTerm: string; //relation between nav and productList
 
-  //For base
+  //For base component
   productsFetched = new Subject<{
     allCategories: ICategory[];
     selectedCategory: ICategory;
@@ -46,17 +45,6 @@ export class ShopService {
   }>();
 
   constructor(private http: HttpClient) {}
-
-  getFavorites() {
-    const shopParamsConst = structuredClone(this.shopParams);
-    const params: HttpParams = this.generateHttpParams(shopParamsConst);
-
-    return this.http.get<ApiResponse<Product[]>>(this.baseUrl + 'products/favorites', { params }).pipe(
-      map((response) => {
-        return response.result;
-      })
-    );
-  }
 
   getProducts(useCache = true): Observable<Pagination<Product[]>> {
     const shopParamsConst = structuredClone(this.shopParams);
@@ -95,11 +83,11 @@ export class ShopService {
     );
   }
 
-  // updateProduct(product: Product) {
-  //   return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
-  // }
+  updateProduct(product: Product) {
+    return this.http.post<number>(this.baseUrl + 'products/update-product/', product);
+  }
 
-  AddOrRemoveFavourite(productId: number) {
+  addOrRemoveFavourite(productId: number) {
     return this.http.post(this.baseUrl + 'products/add-remove-favourite/' + productId, {});
   }
 
