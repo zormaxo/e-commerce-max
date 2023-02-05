@@ -47,6 +47,17 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
+  getFavorites() {
+    const shopParamsConst = structuredClone(this.shopParams);
+    const params: HttpParams = this.generateHttpParams(shopParamsConst);
+
+    return this.http.get<ApiResponse<Product[]>>(this.baseUrl + 'products/favorites', { params }).pipe(
+      map((response) => {
+        return response.result;
+      })
+    );
+  }
+
   getProducts(useCache = true): Observable<Pagination<Product[]>> {
     const shopParamsConst = structuredClone(this.shopParams);
 

@@ -52,6 +52,7 @@ public class Startup
         services.AddDbContext<StoreContext>(
             opt =>
             {
+                opt.EnableSensitiveDataLogging();
                 opt.UseNpgsql(connString);
             });
 

@@ -48,11 +48,17 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .WhereIf(productSpecParams.CountyId.HasValue, p => p.County.Id == productSpecParams.CountyId)
             .WhereIf(productSpecParams.CityId.HasValue, p => p.County.CityId == productSpecParams.CityId)
             .WhereIf(!productSpecParams.GetAllStatus.HasValue, p => p.IsActive) //true: All, false: InActive, null: Active
-            .WhereIf(productSpecParams.GetAllStatus.HasValue && productSpecParams.GetAllStatus == false, p => !p.IsActive)
-            .WhereIf(
-                productSpecParams.Favourite.HasValue && productSpecParams.Favourite == true,
-                x => x.Favourites.Any(y => y.UserId == productSpecParams.UserId))
-            .WhereIf(productSpecParams.UserId.HasValue, p => p.UserId == productSpecParams.UserId);
+            .WhereIf(productSpecParams.GetAllStatus.HasValue && productSpecParams.GetAllStatus == false, p => !p.IsActive);
+
+        if (productSpecParams.Favourite.HasValue && productSpecParams.Favourite == true)
+        {
+            FilteredProducts = FilteredProducts.Where(x => x.Favourites.Any(y => y.UserId == productSpecParams.UserId));
+        }
+        else if (productSpecParams.UserId.HasValue)
+        {
+            FilteredProducts = FilteredProducts.Where(p => p.UserId == productSpecParams.UserId);
+        }
+
 
         AddCategoryFiltering();
 

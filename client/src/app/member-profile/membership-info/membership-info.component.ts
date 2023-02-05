@@ -44,13 +44,22 @@ export class MembershipInfoComponent implements OnInit {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => (this.user = user));
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
   ngOnInit(): void {
     this.loadMember();
     this.initializeUploader();
+  }
+
+  loadMember() {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+      this.memberService.getMember(user.userId).subscribe((member: Member) => {
+        this.member = member;
+        this.memberClone = structuredClone(this.member);
+      });
+    });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   fileOverBase(e: any) {
@@ -91,15 +100,6 @@ export class MembershipInfoComponent implements OnInit {
   deletePhoto(photoId: number) {
     this.memberService.deletePhoto(photoId).subscribe(() => {
       this.member.photos = this.member.photos.filter((x) => x.id !== photoId);
-    });
-  }
-
-  loadMember() {
-    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.memberService.getMember(user.userId).subscribe((member: Member) => {
-        this.member = member;
-        this.memberClone = structuredClone(this.member);
-      });
     });
   }
 

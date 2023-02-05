@@ -1,29 +1,29 @@
 <div class="row" *ngIf="accountService.currentUser$ | async as user">
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div class="card">
-      <div class="card-header h6">Kullanıcı Bilgilerim</div>
+      <div class="card-header h6">User Information</div>
       <ul class="list-group list-group-flush">
         <a class="list-group-item list-group-item-action small" routerLink="/uye/uyelik" routerLinkActive="active">
           Membership Information
         </a>
       </ul>
-      <div class="card-header h6">İlanlarım</div>
+      <div class="card-header h6">My Ads</div>
       <ul class="list-group list-group-flush">
         <a class="list-group-item list-group-item-action small" routerLink="/uye/ozet" routerLinkActive="active">
-          Özet
+          Summary
         </a>
         <a
           class="list-group-item list-group-item-action small"
           routerLink="/uye/ilanlar"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
-          Yayında Olanlar
+          On Air
         </a>
         <a
           class="list-group-item list-group-item-action small"
           routerLink="/uye/ilanlar/pasif"
           routerLinkActive="active">
-          Yayında Olmayanlar
+          Not on Air
         </a>
         <a
           class="list-group-item list-group-item-action small"

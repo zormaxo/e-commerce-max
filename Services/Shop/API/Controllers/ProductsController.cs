@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
+using Shop.Application.Extensions;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Core.Shared;
 using Shop.Core.Shared.Dtos;
 using Shop.Core.Shared.Dtos.Product;
 using Shop.Shared.Dtos.Product;
-using Shop.Application.Extensions;
 
 namespace Shop.API.Controllers;
 

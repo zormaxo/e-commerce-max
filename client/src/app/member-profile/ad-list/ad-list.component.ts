@@ -17,7 +17,7 @@ registerLocaleData(localeTr);
 })
 export class AdListComponent implements OnInit {
   products: Product[];
-  shopParams = new ShopParams(10);
+  shopParams: ShopParams;
   totalCount: number;
   activeStatus: boolean;
   page: string;
@@ -30,6 +30,7 @@ export class AdListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.shopParams = this.shopService.getShopParams();
     this.route.data.subscribe((data: Data) => {
       this.page = data['page'];
     });
@@ -37,24 +38,39 @@ export class AdListComponent implements OnInit {
     switch (this.page) {
       case 'active':
         this.activeStatus = true;
+        this.shopParams.getAllStatus = undefined;
+        this.shopParams.favourite = false;
+        this.getProducts();
         break;
       case 'inactive':
         this.activeStatus = false;
         this.shopParams.getAllStatus = false;
+        this.shopParams.favourite = false;
+        this.getProducts();
         break;
       case 'favourites':
+        this.activeStatus = true;
         this.shopParams.getAllStatus = true;
         this.shopParams.favourite = true;
+           this.getProducts();
+        // this.getFavorites();
         break;
     }
+  }
 
-    this.getProducts();
+  getFavorites() {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+      this.shopParams.userId = user.userId;
+      this.shopService.getFavorites().subscribe((response) => {
+        this.products = response
+      });
+    });
   }
 
   getProducts() {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
       this.shopParams.userId = user.userId;
-      this.shopService.getProducts().subscribe((response) => {
+      this.shopService.getProducts(false).subscribe((response) => {
         this.products = response.data;
         this.shopParams.pageNumber = response.pageIndex;
         this.shopParams.pageSize = response.pageSize;
