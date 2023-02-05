@@ -6,6 +6,7 @@ import { MemberMessagesComponent } from './member-messages/member-messages.compo
 import { MemberProfileNavComponent } from './member-profile-nav/member-profile-nav.component';
 import { MemberProfileComponent } from './member-profile.component';
 import { MembershipInfoComponent } from './membership-info/membership-info.component';
+import { MessagesOutlookComponent } from './messages-outlook/messages-outlook.component';
 import { SummaryComponent } from './summary/summary.component';
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
       { path: 'ads', component: AdListComponent, data: { page: 'active ads' } },
       { path: 'ads/inactive', component: AdListComponent, data: { page: 'inactive ads' } },
       { path: 'favorites', component: AdListComponent, data: { page: 'favorites' } },
-      { path: 'messages', component: MemberMessagesComponent },
+      { path: 'messages', component: MessagesOutlookComponent },
     ],
   },
 ];

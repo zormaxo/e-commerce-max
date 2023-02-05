@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'src/app/core/services/message.service';
 import { Message } from 'src/app/shared/models/message';
 import { Pagination } from 'src/app/shared/models/pagination';
@@ -9,7 +9,7 @@ import { Pagination2 } from 'src/app/shared/models/pagination2';
   templateUrl: './messages-outlook.component.html',
   styleUrls: ['./messages-outlook.component.scss'],
 })
-export class MessagesOutlookComponent {
+export class MessagesOutlookComponent implements OnInit {
   messages?: Message[];
   pagination?: Pagination2;
   container = 'Unread';
