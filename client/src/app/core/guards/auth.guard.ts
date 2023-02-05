@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       map((user) => {
         if (user) return true;
 
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/signin');
         this.toastr.error('You shall not pass!');
       })
     );

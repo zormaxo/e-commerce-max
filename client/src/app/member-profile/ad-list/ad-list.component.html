@@ -2,15 +2,15 @@
 <hr />
 
 <ng-container *ngFor="let product of products; let i = index">
-  <div class="card mb-3 shadow" style="background-color: #00000008; height: 180px">
+  <div class="card mb-3 shadow" style="background-color: #00000008; height: 160px">
     <div class="card-body">
       <div class="row">
-        <div class="col">
-          <a [class.stretched-link]="page === 'favorites'" [routerLink]="['/product', product.id]">
-            <p class="card-title h6">{{ product.name }}</p></a
+        <div class="col-7 col-md-10">
+          <a  [routerLink]="['/product', product.id]">
+            <div class="card-title h6 text-decoration-underline text-truncate">{{ product.name }}</div></a
           >
         </div>
-        <div class="col-auto">
+        <div class="col-auto ms-auto">
           <p style="color: brown" class="h6">{{ product.priceText }}</p>
         </div>
       </div>

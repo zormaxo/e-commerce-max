@@ -112,10 +112,23 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-warning py-0 border-0"  routerLink="/member/favorites" type="button">
+        <a class="btn btn-outline-warning py-0 border-0" routerLink="/member/favorites" type="button">
           <em class="fa-solid fa-star"></em>
         </a>
       </li>
+      <li>
+        <a
+          class="btn btn-outline-warning py-0 border-0 position-relative"
+          type="button"
+          routerLink="/basket"
+          routerLinkActive="active">
+          <em class="fa-solid fa-shopping-cart"></em>
+          <div *ngIf="basketService.basketSource$ | async as basket" class="cart-no">
+            {{ getCount(basket.items) }}
+          </div>
+        </a>
+      </li>
+
       <li class="nav-item dropdown">
         <a class="btn btn-outline-warning py-0 border-0" routerLink="/member/mobile" type="button">
           <em class="fa-solid fa-user"></em>
