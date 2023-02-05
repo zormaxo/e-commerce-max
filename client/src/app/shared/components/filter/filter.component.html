@@ -1,9 +1,9 @@
 <form #form="ngForm" (ngSubmit)="onSearch()">
-  <div class="accordion mt-3">
+  <div class="accordion">
     <div class="accordion-item" *ngIf="filterAreas.isNew">
       <h2 class="accordion-header">
         <button
-          class="accordion-button px-3 py-2"
+          class="accordion-button px-3 py-1"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#panelsStayOpen-collapseOne">
@@ -11,7 +11,7 @@
         </button>
       </h2>
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-        <div class="accordion-body px-3 py-2">
+        <div class="accordion-body px-3 py-1">
           <div class="form-check">
             <input
               class="form-check-input"
@@ -38,7 +38,7 @@
     <div class="accordion-item" *ngIf="filterAreas.maxValue">
       <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
         <button
-          class="accordion-button collapsed px-3 py-2"
+          class="accordion-button collapsed px-3 py-1"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#panelsStayOpen-collapseTwo">
@@ -46,7 +46,7 @@
         </button>
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-        <div class="accordion-body px-3 py-2">
+        <div class="accordion-body px-3 py-1">
           <div class="btn-group mb-1">
             <input
               type="radio"

@@ -1,5 +1,57 @@
 <div class="row">
   <app-breadcrumb *ngIf="mode === LeftNavMode.AllProducts"></app-breadcrumb>
+  <div class="mb-3 d-sm-none">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button collapsed px-3 py-1"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne">
+            Navigation
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body p-0">
+            <app-left-nav
+              *ngIf="allCategories"
+              [filteredCategories]="filteredCategories"
+              [leftNavMode]="mode"></app-left-nav>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button
+            class="accordion-button collapsed px-3 py-1"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo">
+            Filter
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body p-0">
+            <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section class="d-none d-sm-block col-sm-4 col-md-3">
     <div *ngIf="member" class="card small mb-3">
       <div class="card-body">
@@ -18,7 +70,9 @@
         </div>
       </div>
     </div>
+
     <app-left-nav *ngIf="allCategories" [filteredCategories]="filteredCategories" [leftNavMode]="mode"></app-left-nav>
+    <div class="mb-3"></div>
     <app-filter *ngIf="shopParams" [categoryName]="mainCategoryName" [shopParams]="shopParams"></app-filter>
   </section>
   <section class="col-sm-8 col-md-9">
