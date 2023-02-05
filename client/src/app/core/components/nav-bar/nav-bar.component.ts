@@ -35,10 +35,17 @@ export class NavBarComponent {
   }
 
   onSearch(event?: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.value) {
+    let searchTerm = undefined;
+    if (event) {
+      const input = event.target as HTMLInputElement;
+      searchTerm = input.value;
+    } else {
+      searchTerm = this.shopService.shopParams.search;
+    }
+
+    if (searchTerm) {
       this.router.navigate(['search-result'], {
-        queryParams: { 'search-term': input.value },
+        queryParams: { 'search-term': searchTerm },
       });
     } else {
       this.shopService.shopParams.search = '';

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
 
 @Component({
@@ -7,5 +8,10 @@ import { AccountService } from 'src/app/account/account.service';
   styleUrls: ['./member-profile-nav.component.scss'],
 })
 export class MemberProfileNavComponent {
-  constructor(public accountService: AccountService) {}
+  constructor(public accountService: AccountService, private router: Router) {}
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl('');
+  }
 }
