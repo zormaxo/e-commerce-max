@@ -1,4 +1,6 @@
-﻿namespace Shop.Shared.Dtos;
+﻿using Shop.Shared.Dtos.Member;
+
+namespace Shop.Shared.Dtos;
 
 public class MessageDto
 {
@@ -9,6 +11,10 @@ public class MessageDto
     public string SenderUsername { get; set; }
 
     public string SenderPhotoUrl { get; set; }
+
+    public MemberDto Sender { get; set; }
+
+    public MemberDto Recipient { get; set; }
 
     public int RecipientId { get; set; }
 

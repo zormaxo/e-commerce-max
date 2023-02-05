@@ -55,8 +55,9 @@ public class MessageRepository : IMessageRepository
 
         var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
 
-        return await PagedList<MessageDto>
+        var omer = await PagedList<MessageDto>
             .CreateAsync(messages, messageParams.PageIndex, messageParams.PageSize);
+        return omer;
     }
 
     public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientUserName)

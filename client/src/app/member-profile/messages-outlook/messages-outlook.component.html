@@ -31,9 +31,8 @@
         [hidden]="loading"
         *ngFor="let message of messages"
         routerLink="{{
-          container === 'Outbox' ? '/members/' + message.recipientUsername : '/members/' + message.senderUsername
-        }}"
-        [queryParams]="{ tab: 'Messages' }">
+          container === 'Outbox' ? '/member/messages/' + message.recipient.id : '/member/messages/' + message.sender.id
+        }}">
         <td>{{ message.content }}</td>
         <td>
           <div *ngIf="container === 'Outbox'">
@@ -41,14 +40,14 @@
               class="img-circle rounded-circle me-2"
               src="{{ message.recipientPhotoUrl || './assets/user.png' }}"
               alt="recipient photo" />
-            <strong>{{ message.recipientUsername | titlecase }}</strong>
+            <strong>{{ message.recipient.firstName | titlecase }}</strong>
           </div>
           <div *ngIf="container !== 'Outbox'">
             <img
               class="img-circle rounded-circle me-2"
               src="{{ message.senderPhotoUrl || './assets/user.png' }}"
               alt="recipient photo" />
-            <strong>{{ message.senderUsername | titlecase }}</strong>
+            <strong>{{ message.sender.firstName | titlecase }}</strong>
           </div>
         </td>
         <td>{{ message.messageSent | timeago }}</td>

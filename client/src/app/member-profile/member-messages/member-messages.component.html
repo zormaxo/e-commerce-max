@@ -1,7 +1,7 @@
 <div>
   <strong> {{ member.firstName }} - {{ member.email }}</strong>
 </div>
-<hr />
+<hr class="my-1" />
 <div class="card">
   <div class="card-body" #scrollMe style="overflow: scroll; height: 535px" [scrollTop]="scrollMe.scrollHeight">
     <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
@@ -9,56 +9,67 @@
     </div>
 
     <ul *ngIf="(messageService.messageThread$ | async)!.length > 0" class="chat">
-      <li *ngFor="let message of messageService.messageThread$ | async">
-        <div class="row">
-          <div class="col-9 col-md-11">
-            <div class="row">
-              <div class="col-12 col-md-auto small text-muted">
-                <span><i class="fa-solid fa-clock"></i> {{ message.messageSent | timeago }} </span>
-              </div>
-              <div class="col-12 col-md-auto small">
-                <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username"
-                  >(read {{ message.dateRead | timeago }})</span
-                >
-                <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username"
-                  >(unread)</span
-                >
-              </div>
-              <div class="col-12">
-                <div>{{ message.content }}</div>
+      <ng-container>
+        <li *ngFor="let message of messageService.messageThread$ | async">
+          <div class="row" *ngIf="user.email === message.recipient.userName">
+            <div class="col-auto align-self-center">
+              <span class="chat-img">
+                <img
+                  class="rounded-circle"
+                  src="{{ message.senderPhotoUrl || './assets/user.png' }}"
+                  alt="image of user" />
+              </span>
+            </div>
+            <div class="col-9 col-md-11">
+              <div class="row">
+                <div class="col-12 col-md-auto small text-muted">
+                  <span><i class="fa-solid fa-clock"></i> {{ message.messageSent | timeago }} </span>
+                </div>
+                <div class="col-12 col-md-auto small">
+                  <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username"
+                    >(read {{ message.dateRead | timeago }})</span
+                  >
+                  <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username"
+                    >(unread)</span
+                  >
+                </div>
+                <div class="col-12">
+                  <div>{{ message.content }}</div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-3 col-md-1 align-self-center">
-            <span class="chat-img">
-              <img
-                class="rounded-circle"
-                src="{{ message.senderPhotoUrl || './assets/user.png' }}"
-                alt="image of user" />
-            </span>
-          </div>
-        </div>
 
-        <!-- <div>
-          <span class="chat-img float-end">
-            <img class="rounded-circle" src="{{ message.senderPhotoUrl || './assets/user.png' }}" alt="image of user" />
-          </span>
-          <div class="chat-body">
-            <div class="header">
-              <small class="text-muted">
-                <span><i class="fa-solid fa-clock"></i> {{ message.messageSent | timeago }} </span>
-                <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username"
-                  >(unread)</span
-                >
-                <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username"
-                  >(read {{ message.dateRead | timeago }})</span
-                >
-              </small>
+          <div class="row" *ngIf="user.email === message.sender.userName">
+            <div class="col-9 col-md-11">
+              <div class="row">
+                <div class="col-12 col-md-auto small text-muted">
+                  <span><i class="fa-solid fa-clock"></i> {{ message.messageSent | timeago }} </span>
+                </div>
+                <div class="col-12 col-md-auto small">
+                  <span class="text-success" *ngIf="message.dateRead && message.senderUsername !== username"
+                    >(read {{ message.dateRead | timeago }})</span
+                  >
+                  <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername !== username"
+                    >(unread)</span
+                  >
+                </div>
+                <div class="col-12">
+                  <div>{{ message.content }}</div>
+                </div>
+              </div>
             </div>
-            <div>{{ message.content }}</div>
+            <div class="col-3 col-md-1 align-self-center">
+              <span class="chat-img">
+                <img
+                  class="rounded-circle"
+                  src="{{ message.senderPhotoUrl || './assets/user.png' }}"
+                  alt="image of user" />
+              </span>
+            </div>
           </div>
-        </div> -->
-      </li>
+        </li>
+      </ng-container>
     </ul>
   </div>
 

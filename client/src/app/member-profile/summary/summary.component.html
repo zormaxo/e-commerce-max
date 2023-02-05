@@ -11,7 +11,11 @@
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.activeProducts }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['ads']" routerLinkActive="active"></a>
+          <a
+            class="stretched-link"
+            routerLink="/member/ads"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"></a>
         </div>
       </div>
     </div>
@@ -26,7 +30,6 @@
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.activeProducts + counts.inactiveProducts }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['ads/inactive']" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
@@ -41,7 +44,7 @@
           <div class="col-3">
             <p class="card-text lead fw-bold">{{ counts.favourites }}</p>
           </div>
-          <a class="stretched-link" [routerLink]="['ads/favorites']" routerLinkActive="active"></a>
+          <a class="stretched-link" routerLink="/member/favorites" routerLinkActive="active"></a>
         </div>
       </div>
     </div>
