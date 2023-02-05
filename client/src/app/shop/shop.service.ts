@@ -105,6 +105,7 @@ export class ShopService {
 
   resetShopParams() {
     this.shopParams = new ShopParams();
+    return this.shopParams;
   }
 
   getProductCounts(userId: number) {

@@ -30,7 +30,7 @@ export class AdListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.shopParams = this.shopService.getShopParams();
+    this.shopParams = this.shopService.resetShopParams();
     this.route.data.subscribe((data: Data) => {
       this.page = data['page'];
     });

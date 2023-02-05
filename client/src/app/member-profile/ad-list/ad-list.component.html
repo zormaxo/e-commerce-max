@@ -19,20 +19,19 @@
         </div>
         <div class="col">
           <div class="row">
-            <p class="card-text small">This is a wider card with supporting text.</p>
-            <p class="card-text small"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <p class="card-text small">{{ product.name }}</p>
             <div class="text-end">
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
-                  İşlemler
+                  Actions
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/uye/uyelik/ilan/duzenle">Düzenle</a></li>
+                  <li><a class="dropdown-item" routerLink="/uye/uyelik/ilan/duzenle">Edit</a></li>
                   <li *ngIf="this.activeStatus">
-                    <a class="dropdown-item" (click)="onActive(product, false)">Yayından kaldır</a>
+                    <a class="dropdown-item" (click)="onActive(product, false)">Unpublish</a>
                   </li>
                   <li *ngIf="!this.activeStatus">
-                    <a class="dropdown-item" (click)="onActive(product, true)">Yayına al</a>
+                    <a class="dropdown-item" (click)="onActive(product, true)">Publish</a>
                   </li>
                 </ul>
               </div>
