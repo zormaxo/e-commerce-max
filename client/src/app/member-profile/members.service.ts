@@ -81,21 +81,6 @@ export class MembersService {
     );
   }
 
-  getLightMember(userId: number) {
-    const member = [...this.memberCache.values()]
-      .reduce((arr, elem) => arr.concat(elem.result), [])
-      .find((member: Member) => member.id === userId);
-
-    if (member) {
-      return of(member);
-    }
-    return this.http.get(this.baseUrl + 'users/light/' + userId).pipe(
-      map((response: any) => {
-        return response.result;
-      })
-    );
-  }
-
   updateMember(member: Member) {
     return this.http.put(this.baseUrl + 'users/update-member', member).pipe(
       map(() => {

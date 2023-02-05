@@ -15,7 +15,7 @@ export class UserProductsComponent extends AppProductBaseClass implements OnInit
 
   ngOnInit(): void {
     this.membersService
-      .getLightMember((this.shopParams.userId = +this.route.snapshot.paramMap.get('id')))
+      .getMember((this.shopParams.userId = +this.route.snapshot.paramMap.get('id')))
       .subscribe((member) => {
         this.member = member;
         super.ngOnInit();

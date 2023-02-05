@@ -166,7 +166,7 @@
               [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
               (fileOver)="fileOverBase($event)"
               [uploader]="uploader"
-              class="card bg-light p-2 text-center mb-3 my-drop-zone">
+              class="card bg-faded p-2 text-center mb-3 my-drop-zone">
               <i class="fa fa-upload fa-3x"></i>
               Drop photos here
             </div>
@@ -245,21 +245,21 @@
               class="btn btn-success btn-sm me-2"
               (click)="uploader.uploadAll()"
               [disabled]="!uploader.getNotUploadedItems().length">
-              <span class="fa fa-upload"></span> Upload all
+              <span class="fa fa-upload"></span> Upload
             </button>
             <button
               type="button"
               class="btn btn-warning btn-sm me-2"
               (click)="uploader.cancelAll()"
               [disabled]="!uploader.isUploading">
-              <span class="fa fa-ban"></span> Cancel all
+              <span class="fa fa-ban"></span> Cancel
             </button>
             <button
               type="button"
               class="btn btn-danger btn-sm me-2"
               (click)="uploader.clearQueue()"
               [disabled]="!uploader.queue.length">
-              <span class="fa fa-trash"></span> Remove all
+              <span class="fa fa-trash"></span> Remove
             </button>
           </div>
         </div>

@@ -38,14 +38,6 @@ public class UsersController : BaseApiController
         return user == null ? BadRequest("User not found") : (ActionResult<MemberDto>)user;
     }
 
-    [AllowAnonymous]
-    [HttpGet("light/{userId}")]
-    public async Task<ActionResult<MemberLightDto>> GetLightUser(int userId)
-    {
-        var user = await _userSrv.GetUser(userId);
-        return user == null ? BadRequest("User not found") : Ok(_mapper.Map<MemberLightDto>(user));
-    }
-
     [HttpPut("update-member")]
     public async Task UpdateMember(MemberUpdateDto memberUpdateDto) { await UpdateUser(memberUpdateDto); }
 
