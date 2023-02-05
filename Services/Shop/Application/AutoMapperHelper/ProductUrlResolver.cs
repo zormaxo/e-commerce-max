@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Shop.Core.Entities;
-using Shop.Shared.Dtos;
+using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.AutoMapperHelper;
 
