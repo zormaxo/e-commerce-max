@@ -1,15 +1,12 @@
-using API.Dtos;
 using AutoMapper;
-using Core.Entities.OrderAggregate;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
+using Shop.Core.Entities.OrderAggregate;
 using Shop.Core.Extensions;
-using Shop.Core.Shared.Dtos;
-using Shop.Core.Shared.Dtos.City;
-using Shop.Core.Shared.Dtos.Member;
 using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Account;
 using Shop.Shared.Dtos.Basket;
+using Shop.Shared.Dtos.City;
 using Shop.Shared.Dtos.Member;
 using Shop.Shared.Dtos.Product;
 

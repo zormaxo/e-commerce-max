@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MembersService } from 'src/app/core/services/members.service';
+import { MembersService } from 'src/app/member-profile/members.service';
 import { Member } from 'src/app/shared/models/member';
 import { Pagination2 } from 'src/app/shared/models/pagination2';
 import { User } from 'src/app/shared/models/user';

@@ -32,26 +32,25 @@ iwr https://fly.io/install.ps1 -useb | iex
 flyctl auth signup
 flyctl auth login
 flyctl
-flyctl launch --image zormax/datingapp:latest 
+flyctl launch --image zormax/kuyumdan:latest 
 flyctl secrets list
 flyctl secrets set CloudinarySettings__ApiSecret=cJkUciUd-KMfUKYpGsRQt-6LzB4
 flyctl secrets set TokenKey=UJSpK2G6oimnfzS3LfRzv4okmHaQCzMG
 flyctl deploy
-flyctl proxy 6543:5432 -a datingappmax-db
+flyctl proxy 6543:5432 -a ecommercemax-db
 flyctl help
 flyctl logs -a datingappmax
 flyctl auth token
 
-WB7L8xPSI1095mJ
 Postgres cluster ecommercemax-db created
   Username:    postgres
-  Password:    Y5Qfb0a7BqrkM4q
+  Password:    yP791abusVckO4I
   Hostname:    ecommercemax-db.internal
   Proxy port:  5432
   Postgres port:  5433
-  Connection string: postgres://postgres:Y5Qfb0a7BqrkM4q@ecommercemax-db.internal:5432
+  Connection string: postgres://postgres:yP791abusVckO4I@ecommercemax-db.internal:5432
 
-DATABASE_URL=postgres://ecommercemax:9Q9xf5Lik8fWgXo@top2.nearest.of.ecommercemax-db.internal:5432/ecommercemax?sslmode=disableYour Upstash Redis database ecommerce-max-redis is ready.
+ DATABASE_URL=postgres://ecommercemax:mcXHLFAwwXVkmwD@top2.nearest.of.ecommercemax-db.internal:5432/ecommercemax?sslmode=disable
 
 Apps in the personal org can connect to at redis://default:6a62991f167545a396a6a06d924113ab@fly-ecommerce-max-redis.upstash.io
 If you have redis-cli installed, use fly redis connect to connect to your database.

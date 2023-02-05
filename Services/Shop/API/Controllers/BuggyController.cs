@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Core.Entities;
-using Shop.Core.Shared.Dtos;
 using Shop.Persistence;
+using Shop.Shared.Dtos;
 using System.Text.Json;
 
 namespace Shop.API.Controllers;

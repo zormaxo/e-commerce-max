@@ -1,4 +1,3 @@
-using API.Dtos;
 using Shop.Shared.Dtos.Account;
 
 namespace Shop.Shared.Dtos;

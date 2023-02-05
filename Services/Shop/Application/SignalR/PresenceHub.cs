@@ -1,9 +1,8 @@
-using API.SignalR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Shop.Application.Extensions;
 
-namespace Shop.API.SignalR;
+namespace Shop.Application.SignalR;
 
 [Authorize]
 public class PresenceHub : Hub

@@ -1,5 +1,4 @@
-﻿using Shop.Core.Shared.Dtos;
-using Shop.Core.Shared.Dtos.City;
+﻿using Shop.Shared.Dtos.City;
 
 namespace Shop.Shared.Dtos.Product;
 

@@ -1,6 +1,3 @@
-using API.Interfaces;
-using API.SignalR;
-using Core.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.ApplicationServices;
 using Shop.Application.AutoMapperHelper;
+using Shop.Application.SignalR;
 using Shop.Core.Interfaces;
 using Shop.Persistence.Repositories;
 using Shop.Persistence.Services;

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Shop.Core.Response;
+using Shop.Shared.Response;
 using System.Net;
 
 namespace Shop.API.Controllers;

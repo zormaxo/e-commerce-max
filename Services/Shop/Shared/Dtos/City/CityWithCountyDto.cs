@@ -1,4 +1,4 @@
-﻿namespace Shop.Core.Shared.Dtos.City;
+﻿namespace Shop.Shared.Dtos.City;
 
 public class CityWithCountyDto
 {

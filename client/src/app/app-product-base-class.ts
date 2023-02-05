@@ -1,7 +1,7 @@
 import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MembersService } from './core/services/members.service';
+import { MembersService } from './member-profile/members.service';
 import { LeftNavMode } from './shared/enums/leftNavMode';
 import { ICategory } from './shared/models/category';
 import { Member } from './shared/models/member';

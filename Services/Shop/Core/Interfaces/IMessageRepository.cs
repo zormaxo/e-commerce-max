@@ -1,11 +1,8 @@
-﻿
-using API.Entities;
-
-using Shop.Core.Entities;
+﻿using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
 using Shop.Shared.Dtos;
 
-namespace API.Interfaces;
+namespace Shop.Core.Interfaces;
 
 public interface IMessageRepository
 {

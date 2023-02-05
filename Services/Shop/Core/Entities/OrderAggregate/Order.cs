@@ -1,7 +1,6 @@
 using Shop.Core.Entities;
-using Shop.Core.Entities.OrderAggregate;
 
-namespace Core.Entities.OrderAggregate;
+namespace Shop.Core.Entities.OrderAggregate;
 
 public class Order : BaseEntity
 {

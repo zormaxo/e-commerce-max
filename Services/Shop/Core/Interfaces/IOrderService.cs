@@ -1,7 +1,6 @@
-using Core.Entities.OrderAggregate;
 using Shop.Core.Entities.OrderAggregate;
 
-namespace Core.Interfaces;
+namespace Shop.Core.Interfaces;
 
 public interface IOrderService
 {

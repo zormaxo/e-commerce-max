@@ -1,8 +1,8 @@
-using Core.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Shop.Core.Entities.OrderAggregate;
 
-namespace Infrastructure.Data.Config;
+namespace Shop.Persistence.EntityConfigurations;
 
 public class DeliveryMethodConfiguration : IEntityTypeConfiguration<DeliveryMethod>
 {

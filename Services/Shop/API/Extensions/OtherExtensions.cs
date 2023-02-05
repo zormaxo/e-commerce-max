@@ -1,7 +1,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Response;
-using Shop.Core.Response;
+using Shop.Shared.Response;
 
 namespace Shop.API.Extensions;
 

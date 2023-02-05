@@ -5,8 +5,7 @@ using Shop.API.Extensions;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Core.HelperTypes;
-using Shop.Core.Shared.Dtos;
-using Shop.Core.Shared.Dtos.Member;
+using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Member;
 
 namespace Shop.API.Controllers;

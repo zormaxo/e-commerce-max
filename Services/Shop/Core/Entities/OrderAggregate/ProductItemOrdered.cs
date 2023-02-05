@@ -1,4 +1,4 @@
-namespace Core.Entities.OrderAggregate;
+namespace Shop.Core.Entities.OrderAggregate;
 
 public class ProductItemOrdered
 {

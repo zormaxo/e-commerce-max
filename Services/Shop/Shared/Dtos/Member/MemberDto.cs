@@ -1,5 +1,3 @@
-using Shop.Core.Shared.Dtos;
-
 namespace Shop.Shared.Dtos.Member;
 
 public class MemberDto : BaseDto

@@ -4,7 +4,6 @@ using Microsoft.Extensions.FileProviders;
 using RestSharp;
 using Shop.API.Extensions;
 using Shop.API.Middleware;
-using Shop.API.SignalR;
 using Shop.Application.Extensions;
 using Shop.Application.SignalR;
 using Shop.Infrastructure.Extensions;

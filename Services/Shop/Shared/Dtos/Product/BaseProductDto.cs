@@ -1,6 +1,4 @@
-﻿using Shop.Core.Shared.Dtos;
-
-namespace Shop.Shared.Dtos.Product;
+﻿namespace Shop.Shared.Dtos.Product;
 
 public class BaseProductDto : BaseDto
 {

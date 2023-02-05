@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Core.Entities.OrderAggregate;
+namespace Shop.Core.Entities.OrderAggregate;
 
 public enum OrderStatus
 {

@@ -1,10 +1,8 @@
-using API.Dtos;
 using AutoMapper;
-using Core.Entities.OrderAggregate;
-using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Extensions;
 using Shop.Core.Entities.OrderAggregate;
+using Shop.Core.Interfaces;
 using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Account;
 

@@ -1,6 +1,5 @@
 using Shop.API.Response;
 using Shop.Core.Exceptions;
-using Shop.Core.Response;
 using Shop.Shared.Response;
 using System.Net;
 using System.Text.Json;

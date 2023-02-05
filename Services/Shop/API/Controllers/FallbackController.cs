@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
+namespace Shop.API.Controllers;
 
 public class FallbackController : Controller
 {

@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using RestSharp;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
-using Shop.Core.Shared.Dtos;
 using Shop.Persistence;
+using Shop.Shared.Dtos;
 
 namespace Shop.Application;
 

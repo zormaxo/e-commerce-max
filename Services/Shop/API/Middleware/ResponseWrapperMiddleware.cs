@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Shop.API.Response;
-using Shop.Core.Response;
+using Shop.Shared.Response;
 using System.Net;
 
 namespace Shop.API.Middleware;

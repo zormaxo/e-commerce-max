@@ -1,4 +1,4 @@
-namespace API.Entities;
+namespace Shop.Core.Entities;
 
 public class Connection
 {

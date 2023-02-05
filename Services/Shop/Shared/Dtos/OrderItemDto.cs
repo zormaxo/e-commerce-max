@@ -1,4 +1,4 @@
-namespace API.Dtos;
+namespace Shop.Shared.Dtos;
 
 public class OrderItemDto
 {

@@ -6,7 +6,7 @@ using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
 using Shop.Core.Interfaces;
-using Shop.Core.Shared.Dtos;
+using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Member;
 using System.Net;
 

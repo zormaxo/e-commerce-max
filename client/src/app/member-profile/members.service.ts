@@ -3,11 +3,12 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { AccountService } from '../../account/account.service';
+import { AccountService } from '../account/account.service';
 import { Member } from 'src/app/shared/models/member';
 import { User } from 'src/app/shared/models/user';
 import { UserParams } from 'src/app/shared/models/userParams';
-import { getPaginationHeaders, getPaginatedResult } from './paginationHelper';
+import { getPaginationHeaders, getPaginatedResult } from '../core/services/paginationHelper';
+import { ApiResponse } from '../shared/models/api-response/api-response';
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +17,17 @@ export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
   memberCache = new Map();
-  user: User;
-  userParams: UserParams;
+  user: User | undefined;
+  userParams: UserParams | undefined;
 
   constructor(private http: HttpClient, private accountService: AccountService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-      this.user = user;
-      this.userParams = new UserParams(user);
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: (user) => {
+        if (user) {
+          this.userParams = new UserParams(user);
+          this.user = user;
+        }
+      },
     });
   }
 
@@ -35,8 +40,11 @@ export class MembersService {
   }
 
   resetUserParams() {
-    this.userParams = new UserParams(this.user);
-    return this.userParams;
+    if (this.user) {
+      this.userParams = new UserParams(this.user);
+      return this.userParams;
+    }
+    return;
   }
 
   getMembers(userParams: UserParams) {
@@ -60,24 +68,17 @@ export class MembersService {
   }
 
   getMember(userId: number) {
-    const member = this.members.find((x) => x.id === userId);
-    if (member !== undefined) return of(member);
-    return this.http.get(this.baseUrl + 'users/' + userId).pipe(
-      map((response: any) => {
+    const member = [...this.memberCache.values()]
+      .reduce((arr, elem) => arr.concat(elem.result), [])
+      .find((member: Member) => member.id === userId);
+
+    if (member) return of(member);
+
+    return this.http.get<ApiResponse<Member>>(this.baseUrl + 'users/' + userId).pipe(
+      map((response) => {
         return response.result;
       })
     );
-  }
-
-  getMember2(username: string) {
-    const member = [...this.memberCache.values()]
-      .reduce((arr, elem) => arr.concat(elem.result), [])
-      .find((member: Member) => member.firstName === username);
-
-    if (member) {
-      return of(member);
-    }
-    return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
   getLightMember(userId: number) {
@@ -96,7 +97,12 @@ export class MembersService {
   }
 
   updateMember(member: Member) {
-    return this.http.put(this.baseUrl + 'users/update-member', member);
+    return this.http.put(this.baseUrl + 'users/update-member', member).pipe(
+      map(() => {
+        const index = this.members.indexOf(member);
+        this.members[index] = { ...this.members[index], ...member };
+      })
+    );
   }
 
   updateUserFirstLastName(member: Member) {

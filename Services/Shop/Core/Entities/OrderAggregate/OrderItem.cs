@@ -1,6 +1,6 @@
 using Shop.Core.Entities;
 
-namespace Core.Entities.OrderAggregate;
+namespace Shop.Core.Entities.OrderAggregate;
 
 public class OrderItem : BaseEntity
 {

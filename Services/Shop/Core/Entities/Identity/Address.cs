@@ -1,6 +1,4 @@
-using Shop.Core.Entities.Identity;
-
-namespace Core.Entities.Identity;
+namespace Shop.Core.Entities.Identity;
 
 public class Address
 {

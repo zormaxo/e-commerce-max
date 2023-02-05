@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.ApplicationServices;
-using Shop.Core.Shared.Dtos;
+using Shop.Shared.Dtos;
 
 namespace Shop.API.Controllers;
 

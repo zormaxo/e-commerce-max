@@ -1,10 +1,10 @@
-using Core.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
+using Shop.Core.Entities.OrderAggregate;
 using System.Reflection;
 
 namespace Shop.Persistence;

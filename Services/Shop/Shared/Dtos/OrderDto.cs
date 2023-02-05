@@ -1,6 +1,6 @@
 using Shop.Shared.Dtos.Account;
 
-namespace API.Dtos;
+namespace Shop.Shared.Dtos;
 
 public class OrderDto
 {

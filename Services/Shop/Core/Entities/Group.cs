@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Entities;
+namespace Shop.Core.Entities;
 
 public class Group
 {

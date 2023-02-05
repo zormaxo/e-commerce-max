@@ -1,5 +1,5 @@
 using Shop.Core.HelperTypes;
-using Shop.Core.Shared.Dtos;
+using Shop.Shared.Dtos;
 
 namespace Shop.Application.ApplicationServices;
 

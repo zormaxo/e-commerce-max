@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { AccountService } from 'src/app/account/account.service';
-import { MembersService } from 'src/app/core/services/members.service';
+import { MembersService } from 'src/app/member-profile/members.service';
 import { take } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';

@@ -3,7 +3,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AccountService } from 'src/app/account/account.service';
 import { take } from 'rxjs/operators';
-import { MembersService } from 'src/app/core/services/members.service';
+import { MembersService } from 'src/app/member-profile/members.service';
 import { Member } from 'src/app/shared/models/member';
 import { Photo } from 'src/app/shared/models/photo';
 import { User } from 'src/app/shared/models/user';

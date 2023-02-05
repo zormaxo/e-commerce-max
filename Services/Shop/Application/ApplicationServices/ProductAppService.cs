@@ -5,9 +5,8 @@ using Shop.Application.Interfaces;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
-using Shop.Core.Shared.Dtos;
-using Shop.Core.Shared.Dtos.Product;
 using Shop.Persistence;
+using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Product;
 using System.Net;
 

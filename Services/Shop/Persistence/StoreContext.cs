@@ -1,11 +1,10 @@
-using API.Entities;
-using Core.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
+using Shop.Core.Entities.OrderAggregate;
 using Shop.Persistence.Services;
 using System.Linq.Expressions;
 using System.Reflection;

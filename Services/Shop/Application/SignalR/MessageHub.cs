@@ -1,9 +1,5 @@
-using API.Entities;
-using API.Interfaces;
-using API.SignalR;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
-using Shop.API.SignalR;
 using Shop.Application.Extensions;
 using Shop.Core.Entities;
 using Shop.Core.Interfaces;

@@ -1,4 +1,3 @@
-using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace Shop.Core.Entities.Identity;

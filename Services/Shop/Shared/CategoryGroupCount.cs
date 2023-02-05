@@ -1,4 +1,4 @@
-﻿namespace Shop.Core.Shared;
+﻿namespace Shop.Shared;
 
 public class CategoryGroupCount
 {

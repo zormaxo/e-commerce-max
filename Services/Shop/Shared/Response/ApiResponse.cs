@@ -1,6 +1,4 @@
-﻿using Shop.Core.Response;
-
-namespace Shop.Shared.Response;
+﻿namespace Shop.Shared.Response;
 
 /// <summary>
 /// Sample Response class with Request Url, Data, Error, Status, httpStatusCode etc.

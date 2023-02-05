@@ -1,11 +1,9 @@
-﻿using API.Entities;
-
-using API.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
+using Shop.Core.Interfaces;
 using Shop.Shared.Dtos;
 
 namespace Shop.Persistence.Repositories;

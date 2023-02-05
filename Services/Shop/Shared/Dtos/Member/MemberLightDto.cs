@@ -1,4 +1,4 @@
-namespace Shop.Core.Shared.Dtos.Member;
+namespace Shop.Shared.Dtos.Member;
 
 public class MemberLightDto : BaseDto
 {

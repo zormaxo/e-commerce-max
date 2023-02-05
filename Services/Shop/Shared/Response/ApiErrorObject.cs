@@ -1,4 +1,4 @@
-namespace Shop.Core.Response;
+namespace Shop.Shared.Response;
 
 public class ApiErrorObject
 {
