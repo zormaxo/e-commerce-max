@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Shop.API.Filters;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Extensions;
 using Shop.Core.Entities;
@@ -15,10 +16,12 @@ public class ProductsController : BaseApiController
 
     public ProductsController(ProductAppService productSrv) { _productSrv = productSrv; }
 
+    [Cached(600)]
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductDetailDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productSrv.GetProducts<ProductDetailDto>(productParams)); }
 
+    [Cached(600)]
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<ProductDetailDto> GetProduct(int id) { return _productSrv.GetProduct(id, User.GetUserId()); }
