@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using Shop.API.Filters;
-using Shop.Application.ApplicationServices;
-using Shop.Core.HelperTypes;
+using Shop.API.Response;
+using Shop.Shared.Response;
+using System.Net;
 
 namespace Shop.API.Extensions;
 
@@ -8,18 +10,25 @@ public static class ControllerServiceExtensions
 {
     public static IServiceCollection AddControllerServices(this IServiceCollection services)
     {
-        services.AddMemoryCache();
-        services.AddSingleton<CachedItems>();
         services.AddSingleton<ResponseFilterAttribute>();
-        services.AddScoped<AccountAppService>();
-        services.AddScoped<UserAppService>();
-        services.AddScoped<ProductAppService>();
-        services.AddScoped<ProductVehicleAppService>();
-        services.AddScoped<ProductRealEstateAppService>();
-        services.AddScoped<ProductComputerAppService>();
-        services.AddScoped<CategoriesAppService>();
-        services.AddScoped<BasketAppService>();
-        services.AddScoped<LogUserActivityAttribute>();
+        services.AddSingleton<LogUserActivityAttribute>();
+
+        services.Configure<ApiBehaviorOptions>(
+            options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                        .Where(e => e.Value?.Errors.Count > 0)
+                        .SelectMany(x => x.Value!.Errors)
+                        .Select(x => x.ErrorMessage)
+                        .ToArray();
+
+                    var errorResponse = new ApiErrorObject(errors);
+                    var apiResponse = ResponseWrapManager.ResponseWrapper(errorResponse, HttpStatusCode.NotFound);
+                    return new BadRequestObjectResult(apiResponse);
+                };
+            });
 
         return services;
     }

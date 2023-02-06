@@ -66,7 +66,6 @@ public class Startup
         services.AddSingleton(new RestClient(new HttpClient()));
 
         services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-        services.AddOtherServices();
         services.AddApplicationServices(_config);
         services.AddPersistenceServices(_config, _env.IsProduction());
         services.AddInfrastructureServices(_config);

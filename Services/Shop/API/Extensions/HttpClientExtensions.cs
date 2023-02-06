@@ -1,16 +1,17 @@
-﻿using System.Net.Http.Headers;
+﻿using Shop.Core.Exceptions;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace Shop.API.Extensions;
 
 public static class HttpClientExtensions
 {
-    public static async Task<T> ReadContentAs<T>(this HttpResponseMessage response)
+    public static async Task<T?> ReadContentAs<T>(this HttpResponseMessage response)
     {
         if (!response.IsSuccessStatusCode)
-            throw new ApplicationException($"Something went wrong calling the API: {response.ReasonPhrase}");
+            throw new ApiException($"Something went wrong calling the API: {response.ReasonPhrase}");
 
-        var dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var dataAsString = await response.Content.ReadAsStringAsync();
 
         return JsonSerializer.Deserialize<T>(dataAsString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
