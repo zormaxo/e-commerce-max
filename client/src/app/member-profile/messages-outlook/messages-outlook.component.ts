@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'src/app/core/services/message.service';
+import { MessageService } from 'src/app/member-profile/message.service';
 import { Message } from 'src/app/shared/models/message';
 import { Pagination } from 'src/app/shared/models/pagination';
 import { Pagination2 } from 'src/app/shared/models/pagination2';

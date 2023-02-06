@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
-import { MessageService } from 'src/app/core/services/message.service';
+import { MessageService } from 'src/app/member-profile/message.service';
 import { Member } from 'src/app/shared/models/member';
 import { User } from 'src/app/shared/models/user';
 

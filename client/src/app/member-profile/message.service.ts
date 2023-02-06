@@ -6,7 +6,7 @@ import { Group } from 'src/app/shared/models/group';
 import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
 import { environment } from 'src/environments/environment';
-import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { getPaginatedResult, getPaginationHeaders } from '../core/services/paginationHelper';
 
 @Injectable({
   providedIn: 'root',

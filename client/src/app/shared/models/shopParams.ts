@@ -1,4 +1,3 @@
-import { createLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { CurrencyType } from './currency';
 
 export class ShopParams {

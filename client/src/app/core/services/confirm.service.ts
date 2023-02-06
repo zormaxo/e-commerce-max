@@ -27,9 +27,9 @@ export class ConfirmService {
       },
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, config);
-    return this.bsModalRef.onHidden!.pipe(
+    return this.bsModalRef.onHidden.pipe(
       map(() => {
-        return this.bsModalRef!.content!.result;
+        return this.bsModalRef.content.result;
       })
     );
   }

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MessageService } from 'src/app/core/services/message.service';
-
+import { MessageService } from 'src/app/member-profile/message.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
