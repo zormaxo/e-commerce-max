@@ -26,7 +26,7 @@ public class UserRepository : GenericRepository<AppUser>, IUserRepository
 
         //var members = query.ProjectTo<AppUser>(_mapper.ConfigurationProvider).AsNoTracking();
         //return await query.AsNoTracking().ToListAsync();
-        return PagedList<AppUser>.CreateAsync(query, userParams.PageIndex, userParams.PageSize);
+        return PagedList<AppUser>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
     }
 
     public ValueTask<AppUser> GetUserByIdAsync(int id) { return _context.Users.FindAsync(id); }

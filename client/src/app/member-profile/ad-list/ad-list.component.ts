@@ -61,7 +61,7 @@ export class AdListComponent implements OnInit {
       this.shopParams.userId = user.userId;
       this.shopService.getProducts(false).subscribe((response) => {
         this.products = response.data;
-        this.shopParams.pageNumber = response.pageIndex;
+        this.shopParams.pageNumber = response.pageNumber;
         this.shopParams.pageSize = response.pageSize;
         this.totalCount = response.totalCount;
       });

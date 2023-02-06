@@ -56,7 +56,7 @@ public class MessageRepository : IMessageRepository
         var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
 
         var omer = await PagedList<MessageDto>
-            .CreateAsync(messages, messageParams.PageIndex, messageParams.PageSize);
+            .CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
         return omer;
     }
 

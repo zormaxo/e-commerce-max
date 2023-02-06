@@ -20,7 +20,7 @@ public static class EFBigExtensions
     }
 
     public static IQueryable<TSource> EFBigPageBy<TSource>(this IQueryable<TSource> source, IPagedResultRequest request)
-    { return source.Skip(request.PageSize * (request.PageIndex - 1)).Take(request.PageSize); }
+    { return source.Skip(request.PageSize * (request.PageNumber - 1)).Take(request.PageSize); }
 
     public static IQueryable<TSource> EFBigOrderBy<TSource>(
         this IQueryable<TSource> source,

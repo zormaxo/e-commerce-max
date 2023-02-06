@@ -107,7 +107,7 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   getProductsFromInherited() {
     this.getProducts().subscribe((productResponse: Pagination<Product[]>) => {
       this.products = productResponse.data;
-      this.shopParams.pageNumber = productResponse.pageIndex;
+      this.shopParams.pageNumber = productResponse.pageNumber;
       this.shopParams.pageSize = productResponse.pageSize;
       this.totalCount = productResponse.totalCount;
 

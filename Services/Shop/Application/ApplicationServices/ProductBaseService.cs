@@ -87,7 +87,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
 
         data.ForEach(x => x.IsFavourite = x.Favourites.Any(y => y.UserId == UserId));
 
-        return new Pagination<Y>(productSpecParams.PageIndex, productSpecParams.PageSize, catGrpCountList, totalItems, data);
+        return new Pagination<Y>(productSpecParams.PageNumber, productSpecParams.PageSize, catGrpCountList, totalItems, data);
     }
 
     public async Task<int> UpdateProduct(Product product)

@@ -10,14 +10,14 @@ public class PagedList<T> : List<T>
 
     public PagedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
     {
-        PageIndex = pageNumber;
+        PageNumber = pageNumber;
         TotalPages = (int)Math.Ceiling(count / (double)pageSize);
         PageSize = pageSize;
         TotalCount = count;
         AddRange(items);
     }
 
-    public int PageIndex { get; set; }
+    public int PageNumber { get; set; }
 
     public int TotalPages { get; set; }
 
