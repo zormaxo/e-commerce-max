@@ -19,7 +19,7 @@ public class ResponseFilterAttribute : IActionFilter
         if (context.Result is not null)
         {
             ObjectResult result = context.Result as ObjectResult ?? new ObjectResult(string.Empty);
-            apiResponse = ResponseWrapManager.ResponseWrapper(result.Value, context.HttpContext);
+            apiResponse = ResponseWrapManager.ResponseWrapper(result.Value!, context.HttpContext);
         }
         else
         {

@@ -1,6 +1,7 @@
 <div class="row">
   <app-breadcrumb *ngIf="mode === LeftNavMode.AllProducts"></app-breadcrumb>
-  <div class="mb-3 d-sm-none">
+
+  <div *ngIf="shopService.innerWidth < 800" class="mb-3 d-sm-none">
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">

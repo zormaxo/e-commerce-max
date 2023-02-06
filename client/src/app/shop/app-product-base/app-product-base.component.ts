@@ -21,7 +21,7 @@ export class AppProductBaseComponent implements OnInit {
   filteredCategories: ICategory[];
   member: Member;
 
-  constructor(private shopService: ShopService) {}
+  constructor(public shopService: ShopService) {}
 
   ngOnInit(): void {
     this.shopService.productsFetched.subscribe((props) => {

@@ -125,8 +125,12 @@ export abstract class AppProductBaseClass implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.categorySelectedSubs.unsubscribe();
-    this.searchClickedSubs.unsubscribe();
+    if (this.categorySelectedSubs) {
+      this.categorySelectedSubs.unsubscribe();
+    }
+    if (this.searchClickedSubs) {
+      this.searchClickedSubs.unsubscribe();
+    }
   }
 
   abstract getProducts();

@@ -77,7 +77,7 @@ const routes: Routes = [
       },
       {
         path: 'error',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),
       },
 

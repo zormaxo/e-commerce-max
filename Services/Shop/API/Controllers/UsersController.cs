@@ -30,6 +30,7 @@ public class UsersController : BaseApiController
         return users;
     }
 
+    [AllowAnonymous]
     [HttpGet("{userId}", Name = "GetUser")]
     public async Task<ActionResult<MemberDto>> GetUser(int userId)
     {

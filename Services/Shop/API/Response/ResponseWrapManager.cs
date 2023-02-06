@@ -1,56 +1,35 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
-using Newtonsoft.Json.Linq;
 using Shop.Shared.Response;
+using System.Net;
 
 namespace Shop.API.Response;
 
-/// <summary>
-/// Response Wrap Manager to handle any customizations on result and return Custom Formatted Response.
-/// </summary>
 public static class ResponseWrapManager
 {
-    /// <summary>
-    /// The Response Wrapper method handles customizations and generate Formatted Response.
-    /// </summary>
-    /// <param name="response">The Result</param>
-    /// <param name="context">The HTTP Context</param>
-    /// <returns>Sample Response Object</returns>
-    public static ApiResponse ResponseWrapper(object? response, HttpContext context)
-    {
-        var requestUrl = context.Request.GetDisplayUrl();
-        var responseBody = response;
-        ApiErrorObject error = null;
-        var status = true;
-        var httpStatusCode = context.Response.StatusCode;
+    public static ApiResponse ResponseWrapper(object response, HttpContext context)
+    { return GenerateApiResponse(response, context); }
 
-        if (context.Response.StatusCode >= 400)
+    public static ApiResponse ResponseWrapper(object response, HttpStatusCode statusCode)
+    { return GenerateApiResponse(response, null, statusCode); }
+
+    private static ApiResponse GenerateApiResponse(
+        object response,
+        HttpContext? context,
+        HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
+    {
+        var requestUrl = context?.Request.GetDisplayUrl() ?? string.Empty;
+        var responseBody = response;
+        ApiErrorObject? error = null;
+        var status = true;
+        var httpStatusCode = context?.Response.StatusCode ?? (int)statusCode;
+
+        if (httpStatusCode >= 400)
         {
             status = false;
             responseBody = null;
-            error = response is ApiErrorObject @object ? @object : ((JObject)response).ToObject<ApiErrorObject>();
+            error = response is ApiErrorObject @object ? @object : new ApiErrorObject(response, code: httpStatusCode);
         }
-
-        // NOTE: Add any further customizations if needed here
 
         return new ApiResponse(requestUrl, responseBody, error, status, httpStatusCode);
-    }
-
-    public static ApiResponse ResponseWrapper(object? response, int statusCode)
-    {
-        var responseBody = response;
-        ApiErrorObject error = null;
-        var status = true;
-        var httpStatusCode = statusCode;
-
-        if (statusCode >= 400)
-        {
-            status = false;
-            responseBody = null;
-            error = response is ApiErrorObject @object ? @object : ((JObject)response).ToObject<ApiErrorObject>();
-        }
-
-        // NOTE: Add any further customizations if needed here
-
-        return new ApiResponse(string.Empty, responseBody, error, status, httpStatusCode);
     }
 }

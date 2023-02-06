@@ -2,6 +2,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Response;
 using Shop.Shared.Response;
+using System.Net;
 
 namespace Shop.API.Extensions;
 
@@ -15,13 +16,13 @@ public static class OtherExtensions
                 options.InvalidModelStateResponseFactory = actionContext =>
                 {
                     var errors = actionContext.ModelState
-                        .Where(e => e.Value.Errors.Count > 0)
-                        .SelectMany(x => x.Value.Errors)
+                        .Where(e => e.Value?.Errors.Count > 0)
+                        .SelectMany(x => x.Value!.Errors)
                         .Select(x => x.ErrorMessage)
                         .ToArray();
 
                     var errorResponse = new ApiErrorObject(errors);
-                    var apiResponse = ResponseWrapManager.ResponseWrapper(errorResponse, 404);
+                    var apiResponse = ResponseWrapManager.ResponseWrapper(errorResponse, HttpStatusCode.NotFound);
                     return new BadRequestObjectResult(apiResponse);
                 };
             });

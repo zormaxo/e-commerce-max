@@ -2,22 +2,26 @@ namespace Shop.Shared.Response;
 
 public class ApiErrorObject
 {
-    public ApiErrorObject(object apiMessage, Exception ex = null, int? code = null)
+    public ApiErrorObject(object apiMessage, Exception? ex = null, int? code = null)
     {
         Message = apiMessage;
-        ExceptionMessage = ex?.Message;
-        Details = ex?.StackTrace;
         Code = code;
-        InnerExceptionMessage = ex?.InnerException?.Message;
+
+        if (ex is not null)
+        {
+            ExceptionMessage = ex.Message;
+            InnerExceptionMessage = ex.InnerException?.Message ?? string.Empty;
+            Details = ex.StackTrace ?? string.Empty;
+        }
     }
 
     public object Message { get; set; }
 
-    public string ExceptionMessage { get; set; }
+    public string ExceptionMessage { get; set; } = string.Empty;
 
-    public string InnerExceptionMessage { get; set; }
+    public string InnerExceptionMessage { get; set; } = string.Empty;
 
     public int? Code { get; set; }
 
-    public string Details { get; set; }
+    public string Details { get; set; } = string.Empty;
 }
