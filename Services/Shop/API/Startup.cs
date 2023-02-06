@@ -6,7 +6,6 @@ using Shop.API.Extensions;
 using Shop.API.Middleware;
 using Shop.Application.Extensions;
 using Shop.Application.SignalR;
-using Shop.Infrastructure.Extensions;
 using Shop.Persistence;
 using Shop.Persistence.Extensions;
 using System.Text.Json.Serialization;
@@ -68,8 +67,7 @@ public class Startup
         services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         services.AddApplicationServices(_config);
         services.AddPersistenceServices(_config, _env.IsProduction());
-        services.AddInfrastructureServices(_config);
-        services.AddControllerServices();
+        services.AddControllerServices(_config);
         services.AddSwaggerDocumentation();
         services.AddCors(
             opt => opt.AddPolicy(

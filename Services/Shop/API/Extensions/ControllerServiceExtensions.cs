@@ -19,7 +19,7 @@ namespace Shop.API.Extensions;
 
 public static class ControllerServiceExtensions
 {
-    public static IServiceCollection AddControllerServices(this IServiceCollection services)
+    public static IServiceCollection AddControllerServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddSingleton<ResponseFilterAttribute>();
         services.AddSingleton<LogUserActivityAttribute>();
