@@ -1,9 +1,5 @@
 
-omer
-<div #omer>omer</div>
-
-
-<div class="mt-4" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+<div  *ngIf="checkoutForm" [formGroup]="checkoutForm">
   <div class="row">
     <div class="form-group col-12" formGroupName="paymentForm">
       <app-text-input [label]="'Name on card'" formControlName="nameOnCard"></app-text-input>
@@ -32,7 +28,7 @@ omer
   </div>
 </div>
 
-<div class="d-flex justify-content-between flex-row mb-5">
+<div class="d-flex justify-content-between flex-row mb-3">
   <button class="btn btn-outline-primary" cdkStepperPrevious><i class="fa fa-angle-left"></i> Back to review</button>
   <button [disabled]="loading || !paymentFormComplete" class="btn btn-primary" (click)="submitOrder()">
     Submit order <i class="fa fa-angle-right"></i>
