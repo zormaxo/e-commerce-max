@@ -29,6 +29,7 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import { HasRoleDirective } from './core/directives/has-role.directive';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -38,10 +39,6 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     ProductDetailsComponent,
     AppProductBaseComponent,
     UserProductsComponent,
-    AdminPanelComponent,
-    UserManagementComponent,
-    PhotoManagementComponent,
-    RolesModalComponent,
     ConfirmDialogComponent,
   ],
   imports: [
@@ -51,6 +48,8 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     HttpClientModule,
     FormsModule,
     SharedModule,
+    CoreModule,
+    AdminModule,
     NgxSpinnerModule,
     FileUploadModule,
   ],
