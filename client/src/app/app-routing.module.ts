@@ -43,8 +43,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./shop/categories/real-estate/real-estate.module').then((mod) => mod.RealEstateModule),
       },
-
-      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then((mod) => mod.AdminModule),
+        canActivate: [AdminGuard],
+      },
       {
         path: 'search-result',
         loadChildren: () => import('./search-result/search-result.module').then((mod) => mod.SearchResultModule),
