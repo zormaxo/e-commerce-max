@@ -8,6 +8,8 @@ import { CheckoutDeliveryComponent } from './checkout-delivery/checkout-delivery
 import { CheckoutReviewComponent } from './checkout-review/checkout-review.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { CheckoutSuccessComponent } from './checkout-success/checkout-success.component';
+import { CoreModule } from '../core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,6 @@ import { CheckoutSuccessComponent } from './checkout-success/checkout-success.co
     CheckoutPaymentComponent,
     CheckoutSuccessComponent,
   ],
-  imports: [CommonModule, CheckoutRoutingModule, SharedModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, CheckoutRoutingModule, SharedModule, CoreModule],
 })
 export class CheckoutModule {}

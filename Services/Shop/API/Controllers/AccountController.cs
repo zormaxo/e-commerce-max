@@ -42,7 +42,7 @@ public class AccountController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
-        var email = User.FindFirstValue(ClaimTypes.Email);
+        var email = User.FindFirstValue(ClaimTypes.Name);
         return await _accountSrv.GetCurrentUser(email);
     }
 
@@ -54,7 +54,7 @@ public class AccountController : BaseApiController
     [HttpGet("address")]
     public async Task<ActionResult<AddressDto>> GetUserAddress()
     {
-        var email = User.FindFirstValue(ClaimTypes.Email);
+        var email = User.FindFirstValue(ClaimTypes.Name);
         return await _accountSrv.GetUserAddress(email);
     }
 
@@ -62,7 +62,7 @@ public class AccountController : BaseApiController
     [HttpPut("address")]
     public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
     {
-        var email = User.FindFirstValue(ClaimTypes.Email);
+        var email = User.FindFirstValue(ClaimTypes.Name);
         return await _accountSrv.UpdateUserAddress(address, email);
     }
 }
