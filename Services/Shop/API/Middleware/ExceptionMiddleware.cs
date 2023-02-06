@@ -35,10 +35,9 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
-            var response = new ApiErrorObject(nameof(ExceptionMiddleware), ex);
-            //var response = _env.IsDevelopment()
-            //    ? new ApiErrorObject(nameof(ExceptionMiddleware), ex)
-            //    : new ApiErrorObject(nameof(ExceptionMiddleware));
+            var response = _env.IsDevelopment()
+                ? new ApiErrorObject(nameof(ExceptionMiddleware), ex)
+                : new ApiErrorObject(nameof(ExceptionMiddleware));
 
             await CreateExceptionResponse(ex, HttpStatusCode.InternalServerError, response);
         }
