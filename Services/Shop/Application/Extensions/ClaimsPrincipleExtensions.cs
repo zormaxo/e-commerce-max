@@ -13,5 +13,5 @@ public static class ClaimsPrincipleExtensions
     }
 
     public static string RetrieveEmailFromPrincipal(this ClaimsPrincipal user)
-    { return user.FindFirstValue(ClaimTypes.Email) ?? string.Empty; }
+    { return user.FindFirstValue(ClaimTypes.Name) ?? string.Empty; }
 }

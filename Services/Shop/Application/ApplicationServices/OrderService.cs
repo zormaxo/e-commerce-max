@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Shop.Core.Entities;
 using Shop.Core.Entities.OrderAggregate;
 using Shop.Core.Interfaces;
+using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
@@ -9,14 +9,20 @@ public class OrderService : IOrderService
 {
     private readonly IBasketRepository _basketRepo;
     private readonly IUnitOfWork _unitOfWork;
+    readonly StoreContext _storeContext;
 
-    public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork)
+    public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, StoreContext storeContext)
     {
         _unitOfWork = unitOfWork;
         _basketRepo = basketRepo;
+        _storeContext = storeContext;
     }
 
-    public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress)
+    public async Task<Order> CreateOrderAsync(
+        string buyerEmail,
+        int deliveryMethodId,
+        string basketId,
+        Core.Entities.OrderAggregate.Address shippingAddress)
     {
         // get basket from repo
         var basket = await _basketRepo.GetBasketAsync(basketId);
@@ -25,20 +31,11 @@ public class OrderService : IOrderService
         var items = new List<OrderItem>();
         foreach (var item in basket.Items)
         {
-            var productItem = await _unitOfWork.Repository<Product>()
-                .GetAll()
-                .Include(x => x.Photos)
-                .FirstOrDefaultAsync(y => y.Id == item.Id);
-
-            var omer1 = productItem.Photos.ToList();
-
-            var omer = productItem.Photos.FirstOrDefault(x => x.IsMain);
-
-
+            var productItem = await _storeContext.Products.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Id == item.Id);
             var itemOrdered = new ProductItemOrdered(
                 productItem.Id,
                 productItem.Name,
-                productItem.Photos.FirstOrDefault(x => x.IsMain).Url);
+                productItem.Photos.FirstOrDefault(x => x.IsMain)!.Url);
             var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
             items.Add(orderItem);
         }
@@ -49,18 +46,28 @@ public class OrderService : IOrderService
         // calc subtotal
         var subtotal = items.Sum(item => item.Price * item.Quantity);
 
-        // create order
-        var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
-        _unitOfWork.Repository<Order>().Add(order);
+        // check to see if order exists
+        var order = _storeContext.Orders.FirstOrDefault(x => x.PaymentIntentId == basket.PaymentIntentId);
+
+        if (order != null)
+        {
+            order.ShipToAddress = shippingAddress;
+            order.DeliveryMethod = deliveryMethod;
+            order.Subtotal = subtotal;
+            _unitOfWork.Repository<Order>().Update(order);
+        }
+        else
+        {
+            // create order
+            order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal, basket.PaymentIntentId);
+            _unitOfWork.Repository<Order>().Add(order);
+        }
 
         // save to db
         var result = await _unitOfWork.Complete();
 
         if (result <= 0)
             return null;
-
-        // delete basket
-        await _basketRepo.DeleteBasketAsync(basketId);
 
         // return order
         return order;
@@ -71,32 +78,19 @@ public class OrderService : IOrderService
 
     public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
     {
-        return await _unitOfWork.Repository<Order>()
-            .GetAll()
-            .Include(o => o.OrderItems)
-            .Include(o => o.DeliveryMethod)
-            .OrderByDescending(o => o.OrderDate)
+        return await _storeContext.Orders
+            .Include(x => x.OrderItems)
+            .Include(x => x.DeliveryMethod)
             .FirstOrDefaultAsync(o => o.Id == id && o.BuyerEmail == buyerEmail);
-
-
-        // var spec = new OrdersWithItemsAndOrderingSpecification(id, buyerEmail);
-
-        // return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
-        //return null;
     }
 
     public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
     {
-        return await _unitOfWork.Repository<Order>()
-            .GetAll()
+        return await _storeContext.Orders
+            .Include(x => x.OrderItems)
+            .Include(x => x.DeliveryMethod)
             .Where(o => o.BuyerEmail == buyerEmail)
-            .Include(o => o.OrderItems)
-            .Include(o => o.DeliveryMethod)
             .OrderByDescending(o => o.OrderDate)
             .ToListAsync();
-        // var spec = new OrdersWithItemsAndOrderingSpecification(buyerEmail);
-
-        // return await _unitOfWork.Repository<Order>().ListAsync(spec);
-        //return null;
     }
 }

@@ -30,6 +30,7 @@ import { HasRoleDirective } from './core/directives/has-role.directive';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { AdminModule } from './admin/admin.module';
+import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminModule } from './admin/admin.module';
     AppProductBaseComponent,
     UserProductsComponent,
     ConfirmDialogComponent,
+    OrderDetailedComponent,
   ],
   imports: [
     BrowserAnimationsModule,

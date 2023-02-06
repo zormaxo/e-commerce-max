@@ -44,7 +44,9 @@ export class CheckoutPaymentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    loadStripe('pk_test_2PZ84pFKu2MddUgGDG521v9m00SlLWySIR').then((stripe) => {
+    loadStripe(
+      'pk_test_51MPLTyDZz271xOq8ToH8jSsw70hz1oqX2KOmtneuHDbYnYKTVwVs3C6oX2XHATqg9Tf4iDhi5RzEHkdoqjIPoJ1W00PGcYWLK6'
+    ).then((stripe) => {
       this.stripe = stripe;
       const elements = stripe?.elements();
       if (elements) {

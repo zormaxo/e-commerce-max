@@ -37,6 +37,12 @@ flyctl secrets list
 flyctl secrets set CloudinarySettings__ApiSecret=cJkUciUd-KMfUKYpGsRQt-6LzB4
 flyctl secrets set TokenKey=UJSpK2G6oimnfzS3LfRzv4okmHaQCzMG
 flyctl secrets set ConnectionStrings__Redis=fly-ecommerce-max-redis.upstash.io,password=6a62991f167545a396a6a06d924113ab
+
+flyctl secrets set StripeSettings__PublishableKey=pk_test_2PZ84pFKu2MddUgGDG521v9m00SlLWySIR
+flyctl secrets set StripeSettings__SecretKey=sk_test_x6ontnOi8wyfuuob8Intk4Bf00T5dSrgFV
+flyctl secrets set StripeSettings__WhSecret=whsec_aq9hHovzYUqhVfhtWOW8mM2XrmEJRSHy
+
+
 flyctl deploy
 flyctl proxy 6543:5432 -a ecommercemax-db
 flyctl help

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.ApplicationServices;
+using Shop.Application.Common.Interfaces.Payment;
 using Shop.Application.SignalR;
 using Shop.Core.HelperTypes;
 
@@ -18,6 +19,8 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ProductComputerAppService>();
         services.AddScoped<CategoriesAppService>();
         services.AddScoped<BasketAppService>();
+
+        services.AddScoped<IPaymentService, PaymentService>();
 
         services.AddMemoryCache();
         services.AddSingleton<CachedItems>();

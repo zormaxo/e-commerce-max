@@ -79,6 +79,11 @@ const routes: Routes = [
         data: { breadcrumb: 'Checkout' },
       },
       {
+        path: 'orders',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./orders/orders.module').then((m) => m.OrdersModule),
+      },
+      {
         path: 'error',
         // canActivate: [AuthGuard],
         loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),

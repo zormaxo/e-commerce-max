@@ -6,6 +6,7 @@ using Shop.API.Response;
 using Shop.Application.ApplicationServices;
 using Shop.Application.Common.Helpers.AutoMapperHelper;
 using Shop.Application.Common.Interfaces.Authentication;
+using Shop.Application.Common.Interfaces.Payment;
 using Shop.Application.Common.Interfaces.Photo;
 using Shop.Core.Interfaces;
 using Shop.Infrastructure.Photo;
@@ -30,11 +31,13 @@ public static class ControllerServiceExtensions
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IPaymentService, PaymentService>();
         //services.AddScoped<IBasketRepository, BasketMemRepository>();
 
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoService, PhotoService>();
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+
 
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
