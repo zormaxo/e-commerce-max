@@ -16,7 +16,7 @@ public class ProductsController : BaseApiController
 
     public ProductsController(ProductAppService productSrv) { _productSrv = productSrv; }
 
-    [Cached(600)]
+
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductDetailDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
     { return Ok(await _productSrv.GetProducts<ProductDetailDto>(productParams)); }
@@ -26,9 +26,16 @@ public class ProductsController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<ProductDetailDto> GetProduct(int id) { return _productSrv.GetProduct(id, User.GetUserId()); }
 
-    [HttpPost("update-product")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public Task<int> UpdateProduct(Product product) { return _productSrv.UpdateProduct(product); }
+    [HttpPost]
+    public async Task<Product> CreateProduct(ProductCreateDto productToCreate)
+    { return await _productSrv.CreateProduct(productToCreate); }
+
+    [HttpPut("{id}")]
+    public async Task<Product> UpdateProduct(int id, ProductCreateDto productToUpdate)
+    { return await _productSrv.UpdateProduct(id, productToUpdate); }
+
+    [HttpDelete("{id}")]
+    public async Task DeleteProduct(int id) { await _productSrv.DeleteProduct(id); }
 
     [HttpPost("change-active-status")]
     [ProducesResponseType(StatusCodes.Status200OK)]

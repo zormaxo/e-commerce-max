@@ -89,5 +89,7 @@ public class MappingProfiles : Profile
         //.ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
 
         CreateMap<Core.Entities.Identity.Address, AddressDto>().ReverseMap();
+
+        CreateMap<ProductCreateDto, Product>();
     }
 }

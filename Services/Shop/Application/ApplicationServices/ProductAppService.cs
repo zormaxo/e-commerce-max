@@ -1,5 +1,6 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Common.Interfaces.Photo;
 using Shop.Core.Entities;
@@ -31,6 +32,48 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
         product.IsFavourite = product.Favourites.Any(x => x.UserId == userId);
 
         return Mapper.Map<ProductDetailDto>(product);
+    }
+
+    [HttpPost]
+    public async Task<Product> CreateProduct(ProductCreateDto productToCreate)
+    {
+        var product = Mapper.Map<ProductCreateDto, Product>(productToCreate);
+        product.Photos.Add(new ProductPhoto { IsMain = true, Url = "images/products/placeholder.png" });
+
+        int result = await StoreContext.SaveChangesAsync();
+
+        if (result <= 0)
+            throw new ApiException(HttpStatusCode.BadRequest, "Problem creating product");
+
+        return product;
+    }
+
+    [HttpPut("{id}")]
+    public async Task<Product> UpdateProduct(int id, ProductCreateDto productToUpdate)
+    {
+        var product = await StoreContext.FindAsync<Product>(id);
+
+        Mapper.Map(productToUpdate, product);
+
+        int result = StoreContext.SaveChanges();
+
+        if (result <= 0)
+            throw new ApiException(HttpStatusCode.BadRequest, "Problem updating product");
+
+        return product;
+    }
+
+    [HttpDelete("{id}")]
+    public async Task DeleteProduct(int id)
+    {
+        var product = await StoreContext.FindAsync<Product>(id);
+
+        StoreContext.Remove(product);
+
+        int result = StoreContext.SaveChanges();
+
+        if (result <= 0)
+            throw new ApiException(HttpStatusCode.BadRequest, "Problem deleting product");
     }
 
     public async Task<object> GetActiveInactiveProducts(ProductSpecParams productParams)
