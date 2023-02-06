@@ -2,7 +2,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using Shop.Application.Interfaces;
+using Shop.Application.Common.Interfaces.Photo;
 
 namespace Shop.Infrastructure.Photo;
 

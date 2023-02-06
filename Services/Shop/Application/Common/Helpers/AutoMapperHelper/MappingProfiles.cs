@@ -10,7 +10,7 @@ using Shop.Shared.Dtos.City;
 using Shop.Shared.Dtos.Member;
 using Shop.Shared.Dtos.Product;
 
-namespace Shop.Application.AutoMapperHelper;
+namespace Shop.Application.Common.Helpers.AutoMapperHelper;
 
 public class MappingProfiles : Profile
 {
@@ -78,7 +78,7 @@ public class MappingProfiles : Profile
         CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
         CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ? DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
 
-        CreateMap<AddressDto, Shop.Core.Entities.OrderAggregate.Address>().ReverseMap();
+        CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>().ReverseMap();
         CreateMap<Order, OrderToReturnDto>()
             .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.ShortName))
             .ForMember(d => d.ShippingPrice, o => o.MapFrom(s => s.DeliveryMethod.Price));

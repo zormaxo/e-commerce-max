@@ -1,7 +1,7 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Interfaces;
+using Shop.Application.Common.Interfaces.Photo;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;

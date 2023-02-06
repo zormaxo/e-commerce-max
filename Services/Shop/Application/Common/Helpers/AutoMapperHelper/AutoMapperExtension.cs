@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Shop.Application.AutoMapperHelper;
+namespace Shop.Application.Common.Helpers.AutoMapperHelper;
 
 public static class AutoMapperExtension
 {

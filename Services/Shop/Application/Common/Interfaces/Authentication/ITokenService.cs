@@ -1,6 +1,6 @@
 using Shop.Core.Entities.Identity;
 
-namespace Shop.Application.Interfaces;
+namespace Shop.Application.Common.Interfaces.Authentication;
 
 public interface ITokenService
 {

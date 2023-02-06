@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.Common.Interfaces.Authentication;
 using Shop.Application.Extensions;
-using Shop.Application.Interfaces;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
 using Shop.Shared.Dtos.Account;

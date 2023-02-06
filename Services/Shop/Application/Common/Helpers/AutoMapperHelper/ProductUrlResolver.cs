@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Shop.Core.Entities;
 using Shop.Shared.Dtos.Product;
 
-namespace Shop.Application.AutoMapperHelper;
+namespace Shop.Application.Common.Helpers.AutoMapperHelper;
 
 public class ProductUrlResolver : IValueResolver<Product, ShowcaseDto, string>
 {

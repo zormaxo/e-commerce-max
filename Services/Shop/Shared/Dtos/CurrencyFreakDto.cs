@@ -2,13 +2,13 @@
 
 public class CurrencyFreakDto
 {
-    private string _date;
+    private string _date = string.Empty;
 
     public string Date { get => _date; set => _date = value.Split('+')[0]; }
 
-    public Rates Rates { get; set; }
+    public Rates? Rates { get; set; }
 
-    public string Base { get; set; }
+    public string Base { get; set; } = string.Empty;
 }
 
 public class Rates

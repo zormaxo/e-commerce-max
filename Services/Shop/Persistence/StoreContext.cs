@@ -22,7 +22,6 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
 
     public DbSet<Product> Products { get; set; }
 
-
     public DbSet<ProductComputer> ProductComputer { get; set; }
 
     public DbSet<ProductRealEstate> ProductRealEstate { get; set; }

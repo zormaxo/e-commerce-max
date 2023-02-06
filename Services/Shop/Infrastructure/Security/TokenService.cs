@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Shop.Application.Interfaces;
+using Shop.Application.Common.Interfaces.Authentication;
 using Shop.Core.Entities.Identity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -17,7 +17,7 @@ public class TokenService : ITokenService
     public TokenService(IConfiguration config, UserManager<AppUser> userManager)
     {
         _userManager = userManager;
-        _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+        _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]!));
     }
 
     public async Task<string> CreateToken(AppUser user)
@@ -25,7 +25,7 @@ public class TokenService : ITokenService
         var claims = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName!),
             //new Claim(ClaimTypes.Name, user.UserName),
             //new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Shop.Shared.Dtos.Account;
 
-namespace Shop.Application.Validations;
+namespace Shop.API.Validation;
 
 public class LoginValidator : AbstractValidator<LoginDto>
 {

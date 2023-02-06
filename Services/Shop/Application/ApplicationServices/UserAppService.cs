@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Shop.Application.Interfaces;
+using Shop.Application.Common.Interfaces.Photo;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Exceptions;
