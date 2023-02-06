@@ -38,8 +38,9 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
     public async Task<Product> CreateProduct(ProductCreateDto productToCreate)
     {
         var product = Mapper.Map<ProductCreateDto, Product>(productToCreate);
-        product.Photos.Add(new ProductPhoto { IsMain = true, Url = "images/products/placeholder.png" });
+        product.Photos = new List<ProductPhoto> { new ProductPhoto { IsMain = true, Url = "images/products/placeholder.png" } };
 
+        StoreContext.Add(product);
         int result = await StoreContext.SaveChangesAsync();
 
         if (result <= 0)
