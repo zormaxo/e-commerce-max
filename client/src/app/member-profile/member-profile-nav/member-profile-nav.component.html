@@ -3,45 +3,35 @@
     <div class="card">
       <div class="card-header h6">User Information</div>
       <ul class="list-group list-group-flush">
-        <a
-          class="list-group-item list-group-item-action small"
-          routerLink="/member/membership"
-          routerLinkActive="active">
+        <a class="list-group-item list-group-item-action" routerLink="/member/membership" routerLinkActive="active">
           Membership Info
         </a>
-        <a class="list-group-item list-group-item-action small" routerLink="/member/messages" routerLinkActive="active">
+        <a class="list-group-item list-group-item-action" routerLink="/member/messages" routerLinkActive="active">
           Messages
+        </a>
+        <a class="list-group-item list-group-item-action" routerLink="/orders" routerLinkActive="active">
+          View orders
         </a>
       </ul>
       <div class="card-header h6">My Ads</div>
       <ul class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action small" routerLink="/member/summary" routerLinkActive="active">
+        <a class="list-group-item list-group-item-action" routerLink="/member/summary" routerLinkActive="active">
           Summary
         </a>
         <a
-          class="list-group-item list-group-item-action small"
+          class="list-group-item list-group-item-action"
           routerLink="/member/ads"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
           On Air
         </a>
-        <a
-          class="list-group-item list-group-item-action small"
-          routerLink="/member/ads/inactive"
-          routerLinkActive="active">
+        <a class="list-group-item list-group-item-action" routerLink="/member/ads/inactive" routerLinkActive="active">
           Not on Air
         </a>
-        <a
-          class="list-group-item list-group-item-action small"
-          routerLink="/member/favorites"
-          routerLinkActive="active">
+        <a class="list-group-item list-group-item-action" routerLink="/member/favorites" routerLinkActive="active">
           Favorites
         </a>
-        <a
-          class="list-group-item list-group-item-action small text-bg-danger"
-          (click)="logout()">
-          Sign out
-        </a>
+        <a class="list-group-item list-group-item-action text-bg-danger" (click)="logout()"> Sign out </a>
       </ul>
     </div>
   </div>
