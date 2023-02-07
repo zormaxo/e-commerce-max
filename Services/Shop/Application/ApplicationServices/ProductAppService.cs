@@ -28,7 +28,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
 
-        product.IsFavourite = product.Favourites.Any(x => x.UserId == userId);
+        product.IsFavourite = product.Favourites!.Any(x => x.UserId == userId);
 
         return Mapper.Map<ProductDetailDto>(product);
     }
@@ -60,7 +60,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
         if (result <= 0)
             throw new ApiException(HttpStatusCode.BadRequest, "Problem updating product");
 
-        return product;
+        return product!;
     }
 
     [HttpDelete("{id}")]
@@ -68,7 +68,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
     {
         var product = await StoreContext.Products.FindAsync(id);
 
-        StoreContext.Products.Remove(product);
+        StoreContext.Products.Remove(product!);
 
         int result = await StoreContext.SaveChangesAsync();
 
@@ -94,8 +94,8 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
 
     public async Task<int> ChangeActiveStatus(ProductActivateDto productActivateDto)
     {
-        Product productObj = await StoreContext.Products.FindAsync(productActivateDto.Id);
-        productObj.IsActive = productActivateDto.IsActive;
+        Product? productObj = await StoreContext.Products!.FindAsync(productActivateDto.Id);
+        productObj!.IsActive = productActivateDto.IsActive;
         return await StoreContext.SaveChangesAsync();
     }
 
@@ -129,7 +129,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
 
         var photo = new ProductPhoto { Url = result.SecureUrl.AbsoluteUri, PublicId = result.PublicId };
 
-        if (product.Photos.Count == 0)
+        if (product!.Photos.Count == 0)
         {
             photo.IsMain = true;
         }

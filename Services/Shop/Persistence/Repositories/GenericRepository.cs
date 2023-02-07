@@ -27,7 +27,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public DbSet<T> GetAll() { return _dbSet; }
 
-    public ValueTask<T> GetByIdAsync(int id) { return _dbSet.FindAsync(id); }
+    public ValueTask<T?> GetByIdAsync(int id) { return _dbSet.FindAsync(id); }
 
     public Task<List<T>> ListAllAsync() { return _dbSet.ToListAsync(); }
 

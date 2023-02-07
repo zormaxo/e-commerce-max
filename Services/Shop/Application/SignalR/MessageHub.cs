@@ -32,19 +32,19 @@ public class MessageHub : Hub
     public override async Task OnConnectedAsync()
     {
         var httpContext = Context.GetHttpContext();
-        var otherUser = httpContext.Request.Query["user"].ToString();
-        var groupName = GetGroupName(Context.User.GetUserName(), otherUser);
+        var otherUser = httpContext!.Request.Query["user"].ToString();
+        var groupName = GetGroupName(Context!.User!.GetUserName(), otherUser);
         await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
         var group = await AddToGroup(groupName);
         await Clients.Group(groupName).SendAsync("UpdatedGroup", group);
 
         var messages = await _messageRepository.
-            GetMessageThread(Context.User.GetUserName(), otherUser);
+            GetMessageThread(Context.User!.GetUserName(), otherUser);
 
         await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
     }
 
-    public override async Task OnDisconnectedAsync(Exception exception)
+    public override async Task OnDisconnectedAsync(Exception? exception)
     {
         var group = await RemoveFromMessageGroup();
         await Clients.Group(group.Name).SendAsync("UpdatedGroup", group);
@@ -53,7 +53,7 @@ public class MessageHub : Hub
 
     public async Task SendMessage(CreateMessageDto createMessageDto)
     {
-        var username = Context.User.GetUserName();
+        var username = Context!.User!.GetUserName();
 
         if (username == createMessageDto.RecipientUsername.ToLower())
             throw new HubException("You cannot send messages to yourself");
@@ -73,7 +73,7 @@ public class MessageHub : Hub
             Content = createMessageDto.Content
         };
 
-        var groupName = GetGroupName(sender.UserName, recipient.UserName);
+        var groupName = GetGroupName(sender.UserName!, recipient.UserName!);
 
         var group = await _messageRepository.GetMessageGroup(groupName);
 
@@ -83,7 +83,7 @@ public class MessageHub : Hub
         }
         else
         {
-            var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+            var connections = await _tracker.GetConnectionsForUser(recipient.UserName!);
             if (connections != null)
             {
                 await _presenceHub.Clients
@@ -103,7 +103,7 @@ public class MessageHub : Hub
     private async Task<Group> AddToGroup(string groupName)
     {
         var group = await _messageRepository.GetMessageGroup(groupName);
-        var connection = new Connection(Context.ConnectionId, Context.User.GetUserName());
+        var connection = new Connection(Context.ConnectionId, Context.User!.GetUserName());
 
         if (group == null)
         {
@@ -130,7 +130,7 @@ public class MessageHub : Hub
         throw new HubException("Failed to remove from group");
     }
 
-    private string GetGroupName(string caller, string other)
+    private static string GetGroupName(string caller, string other)
     {
         var stringCompare = string.CompareOrdinal(caller, other) < 0;
         return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";

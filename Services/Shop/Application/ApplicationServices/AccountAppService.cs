@@ -45,7 +45,7 @@ public class AccountAppService : BaseAppService
         return new UserDto
         {
             FirstName = user.FirstName,
-            Email = user.Email,
+            Email = user.Email!,
             UserId = user.Id,
             Token = await _tokenService.CreateToken(user)
         };
@@ -55,15 +55,15 @@ public class AccountAppService : BaseAppService
     {
         var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-        var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+        var result = await _userManager.CheckPasswordAsync(user!, loginDto.Password);
 
         if (!result)
             throw new ApiException(HttpStatusCode.Unauthorized, "Wrong email or password");
 
         return new UserDto
         {
-            UserId = user.Id,
-            Email = user.Email,
+            UserId = user!.Id!,
+            Email = user.Email!,
             FirstName = user.FirstName,
             Token = await _tokenService.CreateToken(user),
         };
@@ -73,7 +73,7 @@ public class AccountAppService : BaseAppService
     {
         var user = await _userManager.FindByEmailFromClaimsPrincipalAsync(email);
 
-        return new UserDto { Email = user.Email, Token = await _tokenService.CreateToken(user), FirstName = user.FirstName };
+        return new UserDto { Email = user.Email!, Token = await _tokenService.CreateToken(user), FirstName = user.FirstName };
     }
 
     public async Task<bool> CheckEmailExistsAsync(string email) { return await _userManager.FindByEmailAsync(email) != null; }

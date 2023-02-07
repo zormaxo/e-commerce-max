@@ -14,11 +14,11 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
     {
     }
 
-    protected IQueryable<Product> FilteredProducts { get; set; }
+    protected IQueryable<Product> FilteredProducts { get; set; } = null!;
 
-    protected IQueryable<Product> PagedAndFilteredProducts { get; set; }
+    protected IQueryable<Product> PagedAndFilteredProducts { get; set; } = null!;
 
-    protected ProductSpecParams ProductSpecParams { get; set; }
+    protected ProductSpecParams ProductSpecParams { get; set; } = null!;
 
     public async Task<Pagination<Y>> GetProducts<Y>(ProductSpecParams productSpecParams) where Y : BaseProductDto
     {
@@ -59,7 +59,6 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             FilteredProducts = FilteredProducts.Where(p => p.UserId == productSpecParams.UserId);
         }
 
-
         AddCategoryFiltering();
 
         if (!string.IsNullOrEmpty(productSpecParams.CategoryName))
@@ -85,14 +84,14 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .AsNoTracking()
             .ToListAsync();
 
-        data.ForEach(x => x.IsFavourite = x.Favourites.Any(y => y.UserId == UserId));
+        data.ForEach(x => x.IsFavourite = x.Favourites!.Any(y => y.UserId == UserId));
 
         return new Pagination<Y>(productSpecParams.PageNumber, productSpecParams.PageSize, catGrpCountList, totalItems, data);
     }
 
     public async Task<int> UpdateProduct(Product product)
     {
-        Product productObj = await StoreContext.Products.FindAsync(product.Id);
+        Product? productObj = await StoreContext.Products.FindAsync(product.Id);
         Mapper.Map(product, productObj);
         return await StoreContext.SaveChangesAsync();
     }

@@ -7,7 +7,7 @@ public interface IGenericRepository<T> where T : class
 {
     DbSet<T> GetAll();
 
-    ValueTask<T> GetByIdAsync(int id);
+    ValueTask<T?> GetByIdAsync(int id);
 
     Task<List<T>> ListAllAsync();
 
