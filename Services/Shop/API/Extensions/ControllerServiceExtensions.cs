@@ -26,10 +26,7 @@ namespace Shop.API.Extensions;
 
 public static class ControllerServiceExtensions
 {
-    public static IServiceCollection AddControllerServices(
-        this IServiceCollection services,
-        IConfiguration config,
-        IWebHostEnvironment environment)
+    public static IServiceCollection AddControllerServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<ResponseFilterAttribute>();
         services.AddSingleton<LogUserActivityAttribute>();
@@ -42,11 +39,11 @@ public static class ControllerServiceExtensions
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPaymentService, PaymentService>();
-        //services.AddScoped<IBasketRepository, BasketMemRepository>();
+        ////services.AddScoped<IBasketRepository, BasketMemRepository>();
 
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPhotoService, PhotoService>();
-        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+        services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
@@ -56,20 +53,16 @@ public static class ControllerServiceExtensions
         services.AddHttpClient();
         services.AddHttpClient(
             "currencyfreak",
-            config =>
-            {
-                config.BaseAddress = new Uri("https://api.currencyfreaks.com/");
-            });
+            config => config.BaseAddress = new Uri(configuration.GetValue<string>("CurrencyApi")!));
 
         services.AddSingleton(new RestClient(new HttpClient()));
 
-        services.AddSingleton<IConnectionMultiplexer>(
-            c =>
+        _ = services.AddSingleton(
+            (Func<IServiceProvider, IConnectionMultiplexer>)(_ =>
             {
-                var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis")!);
+                var options = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis")!);
                 return ConnectionMultiplexer.Connect(options);
-            });
-
+            }));
 
         services.Configure<ApiBehaviorOptions>(
             options =>
@@ -103,12 +96,8 @@ public static class ControllerServiceExtensions
             {
                 opt.AddPolicy(
                     "CorsPolicy",
-                    policy =>
-                    {
-                        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201");
-                    });
+                    policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201"));
             });
-
 
         return services;
     }
