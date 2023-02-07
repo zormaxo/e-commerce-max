@@ -11,10 +11,10 @@ namespace Shop.Persistence;
 
 public class StoreContextSeed
 {
-    private readonly StoreContext context;
-    private readonly RoleManager<AppRole> roleManager;
-    private readonly ILoggerFactory loggerFactory;
-    private readonly UserManager<AppUser> userManager;
+    private readonly StoreContext _context;
+    private readonly RoleManager<AppRole> _roleManager;
+    private readonly ILoggerFactory _loggerFactory;
+    private readonly UserManager<AppUser> _userManager;
 
     public StoreContextSeed(
         StoreContext context,
@@ -22,46 +22,45 @@ public class StoreContextSeed
         RoleManager<AppRole> roleManager,
         ILoggerFactory loggerFactory)
     {
-        this.context = context;
-        userManager = userManager;
-        this.roleManager = roleManager;
-        this.loggerFactory = loggerFactory;
+        _context = context;
+        _userManager = userManager;
+        _roleManager = roleManager;
+        _loggerFactory = loggerFactory;
     }
-
 
     public async Task SeedAsync()
     {
-        var logger = loggerFactory.CreateLogger("StoreContextSeed");
+        var logger = _loggerFactory.CreateLogger("StoreContextSeed");
         logger.LogInformation("Seeding starting...");
 
-        await context.Database.MigrateAsync();
+        await _context.Database.MigrateAsync();
         var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         try
         {
-            if (!await context.Cities.AnyAsync())
+            if (!await _context.Cities.AnyAsync())
             {
                 logger.LogInformation("City seeding starting...");
                 var cityData = await File.ReadAllTextAsync(path + "/SeedData/cities.json");
                 var cities = JsonConvert.DeserializeObject<List<City>>(cityData);
 
-                context.Cities.AddRange(cities!);
+                _context.Cities.AddRange(cities!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
 
-            if (!await context.Counties.AnyAsync())
+            if (!await _context.Counties.AnyAsync())
             {
                 logger.LogInformation("County seeding starting...");
                 var countyData = await File.ReadAllTextAsync(path + "/SeedData/counties.json");
                 var counties = JsonConvert.DeserializeObject<List<County>>(countyData);
 
-                context.Counties.AddRange(counties!);
+                _context.Counties.AddRange(counties!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
 
-            if (!await userManager.Users.AnyAsync())
+            if (!await _userManager.Users.AnyAsync())
             {
                 string userData = await File.ReadAllTextAsync(path + "/SeedData/users.json");
                 var users = JsonConvert.DeserializeObject<List<AppUser>>(userData);
@@ -77,14 +76,14 @@ public class StoreContextSeed
 
                 foreach (var role in roles)
                 {
-                    await roleManager.CreateAsync(role);
+                    await _roleManager.CreateAsync(role);
                 }
 
                 foreach (var user in users)
                 {
                     user.UserName = user.UserName!.ToLower();
-                    await userManager.CreateAsync(user, "1234");
-                    await userManager.AddToRoleAsync(user, "Member");
+                    await _userManager.CreateAsync(user, "1234");
+                    await _userManager.AddToRoleAsync(user, "Member");
                 }
 
                 var admin = new AppUser
@@ -95,22 +94,22 @@ public class StoreContextSeed
                     LastName = "Admin"
                 };
 
-                await userManager.CreateAsync(admin, "1234");
-                await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
+                await _userManager.CreateAsync(admin, "1234");
+                await _userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
             }
 
-            if (!await context.Categories.AnyAsync())
+            if (!await _context.Categories.AnyAsync())
             {
                 logger.LogInformation("Category seeding starting...");
                 var typesData = await File.ReadAllTextAsync(path + "/SeedData/categories.json");
                 var types = JsonConvert.DeserializeObject<List<Category>>(typesData);
 
-                context.Categories.AddRange(types!);
+                _context.Categories.AddRange(types!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
 
-            if (!await context.Products.AnyAsync())
+            if (!await _context.Products.AnyAsync())
             {
                 logger.LogInformation("Product seeding starting...");
                 var productsData = await File.ReadAllTextAsync(path + "/SeedData/products.json");
@@ -119,49 +118,49 @@ public class StoreContextSeed
                 foreach (var product in products!)
                     product.CreatedDate = GetRandomDate(DateTime.Now, DateTime.Now.AddDays(-365));
 
-                context.Products.AddRange(products);
+                _context.Products.AddRange(products);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
-            if (!await context.ProductVehicle.AnyAsync())
+            if (!await _context.ProductVehicle.AnyAsync())
             {
                 logger.LogInformation("ProductVehicle seeding starting...");
                 var machinesData = await File.ReadAllTextAsync(path + "/SeedData/productVehicle.json");
                 var machines = JsonConvert.DeserializeObject<List<ProductVehicle>>(machinesData);
 
-                context.ProductVehicle.AddRange(machines!);
+                _context.ProductVehicle.AddRange(machines!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
-            if (!await context.ProductComputer.AnyAsync())
+            if (!await _context.ProductComputer.AnyAsync())
             {
                 logger.LogInformation("ProductComputer seeding starting...");
                 var computerData = await File.ReadAllTextAsync(path + "/SeedData/productComputer.json");
                 var computers = JsonConvert.DeserializeObject<List<ProductComputer>>(computerData);
 
-                context.ProductComputer.AddRange(computers!);
+                _context.ProductComputer.AddRange(computers!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
-            if (!await context.ProductRealEstate.AnyAsync())
+            if (!await _context.ProductRealEstate.AnyAsync())
             {
                 logger.LogInformation("ProductRealEstate seeding starting...");
                 var realEstateDate = await File.ReadAllTextAsync(path + "/SeedData/productRealEstate.json");
                 var realEstates = JsonConvert.DeserializeObject<List<ProductRealEstate>>(realEstateDate);
 
-                context.ProductRealEstate.AddRange(realEstates!);
+                _context.ProductRealEstate.AddRange(realEstates!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
-            if (!await context.DeliveryMethods.AnyAsync())
+            if (!await _context.DeliveryMethods.AnyAsync())
             {
                 logger.LogInformation("DeliveryMethod seeding starting...");
                 var deliveryData = File.ReadAllText(path + "/SeedData/delivery.json");
                 var methods = JsonConvert.DeserializeObject<List<DeliveryMethod>>(deliveryData);
 
-                context.DeliveryMethods.AddRange(methods!);
+                _context.DeliveryMethods.AddRange(methods!);
 
-                await context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
 
             logger.LogInformation("Seeding finished.");
@@ -172,8 +171,7 @@ public class StoreContextSeed
         }
     }
 
-    static readonly Random rnd = new Random();
-
+    static readonly Random rnd = new();
 
     public static DateTime GetRandomDate(DateTime from, DateTime to)
     {

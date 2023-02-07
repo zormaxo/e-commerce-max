@@ -21,7 +21,9 @@ public static class ConfigureServices
 
         var connString = string.Empty;
         if (environment.IsDevelopment())
+        {
             connString = config.GetConnectionString("DefaultConnection");
+        }
         else
         {
             // Use connection string provided at runtime by FlyIO.

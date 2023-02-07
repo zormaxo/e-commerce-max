@@ -10,9 +10,9 @@ internal class AuditEntry
 
     public EntityEntry EntityEntry { get; }
 
-    public string Action { get; set; }
+    public string Action { get; set; } = string.Empty;
 
-    public string TableName { get; set; }
+    public string TableName { get; set; } = string.Empty;
 
     public Dictionary<string, object> KeyValues { get; set; } = new Dictionary<string, object>();
 

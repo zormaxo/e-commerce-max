@@ -114,7 +114,6 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
         }
     }
 
-
     /// <summary>
     /// Used for audit table
     /// </summary>
@@ -143,7 +142,7 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
 
             var auditEntry = new AuditEntry(entityEntry)
             {
-                TableName = entityEntry.Metadata.GetTableName(),
+                TableName = entityEntry.Metadata.GetTableName()!,
                 Action = entityEntry.State.ToString(),
             };
             auditEntries.Add(auditEntry);
@@ -159,25 +158,25 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
                 string propertyName = property.Metadata.Name;
                 if (property.Metadata.IsPrimaryKey())
                 {
-                    auditEntry.KeyValues[propertyName] = property.CurrentValue;
+                    auditEntry.KeyValues[propertyName] = property.CurrentValue!;
                     continue;
                 }
 
                 switch (entityEntry.State)
                 {
                     case EntityState.Added:
-                        auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        auditEntry.NewValues[propertyName] = property.CurrentValue!;
                         break;
 
                     case EntityState.Deleted:
-                        auditEntry.OldValues[propertyName] = property.OriginalValue;
+                        auditEntry.OldValues[propertyName] = property.OriginalValue!;
                         break;
 
                     case EntityState.Modified:
                         if (property.IsModified)
                         {
-                            auditEntry.OldValues[propertyName] = property.OriginalValue;
-                            auditEntry.NewValues[propertyName] = property.CurrentValue;
+                            auditEntry.OldValues[propertyName] = property.OriginalValue!;
+                            auditEntry.NewValues[propertyName] = property.CurrentValue!;
                         }
                         break;
                 }
@@ -205,11 +204,11 @@ public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUse
             {
                 if (prop.Metadata.IsPrimaryKey())
                 {
-                    auditEntry.KeyValues[prop.Metadata.Name] = prop.CurrentValue;
+                    auditEntry.KeyValues[prop.Metadata.Name] = prop.CurrentValue!;
                 }
                 else
                 {
-                    auditEntry.NewValues[prop.Metadata.Name] = prop.CurrentValue;
+                    auditEntry.NewValues[prop.Metadata.Name] = prop.CurrentValue!;
                 }
             }
             Audits.Add(auditEntry.ToAudit(_userId));
