@@ -48,7 +48,7 @@
   <div class="d-md-none" *ngIf="totalCount > 0">
     <table class="table table-striped table-hover table-bordered table-sm" aria-label="Ürünler" aria-hidden="true">
       <tbody>
-        <tr *ngFor="let product of products" style="line-height: 20px">
+        <tr *ngFor="let product of products" routerLink="/product/{{ product.id }}" style="line-height: 20px">
           <td style="width: 100px">
             <img src="{{ product.pictureUrl }}" style="max-height: 100px" class="img-fluid rounded-start" alt="..." />
           </td>

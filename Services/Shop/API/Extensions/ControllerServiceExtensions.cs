@@ -71,18 +71,6 @@ public static class ControllerServiceExtensions
             });
 
 
-        services.AddCors(
-            opt =>
-            {
-                opt.AddPolicy(
-                    "CorsPolicy",
-                    policy =>
-                    {
-                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4201");
-                    });
-            });
-
-
         services.Configure<ApiBehaviorOptions>(
             options =>
             {
@@ -109,6 +97,18 @@ public static class ControllerServiceExtensions
             });
 
         services.AddHealthChecks();
+
+        services.AddCors(
+            opt =>
+            {
+                opt.AddPolicy(
+                    "CorsPolicy",
+                    policy =>
+                    {
+                        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201");
+                    });
+            });
+
 
         return services;
     }

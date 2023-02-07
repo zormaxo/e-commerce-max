@@ -14,7 +14,7 @@
       <tr *ngFor="let item of basket.items">
         <td>
           <div class="p-1 d-inline-block">
-            <img src="{{ item.pictureUrl }}" alt="{{ item.productName }}" class="img-fluid" style="max-height: 50px" />
+            <img src="{{ item.pictureUrl }}" alt="{{ item.productName }}" class="img-fluid me-2" style="max-height: 50px" />
             <div class="d-inline-block align-middle">
               <a routerLink="/shop/{{ item.id }}" class="text-dark text-decoration-none">
                 {{ item.productName }}

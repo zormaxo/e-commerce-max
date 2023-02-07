@@ -15,17 +15,20 @@ using Shop.Persistence;
 using System.Text.Json.Serialization;
 
 Log.Information("Application Starting Up");
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructureServices(builder.Configuration, builder.Environment);
-builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllerServices(builder.Configuration, builder.Environment);
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration, builder.Environment);
+builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
+app.UseCors("CorsPolicy");
 app.UseCustomHealthCheck();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
@@ -41,7 +44,6 @@ app.UseStaticFiles(
         RequestPath = "/Content"
     });
 
-app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
