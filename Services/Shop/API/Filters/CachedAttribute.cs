@@ -1,6 +1,6 @@
-using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Shop.Application.Common.Interfaces.Repository;
 using System.Text;
 
 namespace Shop.API.Filters;

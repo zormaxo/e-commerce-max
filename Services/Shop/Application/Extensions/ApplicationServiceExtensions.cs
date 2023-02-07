@@ -1,9 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.ApplicationServices;
+using Shop.Application.Common;
 using Shop.Application.Common.Interfaces.Payment;
 using Shop.Application.SignalR;
 using Shop.Core.HelperTypes;
+using Shop.Persistence.Services;
 
 namespace Shop.Application.Extensions;
 
@@ -27,6 +29,8 @@ public static class ApplicationServiceExtensions
 
         services.AddSignalR();
         services.AddSingleton<PresenceTracker>();
+
+        services.AddScoped<UserResolverService>();
 
         return services;
     }

@@ -1,4 +1,4 @@
-namespace Core.Interfaces
+namespace Shop.Application.Common.Interfaces.Repository
 {
     public interface IResponseCacheService
     {
