@@ -32,7 +32,7 @@ public class UserAppService : BaseAppService
     public async Task<PagedList<MemberDto>> GetUsers(UserParams userParams, string username)
     {
         var user = await _userRepository.GetUserByUsernameAsync(username);
-        userParams.CurrentUsername = user.UserName;
+        userParams.CurrentUsername = user.UserName!;
 
         PagedList<AppUser> appUsers = await _userRepository.GetMembersAsync(userParams);
 

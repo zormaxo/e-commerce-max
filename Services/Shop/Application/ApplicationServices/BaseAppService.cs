@@ -21,10 +21,10 @@ public class BaseAppService
 
     public BaseAppService(IServiceProvider serviceProvider)
     {
-        StoreContext = serviceProvider.GetService<IStoreContext>();
-        Mapper = serviceProvider.GetService<IMapper>();
-        CachedItems = serviceProvider.GetService<CachedItems>();
-        HttpContext = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
+        StoreContext = serviceProvider.GetService<IStoreContext>()!;
+        Mapper = serviceProvider.GetService<IMapper>()!;
+        CachedItems = serviceProvider.GetService<CachedItems>()!;
+        HttpContext = serviceProvider.GetService<IHttpContextAccessor>()!.HttpContext!;
 
         if (int.TryParse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int result))
         {

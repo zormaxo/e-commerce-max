@@ -18,7 +18,7 @@ public class OrderService : IOrderService
         _storeContext = storeContext;
     }
 
-    public async Task<Order> CreateOrderAsync(
+    public async Task<Order?> CreateOrderAsync(
         string buyerEmail,
         int deliveryMethodId,
         string basketId,
@@ -52,14 +52,14 @@ public class OrderService : IOrderService
         if (order != null)
         {
             order.ShipToAddress = shippingAddress;
-            order.DeliveryMethod = deliveryMethod;
+            order.DeliveryMethod = deliveryMethod!;
             order.Subtotal = subtotal;
             _unitOfWork.Repository<Order>().Update(order);
         }
         else
         {
             // create order
-            order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal, basket.PaymentIntentId);
+            order = new Order(items, buyerEmail, shippingAddress, deliveryMethod!, subtotal, basket.PaymentIntentId);
             _unitOfWork.Repository<Order>().Add(order);
         }
 
@@ -76,7 +76,7 @@ public class OrderService : IOrderService
     public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
     { return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync(); }
 
-    public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
+    public async Task<Order?> GetOrderByIdAsync(int id, string buyerEmail)
     {
         return await _storeContext.Orders
             .Include(x => x.OrderItems)
