@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Shop.Application.Common.Interfaces.Payment;
+using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.Entities;
 using Shop.Core.Entities.OrderAggregate;
 using Shop.Core.Interfaces;
-using Shop.Persistence;
 using Stripe;
 
 namespace Shop.Application.Common;
@@ -13,13 +13,13 @@ public class PaymentService : IPaymentService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IBasketRepository _basketRepository;
     private readonly IConfiguration _config;
-    readonly StoreContext _storeContext;
+    readonly IStoreContext _storeContext;
 
     public PaymentService(
         IUnitOfWork unitOfWork,
         IBasketRepository basketRepository,
         IConfiguration config,
-        StoreContext storeContext)
+        IStoreContext storeContext)
     {
         _storeContext = storeContext;
         _config = config;

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.Entities;
 using Shop.Core.Entities.Identity;
 using Shop.Core.Entities.OrderAggregate;
@@ -11,7 +12,7 @@ using System.Reflection;
 
 namespace Shop.Persistence;
 
-public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+public class StoreContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>, IStoreContext
 {
     private readonly int _userId;
 

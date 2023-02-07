@@ -16,7 +16,6 @@ using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.Interfaces;
 using Shop.Infrastructure.Photo;
 using Shop.Infrastructure.Security;
-using Shop.Persistence;
 using Shop.Persistence.Repositories;
 using Shop.Shared.Response;
 using StackExchange.Redis;
@@ -71,33 +70,6 @@ public static class ControllerServiceExtensions
                 return ConnectionMultiplexer.Connect(options);
             });
 
-        var connString = string.Empty;
-        if (environment.IsDevelopment())
-            connString = config.GetConnectionString("DefaultConnection");
-        else
-        {
-            // Use connection string provided at runtime by FlyIO.
-            var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-
-            // Parse connection URL to connection string for Npgsql
-            connUrl = connUrl!.Replace("postgres://", string.Empty);
-            var pgUserPass = connUrl.Split("@")[0];
-            var pgHostPortDb = connUrl.Split("@")[1];
-            var pgHostPort = pgHostPortDb.Split("/")[0];
-            var pgDb = pgHostPortDb.Split("/")[1];
-            var pgUser = pgUserPass.Split(":")[0];
-            var pgPass = pgUserPass.Split(":")[1];
-            var pgHost = pgHostPort.Split(":")[0];
-            var pgPort = pgHostPort.Split(":")[1];
-
-            connString = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
-        }
-        services.AddDbContext<StoreContext>(
-            opt =>
-            {
-                opt.EnableSensitiveDataLogging();
-                opt.UseNpgsql(connString);
-            });
 
         services.AddCors(
             opt =>

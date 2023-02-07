@@ -15,13 +15,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.3" />
-    <PackageReference Include="StackExchange.Redis" Version="2.6.90" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.24" />
   </ItemGroup>
 
   <ItemGroup>
 	<Content Include="SeedData\**" CopyToOutputDirectory="PreserveNewest" />
-    <ProjectReference Include="..\Core\Shop.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Shop.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

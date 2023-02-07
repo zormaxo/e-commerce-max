@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RestSharp;
+using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
-using Shop.Persistence;
 using Shop.Shared.Dtos;
 
 namespace Shop.Application;
@@ -12,7 +12,7 @@ namespace Shop.Application;
 public static class CacheService
 {
     public async static Task FillCacheItemsAsync(
-        StoreContext context,
+        IStoreContext context,
         ILoggerFactory loggerFactory,
         IMapper mapper,
         CachedItems cachedItems,
@@ -45,7 +45,7 @@ public static class CacheService
                 currency.Date = DateTime.UtcNow;
                 cachedItems.Currency = currency;
 
-                context.Add(currency);
+                context.Currency.Add(currency);
                 await context.SaveChangesAsync();
             }
             catch

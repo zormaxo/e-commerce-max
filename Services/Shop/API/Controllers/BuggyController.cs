@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.Entities;
-using Shop.Persistence;
 using Shop.Shared.Dtos;
 using System.Text.Json;
 
@@ -9,11 +9,11 @@ namespace Shop.API.Controllers;
 
 public class BuggyController : BaseApiController
 {
-    private readonly StoreContext _context;
+    private readonly IStoreContext _context;
     private readonly HttpClient _client;
     private readonly IHttpClientFactory _httpClientFactory;
 
-    public BuggyController(StoreContext context, HttpClient client, IHttpClientFactory HttpClientFactory)
+    public BuggyController(IStoreContext context, HttpClient client, IHttpClientFactory HttpClientFactory)
     {
         _context = context;
         _client = client;

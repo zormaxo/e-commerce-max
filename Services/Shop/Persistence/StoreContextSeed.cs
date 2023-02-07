@@ -9,17 +9,32 @@ using System.Reflection;
 
 namespace Shop.Persistence;
 
-public static class StoreContextSeed
+public class StoreContextSeed
 {
-    public static async Task SeedAsync(
+    private readonly StoreContext context;
+    private readonly RoleManager<AppRole> roleManager;
+    private readonly ILoggerFactory loggerFactory;
+    private readonly UserManager<AppUser> userManager;
+
+    public StoreContextSeed(
         StoreContext context,
         UserManager<AppUser> userManager,
         RoleManager<AppRole> roleManager,
         ILoggerFactory loggerFactory)
     {
+        this.context = context;
+        userManager = userManager;
+        this.roleManager = roleManager;
+        this.loggerFactory = loggerFactory;
+    }
+
+
+    public async Task SeedAsync()
+    {
         var logger = loggerFactory.CreateLogger("StoreContextSeed");
         logger.LogInformation("Seeding starting...");
 
+        await context.Database.MigrateAsync();
         var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         try
@@ -158,6 +173,7 @@ public static class StoreContextSeed
     }
 
     static readonly Random rnd = new Random();
+
 
     public static DateTime GetRandomDate(DateTime from, DateTime to)
     {

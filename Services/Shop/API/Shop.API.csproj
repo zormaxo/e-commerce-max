@@ -32,6 +32,7 @@
 	<Content Include="Content\**" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\Application\Shop.Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Shop.Infrastructure.csproj" />
+    <ProjectReference Include="..\Persistence\Shop.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

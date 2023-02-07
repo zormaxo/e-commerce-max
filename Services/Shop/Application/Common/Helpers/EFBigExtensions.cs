@@ -4,7 +4,7 @@ using Shop.Core.Interfaces;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
-namespace Shop.Persistence;
+namespace Shop.Application.Common.Helpers;
 
 public static class EFBigExtensions
 {
@@ -22,6 +22,10 @@ public static class EFBigExtensions
     public static IQueryable<TSource> EFBigPageBy<TSource>(this IQueryable<TSource> source, IPagedResultRequest request)
     { return source.Skip(request.PageSize * (request.PageNumber - 1)).Take(request.PageSize); }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Major Code Smell",
+        "S3358:Ternary operators should not be nested",
+        Justification = "<Pending>")]
     public static IQueryable<TSource> EFBigOrderBy<TSource>(
         this IQueryable<TSource> source,
         string sort,

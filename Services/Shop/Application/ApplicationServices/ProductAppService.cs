@@ -6,7 +6,6 @@ using Shop.Application.Common.Interfaces.Photo;
 using Shop.Core.Entities;
 using Shop.Core.Exceptions;
 using Shop.Core.HelperTypes;
-using Shop.Persistence;
 using Shop.Shared.Dtos;
 using Shop.Shared.Dtos.Product;
 using System.Net;
@@ -40,7 +39,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
         var product = Mapper.Map<ProductCreateDto, Product>(productToCreate);
         product.Photos = new List<ProductPhoto> { new ProductPhoto { IsMain = true, Url = "images/products/placeholder.png" } };
 
-        StoreContext.Add(product);
+        StoreContext.Products.Add(product);
         int result = await StoreContext.SaveChangesAsync();
 
         if (result <= 0)
@@ -52,11 +51,11 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
     [HttpPut("{id}")]
     public async Task<Product> UpdateProduct(int id, ProductCreateDto productToUpdate)
     {
-        var product = await StoreContext.FindAsync<Product>(id);
+        var product = await StoreContext.Products.FindAsync(id);
 
         Mapper.Map(productToUpdate, product);
 
-        int result = StoreContext.SaveChanges();
+        int result = await StoreContext.SaveChangesAsync();
 
         if (result <= 0)
             throw new ApiException(HttpStatusCode.BadRequest, "Problem updating product");
@@ -67,11 +66,11 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
     [HttpDelete("{id}")]
     public async Task DeleteProduct(int id)
     {
-        var product = await StoreContext.FindAsync<Product>(id);
+        var product = await StoreContext.Products.FindAsync(id);
 
-        StoreContext.Remove(product);
+        StoreContext.Products.Remove(product);
 
-        int result = StoreContext.SaveChanges();
+        int result = await StoreContext.SaveChangesAsync();
 
         if (result <= 0)
             throw new ApiException(HttpStatusCode.BadRequest, "Problem deleting product");

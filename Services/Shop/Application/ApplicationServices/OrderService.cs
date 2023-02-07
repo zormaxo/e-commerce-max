@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.Entities.OrderAggregate;
 using Shop.Core.Interfaces;
-using Shop.Persistence;
 
 namespace Shop.Application.ApplicationServices;
 
@@ -9,9 +9,9 @@ public class OrderService : IOrderService
 {
     private readonly IBasketRepository _basketRepo;
     private readonly IUnitOfWork _unitOfWork;
-    readonly StoreContext _storeContext;
+    readonly IStoreContext _storeContext;
 
-    public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, StoreContext storeContext)
+    public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, IStoreContext storeContext)
     {
         _unitOfWork = unitOfWork;
         _basketRepo = basketRepo;

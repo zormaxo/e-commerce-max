@@ -1,6 +1,6 @@
+using Shop.Application.Common.Helpers;
 using Shop.Core.Entities;
 using Shop.Core.Interfaces;
-using Shop.Persistence;
 using Shop.Shared.Dtos.Product;
 
 namespace Shop.Application.ApplicationServices;

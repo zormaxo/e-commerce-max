@@ -1,8 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.HelperTypes;
-using Shop.Persistence;
 using System.Security.Claims;
 
 namespace Shop.Application.ApplicationServices;
@@ -11,7 +11,7 @@ public class BaseAppService
 {
     protected IMapper Mapper { get; }
 
-    protected StoreContext StoreContext { get; }
+    protected IStoreContext StoreContext { get; }
 
     protected CachedItems CachedItems { get; }
 
@@ -21,7 +21,7 @@ public class BaseAppService
 
     public BaseAppService(IServiceProvider serviceProvider)
     {
-        StoreContext = serviceProvider.GetService<StoreContext>();
+        StoreContext = serviceProvider.GetService<IStoreContext>();
         Mapper = serviceProvider.GetService<IMapper>();
         CachedItems = serviceProvider.GetService<CachedItems>();
         HttpContext = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;

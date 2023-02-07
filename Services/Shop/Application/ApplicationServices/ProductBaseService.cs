@@ -1,8 +1,8 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Shop.Application.Common.Helpers;
 using Shop.Core.Entities;
 using Shop.Core.HelperTypes;
-using Shop.Persistence;
 using Shop.Shared;
 using Shop.Shared.Dtos.Product;
 
