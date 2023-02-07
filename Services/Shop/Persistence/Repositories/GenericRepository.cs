@@ -1,6 +1,6 @@
-using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Interfaces;
+using System.Linq.Expressions;
 
 namespace Shop.Persistence.Repositories;
 
@@ -15,21 +15,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         _dbSet = context.Set<T>();
     }
 
-    public void Add(T entity)
-    {
-        _context.Set<T>().Add(entity);
-    }
+    public void Add(T entity) { _context.Set<T>().Add(entity); }
 
-    public void Delete(T entity)
-    {
-        _context.Set<T>().Remove(entity);
-    }
+    public void Delete(T entity) { _context.Set<T>().Remove(entity); }
 
     public void Update(T entity)
     {
         _context.Set<T>().Attach(entity);
         _context.Entry(entity).State = EntityState.Modified;
-    } 
+    }
 
     public DbSet<T> GetAll() { return _dbSet; }
 
