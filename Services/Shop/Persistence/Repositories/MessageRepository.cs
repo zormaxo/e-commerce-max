@@ -25,10 +25,10 @@ public class MessageRepository : IMessageRepository
 
     public void DeleteMessage(Message message) { _context.Messages.Remove(message); }
 
-    public async Task<Connection> GetConnection(string connectionId)
+    public async Task<Connection?> GetConnection(string connectionId)
     { return await _context.Connections.FindAsync(connectionId); }
 
-    public async Task<Group> GetGroupForConnection(string connectionId)
+    public async Task<Group?> GetGroupForConnection(string connectionId)
     {
         return await _context.Groups
             .Include(x => x.Connections)
@@ -36,9 +36,9 @@ public class MessageRepository : IMessageRepository
             .FirstOrDefaultAsync();
     }
 
-    public async Task<Message> GetMessage(int id) { return await _context.Messages.FindAsync(id); }
+    public async Task<Message?> GetMessage(int id) { return await _context.Messages.FindAsync(id); }
 
-    public async Task<Group> GetMessageGroup(string groupName)
+    public async Task<Group?> GetMessageGroup(string groupName)
     { return await _context.Groups.Include(x => x.Connections).FirstOrDefaultAsync(x => x.Name == groupName); }
 
     public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
@@ -47,10 +47,9 @@ public class MessageRepository : IMessageRepository
 
         query = messageParams.Container switch
         {
-            "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username && u.RecipientDeleted == false),
-            "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username && u.SenderDeleted == false),
-            _ => query.Where(
-                u => u.RecipientUsername == messageParams.Username && u.RecipientDeleted == false && u.DateRead == null)
+            "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username && !u.RecipientDeleted),
+            "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username && !u.SenderDeleted),
+            _ => query.Where(u => u.RecipientUsername == messageParams.Username && !u.RecipientDeleted && u.DateRead == null)
         };
 
         var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
@@ -65,14 +64,13 @@ public class MessageRepository : IMessageRepository
         var query = _context.Messages
             .Where(
                 m => m.RecipientUsername == currentUserName &&
-                    m.RecipientDeleted == false &&
+                    !m.RecipientDeleted &&
                     m.SenderUsername == recipientUserName ||
                     m.RecipientUsername == recipientUserName &&
-                    m.SenderDeleted == false &&
+                    !m.SenderDeleted &&
                     m.SenderUsername == currentUserName)
             .OrderBy(m => m.MessageSent)
             .AsQueryable();
-
 
         var unreadMessages = query.Where(m => m.DateRead == null && m.RecipientUsername == currentUserName).ToList();
 

@@ -8,7 +8,7 @@ public class UserResolverService
     private readonly IHttpContextAccessor _context;
     public UserResolverService(IHttpContextAccessor context) { _context = context; }
 
-    public string GetUsername() { return _context.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty; }
+    public string GetUsername() { return _context?.HttpContext?.User.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty; }
 
     public int GetUserId()
     {
