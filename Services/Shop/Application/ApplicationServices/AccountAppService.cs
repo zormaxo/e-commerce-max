@@ -23,6 +23,7 @@ public class AccountAppService : BaseAppService
 
     public async Task<UserDto> Register(RegisterDto registerDto)
     {
+        registerDto.Email = registerDto.Email.ToLower();
         if (await CheckEmailExistsAsync(registerDto.Email))
         {
             throw new ApiException(HttpStatusCode.BadRequest, "Email address is in use");
@@ -53,6 +54,7 @@ public class AccountAppService : BaseAppService
 
     public async Task<UserDto> Login(LoginDto loginDto)
     {
+        loginDto.Email = loginDto.Email.ToLower();
         var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
         var result = await _userManager.CheckPasswordAsync(user!, loginDto.Password);
