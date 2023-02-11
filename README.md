@@ -1,4 +1,4 @@
-# E-commerceapp-max
+# E-commerce-max
 
 E-commerce-max is a well designed Single Page App (SPA) e-commerce application. The application is designed by following the principles of clean architecture and making use of .Net Core and Angular technologies.
 
