@@ -45,11 +45,11 @@ export class PresenceService {
       this.onlineUsersSource.next(usernames);
     });
 
-    this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
+    this.hubConnection.on('NewMessageReceived', ({ firstName, userId }) => {
       this.toastr
-        .info(knownAs + ' has sent you a new message!')
+        .info(firstName + ' has sent you a new message!')
         .onTap.pipe(take(1))
-        .subscribe(() => this.router.navigateByUrl('uyeler/' + knownAs + '?tab=Messages'));
+        .subscribe(() => this.router.navigateByUrl('member/messages/' + userId));
     });
   }
 

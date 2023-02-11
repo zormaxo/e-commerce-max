@@ -88,7 +88,7 @@ public class MessageHub : Hub
             {
                 await _presenceHub.Clients
                     .Clients(connections)
-                    .SendAsync("NewMessageReceived", new { username = sender.UserName, knownAs = sender.Id });
+                    .SendAsync("NewMessageReceived", new { firstName = sender.FirstName, userId = sender.Id });
             }
         }
 

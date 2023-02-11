@@ -7,7 +7,6 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { UserProductsComponent } from './shop/user-products/user-products.component';
 import { AppProductBaseComponent } from './shop/app-product-base/app-product-base.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
@@ -16,7 +15,6 @@ const routes: Routes = [
     path: 'signin',
     loadChildren: () => import('./account/account.module').then((mod) => mod.AccountModule),
   },
-
   {
     path: '',
     component: HomeComponent,
@@ -29,7 +27,6 @@ const routes: Routes = [
         component: AppProductBaseComponent,
         children: [{ path: ':id', component: UserProductsComponent }],
       },
-
       {
         path: 'vehicle',
         loadChildren: () => import('./shop/categories/vehicle/vehicle.module').then((mod) => mod.MachineModule),
@@ -88,11 +85,6 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),
       },
-
-      // {
-      //   path: 'ads/:id',
-      //   component: UserProductsComponent,
-      // },
     ],
   },
 
