@@ -10,7 +10,7 @@ Demo site: https://ecommercemax.fly.dev
 2. SOLID
 3. ASP.NET Identity for login and registration
 4. Automapper
-5. Paging, Sorting, Searching and Filtering
+5. Paging, searching, sorting and filtering
 6. Accepting payments using Stripe
 7. Angular validation and async validation
 8. Caching
