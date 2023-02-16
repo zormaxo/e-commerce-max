@@ -31,6 +31,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { AdminModule } from './admin/admin.module';
 import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { OrderDetailedComponent } from './order-detailed/order-detailed.componen
     AdminModule,
     NgxSpinnerModule,
     FileUploadModule,
+    NgxGoogleAnalyticsModule.forRoot('G-S1C9DQPJFT'),
+    NgxGoogleAnalyticsRouterModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
