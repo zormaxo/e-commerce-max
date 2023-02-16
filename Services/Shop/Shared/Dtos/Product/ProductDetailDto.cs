@@ -14,14 +14,10 @@ public class ProductDetailDto : BaseProductDto
 
     public CountyDto County { get; set; } = null!;
 
-    public ICollection<PhotoDto>? Photos { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public ProductMemberDto User { get; set; } = null!;
-
-    //For shopping
-    public string PictureUrl { get; set; } = string.Empty;
 
     //For e-commerce
     public decimal Price { get; set; }

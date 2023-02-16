@@ -26,7 +26,7 @@ public class ProductsController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<ProductDetailDto> GetProduct(int id) { return _productSrv.GetProduct(id, User.GetUserId()); }
 
-    [HttpPost("omer")]
+    [HttpPost("create-porduct")]
     public async Task<Product> CreateProduct(ProductCreateDto productToCreate)
     { return await _productSrv.CreateProduct(productToCreate); }
 

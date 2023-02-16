@@ -1,4 +1,3 @@
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Common.Helpers;
 using Shop.Core.Entities;
@@ -79,15 +78,27 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .EFBigOrderBy(productSpecParams.Sort, CachedItems)
             .EFBigPageBy(productSpecParams);
 
-        List<Y> data = await PagedAndFilteredProducts
-            .ProjectTo<Y>(Mapper.ConfigurationProvider)
+        var products = await PagedAndFilteredProducts
+            .Include(x => x.County)
+            .ThenInclude(x => x.City)
+            .Include(x => x.Photos)
+            .Include(x => x.User)
+            .Include(x => x.Favourites)
             .AsNoTracking()
             .ToListAsync();
 
-        data.ForEach(x => x.IsFavourite = x.Favourites!.Any(y => y.UserId == UserId));
+        List<Y> productDtoList = Mapper.Map<List<Y>>(products);
 
-        return new Pagination<Y>(productSpecParams.PageNumber, productSpecParams.PageSize, catGrpCountList, totalItems, data);
+        SetFavorite(productDtoList);
+
+        return new Pagination<Y>(
+            productSpecParams.PageNumber,
+            productSpecParams.PageSize,
+            catGrpCountList,
+            totalItems,
+            productDtoList);
     }
+
 
     public async Task<int> UpdateProduct(Product product)
     {
@@ -123,6 +134,23 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
                 _ => productParams.MaxValue,
             };
         }
+    }
+
+    private void SetFavorite<Y>(List<Y> productDtoList) where Y : BaseProductDto
+    {
+        productDtoList.ForEach(
+            x =>
+            {
+                x.IsFavourite = x.Favourites!.Any(y => y.UserId == UserId);
+                var url = x.Photos!.FirstOrDefault(x => x.IsMain)?.Url;
+                if (!string.IsNullOrEmpty(url))
+                {
+                    bool isValidUrl = Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult) &&
+                        (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+                    x.PictureUrl = isValidUrl ? url : Config["ApiUrl"] + url;
+                }
+            });
     }
 
     private async Task<List<int>> GetCategoryIds(string categoryName)

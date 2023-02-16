@@ -98,6 +98,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy, AfterViewInit
         previewInfinityMove: true,
         previewBullets: true,
         thumbnailsMoveSize: 4,
+        imagePercent: 70,
+        thumbnailsPercent: 30,
         thumbnailsOrder: NgxGalleryOrder.Page,
         thumbnailSize: NgxGalleryImageSize.Contain,
       },

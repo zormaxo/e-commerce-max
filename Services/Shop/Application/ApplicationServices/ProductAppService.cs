@@ -1,4 +1,3 @@
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,16 +20,23 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
     public async Task<ProductDetailDto> GetProduct(int id, int? userId)
     {
         var product = await StoreContext.Products
-            .ProjectTo<ProductDetailDto>(Mapper.ConfigurationProvider)
+            .Include(x => x.County)
+            .ThenInclude(x => x.City)
+            .Include(x => x.Photos)
+            .Include(x => x.User)
+            .Include(x => x.Favourites)
+            //.ProjectTo<ProductDetailDto>(Mapper.ConfigurationProvider)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (product == null)
             throw new ApiException(HttpStatusCode.NotFound, $"Product with id: {id} is not found.");
 
-        product.IsFavourite = product.Favourites!.Any(x => x.UserId == userId);
+        var productDetail = Mapper.Map<ProductDetailDto>(product);
 
-        return Mapper.Map<ProductDetailDto>(product);
+        productDetail.IsFavourite = product.Favourites!.Any(x => x.UserId == userId);
+
+        return productDetail;
     }
 
     [HttpPost]

@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Application.Common.Interfaces.Repository;
 using Shop.Core.HelperTypes;
@@ -17,10 +18,13 @@ public class BaseAppService
 
     protected HttpContext HttpContext { get; }
 
+    protected IConfiguration Config { get; }
+
     protected int? UserId { get; }
 
     public BaseAppService(IServiceProvider serviceProvider)
     {
+        Config = serviceProvider.GetService<IConfiguration>()!;
         StoreContext = serviceProvider.GetService<IStoreContext>()!;
         Mapper = serviceProvider.GetService<IMapper>()!;
         CachedItems = serviceProvider.GetService<CachedItems>()!;
