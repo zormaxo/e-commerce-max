@@ -24,6 +24,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
             .ThenInclude(x => x.City)
             .Include(x => x.Photos)
             .Include(x => x.User)
+            .ThenInclude(x => x.Photos)
             .Include(x => x.Favourites)
             //.ProjectTo<ProductDetailDto>(Mapper.ConfigurationProvider)
             .AsNoTracking()

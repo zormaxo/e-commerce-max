@@ -12,8 +12,8 @@ export class LoginComponent {
   @Output() cancelRegister = new EventEmitter<boolean>();
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+    email: new FormControl('test@test.com', [Validators.required, Validators.email]),
+    password: new FormControl('1234', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
   });
   returnUrl: string;
 
