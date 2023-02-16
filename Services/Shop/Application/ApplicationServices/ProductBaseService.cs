@@ -83,6 +83,7 @@ public abstract class ProductBaseService<T> : BaseAppService where T : class
             .ThenInclude(x => x.City)
             .Include(x => x.Photos)
             .Include(x => x.User)
+            .ThenInclude(x => x.Photos)
             .Include(x => x.Favourites)
             .AsNoTracking()
             .ToListAsync();

@@ -55,7 +55,7 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-go
     AdminModule,
     NgxSpinnerModule,
     FileUploadModule,
-    NgxGoogleAnalyticsModule.forRoot('G-S1C9DQPJFT'),
+    NgxGoogleAnalyticsModule.forRoot('G-660XMP0LHY'),
     NgxGoogleAnalyticsRouterModule,
   ],
   providers: [
