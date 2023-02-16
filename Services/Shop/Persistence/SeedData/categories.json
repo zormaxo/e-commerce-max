@@ -49,10 +49,10 @@
 	"Url": "vehicle-motorcycle"
   }, {
     "Id": 10,
-    "Name": "Boats",
+    "Name": "Motor Yacht",
 	"ParentId":1,
     "Count": 0,
-	"Url": "vehicle-boat"
+	"Url": "vehicle-motor-yacht"
   }, {
     "Id": 11,	  
     "Name": "Audi",

@@ -26,19 +26,8 @@
       "IsNew": true
     }
   }, {
-    "Name": "Son Of Wind",
-    "Description": "Son of Wind Gulet is the perfect luxury yacht charter for those who are looking for an unforgettable experience in style and comfort. With her contemporary wood-panelled interior and 5 generous cabins, this gulet yacht comes with all the necessary bells and whistles. From the elegant dining area to the delightful saloon – complete with Wii console, big screen TV and surround sound system – you’ll find everything necessary for a luxurious sailing experience.
-
-Features: Wi-fi and Air Conditioning throughout – Deluxe chef prepared meals & snacks – Stereo system and flat screen TV in the main saloon – Standup paddleboards, canoes & fishing equipment
-
-Advantages: An all inclusive vacation experience on board a luxurious gulet yacht – Enjoy beautiful views from your private balcony or sun lounge area; relax away from the crowds – Explore breathtaking hidden coves as you cruise along Turkey’s beautiful Aegean coastline – Spend quality time with family and friends without leaving that special something out.
-
-Bed Sizes
-Master (Bow ) Cabin Bed (195 cm / 175 cm)
-Starboard Bed (195 cm / 160 cm)
-Portside Bed (195 cm / 160 cm)
-Starboard (Stern) Bed (195 cm / 160 cm)
-Portside (Stern) Bed (195 cm / 100 cm x 2)",
+    "Name": "Green Angular Board 3000",
+    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 150,
     "Photos": [{
         "Url": "https://picsum.photos/500/365"
@@ -64,15 +53,9 @@ Portside (Stern) Bed (195 cm / 100 cm x 2)",
       "IsNew": false
     }
   }, {
-    "Name": "Wicked Felina",
-    "Description": "Experience the ultimate luxury charter on Wicked Felina gulet, a Turkish gulet accommodating up to 10 guests in 5 cabins. Perfect for a family yacht charter holiday or groups of friends, this amazing wooden-hulled sailing yacht will offer you an unforgettable blue cruise experience with experienced local crew members.
-
-Features: Luxurious teak deck spaces. Spacious indoor salon and dining area. Separate crew quarters ensuring your privacy. Fully air conditioned cabins and common areas.
-
-Benefits: Spend quality time with friends and family on your own private yacht rental with no crowds or interruptions. – Enjoy the finest view in the Mediterranean. Uninterrupted turquoise waters, sandy beaches & interesting historical sites around every coast line!
-
-Make unforgettable memories while partaking in fun activities like snorkeling and fishing.",
-    "Price": 1800000,
+    "Name": "Core Board Speed Rush 3",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 180,
     "Photos": [{
         "Url": "https://picsum.photos/500/365"
       }, {
@@ -86,7 +69,7 @@ Make unforgettable memories while partaking in fun activities like snorkeling an
         "Url": "https://picsum.photos/500/385"
       }
     ],
-    "CategoryId": 10,
+    "CategoryId": 9,
     "UserId": 2,
     "Showcase": true,
     "CountyId": 565,
@@ -124,12 +107,9 @@ Make unforgettable memories while partaking in fun activities like snorkeling an
       "IsNew": false
     }
   }, {
-    "Name": "Limitless Motor Yacht",
-    "Description": "
-Limitless yacht is a special option for your large groups. The limitlesness yacht, refitted in 2022, is 56 meters long, 10.5 meters beam, 4 floors and has a total area of 1650 square meters. She offers luxuary accommodations in 14 cabins for 20 people. With her unlimited amenities and profesional crew. Limitless yacht has great facilities where you can relieve all the stress of the outside world with her Turkish bath, massage room and sauna.
-
-With a unique design, spacious living spaces and an elaborate upper deck, the Limitless Yacht Charter is an elegant boat that offers guests an unforgettable experience. Featuring 13 cabins that can accommodate up to 26 guests, this yacht has a total area of ​​1650 square meters, 3 floors and 10.5 meters beam with 4 decks. In addition, it offers great facilities such as Turkish bath and massage room so you can relax from your busy life in the outside world. With her beautiful decoration and excellent equipment, this luxury yacht is one of the best choices for your vacation period.",
-    "Price": 2500000,
+    "Name": "React Board Super Whizzy Fast",
+    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 250,
     "Photos": [{
         "Url": "https://picsum.photos/500/365"
       }, {
@@ -154,12 +134,9 @@ With a unique design, spacious living spaces and an elaborate upper deck, the Li
       "IsNew": true
     }
   }, {
-    "Name": "FX38 Motor Yacht",
-    "Description": "If you are looking for is a sea holiday in the magnificent waters, bays, and islands of the Aegean with an ultra-luxury yacht, here is the opportunity.
-With her high-class equipment, distinctive design, and excellent crew service, the FX38 motor yacht may be your dream yacht.
-
-The FX38 motor yacht with a length of 38 meters and 5 cabins offers the pleasure of a jacuzzi in the flybridge area. Enjoy the jacuzzi during the day or in the evening. With her variety of water sports, she provides good opportunities for every guest looking for difference and entertainment.",
-    "Price": 1200000,
+    "Name": "Typescript Entry Board",
+    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
+    "Price": 120,
     "Photos": [{
         "Url": "https://picsum.photos/504/365",
         "IsMain": true
@@ -470,7 +447,7 @@ The FX38 motor yacht with a length of 38 meters and 5 cabins offers the pleasure
         "Url": "https://picsum.photos/510/385"
       }
     ],
-    "CategoryId": 9,
+    "CategoryId": 10,
     "UserId": 5,
     "Showcase": true,
     "CountyId": 784,
