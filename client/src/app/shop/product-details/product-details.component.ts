@@ -163,10 +163,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy, AfterViewInit
         const itemsToAdd = this.quantity - this.quantityInBasket;
         this.quantityInBasket += itemsToAdd;
         this.basketService.addItemToBasket(this.product, itemsToAdd);
+        this.toastr.success('Item added to basket');
       } else {
         const itemsToRemove = this.quantityInBasket - this.quantity;
         this.quantityInBasket -= itemsToRemove;
         this.basketService.removeItemFromBasket(this.product.id, itemsToRemove);
+        this.toastr.success('Basket updated');
       }
     }
   }

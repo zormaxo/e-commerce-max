@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         else {
           this.router.navigate(['/signin'], { queryParams: { returnUrl: state.url } });
           if (!state.url.includes('mobile')) {
-            this.toastr.error('You shall not pass!');
+            this.toastr.error('You have to sign in!');
           }
 
           return false;

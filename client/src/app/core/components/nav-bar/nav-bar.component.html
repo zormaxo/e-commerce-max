@@ -27,45 +27,50 @@
           routerLink="signin"
           >Sign In</a
         >
-        <div
-          *ngIf="accountService.currentUser$ | async as user"
-          class="navbar-nav justify-content-around align-items-center d-none d-sm-flex">
-          <div class="btn-group" dropdown>
-            <a dropdownToggle type="button" class="nav-link dropdown-toggle small py-0" aria-controls="dropdown-basic">
-              {{ user.firstName | titlecase }}<span class="caret"> </span>
+
+        <div class="navbar-nav justify-content-around align-items-center d-none d-sm-flex">
+          <ng-container *ngIf="accountService.currentUser$ | async as user">
+            <div class="btn-group" dropdown>
+              <a
+                dropdownToggle
+                type="button"
+                class="nav-link dropdown-toggle small py-0"
+                aria-controls="dropdown-basic">
+                {{ user.firstName | titlecase }}<span class="caret"> </span>
+              </a>
+              <ul
+                id="dropdown-basic"
+                *dropdownMenu
+                class="dropdown-menu small"
+                role="menu"
+                aria-labelledby="button-basic">
+                <li role="menuitem">
+                  <a class="dropdown-item small" routerLink="/member/membership">My Profile</a>
+                </li>
+                <li role="menuitem" *appHasRole="['Admin', 'Moderator']">
+                  <a class="dropdown-item small" routerLink="/admin">Admin</a>
+                </li>
+                <li class="py-1">
+                  <a routerLink="/orders" class="dropdown-item"> <i class="fa fa-history"></i> View orders </a>
+                </li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Sign Out</a></li>
+              </ul>
+            </div>
+            <a
+              class="btn btn-outline-dark p-1 me-1 border-0"
+              type="button"
+              routerLink="/member/messages"
+              routerLinkActive="active">
+              <em class="fa-solid fa-envelope fa-lg"></em>
             </a>
-            <ul
-              id="dropdown-basic"
-              *dropdownMenu
-              class="dropdown-menu small"
-              role="menu"
-              aria-labelledby="button-basic">
-              <li role="menuitem">
-                <a class="dropdown-item small" routerLink="/member/membership">My Profile</a>
-              </li>
-              <li role="menuitem" *appHasRole="['Admin', 'Moderator']">
-                <a class="dropdown-item small" routerLink="/admin">Admin</a>
-              </li>
-              <li class="py-1">
-                <a routerLink="/orders" class="dropdown-item"> <i class="fa fa-history"></i> View orders </a>
-              </li>
-              <li class="divider dropdown-divider"></li>
-              <li role="menuitem"><a class="dropdown-item small" (click)="logout()">Sign Out</a></li>
-            </ul>
-          </div>
-          <a
-            class="btn btn-outline-dark p-1 me-1 border-0"
-            type="button"
-            routerLink="/member/messages"
-            routerLinkActive="active">
-            <em class="fa-solid fa-envelope fa-lg"></em>
-          </a>
-          <!-- <a class="btn btn-outline-dark p-1 me-1 border-0" type="button">
+            <!-- <a class="btn btn-outline-dark p-1 me-1 border-0" type="button">
             <em class="fa-solid fa-bell fa-lg"></em>
           </a> -->
-          <!-- <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" routerLink="/lists" routerLinkActive="active">
+            <!-- <a class="btn btn-outline-dark p-1 me-1 border-0" type="button" routerLink="/lists" routerLinkActive="active">
             <em class="fa-solid fa-star fa-lg"></em>
           </a> -->
+          </ng-container>
           <a
             class="btn btn-outline-dark p-1 me-1 border-0 position-relative"
             type="button"
@@ -76,9 +81,9 @@
               {{ getCount(basket.items) }}
             </div>
           </a>
-          <a class="btn btn-outline-dark p-1 me-1 border-0 d-none d-sm-block d-md-none" type="button">
+          <!-- <a class="btn btn-outline-dark p-1 me-1 border-0 d-none d-sm-block d-md-none" type="button">
             <em class="fa-solid fa-circle-plus fa-lg"></em>
-          </a>
+          </a> -->
         </div>
         <!-- <a
           *ngIf="accountService.currentUser$ | async"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { mergeMap, take } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { Product } from 'src/app/shared/models/product';
@@ -18,7 +19,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {

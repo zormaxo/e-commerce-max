@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product';
-import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from 'src/app/shop/shop.service';
 import { AccountService } from 'src/app/account/account.service';
 import { CategoryGroupCount } from 'src/app/shared/models/categoryGroupCount';
