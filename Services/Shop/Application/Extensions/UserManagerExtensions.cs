@@ -10,5 +10,5 @@ public static class UserManagerExtensions
     { return userManager.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Email == email); }
 
     public static Task<AppUser> FindByEmailFromClaimsPrincipalAsync(this UserManager<AppUser> userManager, string email)
-    { return userManager.Users.SingleOrDefaultAsync(x => string.Compare(x.Email, email, true) == 0); }
+    { return userManager.Users.SingleOrDefaultAsync(x => x.Email == email); }
 }

@@ -26,6 +26,6 @@ public class ResponseFilterAttribute : IActionFilter
             apiResponse = ResponseWrapManager.ResponseWrapper(string.Empty, context.HttpContext);
         }
 
-        context.Result = new OkObjectResult(apiResponse);
+        context.Result = new ObjectResult(apiResponse);
     }
 }

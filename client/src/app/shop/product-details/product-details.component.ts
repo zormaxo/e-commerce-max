@@ -9,7 +9,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import {
   NgxGalleryAnimation,
   NgxGalleryImage,
@@ -19,6 +19,7 @@ import {
 } from '@kolkov/ngx-gallery';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, mergeMap, Subscription, take, tap, throttleTime } from 'rxjs';
+import { AccountService } from 'src/app/account/account.service';
 import { BasketService } from 'src/app/basket/basket.service';
 import { ICategory } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
@@ -49,7 +50,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy, AfterViewInit
     public shopService: ShopService,
     private activatedRoute: ActivatedRoute,
     private basketService: BasketService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngAfterViewInit(): void {
@@ -60,7 +63,15 @@ export class ProductDetailsComponent implements OnInit, OnDestroy, AfterViewInit
         .pipe(
           throttleTime(1000),
           tap(() => {
-            this.addLike();
+            this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+              if (user) {
+                this.addLike();
+              } else {
+                this.toastr.error('You must be logged in to like a product');
+                const snapshot: RouterStateSnapshot = this.router.routerState.snapshot;
+                this.router.navigate(['/signin'], { queryParams: { returnUrl: snapshot.url } });
+              }
+            });
           })
         )
         .subscribe();

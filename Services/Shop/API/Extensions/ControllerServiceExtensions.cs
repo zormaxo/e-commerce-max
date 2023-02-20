@@ -57,12 +57,12 @@ public static class ControllerServiceExtensions
 
         services.AddSingleton(new RestClient(new HttpClient()));
 
-        _ = services.AddSingleton(
-            (Func<IServiceProvider, IConnectionMultiplexer>)(_ =>
+        services.AddSingleton<IConnectionMultiplexer>(
+            _ =>
             {
                 var options = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis")!);
                 return ConnectionMultiplexer.Connect(options);
-            }));
+            });
 
         services.Configure<ApiBehaviorOptions>(
             options =>
