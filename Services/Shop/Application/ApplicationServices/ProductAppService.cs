@@ -108,7 +108,7 @@ public class ProductAppService : ProductBaseService<ProductDetailDto>
 
     public async Task AddRemoveFavourite(int productId, int? userId)
     {
-        if (userId is null)
+        if (userId is null || userId == 0)
             throw new ApiException("User not logged in");
 
         var fav = await StoreContext.Favourites.FindAsync(productId, userId);

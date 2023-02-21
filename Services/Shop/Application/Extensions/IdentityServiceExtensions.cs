@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Shop.Application.Common.Interfaces.Repository;
-using Shop.Core.Entities.Identity;
 using System.Text;
 
 namespace Shop.Application.Extensions;
@@ -22,7 +19,7 @@ public static class IdentityServiceExtensions
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]!)),
                         ValidateIssuer = false,
-                        ValidateAudience = false,
+                        ValidateAudience = false
                     };
 
                     options.Events = new JwtBearerEvents

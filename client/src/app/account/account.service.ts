@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Address, User } from 'src/app/shared/models/user';
 import { PresenceService } from '../core/services/presence.service';
@@ -35,6 +35,38 @@ export class AccountService {
         const user = response.result;
         if (user) {
           this.setCurrentUser(user);
+        }
+      })
+    );
+  }
+
+  loadCurrentUser(user: User | null) {
+    if (user == null) {
+      this.currentUserSource.next(null);
+      return of(null);
+    }
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${user.token}`);
+
+    return this.http.get<User>(this.baseUrl + 'account', { headers }).pipe(
+      map((user) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+          this.presenceService.createHubConnection(user);
+
+          user.roles = [];
+          const roles = this.getDecodedToken(user.token).role;
+          if (Array.isArray(roles)) {
+            user.roles = roles;
+          } else {
+            user.roles.push(roles);
+          }
+
+          return user;
+        } else {
+          return null;
         }
       })
     );

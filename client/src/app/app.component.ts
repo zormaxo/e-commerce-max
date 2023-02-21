@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.shopService.innerWidth = window.innerWidth;
     this.loadBasket();
-    this.setCurrentUser();
+    // this.setCurrentUser();
+    this.loadCurrentUser();
   }
 
   loadBasket() {
@@ -39,5 +40,17 @@ export class AppComponent implements OnInit {
     if (!userString) return;
     const user: User = JSON.parse(userString);
     this.accountService.setCurrentUser(user);
+  }
+
+  loadCurrentUser() {
+    const userString = localStorage.getItem('user');
+    if (!userString) return;
+
+    const user: User = JSON.parse(userString);
+    this.accountService.loadCurrentUser(user).subscribe({
+      error: () => {
+        this.accountService.logout();
+      },
+    });
   }
 }

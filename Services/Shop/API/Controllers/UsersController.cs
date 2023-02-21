@@ -42,6 +42,7 @@ public class UsersController : BaseApiController
     [HttpPut("update-member")]
     public async Task UpdateMember(MemberUpdateDto memberUpdateDto) { await UpdateUser(memberUpdateDto); }
 
+    [Authorize]
     [HttpPut("update-user-first-last-name")]
     public async Task UpdateUserFirstLastName(MemberNameUpdateDto memberNameUpdateDto)
     {
