@@ -12,9 +12,16 @@ using Shop.Core.HelperTypes;
 using Shop.Persistence;
 using System.Text.Json.Serialization;
 
+var configuration = new ConfigurationBuilder()
+.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+.Build();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateBootstrapLogger();
 Log.Information("Application Starting Up");
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(
+    (context, services, configuration) => configuration
+        .ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddControllerServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
@@ -59,14 +66,19 @@ var mapper = services.GetRequiredService<IMapper>();
 var cahcedItems = services.GetRequiredService<CachedItems>();
 try
 {
+    Log.Information("=============================================================");
     var initialiser = scope.ServiceProvider.GetRequiredService<StoreContextSeed>();
     await initialiser.SeedAsync();
     await CacheService.FillCacheItemsAsync(context, loggerFactory, mapper, cahcedItems, restClient);
+    app.Run();
 }
 catch (Exception ex)
 {
     logger.LogError(ex, "An error occured during migration");
 }
+finally
+{
+    Log.Information("Application Started Up");
+}
 
-Log.Information("Application Started Up");
-app.Run();
+

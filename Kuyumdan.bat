@@ -1,5 +1,5 @@
 cd Services\Shop\API
-wt -w 0 dotnet watch run
+wt -w 0 -d . powershell dotnet watch
 cd..
 cd..
 cd..

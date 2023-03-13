@@ -55,7 +55,7 @@ public static class CacheService
         }
         else
         {
-            logger.LogInformation($"Currency is exits");
+            logger.LogInformation($"Currency already exists");
             cachedItems.Currency = currencyObj;
         }
 
