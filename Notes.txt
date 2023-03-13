@@ -74,3 +74,6 @@ Redis database ecommerce-max-redis is set on ecommerce-max as the REDIS_URL envi
  /home/zormax/.fly/bin/flyctl redis connect ecommerce-max-redis
 
 
+flyctl apps restart ecommercemax
+
+
