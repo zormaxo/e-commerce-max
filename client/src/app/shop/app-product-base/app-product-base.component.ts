@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LeftNavMode } from 'src/app/shared/enums/leftNavMode';
+import { ICategory } from 'src/app/shared/models/category';
 import { Member } from 'src/app/shared/models/member';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { ShopService } from '../shop.service';
-import { ICategory } from 'd:/Codes/Home/Kuyumdan/client/src/app/shared/models/category';
 
 @Component({
   selector: 'app-app-product-base',
