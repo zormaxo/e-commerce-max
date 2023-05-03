@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.shopService.innerWidth = window.innerWidth;
+    this.loadCurrentUser();
     this.loadBasket();
     // this.setCurrentUser();
-    this.loadCurrentUser();
   }
 
   loadBasket() {

@@ -65,6 +65,8 @@ The following secret was added to ecommercemax:
 Apps in the personal org can connect to at redis://default:6a62991f167545a396a6a06d924113ab@fly-ecommerce-max-redis.upstash.io
 If you have redis-cli installed, use fly redis connect to connect to your database.
 
+flyctl proxy 16379:6379 fly-ecommerce-max-redis.upstash.io
+
 Redis database ecommerce-max-redis is set on ecommerce-max as the REDIS_URL environment variable
 
 
@@ -75,5 +77,7 @@ Redis database ecommerce-max-redis is set on ecommerce-max as the REDIS_URL envi
 
 
 flyctl apps restart ecommercemax
+
+docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest
 
 

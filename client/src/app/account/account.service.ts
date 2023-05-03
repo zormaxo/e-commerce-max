@@ -49,9 +49,10 @@ export class AccountService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${user.token}`);
 
-    return this.http.get<User>(this.baseUrl + 'account', { headers }).pipe(
-      map((user) => {
-        if (user) {
+    return this.http.get<ApiResponse<User>>(this.baseUrl + 'account', { headers }).pipe(
+      map((response) => {
+        if (response.result) {
+          const user = response.result;
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
           this.presenceService.createHubConnection(user);

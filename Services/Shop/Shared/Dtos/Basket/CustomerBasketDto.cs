@@ -11,9 +11,9 @@ public class CustomerBasketDto
 
     public int? DeliveryMethodId { get; set; }
 
-    public string ClientSecret { get; set; } = string.Empty;
+    public string? ClientSecret { get; set; } = string.Empty;
 
-    public string PaymentIntentId { get; set; } = string.Empty;
+    public string? PaymentIntentId { get; set; } = string.Empty;
 
     public decimal ShippingPrice { get; set; }
 }

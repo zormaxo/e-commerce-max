@@ -51,6 +51,10 @@ export class BasketService {
         this.basketSource.next(response.result);
         this.calculateTotals();
       },
+      error(err) {
+        var omer = err;
+        console.log(err);
+      },
     });
   }
 
